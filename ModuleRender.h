@@ -5,7 +5,7 @@
 struct SDL_Texture;
 struct SDL_Renderer;
 struct SDL_Rect;
-#define DEGTORAD(angleDegrees) ((angleDegrees) * M_PI / 180.0)
+//#define DEGTORAD(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 class ModuleRender : public Module
 {
 public:

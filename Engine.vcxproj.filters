@@ -133,6 +133,7 @@
     <ClCompile Include="MathGeoLib-master\src\Time\Clock.cpp">
       <Filter>MathGeoLib</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -369,10 +370,17 @@
     <ClInclude Include="MathGeoLib-master\src\MathGeoLibFwd.h">
       <Filter>MathGeoLib</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleCamera.h" />
+    <ClInclude Include="Point.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
       <UniqueIdentifier>{3c8e6d0b-a7bb-4b43-b488-5b0d8a62f6c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{95d2f25f-80a0-46f7-82b9-7f0cf855ab5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

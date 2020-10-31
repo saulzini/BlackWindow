@@ -4,7 +4,8 @@
 #include "ModuleWindow.h"
 #include "SDL.h"
 #include "GL/glew.h"
-#include "MathGeoLib-master/src/Geometry/Frustum.h"
+#include "ModuleCamera.h"
+//#include "MathGeoLib-master/src/Geometry/Frustum.h"
 ModuleRender::ModuleRender()
 {
 }
@@ -99,7 +100,8 @@ update_status ModuleRender::Update()
 	glEnd();
 	glLineWidth(1.0f);
 
-
+	App->camera->Update();
+	/*
 	//Setting frustum
 	Frustum frustum;
 	frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
@@ -117,7 +119,7 @@ update_status ModuleRender::Update()
 	float4x4 view = frustum.ViewMatrix(); //<-- Important to transpose!
 	view.Transpose();
 	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(*view.v);
+	glLoadMatrixf(*view.v);*/
 	return UPDATE_CONTINUE;
 }
 
