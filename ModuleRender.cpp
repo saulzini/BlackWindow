@@ -4,6 +4,7 @@
 #include "ModuleWindow.h"
 #include "SDL.h"
 #include "GL/glew.h"
+#include "MathGeoLib-master/src/Geometry/Frustum.h"
 ModuleRender::ModuleRender()
 {
 }
@@ -49,9 +50,18 @@ bool ModuleRender::Init()
 
 update_status ModuleRender::PreUpdate()
 {
+	
+	return UPDATE_CONTINUE;
+}
+
+// Called every draw update
+update_status ModuleRender::Update()
+{
+	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+
 	int w = 0; int h = 0;
 	SDL_GetWindowSize(App->window->window, &w, &h);
-	glClearColor(0.1f, 0.1f, 0.1f,1.0f);
+	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLineWidth(1.0f);
@@ -89,13 +99,25 @@ update_status ModuleRender::PreUpdate()
 	glEnd();
 	glLineWidth(1.0f);
 
-	return UPDATE_CONTINUE;
-}
 
-// Called every draw update
-update_status ModuleRender::Update()
-{
-
+	//Setting frustum
+	Frustum frustum;
+	frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
+	frustum.SetViewPlaneDistances(0.1f, 200.0f);
+	frustum.SetHorizontalFovAndAspectRatio(DEGTORAD(1) * 90.0f, 1.3f);
+	frustum.SetPos(float3(0, 1, -2));
+	frustum.SetFront(float3::unitZ);
+	frustum.SetUp(float3::unitY);
+	//Setting projection
+	float4x4 projectionGL = frustum.ProjectionMatrix().Transposed(); //<-- Important to transpose!
+	//Send the frustum projection matrix to OpenGL
+	glMatrixMode(GL_PROJECTION);
+	glLoadMatrixf(*(projectionGL.v));
+	//Setting View 
+	float4x4 view = frustum.ViewMatrix(); //<-- Important to transpose!
+	view.Transpose();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadMatrixf(*view.v);
 	return UPDATE_CONTINUE;
 }
 
