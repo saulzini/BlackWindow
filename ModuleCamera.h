@@ -3,7 +3,7 @@
 #include "Globals.h"
 #include "MathGeoLib-master/src/Geometry/Frustum.h"
 #include "MathGeoLib-master/src/Math/float3.h"
-
+#include "Point.h"
 #define DEGTORAD(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 
 //class Frustum;
@@ -56,11 +56,15 @@ public:
 
 	}
 
+	void MousePitch();
+
 protected:
 	Frustum frustum;
 	float movement_speed;
 	float turn_speed;
 	float pitch_angle;
 	float3 camera_position;
+	//mouse
+	iPoint mouse_position;
 };
 

@@ -12,6 +12,7 @@ ModuleCamera::ModuleCamera()
 	turn_speed = 0.0005f;
 	movement_speed = 0.005f;
 	pitch_angle = 0.05;
+	mouse_position = iPoint(0, 0);
 
 	//Setting frustum
 	frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
@@ -45,12 +46,14 @@ update_status ModuleCamera::Update()
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(*(projectionGL.v));
 
-	//Setting View 
+	//Keyboard movements
 	MoveForward();
 	MoveRight();
 	MoveUp();
 	Pitch();
 	Yaw();
+	//Mouse movements
+	MousePitch();
 	
 
 	//Passing view matrix to opengl
@@ -165,4 +168,37 @@ void ModuleCamera::Rotate(const float3x3 rotation_matrix)
 	frustum.SetFront(rotation_matrix.MulDir(oldFront));
 	vec oldUp = frustum.Up().Normalized();
 	frustum.SetUp(rotation_matrix.MulDir(oldUp));
+}
+
+void ModuleCamera::MousePitch()
+{
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT)) {
+		LOG("Mouse R");
+
+		iPoint new_mouse_position = App->input->GetMouseMotion();
+		//Checking direction
+		//Horizontal
+		int result = new_mouse_position.x - mouse_position.x;
+		// turn right 
+		if (result > 0) {
+			Rotate(frustum.WorldMatrix().RotatePart().RotateY( result *turn_speed));
+		}
+		// turn left
+		else {
+			Rotate(frustum.WorldMatrix().RotatePart().RotateY(result * turn_speed));
+		}
+
+		// Vertical
+		result = new_mouse_position.y - mouse_position.y;
+		//turn up
+		if (result > 0) {
+
+		}
+		//turn down
+		else {
+
+		}
+
+	}
+
 }
