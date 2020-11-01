@@ -116,6 +116,8 @@ void ModuleCamera::MoveUp()
 
 void ModuleCamera::Pitch()
 {
+	//Reference
+	//https://stackoverflow.com/questions/15208104/opengl-camera-pitch-yaw-and-roll-rotation
 	if (App->input->GetKey(SDL_SCANCODE_UP)) {
 		float radians_angle = DEGTORAD(pitch_angle);
 		float3 lookAtVector = frustum.Front() * cos(radians_angle) + frustum.Up()* sin(radians_angle);
