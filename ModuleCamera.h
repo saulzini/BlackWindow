@@ -43,6 +43,14 @@ public:
 		turn_speed = value;
 	}
 
+	float getMovementSpeed() {
+		return movement_speed;
+	}
+
+	float getTurnSpeed() {
+		return turn_speed;
+	}
+
 protected:
 	Frustum frustum;
 	float movement_speed;
