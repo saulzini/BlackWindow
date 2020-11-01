@@ -25,9 +25,10 @@ public:
 	void MoveForward();
 	void MoveRight();
 	void MoveUp();
-	void Roll();
 	void Pitch();
 	void Yaw();
+
+	void Rotate(const float3x3 rotation_matrix);
 
 	void setMovementSpeed(float value) {
 		if (value <= 0.0f) {
@@ -49,6 +50,10 @@ public:
 
 	float getTurnSpeed() {
 		return turn_speed;
+	}
+
+	void SetFOV() {
+
 	}
 
 protected:
