@@ -11,6 +11,7 @@ ModuleCamera::ModuleCamera()
 	camera_position = float3(0, 1, -2);
 	turn_speed = 0.0005f;
 	movement_speed = 0.005f;
+	pitch_angle = 0.05;
 
 	//Setting frustum
 	frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
@@ -116,11 +117,23 @@ void ModuleCamera::MoveUp()
 void ModuleCamera::Pitch()
 {
 	if (App->input->GetKey(SDL_SCANCODE_UP)) {
-		Rotate( frustum.WorldMatrix().RotatePart().RotateX(-turn_speed) );
+		float radians_angle = DEGTORAD(pitch_angle);
+		float3 lookAtVector = frustum.Front() * cos(radians_angle) + frustum.Up()* sin(radians_angle);
+		lookAtVector.Normalize();
+
+		float3 upVector = frustum.WorldRight().Cross(lookAtVector);
+		frustum.SetFront(lookAtVector);
+		frustum.SetUp(upVector);
 		LOG("Up");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN)) {
-		Rotate(frustum.WorldMatrix().RotatePart().RotateX(turn_speed));
+		float radians_angle = DEGTORAD(pitch_angle);
+		float3 lookAtVector = frustum.Front() * cos(-radians_angle) + frustum.Up() * sin(-radians_angle);
+		lookAtVector.Normalize();
+
+		float3 upVector = frustum.WorldRight().Cross(lookAtVector);
+		frustum.SetFront(lookAtVector);
+		frustum.SetUp(upVector);
 		LOG("Down");
 	}
 }

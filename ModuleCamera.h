@@ -44,11 +44,11 @@ public:
 		turn_speed = value;
 	}
 
-	float getMovementSpeed() {
+	float getMovementSpeed() const {
 		return movement_speed;
 	}
 
-	float getTurnSpeed() {
+	float getTurnSpeed() const {
 		return turn_speed;
 	}
 
@@ -60,6 +60,7 @@ protected:
 	Frustum frustum;
 	float movement_speed;
 	float turn_speed;
+	float pitch_angle;
 	float3 camera_position;
 };
 
