@@ -29,6 +29,7 @@ public:
 	void Yaw();
 
 	void Rotate(const float3x3 rotation_matrix);
+	void RotatePitch(const float radians);
 
 	void setMovementSpeed(float value) {
 		if (value <= 0.0f) {
@@ -62,7 +63,7 @@ protected:
 	Frustum frustum;
 	float movement_speed;
 	float turn_speed;
-	float pitch_angle;
+	float radians_angle;
 	float3 camera_position;
 	//mouse
 	iPoint mouse_position;
