@@ -101,25 +101,7 @@ update_status ModuleRender::Update()
 	glLineWidth(1.0f);
 
 	App->camera->Update();
-	/*
-	//Setting frustum
-	Frustum frustum;
-	frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
-	frustum.SetViewPlaneDistances(0.1f, 200.0f);
-	frustum.SetHorizontalFovAndAspectRatio(DEGTORAD(1) * 90.0f, 1.3f);
-	frustum.SetPos(float3(0, 1, -2));
-	frustum.SetFront(float3::unitZ);
-	frustum.SetUp(float3::unitY);
-	//Setting projection
-	float4x4 projectionGL = frustum.ProjectionMatrix().Transposed(); //<-- Important to transpose!
-	//Send the frustum projection matrix to OpenGL
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(*(projectionGL.v));
-	//Setting View 
-	float4x4 view = frustum.ViewMatrix(); //<-- Important to transpose!
-	view.Transpose();
-	glMatrixMode(GL_MODELVIEW);
-	glLoadMatrixf(*view.v);*/
+	
 	return UPDATE_CONTINUE;
 }
 
