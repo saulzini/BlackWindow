@@ -134,6 +134,7 @@
       <Filter>MathGeoLib</Filter>
     </ClCompile>
     <ClCompile Include="ModuleCamera.cpp" />
+    <ClCompile Include="ModuleProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -374,6 +375,7 @@
     <ClInclude Include="Point.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleProgram.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">

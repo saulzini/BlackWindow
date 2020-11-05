@@ -1,7 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
-
+#include <GL/glew.h>
 struct SDL_Texture;
 struct SDL_Renderer;
 struct SDL_Rect;
@@ -18,6 +18,13 @@ public:
 	update_status PostUpdate();
 	bool CleanUp();
 	void WindowResized(unsigned width, unsigned height);
+
+
+	//Rendering triangle
+	GLuint vbo;
+	unsigned CreateTriangleVBO();
+	void RenderVBO(unsigned vbo);
+	void DestroyVBO(unsigned vbo);
 
 private:
 	void* context;

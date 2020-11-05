@@ -5,6 +5,7 @@
 #include "SDL.h"
 #include "GL/glew.h"
 #include "ModuleCamera.h"
+#include "ModuleProgram.h"
 //#include "MathGeoLib-master/src/Geometry/Frustum.h"
 ModuleRender::ModuleRender()
 {
@@ -45,8 +46,29 @@ bool ModuleRender::Init()
 	glEnable(GL_CULL_FACE); // Enable cull backward faces
 	glFrontFace(GL_CCW); // Front faces will be counter clockwise
 
+	
+	unsigned program = App->program->CreateProgramFromSource("HelloWorld.frag", "HelloWorld.vert");
+	glUseProgram(program);
+	vbo = CreateTriangleVBO();
 
 	return true;
+}
+
+
+// This function must be called one time at creation of vertex buffer
+unsigned ModuleRender::CreateTriangleVBO()
+{
+	float vtx_data[] = { -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f };
+	unsigned vbo;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo); // set vbo active
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vtx_data), vtx_data, GL_STATIC_DRAW);
+	return vbo;
+}
+// This function must be called one time at destruction of vertex buffer
+void ModuleRender::DestroyVBO(unsigned vbo)
+{
+	glDeleteBuffers(1, &vbo);
 }
 
 update_status ModuleRender::PreUpdate()
@@ -58,50 +80,7 @@ update_status ModuleRender::PreUpdate()
 // Called every draw update
 update_status ModuleRender::Update()
 {
-	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-
-	int w = 0; int h = 0;
-	SDL_GetWindowSize(App->window->window, &w, &h);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glLineWidth(1.0f);
-	float d = 200.0f;
-	glBegin(GL_LINES);
-	for (float i = -d; i <= d; i += 1.0f)
-	{
-		glVertex3f(i, 0.0f, -d);
-		glVertex3f(i, 0.0f, d);
-		glVertex3f(-d, 0.0f, i);
-		glVertex3f(d, 0.0f, i);
-	}
-	glEnd();
-
-	glLineWidth(2.0f);
-	glBegin(GL_LINES);
-	// red X
-	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f); glVertex3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.1f, 0.0f); glVertex3f(1.1f, -0.1f, 0.0f);
-	glVertex3f(1.1f, 0.1f, 0.0f); glVertex3f(1.0f, -0.1f, 0.0f);
-	// green Y
-	glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f); glVertex3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-0.05f, 1.25f, 0.0f); glVertex3f(0.0f, 1.15f, 0.0f);
-	glVertex3f(0.05f, 1.25f, 0.0f); glVertex3f(0.0f, 1.15f, 0.0f);
-	glVertex3f(0.0f, 1.15f, 0.0f); glVertex3f(0.0f, 1.05f, 0.0f);
-
-	// blue Z
-	glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(-0.05f, 0.1f, 1.05f); glVertex3f(0.05f, 0.1f, 1.05f);
-	glVertex3f(0.05f, 0.1f, 1.05f); glVertex3f(-0.05f, -0.1f, 1.05f);
-	glVertex3f(-0.05f, -0.1f, 1.05f); glVertex3f(0.05f, -0.1f, 1.05f);
-	glEnd();
-	glLineWidth(1.0f);
-
-	App->camera->Update();
-	
+	RenderVBO(vbo);
 	return UPDATE_CONTINUE;
 }
 
@@ -117,10 +96,23 @@ bool ModuleRender::CleanUp()
 	LOG("Destroying renderer");
 	//Destroy window
 	SDL_GL_DeleteContext(context);
+
+	DestroyVBO(vbo);
 	return true;
 }
 
 void ModuleRender::WindowResized(unsigned width, unsigned height)
 {
+}
+
+void ModuleRender::RenderVBO(unsigned vbo)
+{
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glEnableVertexAttribArray(0);
+	// size = 3 float per vertex
+	// stride = 0 is equivalent to stride = sizeof(float)*3
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	// 1 triangle to draw = 3 vertices
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
