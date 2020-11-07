@@ -21,11 +21,12 @@ public:
 
 
 	//Rendering triangle
-	GLuint vbo;
 	unsigned CreateTriangleVBO();
-	void RenderVBO(unsigned vbo);
+	void RenderVBO(unsigned vbo,unsigned program);
 	void DestroyVBO(unsigned vbo);
 
 private:
 	void* context;
+	unsigned int program;
+	unsigned int vbo;
 };

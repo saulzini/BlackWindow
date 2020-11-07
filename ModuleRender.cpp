@@ -47,10 +47,10 @@ bool ModuleRender::Init()
 	glFrontFace(GL_CCW); // Front faces will be counter clockwise
 
 	
-	unsigned program = App->program->CreateProgramFromSource("HelloWorld.frag", "HelloWorld.vert");
-	glUseProgram(program);
+	program = App->program->CreateProgramFromSource("HelloWorld.vert", "HelloWorld.frag");
+	
 	vbo = CreateTriangleVBO();
-
+	
 	return true;
 }
 
@@ -59,8 +59,8 @@ bool ModuleRender::Init()
 unsigned ModuleRender::CreateTriangleVBO()
 {
 	float vtx_data[] = { -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f };
-	unsigned vbo;
-	glGenBuffers(1, &vbo);
+	unsigned int vbo;
+	glGenBuffers(1, &vbo); //creates memory in graphic card
 	glBindBuffer(GL_ARRAY_BUFFER, vbo); // set vbo active
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vtx_data), vtx_data, GL_STATIC_DRAW);
 	return vbo;
@@ -73,14 +73,16 @@ void ModuleRender::DestroyVBO(unsigned vbo)
 
 update_status ModuleRender::PreUpdate()
 {
-	
+	glClearColor(0.51f, 0.76f, 0.76f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	return UPDATE_CONTINUE;
 }
 
 // Called every draw update
 update_status ModuleRender::Update()
 {
-	RenderVBO(vbo);
+	RenderVBO(vbo, program);
 	return UPDATE_CONTINUE;
 }
 
@@ -97,7 +99,7 @@ bool ModuleRender::CleanUp()
 	//Destroy window
 	SDL_GL_DeleteContext(context);
 
-	DestroyVBO(vbo);
+	//DestroyVBO(vbo);
 	return true;
 }
 
@@ -105,14 +107,17 @@ void ModuleRender::WindowResized(unsigned width, unsigned height)
 {
 }
 
-void ModuleRender::RenderVBO(unsigned vbo)
+void ModuleRender::RenderVBO(unsigned vbo,unsigned program)
 {
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+
 	glEnableVertexAttribArray(0);
 	// size = 3 float per vertex
 	// stride = 0 is equivalent to stride = sizeof(float)*3
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	// 1 triangle to draw = 3 vertices
+	glUseProgram(program);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+
 }
 
