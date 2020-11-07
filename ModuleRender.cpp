@@ -5,6 +5,8 @@
 #include "SDL.h"
 #include "GL/glew.h"
 #include "ModuleCamera.h"
+//#include "ImGui\imgui_impl_sdl.h"
+//#include "ImGui\imgui_impl_opengl3.h"
 //#include "MathGeoLib-master/src/Geometry/Frustum.h"
 ModuleRender::ModuleRender()
 {
