@@ -20,13 +20,13 @@ public:
 	void WindowResized(unsigned width, unsigned height);
 
 
-	//Rendering triangle
+	/*//Rendering triangle
 	unsigned CreateTriangleVBO();
 	void RenderVBO(unsigned vbo,unsigned program);
 	void DestroyVBO(unsigned vbo);
-
+	*/
 private:
 	void* context;
-	unsigned int program;
-	unsigned int vbo;
+	/*unsigned int program;
+	unsigned int vbo;*/
 };

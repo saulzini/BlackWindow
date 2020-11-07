@@ -6,11 +6,11 @@
 
 class ModuleRender;
 class ModuleWindow;
-class ModuleTextures;
 class ModuleInput;
-class ModuleRenderExercise;
 class ModuleCamera;
 class ModuleProgram;
+class ModuleRenderExercise;
+class ModuleTextures;
 class Application
 {
 public:
@@ -28,6 +28,7 @@ public:
 	ModuleInput* input = nullptr;
 	ModuleCamera* camera = nullptr;
 	ModuleProgram* program = nullptr;
+	ModuleRenderExercise* exercise = nullptr;
 
 private:
 
