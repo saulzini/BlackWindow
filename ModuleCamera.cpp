@@ -61,6 +61,8 @@ update_status ModuleCamera::Update()
 	view.Transpose();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(*(view.v));
+
+
 	return UPDATE_CONTINUE;
 }
 
