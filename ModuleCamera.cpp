@@ -1,10 +1,10 @@
 #include "ModuleCamera.h"
-//#include "MathGeoLib-master/src/Geometry/Frustum.h"
 #include "MathGeoLib-master/src/Math/float3x3.h"
 #include "SDL.h"
 #include "GL/glew.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include "ModuleWindow.h"
 ModuleCamera::ModuleCamera()
 {
 	//initializing
@@ -120,24 +120,10 @@ void ModuleCamera::MoveUp()
 void ModuleCamera::Pitch()
 {
 	if (App->input->GetKey(SDL_SCANCODE_UP)) {
-		//float radians_angle = DEGTORAD(pitch_angle);
-		/*float3 lookAtVector = frustum.Front() * cos(radians_angle) + frustum.Up()* sin(radians_angle);
-		lookAtVector.Normalize();
-
-		float3 upVector = frustum.WorldRight().Cross(lookAtVector);
-		frustum.SetFront(lookAtVector);
-		frustum.SetUp(upVector);*/
 		RotatePitch(radians_angle);
 		LOG("Up");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN)) {
-		//float radians_angle = DEGTORAD(pitch_angle);
-		/*float3 lookAtVector = frustum.Front() * cos(-radians_angle) + frustum.Up() * sin(-radians_angle);
-		lookAtVector.Normalize();
-
-		float3 upVector = frustum.WorldRight().Cross(lookAtVector);
-		frustum.SetFront(lookAtVector);
-		frustum.SetUp(upVector);*/
 		RotatePitch(-radians_angle);
 
 		LOG("Down");
@@ -148,15 +134,9 @@ void ModuleCamera::Yaw()
 {
 	if (App->input->GetKey(SDL_SCANCODE_LEFT)) {
 		Rotate(frustum.WorldMatrix().RotatePart().RotateY(turn_speed));
-		//Rotate(float3x3::RotateY(turn_speed));
 		LOG("left");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT)) {
-		/*float3x3 rotationMatrix = float3x3::RotateY(-turn_speed);
-		vec oldFront = frustum.Front().Normalized();
-		frustum.SetFront(rotationMatrix.MulDir(oldFront));
-		vec oldUp = frustum.Up().Normalized();
-		frustum.SetUp(rotationMatrix.MulDir(oldUp));*/
 		Rotate(frustum.WorldMatrix().RotatePart().RotateY(-turn_speed));
 		LOG("right");
 	}
