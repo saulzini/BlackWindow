@@ -153,6 +153,12 @@
       <Filter>Graphics\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ModuleEditor.cpp" />
+    <ClCompile Include="DefaultImGuiWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -418,6 +424,12 @@
       <Filter>Graphics\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="ModuleEditor.h" />
+    <ClInclude Include="DefaultImGuiWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
@@ -431,6 +443,9 @@
     </Filter>
     <Filter Include="Graphics\ImGui">
       <UniqueIdentifier>{4231776c-f7cf-43a1-9916-ed6bd710fe8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\UIWindow">
+      <UniqueIdentifier>{40e881ee-16d6-484f-8841-ea309d753f5f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

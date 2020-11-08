@@ -1,5 +1,10 @@
 #pragma once
 #include "Module.h"
+#include <vector>
+#include "DefaultImGuiWindow.h"
+
+struct ImGuiIO;
+class ConsoleWindow;
 class ModuleEditor :
 	public Module
 {
@@ -13,7 +18,14 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+
+	void addWindow(DefaultImGuiWindow *window); //method for adding multiple windows
+
+	ConsoleWindow* consoleWindow;
 private:
-	
+	std::vector<DefaultImGuiWindow*> windows;
+	void ShowDockSpace(bool* p_open);
+	void setStyle(const ImGuiIO io);
+	void UpdateWindows();
 };
 
