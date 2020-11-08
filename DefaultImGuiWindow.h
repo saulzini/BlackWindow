@@ -1,8 +1,10 @@
 #pragma once
+#include "ImGui/imgui.h"
+
 class DefaultImGuiWindow
 {
 public:
-    DefaultImGuiWindow(const char* _title = "title") : title(_title) {
+    DefaultImGuiWindow(const char* _title, ImGuiWindowFlags _window_flags) : title(_title) , window_flags(_window_flags) {
         show = true;
     }
     ~DefaultImGuiWindow();
@@ -11,6 +13,8 @@ public:
     const bool getShow() {
         return show;
     }
+    ImGuiWindowFlags window_flags;
+
 protected:
     bool begin();
     void end();

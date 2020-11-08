@@ -29,6 +29,7 @@ public:
 	ModuleInput* input = nullptr;
 	ModuleCamera* camera = nullptr;
 	ModuleEditor* editor = nullptr;
+	void RequestBrowser(const char* route);
 
 private:
 

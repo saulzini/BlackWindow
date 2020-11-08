@@ -60,3 +60,9 @@ bool Application::CleanUp()
 
 	return ret;
 }
+
+void Application::RequestBrowser(const char* route)
+{
+	ShellExecute(NULL, "open", route, nullptr, nullptr, SW_SHOWNORMAL);
+
+}

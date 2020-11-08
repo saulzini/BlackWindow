@@ -21,7 +21,7 @@ ModuleEditor::~ModuleEditor()
 bool ModuleEditor::Init()
 {
     //Creating windows
-    addWindow(consoleWindow = new ConsoleWindow("Console window"));
+    addWindow(consoleWindow = new ConsoleWindow("Console window1", ImGuiWindowFlags_MenuBar)); //TODO:: Check how to create callback
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -40,6 +40,18 @@ bool ModuleEditor::Init()
     ImGui_ImplOpenGL3_Init();
 
     return true;
+}
+
+
+void ModuleEditor::PressGuiBtn()
+{
+    LOG("GUI BTN");
+}
+
+void ModuleEditor::PressAboutBtn()
+{
+    LOG("About BTN");
+
 }
 
 update_status ModuleEditor::PreUpdate()
@@ -117,6 +129,7 @@ void ModuleEditor::UpdateWindows()
     }
 }
 
+
 void ModuleEditor::ShowDockSpace(bool* p_open)
 {
     static bool opt_fullscreen_persistant = true;
@@ -167,6 +180,29 @@ void ModuleEditor::ShowDockSpace(bool* p_open)
         //ShowDockingDisabledMessage();
     }
 
+    //Adding help menu bar
+    if (ImGui::BeginMenuBar()) {
+
+        if (ImGui::BeginMenu("Help")) {
+            if (ImGui::MenuItem("Gui Demo")) {
+                //open demo
+                //demo_pressed();
+            }
+            //  showcase != showcase;
+            if (ImGui::MenuItem("Documentation"))
+                App->RequestBrowser("https://github.com/saulzini/Engine/wiki");
+            if (ImGui::MenuItem("Download latest"))
+                App->RequestBrowser("https://github.com/saulzini/Engine/releases");
+            if (ImGui::MenuItem("Report a bug"))
+                App->RequestBrowser("https://github.com/saulzini/Engine/issues");
+            if (ImGui::MenuItem("About")) {
+                //open about
+            }
+            ImGui::EndMenu();
+        }
+        ImGui::EndMenuBar();
+    }
+    //End menu bar
 
     ImGui::End();
 }

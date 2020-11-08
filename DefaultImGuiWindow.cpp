@@ -1,5 +1,5 @@
 #include "DefaultImGuiWindow.h"
-#include "ImGui/imgui.h"
+
 DefaultImGuiWindow::~DefaultImGuiWindow()
 {
 }
@@ -15,7 +15,7 @@ DefaultImGuiWindow::DefaultImGuiWindow(std::string _title)
 
 bool DefaultImGuiWindow::begin()
 {
-	return ImGui::Begin(title, &show);
+	return ImGui::Begin(title, &show, window_flags);
 }
 
 void DefaultImGuiWindow::end()

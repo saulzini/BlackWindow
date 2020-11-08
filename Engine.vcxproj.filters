@@ -159,6 +159,9 @@
     <ClCompile Include="ConsoleWindow.cpp">
       <Filter>Graphics\UIWindow</Filter>
     </ClCompile>
+    <ClCompile Include="FPSGraph.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -428,6 +431,9 @@
       <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSGraph.h">
       <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
   </ItemGroup>

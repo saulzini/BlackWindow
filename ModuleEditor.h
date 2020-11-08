@@ -3,6 +3,7 @@
 #include <vector>
 #include "DefaultImGuiWindow.h"
 
+
 struct ImGuiIO;
 class ConsoleWindow;
 class ModuleEditor :
@@ -27,5 +28,8 @@ private:
 	void ShowDockSpace(bool* p_open);
 	void SetStyle(const ImGuiIO io);
 	void UpdateWindows();
+
+	void PressGuiBtn();
+	void PressAboutBtn();
 };
 
