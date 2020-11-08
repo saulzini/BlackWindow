@@ -1,5 +1,8 @@
 #include "DefaultImGuiWindow.h"
 #include "ImGui/imgui.h"
+DefaultImGuiWindow::~DefaultImGuiWindow()
+{
+}
 /*
 DefaultImGuiWindow::DefaultImGuiWindow(std::string _title)
 {
