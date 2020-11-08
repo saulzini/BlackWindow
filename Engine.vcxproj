@@ -150,7 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="FPSGraph.h" />
+    <ClInclude Include="ConfigurationWindow.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ConsoleWindow.h" />
     <ClInclude Include="ImGui\imconfig.h" />
@@ -248,8 +248,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="ConfigurationWindow.cpp" />
     <ClCompile Include="ConsoleWindow.cpp" />
-    <ClCompile Include="FPSGraph.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />

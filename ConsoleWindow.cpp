@@ -38,9 +38,6 @@ void ConsoleWindow::Update()
         ImGui::TextWrapped(
             "Console window ");
         
-        
-        
-            
         ImGui::SameLine();
         ImGui::Separator();
 

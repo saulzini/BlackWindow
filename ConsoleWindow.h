@@ -9,15 +9,11 @@ class ConsoleWindow :
 public:
     ConsoleWindow(
         const char* _title, 
-        //void (*_demo_pressed)(), //Parameter for callback gui demo btn
-        //void (*_about_pressed)() , //Parameter for callback about btn
         ImGuiWindowFlags _window_flags ) : DefaultImGuiWindow(_title, _window_flags) 
     {
         ClearLog();
         memset(InputBuf, 0, sizeof(InputBuf));
         HistoryPos = -1;
-      //  demo_pressed = (void)_demo_pressed;
-      //  about_pressed = (void)_about_pressed;
         // "CLASSIFY" is here to provide the test case where "C"+[tab] completes to "CL" and display multiple matches.
         AutoScroll = true;
         ScrollToBottom = false;
@@ -38,7 +34,5 @@ private:
     bool                  AutoScroll;
     bool                  ScrollToBottom;
 
-    //void demo_pressed;
-    //void about_pressed;
 };
 

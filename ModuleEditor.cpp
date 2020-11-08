@@ -6,6 +6,7 @@
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_opengl3.h"
 #include "ConsoleWindow.h"
+#include "ConfigurationWindow.h"
 ModuleEditor::ModuleEditor()
 {
 }
@@ -21,7 +22,8 @@ ModuleEditor::~ModuleEditor()
 bool ModuleEditor::Init()
 {
     //Creating windows
-    addWindow(consoleWindow = new ConsoleWindow("Console window1", ImGuiWindowFlags_MenuBar)); //TODO:: Check how to create callback
+    addWindow(consoleWindow = new ConsoleWindow("Console window1", ImGuiWindowFlags_MenuBar)); 
+    addWindow(configurationWindow = new ConfigurationWindow("Configuration window", ImGuiWindowFlags_MenuBar));
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -40,18 +42,6 @@ bool ModuleEditor::Init()
     ImGui_ImplOpenGL3_Init();
 
     return true;
-}
-
-
-void ModuleEditor::PressGuiBtn()
-{
-    LOG("GUI BTN");
-}
-
-void ModuleEditor::PressAboutBtn()
-{
-    LOG("About BTN");
-
 }
 
 update_status ModuleEditor::PreUpdate()

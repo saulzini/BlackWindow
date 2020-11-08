@@ -6,6 +6,7 @@
 
 struct ImGuiIO;
 class ConsoleWindow;
+class ConfigurationWindow;
 class ModuleEditor :
 	public Module
 {
@@ -23,13 +24,12 @@ public:
 	void addWindow(DefaultImGuiWindow *window); //method for adding multiple windows
 
 	ConsoleWindow* consoleWindow;
+	ConfigurationWindow* configurationWindow;
 private:
 	std::vector<DefaultImGuiWindow*> windows;
 	void ShowDockSpace(bool* p_open);
 	void SetStyle(const ImGuiIO io);
 	void UpdateWindows();
 
-	void PressGuiBtn();
-	void PressAboutBtn();
 };
 

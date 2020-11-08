@@ -3,15 +3,6 @@
 DefaultImGuiWindow::~DefaultImGuiWindow()
 {
 }
-/*
-DefaultImGuiWindow::DefaultImGuiWindow(std::string _title)
-{
-	show = true;
-	title = _title;
-}
-*/
-
-
 
 bool DefaultImGuiWindow::begin()
 {
