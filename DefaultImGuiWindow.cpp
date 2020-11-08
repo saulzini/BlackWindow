@@ -10,9 +10,7 @@ DefaultImGuiWindow::DefaultImGuiWindow(std::string _title)
 	title = _title;
 }
 */
-void DefaultImGuiWindow::update()
-{
-}
+
 
 
 bool DefaultImGuiWindow::begin()

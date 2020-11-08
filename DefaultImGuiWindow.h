@@ -6,7 +6,7 @@ public:
         show = true;
     }
     ~DefaultImGuiWindow();
-    virtual void update();
+    virtual void Update() {};
 
     const bool getShow() {
         return show;

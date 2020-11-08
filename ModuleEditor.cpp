@@ -113,7 +113,7 @@ void ModuleEditor::UpdateWindows()
 {
     for (unsigned int i = 0; i < windows.size(); i++)
     {
-        windows[i]->update();
+        windows[i]->Update();
     }
 }
 
