@@ -59,6 +59,15 @@ public:
 
 	void MousePitch();
 
+	const float4x4 GetView() {
+		return frustum.ViewMatrix();
+	};
+
+
+	const float4x4 GetProjection() {
+		return frustum.ProjectionMatrix();
+	};
+
 protected:
 	Frustum frustum;
 	float movement_speed;
