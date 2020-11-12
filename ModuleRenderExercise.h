@@ -32,5 +32,6 @@ public:
 private:
 	unsigned int program;
 	unsigned int vbo;
+	unsigned int texture;
 };
 

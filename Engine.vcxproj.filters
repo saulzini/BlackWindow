@@ -136,6 +136,9 @@
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="ModuleProgram.cpp" />
     <ClCompile Include="ModuleRenderExercise.cpp" />
+    <ClCompile Include="Texture2D.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -378,6 +381,9 @@
     </ClInclude>
     <ClInclude Include="ModuleProgram.h" />
     <ClInclude Include="ModuleRenderExercise.h" />
+    <ClInclude Include="Texture2D.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
@@ -385,6 +391,9 @@
     </Filter>
     <Filter Include="Utils">
       <UniqueIdentifier>{95d2f25f-80a0-46f7-82b9-7f0cf855ab5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{2ddcefa5-5550-47b2-b0c9-3f33fe98bad0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -408,6 +417,12 @@
     </None>
     <None Include="MathGeoLib-master\src\Math\Matrix.inl">
       <Filter>MathGeoLib</Filter>
+    </None>
+    <None Include="Game\HelloWorld.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Game\HelloWorld.vert">
+      <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>
