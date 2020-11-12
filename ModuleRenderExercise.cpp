@@ -16,7 +16,7 @@ unsigned ModuleRenderExercise::CreateTriangleVBO()
 	float vtx_data[] = { 
 		-1.0f, -1.0f, 0.0f, 
 		1.0f, -1.0f, 0.0f, 
-		0.0f, 1.0f, 0.0f,
+		-1.0f, 1.0f, 0.0f,
 
 		0.0f,0.0f,
 		1.0f,0.0f,
@@ -39,21 +39,28 @@ void ModuleRenderExercise::DestroyVBO(unsigned vbo)
 
 void ModuleRenderExercise::RenderVBO(unsigned vbo, unsigned program)
 {
+
+	float4x4 proj = App->camera->GetProjection();
+	float4x4 view = App->camera->GetView();
+	float4x4 model;
+
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glEnableVertexAttribArray(0);
+
 	// TODO: retrieve model view and projection
 	glUseProgram(program);
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, texture);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0,0);
-	glEnableVertexAttribArray(0);
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)(sizeof(float) * 3 * 3)); // buffer offset);
 	glEnableVertexAttribArray(1);
 
-	float4x4 model, view, projection;
+	
 
 	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &model[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
-	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &projection[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
+	glBindTexture(GL_TEXTURE_2D, texture);
 	glUniform1i(glGetUniformLocation(program, "mytexture"), 0);
 
 	
