@@ -27,7 +27,7 @@ public:
 	ConfigurationWindow* configurationWindow;
 private:
 	std::vector<DefaultImGuiWindow*> windows;
-	void ShowDockSpace(bool* p_open);
+	void ShowDockSpace(bool* pOpen);
 	void SetStyle(const ImGuiIO io);
 	void UpdateWindows();
 

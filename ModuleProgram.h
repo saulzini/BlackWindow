@@ -14,13 +14,13 @@ public:
     update_status PostUpdate();
     bool CleanUp();
 
-    char* LoadShaderSource(const char* shader_file_name);
+    char* LoadShaderSource(const char* shaderFileName);
 
     unsigned CompileShader(unsigned type, const char* source);
 
-    unsigned CreateProgram(unsigned vtx_shader, unsigned frg_shader);
+    unsigned CreateProgram(unsigned vtxShader, unsigned frgShader);
 
-    unsigned CreateProgramFromSource(const char* vtx_shader, const char* frg_shader);
+    unsigned CreateProgramFromSource(const char* vtxShader, const char* frgShader);
     
 };
 
