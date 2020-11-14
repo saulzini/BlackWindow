@@ -47,7 +47,7 @@ public:
 	void SetFOV(float horizontalFov, float aspectRatio) {
 		frustum.SetHorizontalFovAndAspectRatio(horizontalFov, aspectRatio);
 	}
-
+	
 
 	const float4x4 GetView() {
 		return frustum.ViewMatrix();
@@ -65,6 +65,9 @@ public:
 		speedFactor = factor;
 	}
 
+	void ResetCameraPosition();
+	void ResetToDefaultSpeeds();
+
 
 private:
 	void MoveForward(float deltaTime);
@@ -72,15 +75,15 @@ private:
 	void MoveUp(float deltaTime);
 	void Pitch(float deltaTime);
 	void Yaw(float deltaTime);
+	void CheckForResetCameraPosition();
 
 	void Rotate(const float3x3 rotation_matrix);
 	void RotatePitch(float radians,float deltaTime);
 	void MousePitch(float deltaTime);
 	
-	const float getMovementSpeedFactor();
-	const float getTurnSpeedFactor();
-	const float getRadiansAngleSpeedFactor();
-	void resetToDefaultSpeeds();
+	const float GetMovementSpeedFactor();
+	const float GetTurnSpeedFactor();
+	const float GetRadiansAngleSpeedFactor();
 
 protected:
 	Frustum frustum;

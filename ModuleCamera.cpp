@@ -19,9 +19,7 @@ ModuleCamera::ModuleCamera()
 	frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
 	frustum.SetViewPlaneDistances(0.1f, 200.0f);
 	frustum.SetHorizontalFovAndAspectRatio(DEGTORAD(1) * 90.0f, 1.3f);
-	frustum.SetPos(cameraPosition);
-	frustum.SetFront(float3::unitZ);
-	frustum.SetUp(float3::unitY);
+	ResetCameraPosition();
 }
 
 ModuleCamera::~ModuleCamera()
@@ -47,6 +45,10 @@ update_status ModuleCamera::Update(float deltaTime)
 	glMatrixMode(GL_PROJECTION);
 	glLoadMatrixf(*(projectionGL.v));
 
+
+	// Check for reset camera position
+	CheckForResetCameraPosition();
+
 	//Keyboard movements
 	MoveForward(deltaTime);
 	MoveRight(deltaTime);
@@ -55,6 +57,7 @@ update_status ModuleCamera::Update(float deltaTime)
 	Yaw(deltaTime);
 	//Mouse movements
 	MousePitch(deltaTime);
+	
 	
 
 	//Passing view matrix to opengl
@@ -80,12 +83,12 @@ bool ModuleCamera::CleanUp()
 void ModuleCamera::MoveForward(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_W)) {
-		frustum.Translate(frustum.Front() * getMovementSpeedFactor() * deltaTime);
+		frustum.Translate(frustum.Front() * GetMovementSpeedFactor() * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("W");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_S)) {
-		frustum.Translate(frustum.Front() * -getMovementSpeedFactor() * deltaTime);
+		frustum.Translate(frustum.Front() * -GetMovementSpeedFactor() * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("S");
 	}
@@ -94,12 +97,12 @@ void ModuleCamera::MoveForward(float deltaTime)
 void ModuleCamera::MoveRight(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_D)) {
-		frustum.Translate(frustum.WorldRight() * getMovementSpeedFactor() * deltaTime);
+		frustum.Translate(frustum.WorldRight() * GetMovementSpeedFactor() * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("D");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_A)) {
-		frustum.Translate(frustum.WorldRight() * -getMovementSpeedFactor() * deltaTime);
+		frustum.Translate(frustum.WorldRight() * -GetMovementSpeedFactor() * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("A");
 	}
@@ -109,12 +112,12 @@ void ModuleCamera::MoveUp(float deltaTime)
 {
 
 	if (App->input->GetKey(SDL_SCANCODE_Q)) {
-		cameraPosition = float3(cameraPosition.x , cameraPosition.y + getMovementSpeedFactor() * deltaTime, cameraPosition.z);
+		cameraPosition = float3(cameraPosition.x , cameraPosition.y + GetMovementSpeedFactor() * deltaTime, cameraPosition.z);
 		frustum.SetPos(cameraPosition);
 		LOG("Q");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_E)) {
-		cameraPosition = float3(cameraPosition.x, cameraPosition.y - getMovementSpeedFactor() * deltaTime, cameraPosition.z);
+		cameraPosition = float3(cameraPosition.x, cameraPosition.y - GetMovementSpeedFactor() * deltaTime, cameraPosition.z);
 		frustum.SetPos(cameraPosition);
 		LOG("E");
 	}
@@ -123,11 +126,11 @@ void ModuleCamera::MoveUp(float deltaTime)
 void ModuleCamera::Pitch(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_UP)) {
-		RotatePitch(getRadiansAngleSpeedFactor(), deltaTime);
+		RotatePitch(GetRadiansAngleSpeedFactor(), deltaTime);
 		LOG("Up");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN)) {
-		RotatePitch(-getRadiansAngleSpeedFactor(), deltaTime);
+		RotatePitch(-GetRadiansAngleSpeedFactor(), deltaTime);
 		LOG("Down");
 	}
 }
@@ -148,14 +151,22 @@ void ModuleCamera::RotatePitch(float radians, float deltaTime)
 void ModuleCamera::Yaw(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_LEFT)) {
-		Rotate(frustum.WorldMatrix().RotatePart().RotateY(getTurnSpeedFactor() * deltaTime));
+		Rotate(frustum.WorldMatrix().RotatePart().RotateY(GetTurnSpeedFactor() * deltaTime));
 		LOG("left");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT)) {
-		Rotate(frustum.WorldMatrix().RotatePart().RotateY(-getTurnSpeedFactor() * deltaTime));
+		Rotate(frustum.WorldMatrix().RotatePart().RotateY(-GetTurnSpeedFactor() * deltaTime));
 		LOG("right");
 	}
 	
+}
+
+void ModuleCamera::CheckForResetCameraPosition()
+{
+	if (App->input->GetKey(SDL_SCANCODE_F)) {
+		LOG("F");
+		ResetCameraPosition();
+	}
 }
 
 void ModuleCamera::Rotate(const float3x3 rotation_matrix)
@@ -176,17 +187,17 @@ void ModuleCamera::MousePitch(float deltaTime)
 		//Horizontal
 		int result = mousePosition.x - new_mousePosition.x;
 		// turn right / left direction given by result 
-		Rotate(frustum.WorldMatrix().RotatePart().RotateY( result * getTurnSpeedFactor() * deltaTime));
+		Rotate(frustum.WorldMatrix().RotatePart().RotateY( result * GetTurnSpeedFactor() * deltaTime));
 		
 		// Vertical
 		result =  mousePosition.y - new_mousePosition.y;
 		//turn up/down direction given by result
-		RotatePitch(result * getRadiansAngleSpeedFactor(), deltaTime);
+		RotatePitch(result * GetRadiansAngleSpeedFactor(), deltaTime);
 	}
 
 }
 
-const float ModuleCamera::getMovementSpeedFactor()
+const float ModuleCamera::GetMovementSpeedFactor()
 {
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT) ) {
 		return movementSpeed * speedFactor;
@@ -194,7 +205,7 @@ const float ModuleCamera::getMovementSpeedFactor()
 	return movementSpeed;
 }
 
-const float ModuleCamera::getTurnSpeedFactor()
+const float ModuleCamera::GetTurnSpeedFactor()
 {
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT)) {
 		return turnSpeed * speedFactor;
@@ -202,7 +213,7 @@ const float ModuleCamera::getTurnSpeedFactor()
 	return turnSpeed;
 }
 
-const float ModuleCamera::getRadiansAngleSpeedFactor()
+const float ModuleCamera::GetRadiansAngleSpeedFactor()
 {
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT)) {
 		return radiansAngle * speedFactor;
@@ -210,7 +221,14 @@ const float ModuleCamera::getRadiansAngleSpeedFactor()
 	return radiansAngle;
 }
 
-void ModuleCamera::resetToDefaultSpeeds()
+void ModuleCamera::ResetCameraPosition()
+{
+	frustum.SetPos(initialCameraPosition);
+	frustum.SetFront(float3::unitZ);
+	frustum.SetUp(float3::unitY);
+}
+
+void ModuleCamera::ResetToDefaultSpeeds()
 {
 	turnSpeed = initialTurnSpeed;
 	movementSpeed = initialMovementSpeed;
