@@ -32,12 +32,12 @@ bool ModuleCamera::Init()
 	return true;
 }
 
-update_status ModuleCamera::PreUpdate()
+update_status ModuleCamera::PreUpdate(float deltaTime)
 {
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleCamera::Update()
+update_status ModuleCamera::Update(float deltaTime)
 {
 	//Setting projection
 	float4x4 projectionGL = frustum.ProjectionMatrix().Transposed(); //<-- Important to transpose!
@@ -47,13 +47,13 @@ update_status ModuleCamera::Update()
 	glLoadMatrixf(*(projectionGL.v));
 
 	//Keyboard movements
-	MoveForward();
-	MoveRight();
-	MoveUp();
-	Pitch();
-	Yaw();
+	MoveForward(deltaTime);
+	MoveRight(deltaTime);
+	MoveUp(deltaTime);
+	Pitch(deltaTime);
+	Yaw(deltaTime);
 	//Mouse movements
-	MousePitch();
+	MousePitch(deltaTime);
 	
 
 	//Passing view matrix to opengl
@@ -66,7 +66,7 @@ update_status ModuleCamera::Update()
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleCamera::PostUpdate()
+update_status ModuleCamera::PostUpdate(float deltaTime)
 {
 	return UPDATE_CONTINUE;
 }
@@ -76,63 +76,62 @@ bool ModuleCamera::CleanUp()
 	return true;
 }
 
-void ModuleCamera::MoveForward()
+void ModuleCamera::MoveForward(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_W)) {
-		frustum.Translate(frustum.Front() * movementSpeed);
+		frustum.Translate(frustum.Front() * movementSpeed * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("W");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_S)) {
-		frustum.Translate(frustum.Front() * -movementSpeed);
+		frustum.Translate(frustum.Front() * -movementSpeed * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("S");
 	}
 }
 
-void ModuleCamera::MoveRight()
+void ModuleCamera::MoveRight(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_D)) {
-		frustum.Translate(frustum.WorldRight() * movementSpeed);
+		frustum.Translate(frustum.WorldRight() * movementSpeed * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("D");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_A)) {
-		frustum.Translate(frustum.WorldRight() * -movementSpeed);
+		frustum.Translate(frustum.WorldRight() * -movementSpeed * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("A");
 	}
 }
 
-void ModuleCamera::MoveUp()
+void ModuleCamera::MoveUp(float deltaTime)
 {
 
 	if (App->input->GetKey(SDL_SCANCODE_Q)) {
-		cameraPosition = float3(cameraPosition.x , cameraPosition.y + movementSpeed, cameraPosition.z);
+		cameraPosition = float3(cameraPosition.x , cameraPosition.y + movementSpeed * deltaTime, cameraPosition.z);
 		frustum.SetPos(cameraPosition);
 		LOG("Q");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_E)) {
-		cameraPosition = float3(cameraPosition.x, cameraPosition.y - movementSpeed, cameraPosition.z);
+		cameraPosition = float3(cameraPosition.x, cameraPosition.y - movementSpeed * deltaTime, cameraPosition.z);
 		frustum.SetPos(cameraPosition);
 		LOG("E");
 	}
 }
 
-void ModuleCamera::Pitch()
+void ModuleCamera::Pitch(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_UP)) {
-		RotatePitch(radiansAngle);
+		RotatePitch(radiansAngle, deltaTime);
 		LOG("Up");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN)) {
-		RotatePitch(-radiansAngle);
-
+		RotatePitch(-radiansAngle, deltaTime);
 		LOG("Down");
 	}
 }
 
-void ModuleCamera::Yaw()
+void ModuleCamera::Yaw(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_LEFT)) {
 		Rotate(frustum.WorldMatrix().RotatePart().RotateY(turnSpeed));
@@ -153,18 +152,18 @@ void ModuleCamera::Rotate(const float3x3 rotation_matrix)
 	frustum.SetUp(rotation_matrix.MulDir(oldUp));
 }
 
-void ModuleCamera::RotatePitch(const float radians)
+void ModuleCamera::RotatePitch(float radians,float deltaTime)
 {
 	//Reference
 	//https://stackoverflow.com/questions/15208104/opengl-camera-pitch-yaw-and-roll-rotation
-	float3 lookAtVector = frustum.Front() * cos(radians) + frustum.Up() * sin(radians);
+	float3 lookAtVector = frustum.Front() * cos(radians*deltaTime) + frustum.Up() * sin(radians * deltaTime) ;
 	lookAtVector.Normalize();
 	float3 upVector = frustum.WorldRight().Cross(lookAtVector);
 	frustum.SetFront(lookAtVector);
 	frustum.SetUp(upVector);
 }
 
-void ModuleCamera::MousePitch()
+void ModuleCamera::MousePitch(float deltaTime)
 {
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT)) {
 		LOG("Mouse R");
@@ -174,12 +173,12 @@ void ModuleCamera::MousePitch()
 		//Horizontal
 		int result = mousePosition.x - new_mousePosition.x;
 		// turn right / left direction given by result 
-		Rotate(frustum.WorldMatrix().RotatePart().RotateY( result *turnSpeed ));
+		Rotate(frustum.WorldMatrix().RotatePart().RotateY( result *turnSpeed * deltaTime));
 		
 		// Vertical
 		result =  mousePosition.y - new_mousePosition.y;
 		//turn up/down direction given by result
-		RotatePitch(result * radiansAngle);
+		RotatePitch(result * radiansAngle, deltaTime);
 	}
 
 }

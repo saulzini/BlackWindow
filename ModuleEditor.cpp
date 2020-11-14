@@ -46,7 +46,7 @@ bool ModuleEditor::Init()
     return true;
 }
 
-update_status ModuleEditor::PreUpdate()
+update_status ModuleEditor::PreUpdate(float deltaTime)
 {
     bool show = true;
     // Start the Dear ImGui frame
@@ -62,7 +62,7 @@ update_status ModuleEditor::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleEditor::Update()
+update_status ModuleEditor::Update(float deltaTime)
 {
     bool showDemoWindow = true;
     ImGui::ShowDemoWindow(&showDemoWindow);
@@ -76,7 +76,7 @@ update_status ModuleEditor::Update()
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleEditor::PostUpdate()
+update_status ModuleEditor::PostUpdate(float deltaTime)
 {
 	return UPDATE_CONTINUE;
 }
@@ -195,6 +195,5 @@ void ModuleEditor::ShowDockSpace(bool* pOpen)
         ImGui::EndMenuBar();
     }
     //End menu bar
-
     ImGui::End();
 }

@@ -9,17 +9,17 @@ bool ModuleProgram::Init()
     return true;
 }
 
-update_status ModuleProgram::PreUpdate()
+update_status ModuleProgram::PreUpdate(float deltaTime)
 {
     return UPDATE_CONTINUE;
 }
 
-update_status ModuleProgram::Update()
+update_status ModuleProgram::Update(float deltaTime)
 {
     return UPDATE_CONTINUE;
 }
 
-update_status ModuleProgram::PostUpdate()
+update_status ModuleProgram::PostUpdate(float deltaTime)
 {
     return UPDATE_CONTINUE;
 }

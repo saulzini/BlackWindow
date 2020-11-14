@@ -17,20 +17,11 @@ public:
 	~ModuleCamera();
 
 	bool Init();
-	update_status PreUpdate();
-	update_status Update();
-	update_status PostUpdate();
+	update_status PreUpdate(float deltaTime);
+	update_status Update(float deltaTime);
+	update_status PostUpdate(float deltaTime);
 	bool CleanUp();
-
-	void MoveForward();
-	void MoveRight();
-	void MoveUp();
-	void Pitch();
-	void Yaw();
-
-	void Rotate(const float3x3 rotation_matrix);
-	void RotatePitch(const float radians);
-
+	
 	void setMovementSpeed(float value) {
 		if (value <= 0.0f) {
 			return;
@@ -54,11 +45,9 @@ public:
 	}
 
 	void SetFOV(float horizontalFov, float aspectRatio) {
-		frustum.SetHorizontalFovAndAspectRatio(horizontalFov,aspectRatio );
-
+		frustum.SetHorizontalFovAndAspectRatio(horizontalFov, aspectRatio);
 	}
 
-	void MousePitch();
 
 	const float4x4 GetView() {
 		return frustum.ViewMatrix();
@@ -68,6 +57,16 @@ public:
 	const float4x4 GetProjection() {
 		return frustum.ProjectionMatrix();
 	};
+private:
+	void MoveForward(float deltaTime);
+	void MoveRight(float deltaTime);
+	void MoveUp(float deltaTime);
+	void Pitch(float deltaTime);
+	void Yaw(float deltaTime);
+
+	void Rotate(const float3x3 rotation_matrix);
+	void RotatePitch(float radians,float deltaTime);
+	void MousePitch(float deltaTime);
 
 protected:
 	Frustum frustum;
