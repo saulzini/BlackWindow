@@ -7,6 +7,8 @@
 #include "ModuleProgram.h"
 #include "ModuleRenderExercise.h"
 #include "ModuleEditor.h"
+#include "Core/Time.h"
+#include "SDL.h"
 using namespace std;
 
 Application::Application()
@@ -43,14 +45,19 @@ update_status Application::Update()
 {
 	update_status ret = UPDATE_CONTINUE;
 
-	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
-		ret = (*it)->PreUpdate();
+	float time = (float) SDL_GetTicks();
+	Time currentTime = time-lastFrame; 
+	lastFrame = time;
+	
 
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
-		ret = (*it)->Update();
+		ret = (*it)->PreUpdate(currentTime);
 
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
-		ret = (*it)->PostUpdate();
+		ret = (*it)->Update(currentTime);
+
+	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
+		ret = (*it)->PostUpdate(currentTime);
 
 	return ret;
 }

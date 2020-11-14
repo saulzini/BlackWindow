@@ -446,6 +446,9 @@
     <ClInclude Include="ConfigurationWindow.h">
       <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
+    <ClInclude Include="Core\Time.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
@@ -465,6 +468,9 @@
     </Filter>
     <Filter Include="Graphics\UIWindow">
       <UniqueIdentifier>{40e881ee-16d6-484f-8841-ea309d753f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{ebb6cf58-a825-4957-9447-ace7c8bf1e2c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

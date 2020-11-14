@@ -82,7 +82,7 @@ bool ModuleRender::Init()
 	return true;
 }
 
-update_status ModuleRender::PreUpdate()
+update_status ModuleRender::PreUpdate(float deltaTime)
 {
 	glClearColor(0.51f, 0.76f, 0.76f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -91,7 +91,7 @@ update_status ModuleRender::PreUpdate()
 }
 
 // Called every draw update
-update_status ModuleRender::Update()
+update_status ModuleRender::Update(float deltaTime)
 {
 	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
@@ -138,7 +138,7 @@ update_status ModuleRender::Update()
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleRender::PostUpdate()
+update_status ModuleRender::PostUpdate(float deltaTime)
 {
 	SDL_GL_SwapWindow(App->window->window);
 	return UPDATE_CONTINUE;
