@@ -35,25 +35,26 @@ public:
 		if (value <= 0.0f) {
 			return;
 		}
-		movement_speed = value;
+		movementSpeed = value;
 	}
 
 	void setTurnSpeed(float value) {
 		if (value <= 0.0f) {
 			return;
 		}
-		turn_speed = value;
+		turnSpeed = value;
 	}
 
 	float getMovementSpeed() const {
-		return movement_speed;
+		return movementSpeed;
 	}
 
 	float getTurnSpeed() const {
-		return turn_speed;
+		return turnSpeed;
 	}
 
-	void SetFOV() {
+	void SetFOV(float horizontalFov, float aspectRatio) {
+		frustum.SetHorizontalFovAndAspectRatio(horizontalFov,aspectRatio );
 
 	}
 
@@ -70,11 +71,11 @@ public:
 
 protected:
 	Frustum frustum;
-	float movement_speed;
-	float turn_speed;
-	float radians_angle;
-	float3 camera_position;
+	float movementSpeed;
+	float turnSpeed;
+	float radiansAngle;
+	float3 cameraPosition;
 	//mouse
-	iPoint mouse_position;
+	iPoint mousePosition;
 };
 

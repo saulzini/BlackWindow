@@ -29,11 +29,11 @@ bool ModuleProgram::CleanUp()
     return true;
 }
 
-char* ModuleProgram::LoadShaderSource(const char* shader_file_name)
+char* ModuleProgram::LoadShaderSource(const char* shaderFileName)
 {
     char* data = nullptr;
     FILE* file = nullptr;
-    fopen_s(&file, shader_file_name, "rb");
+    fopen_s(&file, shaderFileName, "rb");
     if (file)
     {
         fseek(file, 0, SEEK_END);
@@ -49,67 +49,67 @@ char* ModuleProgram::LoadShaderSource(const char* shader_file_name)
 
 unsigned ModuleProgram::CompileShader(unsigned type, const char* source)
 {
-    unsigned shader_id = glCreateShader(type);
-    glShaderSource(shader_id, 1, &source, 0);
-    glCompileShader(shader_id);
+    unsigned shaderId = glCreateShader(type);
+    glShaderSource(shaderId, 1, &source, 0);
+    glCompileShader(shaderId);
     int res = GL_FALSE;
-    glGetShaderiv(shader_id, GL_COMPILE_STATUS, &res);
+    glGetShaderiv(shaderId, GL_COMPILE_STATUS, &res);
     if (res == GL_FALSE)
     {
         int len = 0;
-        glGetShaderiv(shader_id, GL_INFO_LOG_LENGTH, &len);
+        glGetShaderiv(shaderId, GL_INFO_LOG_LENGTH, &len);
         if (len > 0)
         {
             int written = 0;
             char* info = (char*)malloc(len);
-            glGetShaderInfoLog(shader_id, len, &written, info);
+            glGetShaderInfoLog(shaderId, len, &written, info);
             LOG("Log Info: %s", info);
             free(info);
         }
     }
-    return shader_id;
+    return shaderId;
 }
 
-unsigned ModuleProgram::CreateProgram(unsigned vtx_shader, unsigned frg_shader)
+unsigned ModuleProgram::CreateProgram(unsigned vtxShader, unsigned frgShader)
 {
-    unsigned program_id = glCreateProgram();
-    glAttachShader(program_id, vtx_shader);
-    glAttachShader(program_id, frg_shader);
-    glLinkProgram(program_id);
+    unsigned programId = glCreateProgram();
+    glAttachShader(programId, vtxShader);
+    glAttachShader(programId, frgShader);
+    glLinkProgram(programId);
     int res;
-    glGetProgramiv(program_id, GL_LINK_STATUS, &res);
+    glGetProgramiv(programId, GL_LINK_STATUS, &res);
     if (res == GL_FALSE)
     {
         int len = 0;
-        glGetProgramiv(program_id, GL_INFO_LOG_LENGTH, &len);
+        glGetProgramiv(programId, GL_INFO_LOG_LENGTH, &len);
         if (len > 0)
         {
             int written = 0;
             char* info = (char*)malloc(len);
-            glGetProgramInfoLog(program_id, len, &written, info);
+            glGetProgramInfoLog(programId, len, &written, info);
             LOG("Program Log Info: %s", info);
             free(info);
         }
     }
-    glDeleteShader(vtx_shader);
-    glDeleteShader(frg_shader);
-    return program_id;
+    glDeleteShader(vtxShader);
+    glDeleteShader(frgShader);
+    return programId;
 }
 
-unsigned ModuleProgram::CreateProgramFromSource(const char* vtx_shader, const char* frg_shader)
+unsigned ModuleProgram::CreateProgramFromSource(const char* vtxShader, const char* frgShader)
 {
-    char* vtx_source = LoadShaderSource(vtx_shader);
-    char* frg_source = LoadShaderSource(frg_shader);
+    char* vtxSource = LoadShaderSource(vtxShader);
+    char* frgSource = LoadShaderSource(frgShader);
     
-    if (vtx_shader == nullptr || frg_source == nullptr) {
+    if (vtxShader == nullptr || frgSource == nullptr) {
         return 0;
     }
 
-    unsigned vtx_compile = CompileShader(GL_VERTEX_SHADER, vtx_source);
-    unsigned frg_compile = CompileShader(GL_FRAGMENT_SHADER, frg_source);
-    if (vtx_shader == 0 || frg_shader == 0) {
+    unsigned vtxCompile = CompileShader(GL_VERTEX_SHADER, vtxSource);
+    unsigned frgCompile = CompileShader(GL_FRAGMENT_SHADER, frgSource);
+    if (vtxShader == 0 || frgShader == 0) {
         return 0;
     }
 
-    return CreateProgram(vtx_compile, frg_compile);
+    return CreateProgram(vtxCompile, frgCompile);
 }
