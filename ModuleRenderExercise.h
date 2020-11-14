@@ -9,7 +9,6 @@ public:
 
 	//Rendering triangle
 	unsigned CreateTriangleVBO();
-	void RenderVBO(unsigned vbo, unsigned program);
 	void RenderTriangle();
 	void DestroyVBO(unsigned vbo);
 

@@ -138,7 +138,7 @@ update_status ModuleRender::Update()
 	glVertex3f(-0.05f, -0.1f, 1.05f); glVertex3f(0.05f, -0.1f, 1.05f);
 	glEnd();
 	glLineWidth(1.0f);
-	///App->exercise->RenderTriangle();
+	
 	return UPDATE_CONTINUE;
 }
 
