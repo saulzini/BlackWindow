@@ -47,6 +47,7 @@ update_status ModuleInput::PreUpdate(float deltaTime)
 	static SDL_Event event;
 
 	mouse_motion = { 0, 0 };
+	scrollAmount = 0;
 	memset(windowEvents, false, WE_COUNT * sizeof(bool));
 
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
@@ -122,7 +123,13 @@ update_status ModuleInput::PreUpdate(float deltaTime)
 			mouse.x = event.motion.x / SCREEN_SIZE;
 			mouse.y = event.motion.y / SCREEN_SIZE;
 			break;
+
+		case SDL_MOUSEWHEEL:
+			scrollAmount = event.wheel.y;
+			break;
 		}
+
+		
 	}
 
 	if (GetWindowEvent(EventWindow::WE_QUIT) == true || GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)

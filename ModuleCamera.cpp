@@ -57,6 +57,7 @@ update_status ModuleCamera::Update(float deltaTime)
 	Yaw(deltaTime);
 	//Mouse movements
 	MousePitch(deltaTime);
+	MouseZoom(deltaTime);
 	
 	
 
@@ -195,6 +196,15 @@ void ModuleCamera::MousePitch(float deltaTime)
 		RotatePitch(result * GetRadiansAngleSpeedFactor(), deltaTime);
 	}
 
+}
+
+void ModuleCamera::MouseZoom(float deltaTime)
+{
+	int scrollAmount =  App->input->GetScrollAmount();
+	if (scrollAmount != 0) {
+		frustum.Translate(frustum.Front() * (scrollAmount + GetMovementSpeedFactor() ) * deltaTime);
+		cameraPosition = frustum.Pos();
+	}
 }
 
 const float ModuleCamera::GetMovementSpeedFactor()

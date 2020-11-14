@@ -78,9 +78,12 @@ private:
 	void CheckForResetCameraPosition();
 
 	void Rotate(const float3x3 rotation_matrix);
-	void RotatePitch(float radians,float deltaTime);
-	void MousePitch(float deltaTime);
 	
+	void MousePitch(float deltaTime);
+	void MouseZoom(float deltaTime);
+	void RotatePitch(float radians,float deltaTime);
+	
+
 	const float GetMovementSpeedFactor();
 	const float GetTurnSpeedFactor();
 	const float GetRadiansAngleSpeedFactor();

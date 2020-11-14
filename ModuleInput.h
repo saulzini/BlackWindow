@@ -64,12 +64,17 @@ public:
 	const iPoint& GetMouseMotion() const;
 	const iPoint& GetMousePosition() const;
 
+	const int GetScrollAmount() {
+		return scrollAmount;
+	}
+
 private:
 	bool		windowEvents[WE_COUNT];
 	KeyState* keyboard;
 	KeyState	mouse_buttons[NUM_MOUSE_BUTTONS];
 	iPoint mouse_motion;
 	iPoint mouse;
+	int scrollAmount;
 };
 
 #endif // __MODULEINPUT_H__
