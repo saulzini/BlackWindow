@@ -3,8 +3,7 @@
 #include <stdlib.h>         // NULL, malloc, free, atoi
 #include "Application.h"
 #include "ModuleCamera.h"
-#include "MathGeoLib-master/src/Math/float3.h"
-
+#include <math.h>
 void ConfigurationWindow::Update()
 {
     if (show)
@@ -174,9 +173,11 @@ void ConfigurationWindow::Update()
             ImGui::InputFloat3("Up", vec4f);
 
             // Position
-            //ImGui::InputFloat3("Position", vec4f);;
-            //float3 cameraPosition = float3(App->camera->cameraPosition);
-            //ImGui::InputFloat3("Position", cameraPosition);
+            ImGui::InputFloat3("Position", vec4f);
+
+            
+            //ImGui::InputFloat3("Position", App->camera->cameraPosition[0] );
+
 
             // Move Speed
             static float ms = 0.f;
