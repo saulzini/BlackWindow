@@ -8,6 +8,8 @@ void ConfigurationWindow::Update()
 {
     if (show)
     {
+        ImGui::SetNextWindowContentSize(ImVec2(400, 70.0f));
+
         if (!begin())
         {
             show = false;

@@ -74,7 +74,6 @@ update_status ModuleCamera::Update(float deltaTime)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(*(view.v));
 
-
 	return UPDATE_CONTINUE;
 }
 
