@@ -139,6 +139,34 @@
     <ClCompile Include="Texture2D.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="ImGui\imgui.cpp">
+      <Filter>Graphics\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_demo.cpp">
+      <Filter>Graphics\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_draw.cpp">
+      <Filter>Graphics\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_opengl3.cpp">
+      <Filter>Graphics\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_impl_sdl.cpp">
+      <Filter>Graphics\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGui\imgui_widgets.cpp">
+      <Filter>Graphics\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEditor.cpp" />
+    <ClCompile Include="DefaultImGuiWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="ConsoleWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="ConfigurationWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -384,6 +412,40 @@
     <ClInclude Include="Texture2D.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="ImGui\imconfig.h">
+      <Filter>Graphics\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui.h">
+      <Filter>Graphics\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_opengl3.h">
+      <Filter>Graphics\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_impl_sdl.h">
+      <Filter>Graphics\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imgui_internal.h">
+      <Filter>Graphics\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_rectpack.h">
+      <Filter>Graphics\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_textedit.h">
+      <Filter>Graphics\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGui\imstb_truetype.h">
+      <Filter>Graphics\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEditor.h" />
+    <ClInclude Include="DefaultImGuiWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="ConfigurationWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
@@ -394,6 +456,15 @@
     </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{2ddcefa5-5550-47b2-b0c9-3f33fe98bad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{826cc23b-b061-4474-9c90-7b5814149368}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\ImGui">
+      <UniqueIdentifier>{4231776c-f7cf-43a1-9916-ed6bd710fe8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\UIWindow">
+      <UniqueIdentifier>{40e881ee-16d6-484f-8841-ea309d753f5f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

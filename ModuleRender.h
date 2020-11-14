@@ -19,12 +19,10 @@ public:
 	bool CleanUp();
 	void WindowResized(unsigned width, unsigned height);
 
+	void* GetContext() {
+		return context;
+	}
 
-	/*//Rendering triangle
-	unsigned CreateTriangleVBO();
-	void RenderVBO(unsigned vbo,unsigned program);
-	void DestroyVBO(unsigned vbo);
-	*/
 private:
 	void* context;
 	/*unsigned int program;

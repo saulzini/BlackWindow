@@ -7,7 +7,9 @@
 #include "ModuleCamera.h"
 #include "ModuleProgram.h"
 #include "ModuleRenderExercise.h"
-
+//#include "ImGui\imgui_impl_sdl.h"
+//#include "ImGui\imgui_impl_opengl3.h"
+//#include "MathGeoLib-master/src/Geometry/Frustum.h"
 void __stdcall OurOpenGLErrorFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
 	const char* tmp_source = "", * tmp_type = "", * tmp_severity = "";
@@ -40,6 +42,7 @@ void __stdcall OurOpenGLErrorFunction(GLenum source, GLenum type, GLuint id, GLe
 
 }
 
+
 ModuleRender::ModuleRender()
 {
 }
@@ -52,13 +55,6 @@ ModuleRender::~ModuleRender()
 // Called before render is available
 bool ModuleRender::Init()
 {
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4); // desired version
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_COMPATIBILITY);
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1); // we want a double buffer
-	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24); // we want to have a depth buffer with 24 bits
-	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8); // we want to have a stencil buffer with 8 bits
-
 	context = SDL_GL_CreateContext(App->window->window); //init context with window
 	//SDL_WINDOW_OPENGL(SDL_WINDOW_SHOWN);
 
@@ -138,7 +134,7 @@ update_status ModuleRender::Update()
 	glVertex3f(-0.05f, -0.1f, 1.05f); glVertex3f(0.05f, -0.1f, 1.05f);
 	glEnd();
 	glLineWidth(1.0f);
-	
+
 	return UPDATE_CONTINUE;
 }
 
