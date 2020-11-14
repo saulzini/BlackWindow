@@ -68,6 +68,14 @@ public:
 	void ResetCameraPosition();
 	void ResetToDefaultSpeeds();
 
+	float3 GetCameraPosition() {
+		return cameraPosition;
+	}
+
+	void SetCameraPosition(float3 mCameraPosition) {
+		cameraPosition = mCameraPosition;
+	}
+
 
 private:
 	void MoveForward(float deltaTime);
