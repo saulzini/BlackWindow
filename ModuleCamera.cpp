@@ -8,7 +8,7 @@
 ModuleCamera::ModuleCamera()
 {
 	//initializing
-	initialCameraPosition = cameraPosition = float3(0, 1, -2);
+	initialCameraPosition = cameraPosition = lastCameraPosition = float3(0, 1, -2);
 	initialTurnSpeed = turnSpeed = 0.0005f;
 	initialMovementSpeed = movementSpeed = 0.005f;
 	initialRadiansAngle = radiansAngle = DEGTORAD(0.05);
@@ -38,6 +38,13 @@ update_status ModuleCamera::PreUpdate(float deltaTime)
 
 update_status ModuleCamera::Update(float deltaTime)
 {
+	if (
+		lastCameraPosition.x != cameraPosition.x || 
+		lastCameraPosition.y != cameraPosition.y || 
+		lastCameraPosition.z == cameraPosition.z) {
+		frustum.SetPos(cameraPosition);
+	}
+
 	//Setting projection
 	float4x4 projectionGL = frustum.ProjectionMatrix().Transposed(); //<-- Important to transpose!
 	
@@ -66,7 +73,6 @@ update_status ModuleCamera::Update(float deltaTime)
 	view.Transpose();
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixf(*(view.v));
-
 
 	return UPDATE_CONTINUE;
 }
