@@ -36,11 +36,11 @@ public:
 		turnSpeed = value;
 	}
 
-	float getMovementSpeed() const {
+	const float getMovementSpeed()  {
 		return movementSpeed;
 	}
 
-	float getTurnSpeed() const {
+	const float getTurnSpeed()  {
 		return turnSpeed;
 	}
 
@@ -57,6 +57,15 @@ public:
 	const float4x4 GetProjection() {
 		return frustum.ProjectionMatrix();
 	};
+
+	void setSpeedFactor(float factor) {
+		if (factor < 0) {
+			return;
+		}
+		speedFactor = factor;
+	}
+
+
 private:
 	void MoveForward(float deltaTime);
 	void MoveRight(float deltaTime);
@@ -67,6 +76,11 @@ private:
 	void Rotate(const float3x3 rotation_matrix);
 	void RotatePitch(float radians,float deltaTime);
 	void MousePitch(float deltaTime);
+	
+	const float getMovementSpeedFactor();
+	const float getTurnSpeedFactor();
+	const float getRadiansAngleSpeedFactor();
+	void resetToDefaultSpeeds();
 
 protected:
 	Frustum frustum;
@@ -74,6 +88,13 @@ protected:
 	float turnSpeed;
 	float radiansAngle;
 	float3 cameraPosition;
+
+	float initialMovementSpeed;
+	float initialTurnSpeed;
+	float initialRadiansAngle;
+	float3 initialCameraPosition;
+
+	float speedFactor;
 	//mouse
 	iPoint mousePosition;
 };

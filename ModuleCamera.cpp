@@ -8,11 +8,12 @@
 ModuleCamera::ModuleCamera()
 {
 	//initializing
-	cameraPosition = float3(0, 1, -2);
-	turnSpeed = 0.0005f;
-	movementSpeed = 0.005f;
-	radiansAngle = DEGTORAD(0.05);
+	initialCameraPosition = cameraPosition = float3(0, 1, -2);
+	initialTurnSpeed = turnSpeed = 0.0005f;
+	initialMovementSpeed = movementSpeed = 0.005f;
+	initialRadiansAngle = radiansAngle = DEGTORAD(0.05);
 	mousePosition = iPoint(0, 0);
+	speedFactor = 2.0f;
 
 	//Setting frustum
 	frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
@@ -79,12 +80,12 @@ bool ModuleCamera::CleanUp()
 void ModuleCamera::MoveForward(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_W)) {
-		frustum.Translate(frustum.Front() * movementSpeed * deltaTime);
+		frustum.Translate(frustum.Front() * getMovementSpeedFactor() * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("W");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_S)) {
-		frustum.Translate(frustum.Front() * -movementSpeed * deltaTime);
+		frustum.Translate(frustum.Front() * -getMovementSpeedFactor() * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("S");
 	}
@@ -93,12 +94,12 @@ void ModuleCamera::MoveForward(float deltaTime)
 void ModuleCamera::MoveRight(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_D)) {
-		frustum.Translate(frustum.WorldRight() * movementSpeed * deltaTime);
+		frustum.Translate(frustum.WorldRight() * getMovementSpeedFactor() * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("D");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_A)) {
-		frustum.Translate(frustum.WorldRight() * -movementSpeed * deltaTime);
+		frustum.Translate(frustum.WorldRight() * -getMovementSpeedFactor() * deltaTime);
 		cameraPosition = frustum.Pos();
 		LOG("A");
 	}
@@ -108,12 +109,12 @@ void ModuleCamera::MoveUp(float deltaTime)
 {
 
 	if (App->input->GetKey(SDL_SCANCODE_Q)) {
-		cameraPosition = float3(cameraPosition.x , cameraPosition.y + movementSpeed * deltaTime, cameraPosition.z);
+		cameraPosition = float3(cameraPosition.x , cameraPosition.y + getMovementSpeedFactor() * deltaTime, cameraPosition.z);
 		frustum.SetPos(cameraPosition);
 		LOG("Q");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_E)) {
-		cameraPosition = float3(cameraPosition.x, cameraPosition.y - movementSpeed * deltaTime, cameraPosition.z);
+		cameraPosition = float3(cameraPosition.x, cameraPosition.y - getMovementSpeedFactor() * deltaTime, cameraPosition.z);
 		frustum.SetPos(cameraPosition);
 		LOG("E");
 	}
@@ -122,23 +123,36 @@ void ModuleCamera::MoveUp(float deltaTime)
 void ModuleCamera::Pitch(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_UP)) {
-		RotatePitch(radiansAngle, deltaTime);
+		RotatePitch(getRadiansAngleSpeedFactor(), deltaTime);
 		LOG("Up");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN)) {
-		RotatePitch(-radiansAngle, deltaTime);
+		RotatePitch(-getRadiansAngleSpeedFactor(), deltaTime);
 		LOG("Down");
 	}
 }
 
+
+void ModuleCamera::RotatePitch(float radians, float deltaTime)
+{
+	//Reference
+	//https://stackoverflow.com/questions/15208104/opengl-camera-pitch-yaw-and-roll-rotation
+	float3 lookAtVector = frustum.Front() * cos(radians * deltaTime) + frustum.Up() * sin(radians * deltaTime);
+	lookAtVector.Normalize();
+	float3 upVector = frustum.WorldRight().Cross(lookAtVector);
+	frustum.SetFront(lookAtVector);
+	frustum.SetUp(upVector);
+}
+
+
 void ModuleCamera::Yaw(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_LEFT)) {
-		Rotate(frustum.WorldMatrix().RotatePart().RotateY(turnSpeed));
+		Rotate(frustum.WorldMatrix().RotatePart().RotateY(getTurnSpeedFactor() * deltaTime));
 		LOG("left");
 	}
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT)) {
-		Rotate(frustum.WorldMatrix().RotatePart().RotateY(-turnSpeed));
+		Rotate(frustum.WorldMatrix().RotatePart().RotateY(-getTurnSpeedFactor() * deltaTime));
 		LOG("right");
 	}
 	
@@ -152,17 +166,6 @@ void ModuleCamera::Rotate(const float3x3 rotation_matrix)
 	frustum.SetUp(rotation_matrix.MulDir(oldUp));
 }
 
-void ModuleCamera::RotatePitch(float radians,float deltaTime)
-{
-	//Reference
-	//https://stackoverflow.com/questions/15208104/opengl-camera-pitch-yaw-and-roll-rotation
-	float3 lookAtVector = frustum.Front() * cos(radians*deltaTime) + frustum.Up() * sin(radians * deltaTime) ;
-	lookAtVector.Normalize();
-	float3 upVector = frustum.WorldRight().Cross(lookAtVector);
-	frustum.SetFront(lookAtVector);
-	frustum.SetUp(upVector);
-}
-
 void ModuleCamera::MousePitch(float deltaTime)
 {
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT)) {
@@ -173,12 +176,45 @@ void ModuleCamera::MousePitch(float deltaTime)
 		//Horizontal
 		int result = mousePosition.x - new_mousePosition.x;
 		// turn right / left direction given by result 
-		Rotate(frustum.WorldMatrix().RotatePart().RotateY( result *turnSpeed * deltaTime));
+		Rotate(frustum.WorldMatrix().RotatePart().RotateY( result * getTurnSpeedFactor() * deltaTime));
 		
 		// Vertical
 		result =  mousePosition.y - new_mousePosition.y;
 		//turn up/down direction given by result
-		RotatePitch(result * radiansAngle, deltaTime);
+		RotatePitch(result * getRadiansAngleSpeedFactor(), deltaTime);
 	}
 
 }
+
+const float ModuleCamera::getMovementSpeedFactor()
+{
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT) ) {
+		return movementSpeed * speedFactor;
+	}
+	return movementSpeed;
+}
+
+const float ModuleCamera::getTurnSpeedFactor()
+{
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT)) {
+		return turnSpeed * speedFactor;
+	}
+	return turnSpeed;
+}
+
+const float ModuleCamera::getRadiansAngleSpeedFactor()
+{
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT)) {
+		return radiansAngle * speedFactor;
+	}
+	return radiansAngle;
+}
+
+void ModuleCamera::resetToDefaultSpeeds()
+{
+	turnSpeed = initialTurnSpeed;
+	movementSpeed = initialMovementSpeed;
+	radiansAngle = initialRadiansAngle;
+}
+
+
