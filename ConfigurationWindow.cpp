@@ -16,33 +16,33 @@ void ConfigurationWindow::Update()
         }
 
         ImGui::Text("Console window");
-        ImGui::Spacing();
-        if (ImGui::CollapsingHeader("Application")) {
+        ImGui::Spacing(); //new line
+        if (ImGui::CollapsingHeader("Application")) { //collapsables
 
             // App Name
-            static char str0[128] = "Edu, engine";
-            ImGui::InputText("App Name", str0, IM_ARRAYSIZE(str0));
+            static char str0[128] = "Black Screen Engine";
+            ImGui::InputText("App Name", str0, IM_ARRAYSIZE(str0)); //always pass chars and size
 
             // Organization
-            static char str1[128] = "UPC CITM";
+            static char str1[128] = "UPC";
             ImGui::InputText("Organization", str1, IM_ARRAYSIZE(str1));
 
             // Max FPS
             static int i1 = 0;
             static int max1 = 255;
-            ImGui::SliderInt("slider int", &i1, 1, max1);
+            ImGui::SliderInt("slider int", &i1, 1, max1); //slider value, int step, int max
 
             // Limit Frame Rate
             ImGui::Text("Limit Framerate:");
             ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", max1);
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", max1); //color text
 
             // Graph 1
             static int values_offset = 0;
             static float arr[] = { 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f };
             char title1[25];
             sprintf_s(title1, 25, "Framerate %.1f", 20);
-            ImGui::PlotHistogram("##framerate", arr, IM_ARRAYSIZE(arr), 0, title1, 0.0f, 1.0f, ImVec2(310, 100));
+            ImGui::PlotHistogram("##framerate", arr, IM_ARRAYSIZE(arr), 0, title1, 0.0f, 1.0f, ImVec2(310, 100)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
 
             // Graph 2
             char title2[25];
@@ -96,12 +96,12 @@ void ConfigurationWindow::Update()
             static bool fullscreen;
             static bool resizable;
             static bool borderless;
-            static bool fillDesktop;
+            static bool fullDesktop;
 
             ImGui::Checkbox("Fullscreen", &fullscreen); ImGui::SameLine(300);
             ImGui::Checkbox("Resizable", &resizable);
             ImGui::Checkbox("Borderless", &borderless); ImGui::SameLine(300);
-            ImGui::Checkbox("Full Desktop", &fillDesktop);
+            ImGui::Checkbox("Full Desktop", &fullDesktop);
 
         }
         if (ImGui::CollapsingHeader("File Sytem")) {}
@@ -173,11 +173,11 @@ void ConfigurationWindow::Update()
             ImGui::InputFloat3("Up", vec4f);
 
             // Position
-            ImGui::InputFloat3("Position", vec4f);
+           // ImGui::InputFloat3("Position", vec4f);
 
             
             //ImGui::InputFloat3("Position", App->camera->cameraPosition[0] );
-
+            ImGui::InputFloat3("Position", &App->camera->cameraPosition.x);
 
             // Move Speed
             static float ms = 0.f;
@@ -221,13 +221,13 @@ void ConfigurationWindow::Update()
             ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", "- not assigned-");
 
             // Pick Another
-            ImGui::PushID(1);
+            ImGui::PushID(1); //begin btn
             ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(7.0f, 0.6f, 0.6f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(7.0f, 0.8f, 0.8f));
             ImGui::Button("Pick Another");
             ImGui::PopStyleColor(3);
-            ImGui::PopID();
+            ImGui::PopID(); //end btn
 
             // Is Active Camera
             static bool isActive = false;

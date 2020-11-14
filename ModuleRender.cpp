@@ -7,9 +7,7 @@
 #include "ModuleCamera.h"
 #include "ModuleProgram.h"
 #include "ModuleRenderExercise.h"
-//#include "ImGui\imgui_impl_sdl.h"
-//#include "ImGui\imgui_impl_opengl3.h"
-//#include "MathGeoLib-master/src/Geometry/Frustum.h"
+
 void __stdcall OurOpenGLErrorFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
 	const char* tmp_source = "", * tmp_type = "", * tmp_severity = "";

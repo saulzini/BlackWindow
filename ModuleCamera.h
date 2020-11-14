@@ -13,6 +13,10 @@ class ModuleCamera :
 {
 
 public:
+	float3 cameraPosition;
+	float movementSpeed;
+
+public:
 	ModuleCamera();
 	~ModuleCamera();
 
@@ -98,10 +102,9 @@ private:
 
 protected:
 	Frustum frustum;
-	float movementSpeed;
 	float turnSpeed;
 	float radiansAngle;
-	float3 cameraPosition;
+	float3 lastCameraPosition;
 
 	float initialMovementSpeed;
 	float initialTurnSpeed;

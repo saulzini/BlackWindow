@@ -3,7 +3,7 @@
 #include <stdlib.h>  
 #include <GL\glew.h>
 #include "Globals.h"
-
+#include <assert.h>  
 bool ModuleProgram::Init()
 {
     return true;
@@ -66,6 +66,7 @@ unsigned ModuleProgram::CompileShader(unsigned type, const char* source)
             LOG("Log Info: %s", info);
             free(info);
         }
+        assert(res != GL_FALSE); // Shader not compiled
     }
     return shaderId;
 }
@@ -101,15 +102,12 @@ unsigned ModuleProgram::CreateProgramFromSource(const char* vtxShader, const cha
     char* vtxSource = LoadShaderSource(vtxShader);
     char* frgSource = LoadShaderSource(frgShader);
     
-    if (vtxShader == nullptr || frgSource == nullptr) {
-        return 0;
-    }
+    assert(vtxSource != nullptr); // Source not found
+    assert(frgSource != nullptr); // Source not found
 
     unsigned vtxCompile = CompileShader(GL_VERTEX_SHADER, vtxSource);
     unsigned frgCompile = CompileShader(GL_FRAGMENT_SHADER, frgSource);
-    if (vtxShader == 0 || frgShader == 0) {
-        return 0;
-    }
+   
 
     return CreateProgram(vtxCompile, frgCompile);
 }
