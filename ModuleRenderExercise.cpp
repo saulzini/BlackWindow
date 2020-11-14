@@ -82,18 +82,18 @@ bool ModuleRenderExercise::Init()
 	return true;
 }
 
-update_status ModuleRenderExercise::PreUpdate()
+update_status ModuleRenderExercise::PreUpdate(float deltaTime)
 {
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleRenderExercise::Update()
+update_status ModuleRenderExercise::Update(float deltaTime)
 {
 	//RenderTriangle();
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleRenderExercise::PostUpdate()
+update_status ModuleRenderExercise::PostUpdate(float deltaTime)
 {
 	return UPDATE_CONTINUE;
 }

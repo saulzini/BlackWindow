@@ -13,9 +13,11 @@ ModuleEditor::ModuleEditor()
 
 ModuleEditor::~ModuleEditor()
 {
+    //Cleaning vector
     for (unsigned int i = 0; i < windows.size(); i++)
     {
         delete(&windows[i]);
+        windows[i] = nullptr;
     }
 }
 
@@ -44,7 +46,7 @@ bool ModuleEditor::Init()
     return true;
 }
 
-update_status ModuleEditor::PreUpdate()
+update_status ModuleEditor::PreUpdate(float deltaTime)
 {
     bool show = true;
     // Start the Dear ImGui frame
@@ -60,10 +62,10 @@ update_status ModuleEditor::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleEditor::Update()
+update_status ModuleEditor::Update(float deltaTime)
 {
-    bool show_demo_window = true;
-    ImGui::ShowDemoWindow(&show_demo_window);
+    bool showDemoWindow = true;
+    ImGui::ShowDemoWindow(&showDemoWindow);
 
     UpdateWindows();
 
@@ -74,7 +76,7 @@ update_status ModuleEditor::Update()
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleEditor::PostUpdate()
+update_status ModuleEditor::PostUpdate(float deltaTime)
 {
 	return UPDATE_CONTINUE;
 }
@@ -86,7 +88,7 @@ bool ModuleEditor::CleanUp()
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
 
-    //TODO::Clean vector
+    
 	return true;
 }
 
@@ -120,16 +122,16 @@ void ModuleEditor::UpdateWindows()
 }
 
 
-void ModuleEditor::ShowDockSpace(bool* p_open)
+void ModuleEditor::ShowDockSpace(bool* pOpen)
 {
-    static bool opt_fullscreen_persistant = true;
-    bool opt_fullscreen = opt_fullscreen_persistant;
-    static ImGuiDockNodeFlags dockspace_flags = ImGuiDockNodeFlags_None;
+    static bool optFullScreenPersistant = true;
+    bool optFullscreen = optFullScreenPersistant;
+    static ImGuiDockNodeFlags dockspaceFlags = ImGuiDockNodeFlags_None;
 
     // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
     // because it would be confusing to have two docking targets within each others.
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
-    if (opt_fullscreen)
+    if (optFullscreen)
     {
         ImGuiViewport* viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(viewport->Pos);
@@ -143,7 +145,7 @@ void ModuleEditor::ShowDockSpace(bool* p_open)
 
     // When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background 
     // and handle the pass-thru hole, so we ask Begin() to not render a background.
-    if (dockspace_flags & ImGuiDockNodeFlags_PassthruCentralNode)
+    if (dockspaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
         window_flags |= ImGuiWindowFlags_NoBackground;
 
     // Important: note that we proceed even if Begin() returns false (aka window is collapsed).
@@ -152,18 +154,18 @@ void ModuleEditor::ShowDockSpace(bool* p_open)
     // We cannot preserve the docking relationship between an active window and an inactive docking, otherwise
     // any change of dockspace/settings would lead to windows being stuck in limbo and never being visible.
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-    ImGui::Begin("###DockSpace", p_open, window_flags);
+    ImGui::Begin("###DockSpace", pOpen, window_flags);
     ImGui::PopStyleVar();
 
-    if (opt_fullscreen)
+    if (optFullscreen)
         ImGui::PopStyleVar(2);
 
     // DockSpace
     ImGuiIO& io = ImGui::GetIO();
     if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
     {
-        ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-        ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
+        ImGuiID dockspaceId = ImGui::GetID("MyDockSpace");
+        ImGui::DockSpace(dockspaceId, ImVec2(0.0f, 0.0f), dockspaceFlags);
     }
     else
     {
@@ -193,6 +195,5 @@ void ModuleEditor::ShowDockSpace(bool* p_open)
         ImGui::EndMenuBar();
     }
     //End menu bar
-
     ImGui::End();
 }

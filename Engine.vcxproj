@@ -151,6 +151,7 @@
   <ItemGroup>
     <ClInclude Include="Application.h" />
     <ClInclude Include="ConfigurationWindow.h" />
+    <ClInclude Include="Core\Time.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ConsoleWindow.h" />
     <ClInclude Include="ImGui\imconfig.h" />

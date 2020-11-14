@@ -17,47 +17,37 @@ public:
 	~ModuleCamera();
 
 	bool Init();
-	update_status PreUpdate();
-	update_status Update();
-	update_status PostUpdate();
+	update_status PreUpdate(float deltaTime);
+	update_status Update(float deltaTime);
+	update_status PostUpdate(float deltaTime);
 	bool CleanUp();
-
-	void MoveForward();
-	void MoveRight();
-	void MoveUp();
-	void Pitch();
-	void Yaw();
-
-	void Rotate(const float3x3 rotation_matrix);
-	void RotatePitch(const float radians);
-
+	
 	void setMovementSpeed(float value) {
 		if (value <= 0.0f) {
 			return;
 		}
-		movement_speed = value;
+		movementSpeed = value;
 	}
 
 	void setTurnSpeed(float value) {
 		if (value <= 0.0f) {
 			return;
 		}
-		turn_speed = value;
+		turnSpeed = value;
 	}
 
-	float getMovementSpeed() const {
-		return movement_speed;
+	const float getMovementSpeed()  {
+		return movementSpeed;
 	}
 
-	float getTurnSpeed() const {
-		return turn_speed;
+	const float getTurnSpeed()  {
+		return turnSpeed;
 	}
 
-	void SetFOV() {
-
+	void SetFOV(float horizontalFov, float aspectRatio) {
+		frustum.SetHorizontalFovAndAspectRatio(horizontalFov, aspectRatio);
 	}
-
-	void MousePitch();
+	
 
 	const float4x4 GetView() {
 		return frustum.ViewMatrix();
@@ -68,13 +58,50 @@ public:
 		return frustum.ProjectionMatrix();
 	};
 
+	void setSpeedFactor(float factor) {
+		if (factor < 0) {
+			return;
+		}
+		speedFactor = factor;
+	}
+
+	void ResetCameraPosition();
+	void ResetToDefaultSpeeds();
+
+
+private:
+	void MoveForward(float deltaTime);
+	void MoveRight(float deltaTime);
+	void MoveUp(float deltaTime);
+	void Pitch(float deltaTime);
+	void Yaw(float deltaTime);
+	void CheckForResetCameraPosition();
+
+	void Rotate(const float3x3 rotation_matrix);
+	
+	void MousePitch(float deltaTime);
+	void MouseZoom(float deltaTime);
+	void RotatePitch(float radians,float deltaTime);
+	
+
+	const float GetMovementSpeedFactor();
+	const float GetTurnSpeedFactor();
+	const float GetRadiansAngleSpeedFactor();
+
 protected:
 	Frustum frustum;
-	float movement_speed;
-	float turn_speed;
-	float radians_angle;
-	float3 camera_position;
+	float movementSpeed;
+	float turnSpeed;
+	float radiansAngle;
+	float3 cameraPosition;
+
+	float initialMovementSpeed;
+	float initialTurnSpeed;
+	float initialRadiansAngle;
+	float3 initialCameraPosition;
+
+	float speedFactor;
 	//mouse
-	iPoint mouse_position;
+	iPoint mousePosition;
 };
 

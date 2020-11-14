@@ -37,6 +37,7 @@ public:
 private:
 
 	std::list<Module*> modules;
+	float lastFrame;
 
 };
 

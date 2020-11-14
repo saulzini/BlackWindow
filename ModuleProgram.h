@@ -9,18 +9,18 @@ class ModuleProgram :
 {
 public:
     bool Init();
-    update_status PreUpdate();
-    update_status Update();
-    update_status PostUpdate();
+    update_status PreUpdate(float deltaTime);
+    update_status Update(float deltaTime);
+    update_status PostUpdate(float deltaTime);
     bool CleanUp();
 
-    char* LoadShaderSource(const char* shader_file_name);
+    char* LoadShaderSource(const char* shaderFileName);
 
     unsigned CompileShader(unsigned type, const char* source);
 
-    unsigned CreateProgram(unsigned vtx_shader, unsigned frg_shader);
+    unsigned CreateProgram(unsigned vtxShader, unsigned frgShader);
 
-    unsigned CreateProgramFromSource(const char* vtx_shader, const char* frg_shader);
+    unsigned CreateProgramFromSource(const char* vtxShader, const char* frgShader);
     
 };
 
