@@ -8,8 +8,8 @@
 ModuleCamera::ModuleCamera()
 {
 	//initializing
-	initialCameraPosition = cameraPosition = lastCameraPosition = float3(0, 1, -2);
-	initialTurnSpeed = turnSpeed = 0.0005f;
+	initialCameraPosition = cameraPosition = lastCameraPosition = float3(1, 1, 3);
+	initialTurnSpeed = turnSpeed = 0.0009f;
 	initialMovementSpeed = movementSpeed = 0.005f;
 	initialRadiansAngle = radiansAngle = DEGTORAD(0.05);
 	mousePosition = iPoint(0, 0);
@@ -240,7 +240,7 @@ const float ModuleCamera::GetRadiansAngleSpeedFactor()
 void ModuleCamera::ResetCameraPosition()
 {
 	frustum.SetPos(initialCameraPosition);
-	frustum.SetFront(float3::unitZ);
+	frustum.SetFront(-float3::unitZ);
 	frustum.SetUp(float3::unitY);
 }
 
