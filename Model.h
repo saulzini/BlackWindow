@@ -4,14 +4,16 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include "GL/glew.h"
-
+#include "Texture.h"
+#include "Mesh.h"
 GLint TextureFromFile(const char* path, std::string directory);
-class Mesh;
-class Texture;
 class Model
 {
 public:
 	Model(const char* path) {
+		if (path == "") {
+			return;
+		}
 		this->LoadModel(path);
 	};
 

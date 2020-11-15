@@ -4,11 +4,9 @@
 #include <assimp/postprocess.h>
 #include "Application.h"
 #include "Globals.h"
-#include "Texture.h"
 #include "Vertex.h"
 #include "Assimp/vector3.h"
 #include "Assimp/vector2.h"
-#include "Mesh.h"
 
 void Model::Draw(unsigned int shader)
 {
