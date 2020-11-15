@@ -6,6 +6,7 @@
 #include "ModuleCamera.h"
 #include "ModuleProgram.h"
 #include "ModuleRenderExercise.h"
+#include "ModuleExercise2.h"
 #include "ModuleEditor.h"
 #include "Core/Time.h"
 #include "SDL.h"
@@ -20,7 +21,8 @@ Application::Application()
 	modules.push_back(camera = new ModuleCamera());
 	modules.push_back(program = new ModuleProgram());
 	modules.push_back(editor = new ModuleEditor());
-	modules.push_back(exercise = new ModuleRenderExercise());
+	//modules.push_back(exercise = new ModuleRenderExercise());
+	modules.push_back(exercise2 = new ModuleExercise2());
 }
 
 Application::~Application()
