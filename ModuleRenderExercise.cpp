@@ -37,13 +37,12 @@ void ModuleRenderExercise::DestroyVBO(unsigned vbo)
 
 void ModuleRenderExercise::RenderTriangle()
 {
-	
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
 	glEnableVertexAttribArray(0);
 	// size = 3 float per vertex
 	// stride = 0 is equivalent to stride = sizeof(float)*3
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 	// 1 triangle to draw = 3 vertices
 
 	//float4x4 model = float4x4::identity;

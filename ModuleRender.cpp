@@ -7,9 +7,7 @@
 #include "ModuleCamera.h"
 #include "ModuleProgram.h"
 #include "ModuleRenderExercise.h"
-//#include "ImGui\imgui_impl_sdl.h"
-//#include "ImGui\imgui_impl_opengl3.h"
-//#include "MathGeoLib-master/src/Geometry/Frustum.h"
+
 void __stdcall OurOpenGLErrorFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
 	const char* tmp_source = "", * tmp_type = "", * tmp_severity = "";
@@ -70,7 +68,6 @@ bool ModuleRender::Init()
 	LOG("Renderer: %s", glGetString(GL_RENDERER));
 	LOG("OpenGL version supported %s", glGetString(GL_VERSION));
 	LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
-
 	glDebugMessageCallback(&OurOpenGLErrorFunction, nullptr);
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, true);
 
@@ -84,9 +81,6 @@ bool ModuleRender::Init()
 
 update_status ModuleRender::PreUpdate(float deltaTime)
 {
-	glClearColor(0.51f, 0.76f, 0.76f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	return UPDATE_CONTINUE;
 }
 

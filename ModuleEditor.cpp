@@ -25,7 +25,7 @@ bool ModuleEditor::Init()
 {
     //Creating windows
     addWindow(consoleWindow = new ConsoleWindow("Console window1", ImGuiWindowFlags_MenuBar)); 
-    addWindow(configurationWindow = new ConfigurationWindow("Configuration window", ImGuiWindowFlags_MenuBar));
+    addWindow(configurationWindow = new ConfigurationWindow("Configuration window 1", ImGuiWindowFlags_MenuBar));
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();

@@ -13,6 +13,10 @@ class ModuleCamera :
 {
 
 public:
+	float3 cameraPosition;
+	float movementSpeed;
+
+public:
 	ModuleCamera();
 	~ModuleCamera();
 
@@ -68,6 +72,14 @@ public:
 	void ResetCameraPosition();
 	void ResetToDefaultSpeeds();
 
+	float3 GetCameraPosition() {
+		return cameraPosition;
+	}
+
+	void SetCameraPosition(float3 mCameraPosition) {
+		cameraPosition = mCameraPosition;
+	}
+
 
 private:
 	void MoveForward(float deltaTime);
@@ -90,10 +102,9 @@ private:
 
 protected:
 	Frustum frustum;
-	float movementSpeed;
 	float turnSpeed;
 	float radiansAngle;
-	float3 cameraPosition;
+	float3 lastCameraPosition;
 
 	float initialMovementSpeed;
 	float initialTurnSpeed;
