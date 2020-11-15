@@ -81,8 +81,5 @@ ILuint Texture2D::LoadTexture(const std::string& filename, bool generateMipMaps)
 
     ilDeleteImage(imageID); //release from il since we have it in opengl
 
-    // Generate a new texture
-    //glGenTextures(1, &imageID);
-
     return imageID;
 }
