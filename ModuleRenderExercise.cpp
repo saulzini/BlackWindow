@@ -87,7 +87,7 @@ update_status ModuleRenderExercise::PreUpdate(float deltaTime)
 
 update_status ModuleRenderExercise::Update(float deltaTime)
 {
-	RenderTriangle();
+	//RenderTriangle();
 	return UPDATE_CONTINUE;
 }
 

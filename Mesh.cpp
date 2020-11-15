@@ -32,11 +32,11 @@ void Mesh::Draw(const unsigned int shader)
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
 
-    glBindVertexArray(this->VAO);
-    glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+    glBindVertexArray(VAO);
+    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray( 0 );
     
-    for (GLuint i = 0; i < this->textures.size(); i++) {
+    for (GLuint i = 0; i < textures.size(); i++) {
         glActiveTexture(GL_TEXTURE0 + i);
         glBindTexture(GL_TEXTURE_2D, 0);
     }

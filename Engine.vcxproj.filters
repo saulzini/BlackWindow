@@ -175,6 +175,7 @@
       <Filter>Core\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="GeometryLoader.cpp" />
+    <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />

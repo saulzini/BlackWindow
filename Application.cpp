@@ -26,8 +26,8 @@ Application::Application()
 	modules.push_back(editor = new ModuleEditor());
 
 
-	modules.push_back(exercise = new ModuleRenderExercise());
-	//modules.push_back(exercise2 = new ModuleExercise2());
+	//modules.push_back(exercise = new ModuleRenderExercise());
+	modules.push_back(exercise2 = new ModuleExercise2());
 
 	// init DevIL. This needs to be done only once per application
 	//TODO::IMPROVE THIS

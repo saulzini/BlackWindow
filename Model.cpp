@@ -7,7 +7,14 @@
 #include "Vertex.h"
 #include "Assimp/vector3.h"
 #include "Assimp/vector2.h"
-
+Model::Model(const char* path)
+{
+	textureLoader = new Texture2D();
+	if (path == "") {
+		return;
+	}
+	this->LoadModel(path);
+}
 void Model::Draw(unsigned int shader)
 {
 	for (GLuint i = 0; i < meshes.size(); i++) {
@@ -28,9 +35,6 @@ void Model::LoadModel(const char* path)
 
 	directory = path;
 	ProcessNode(scene->mRootNode, scene);
-	// TODO: LoadTextures(scene->mMaterials, scene->mNumMaterials);
-	// TODO: LoadMeshes(scene->mMeshes, scene->mNumMeshes);
-
 }
 
 void Model::ProcessNode(aiNode* node, const aiScene* scene)
@@ -86,7 +90,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh,const aiScene *scene) {
 		}
 	}
 
-	if (mesh->mMaterialIndex >= 0) {
+	/*if (mesh->mMaterialIndex >= 0) {
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 		std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 
@@ -95,7 +99,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh,const aiScene *scene) {
 		std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-	}
+	}*/
 
 	return Mesh(vertices, indices, textures);
 }
@@ -118,12 +122,12 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType 
 			}
 
 			if (!skip) {
-				/*Texture texture;
-				texture.id = TextureFromFile(str.C_Str(), this->directory);
+				Texture texture;
+				texture.id = textureLoader->LoadTexture(str.C_Str());
 				texture.type = typeName;
-				texture.path = str;
+				texture.path = str.C_Str();
 				textures.push_back(texture);
-				textures_loaded.push_back( texture );*/
+				textures_loaded.push_back( texture );
 			}
 		}
 	}

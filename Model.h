@@ -6,16 +6,12 @@
 #include "GL/glew.h"
 #include "Texture.h"
 #include "Mesh.h"
-GLint TextureFromFile(const char* path, std::string directory);
+#include "Texture2D.h"
+
 class Model
 {
 public:
-	Model(const char* path) {
-		if (path == "") {
-			return;
-		}
-		this->LoadModel(path);
-	};
+	Model(const char* path);
 
 
 	void Draw(unsigned int shader);
@@ -26,10 +22,13 @@ public:
 	Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);
 
 	std::vector<Texture> LoadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
+
+
 private:
 	std::vector<Mesh> meshes;
 	std::string directory;
 	std::vector<Texture> textures_loaded;
+	Texture2D* textureLoader;
 
 };
 

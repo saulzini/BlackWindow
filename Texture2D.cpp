@@ -3,8 +3,8 @@
 #include <IL/il.h> 
 Texture2D::~Texture2D()
 {
-    ilBindImage(0);
-    ilDeleteImage(imageID);
+   // ilBindImage(0);
+   // ilDeleteImage(imageID);
 }
 
 ILuint Texture2D::LoadTexture(const std::string& filename, bool generateMipMaps)

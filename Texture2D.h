@@ -2,12 +2,12 @@
 
 #include <string>
 #include "IL/ilu.h"
-
+//TODO::CHANGE to a loader 
 class Texture2D
 {
 public:
 	Texture2D() {
-		imageID = 0;
+		//imageID = 0;
 	};
 	~Texture2D();
 
@@ -17,7 +17,7 @@ public:
 
 private:
 
-	ILuint  imageID;
+	//ILuint  imageID;
 
 };
 
