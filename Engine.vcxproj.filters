@@ -137,7 +137,7 @@
     <ClCompile Include="ModuleProgram.cpp" />
     <ClCompile Include="ModuleRenderExercise.cpp" />
     <ClCompile Include="Texture2D.cpp">
-      <Filter>Utils</Filter>
+      <Filter>Shaders\Utils</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
       <Filter>Graphics\ImGui</Filter>
@@ -413,12 +413,12 @@
     </ClInclude>
     <ClInclude Include="ModuleCamera.h" />
     <ClInclude Include="Point.h">
-      <Filter>Utils</Filter>
+      <Filter>Shaders\Utils</Filter>
     </ClInclude>
     <ClInclude Include="ModuleProgram.h" />
     <ClInclude Include="ModuleRenderExercise.h" />
     <ClInclude Include="Texture2D.h">
-      <Filter>Utils</Filter>
+      <Filter>Shaders\Utils</Filter>
     </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>Graphics\ImGui</Filter>
@@ -465,13 +465,16 @@
       <Filter>Core\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="GeometryLoader.h" />
+    <ClInclude Include="Vertex.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
       <UniqueIdentifier>{3c8e6d0b-a7bb-4b43-b488-5b0d8a62f6c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{95d2f25f-80a0-46f7-82b9-7f0cf855ab5e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{2ddcefa5-5550-47b2-b0c9-3f33fe98bad0}</UniqueIdentifier>
@@ -496,6 +499,9 @@
     </Filter>
     <Filter Include="Core\GeometryLoader">
       <UniqueIdentifier>{2513219a-37c0-4b2f-97b0-ca73ef54453c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Utils">
+      <UniqueIdentifier>{95d2f25f-80a0-46f7-82b9-7f0cf855ab5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

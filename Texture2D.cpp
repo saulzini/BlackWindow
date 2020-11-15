@@ -11,8 +11,7 @@ bool Texture2D::loadTexture(const std::string& filename, bool generateMipMaps)
 {
     ILboolean success;
 
-    // init DevIL. This needs to be done only once per application
-    ilInit();
+    
     // generate an image name
     ilGenImages(1, &imageID);
     // bind it

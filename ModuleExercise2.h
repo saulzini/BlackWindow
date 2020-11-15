@@ -8,11 +8,6 @@ public:
 	ModuleExercise2();
 	~ModuleExercise2();
 
-	//Rendering triangle
-	unsigned CreateTriangleVBO();
-	void RenderTriangle();
-	void DestroyVBO(unsigned vbo);
-
 	unsigned int getProgram() const {
 		return program;
 	};
