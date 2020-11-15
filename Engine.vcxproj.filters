@@ -167,6 +167,14 @@
     <ClCompile Include="ConfigurationWindow.cpp">
       <Filter>Graphics\UIWindow</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleExercise2.cpp" />
+    <ClCompile Include="Model.cpp">
+      <Filter>Core\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Core\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -449,6 +457,14 @@
     <ClInclude Include="Core\Time.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleExercise2.h" />
+    <ClInclude Include="Model.h">
+      <Filter>Core\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Core\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
@@ -471,6 +487,15 @@
     </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{ebb6cf58-a825-4957-9447-ace7c8bf1e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Model">
+      <UniqueIdentifier>{1800a3e0-dc82-4f1c-bc94-d9377714d235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Mesh">
+      <UniqueIdentifier>{7a347214-cc5c-48de-bc20-d7cb9e6052e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GeometryLoader">
+      <UniqueIdentifier>{2513219a-37c0-4b2f-97b0-ca73ef54453c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -74,13 +74,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./SDL/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;./SDL/include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -92,13 +92,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./SDL/include;glew-2.1.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;./SDL/include;glew-2.1.0\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -112,7 +112,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./SDL/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;./SDL/include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -120,7 +120,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -134,7 +134,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./SDL/include;glew-2.1.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;./SDL/include;glew-2.1.0\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -142,7 +142,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -152,6 +152,7 @@
     <ClInclude Include="Application.h" />
     <ClInclude Include="ConfigurationWindow.h" />
     <ClInclude Include="Core\Time.h" />
+    <ClInclude Include="GeometryLoader.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ConsoleWindow.h" />
     <ClInclude Include="ImGui\imconfig.h" />
@@ -238,9 +239,12 @@
     <ClInclude Include="MathGeoLib-master\src\Math\TransformOps.h" />
     <ClInclude Include="MathGeoLib-master\src\Math\vec2d.h" />
     <ClInclude Include="MathGeoLib-master\src\Time\Clock.h" />
+    <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleCamera.h" />
     <ClInclude Include="ModuleEditor.h" />
+    <ClInclude Include="ModuleExercise2.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleProgram.h" />
     <ClInclude Include="ModuleRender.h" />
@@ -254,6 +258,7 @@
     <ClCompile Include="Application.cpp" />
     <ClCompile Include="ConfigurationWindow.cpp" />
     <ClCompile Include="ConsoleWindow.cpp" />
+    <ClCompile Include="GeometryLoader.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
@@ -304,8 +309,11 @@
     <ClCompile Include="MathGeoLib-master\src\Math\SSEMath.cpp" />
     <ClCompile Include="MathGeoLib-master\src\Math\TransformOps.cpp" />
     <ClCompile Include="MathGeoLib-master\src\Time\Clock.cpp" />
+    <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="ModuleEditor.cpp" />
+    <ClCompile Include="ModuleExercise2.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleProgram.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
