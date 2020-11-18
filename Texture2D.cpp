@@ -63,7 +63,7 @@ ILuint Texture2D::LoadTexture(const std::string& filename, bool generateMipMaps)
 
     glGenTextures(1, &imageID); // creating image in opengl
     glBindTexture(GL_TEXTURE_2D,imageID); //Bind texture
-
+   // glObjectLabel()
     glTexImage2D(
         GL_TEXTURE_2D, 
         0, 

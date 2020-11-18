@@ -7,7 +7,7 @@
 #include "Vertex.h"
 #include "Assimp/vector3.h"
 #include "Assimp/vector2.h"
-Model::Model(const char* path)
+Model::Model(std::string path)
 {
 	textureLoader = new Texture2D();
 	if (path == "") {
@@ -22,7 +22,7 @@ void Model::Draw(unsigned int shader)
 	}
 }
 
-void Model::LoadModel(const char* path)
+void Model::LoadModel(std::string path)
 {
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
@@ -33,17 +33,18 @@ void Model::LoadModel(const char* path)
 		return;
 	}
 
-	directory = path;
+	directory = path.substr(0, path.find_last_of('/'));
 	ProcessNode(scene->mRootNode, scene);
 }
 
 void Model::ProcessNode(aiNode* node, const aiScene* scene)
 {
+	// process all the node's meshes (if any)
 	for (GLuint i = 0; i < node->mNumMeshes; i++) {
 		aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
 		this->meshes.push_back(ProcessMesh(mesh, scene));
 	}
-
+	// process all the node's meshes (if any)
 	for (GLuint i = 0; i < node->mNumChildren; i++) {
 		ProcessNode(node->mChildren[i], scene);
 	}
@@ -90,7 +91,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh,const aiScene *scene) {
 		}
 	}
 
-	/*if (mesh->mMaterialIndex >= 0) {
+	if (mesh->mMaterialIndex >= 0) {
 		aiMaterial* material = scene->mMaterials[mesh->mMaterialIndex];
 		std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
 
@@ -99,7 +100,7 @@ Mesh Model::ProcessMesh(aiMesh* mesh,const aiScene *scene) {
 		std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
-	}*/
+	}
 
 	return Mesh(vertices, indices, textures);
 }
@@ -121,15 +122,22 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType 
 				break;
 			}
 
-			if (!skip) {
-				Texture texture;
-				texture.id = textureLoader->LoadTexture(str.C_Str());
-				texture.type = typeName;
-				texture.path = str.C_Str();
-				textures.push_back(texture);
-				textures_loaded.push_back( texture );
-			}
+			
 		}
+		if (!skip) {
+			Texture texture;
+			texture.id = textureLoader->LoadTexture(str.C_Str());
+			texture.type = typeName;
+			texture.path = str.C_Str();
+			textures.push_back(texture);
+			textures_loaded.push_back(texture);
+		}
+		//TODO::Improve this
+		/*Texture texture;
+		texture.id = textureLoader->LoadTexture(str.C_Str());
+		texture.type = typeName;
+		texture.path = str.C_Str();
+		textures.push_back(texture);*/
 	}
 	return textures;
 }

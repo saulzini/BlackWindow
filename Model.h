@@ -7,16 +7,17 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "Texture2D.h"
+#include <string.h>
 
 class Model
 {
 public:
-	Model(const char* path);
+	Model(std::string path);
 
 
 	void Draw(unsigned int shader);
 	
-	void LoadModel(const char* path);
+	void LoadModel(std::string path);
 	void ProcessNode(aiNode* node, const aiScene* scene);
 
 	Mesh ProcessMesh(aiMesh* mesh, const aiScene* scene);

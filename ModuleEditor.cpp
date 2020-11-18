@@ -7,6 +7,7 @@
 #include "ImGui/imgui_impl_opengl3.h"
 #include "ConsoleWindow.h"
 #include "ConfigurationWindow.h"
+#include "PreviewWindow.h"
 ModuleEditor::ModuleEditor()
 {
 }
@@ -26,6 +27,7 @@ bool ModuleEditor::Init()
     //Creating windows
     addWindow(consoleWindow = new ConsoleWindow("Console window1", ImGuiWindowFlags_MenuBar)); 
     addWindow(configurationWindow = new ConfigurationWindow("Configuration window 1", ImGuiWindowFlags_MenuBar));
+    addWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar));
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();

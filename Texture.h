@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "IL/ilu.h"
 
 class Texture
 {
@@ -9,7 +8,7 @@ class Texture
 			id = 0;
 		};
 		~Texture();
-		ILuint id;
+		unsigned int id;
 		std::string type;
 		std::string path;
 

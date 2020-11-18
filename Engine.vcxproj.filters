@@ -175,7 +175,12 @@
       <Filter>Core\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="GeometryLoader.cpp" />
-    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="PreviewWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -471,6 +476,9 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PreviewWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@
 struct ImGuiIO;
 class ConsoleWindow;
 class ConfigurationWindow;
+class PreviewWindow;
 class ModuleEditor :
 	public Module
 {
@@ -25,6 +26,7 @@ public:
 
 	ConsoleWindow* consoleWindow;
 	ConfigurationWindow* configurationWindow;
+	PreviewWindow* previewWindow;
 private:
 	std::vector<DefaultImGuiWindow*> windows;
 	void ShowDockSpace(bool* pOpen);
