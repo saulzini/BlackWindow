@@ -10,6 +10,9 @@
 #include "ModuleEditor.h"
 #include "Core/Time.h"
 #include "SDL.h"
+
+#include <IL/ilut.h> 
+
 using namespace std;
 
 Application::Application()
@@ -21,8 +24,14 @@ Application::Application()
 	modules.push_back(program = new ModuleProgram());
 	modules.push_back(camera = new ModuleCamera());
 	modules.push_back(editor = new ModuleEditor());
+
+
 	//modules.push_back(exercise = new ModuleRenderExercise());
 	modules.push_back(exercise2 = new ModuleExercise2());
+
+	// init DevIL. This needs to be done only once per application
+	//TODO::IMPROVE THIS
+	ilInit();
 }
 
 Application::~Application()

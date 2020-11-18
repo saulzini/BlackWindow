@@ -1,5 +1,7 @@
 #pragma once
 #include "Module.h"
+#include "IL/ilu.h"
+
 class ModuleRenderExercise :
 	public Module
 {
@@ -31,6 +33,6 @@ public:
 private:
 	unsigned int program;
 	unsigned int vbo;
-	unsigned int texture;
+	ILuint texture;
 };
 

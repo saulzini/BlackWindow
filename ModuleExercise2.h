@@ -1,25 +1,12 @@
 #pragma once
 #include "Module.h"
-
+#include "Model.h"
 class ModuleExercise2 :
 	public Module
 {
 public:
 	ModuleExercise2();
 	~ModuleExercise2();
-
-	//Rendering triangle
-	unsigned CreateTriangleVBO();
-	void RenderTriangle();
-	void DestroyVBO(unsigned vbo);
-
-	unsigned int getProgram() const {
-		return program;
-	};
-
-	unsigned int getVbo() const {
-		return vbo;
-	};
 
 	bool Init();
 	update_status PreUpdate(float deltaTime);
@@ -28,10 +15,10 @@ public:
 	bool CleanUp();
 
 
-
 private:
+	Model *house;
+
 	unsigned int program;
-	unsigned int vbo;
-	unsigned int texture;
+
 };
 

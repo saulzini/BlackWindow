@@ -32,6 +32,8 @@ public:
 	ModuleCamera* camera = nullptr;
 	ModuleProgram* program = nullptr;
 	ModuleEditor* editor = nullptr;
+
+	//Exercises
 	ModuleRenderExercise* exercise = nullptr;
 	ModuleExercise2* exercise2 = nullptr;
 	void RequestBrowser(const char* route);

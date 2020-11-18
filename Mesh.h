@@ -1,45 +1,20 @@
 #pragma once
 #include <string>
 #include <vector>
-struct vec3 {
-    int x = 0; 
-    int y = 0; 
-    int z = 0;
-};
+#include <assimp/scene.h>
+#include "Texture.h"
+#include "Vertex.h"
 
-struct vec2 {
-    int x = 0;
-    int y = 0;
-};
-
-struct Vertex {
-    vec3 Position;
-    vec3 Normal;
-    vec2 TexCoords;
-};
-
-struct Texture {
-    unsigned int id;
-    std::string type;
-};
 class Mesh {
 public:
-    Mesh() {};
-   /* Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
-    {
-        this->vertices = vertices;
-        this->indices = indices;
-        this->textures = textures;
+    Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
 
-        SetupMesh();
-    }
- 
+public:
     // mesh data
     std::vector<Vertex>       vertices;
     std::vector<unsigned int> indices;
     std::vector<Texture>      textures;
-
-    Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);*/
+    void Draw(const unsigned int shader);
 private:
     //  render data
     unsigned int VAO, VBO, EBO;
