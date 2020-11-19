@@ -3,6 +3,8 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include "Application.h"
+#include "ModuleEditor.h"
+#include "ConsoleWindow.h"
 #include "Globals.h"
 #include "Vertex.h"
 #include "Assimp/vector3.h"
@@ -27,14 +29,23 @@ void Model::LoadModel(std::string path)
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 	// If the import failed, report it
-	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE )
+	std::string buf("Loading model:");
+	App->editor->consoleWindow->AddLog( buf.append(path.c_str()).c_str() );
+
+	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
+		buf = "Error loading:";
+		App->editor->consoleWindow->AddLog( buf.append(path.c_str()).append(importer.GetErrorString()).c_str() );
 		LOG("Error loading %s: %s", path, importer.GetErrorString());
 		return;
 	}
 
 	directory = path.substr(0, path.find_last_of('/'));
 	ProcessNode(scene->mRootNode, scene);
+
+	buf = "End loading model:";
+	App->editor->consoleWindow->AddLog(buf.append(path.c_str()).c_str());
+
 }
 
 void Model::ProcessNode(aiNode* node, const aiScene* scene)
@@ -52,10 +63,10 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene)
 
 Mesh Model::ProcessMesh(aiMesh* mesh,const aiScene *scene) {
 	std::vector<Vertex> vertices;
-	std::vector<GLuint> indices;
+	std::vector<unsigned int> indices;
 	std::vector<Texture> textures;
 
-	for (GLuint i = 0; i < mesh->mNumVertices; i++) {
+	for (unsigned int i = 0; i < mesh->mNumVertices; i++) {
 		Vertex vertex;
 		aiVector3t<float> vector;
 		vector.x = mesh->mVertices[i].x;
@@ -79,7 +90,6 @@ Mesh Model::ProcessMesh(aiMesh* mesh,const aiScene *scene) {
 		}
 		else {
 			vertex.TexCoords = aiVector2t<float>(0,0);
-
 		}
 		vertices.push_back(vertex);
 	}
@@ -97,9 +107,9 @@ Mesh Model::ProcessMesh(aiMesh* mesh,const aiScene *scene) {
 
 		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
 
-		std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+//		std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
 
-		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+	//	textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	}
 
 	return Mesh(vertices, indices, textures);
@@ -132,12 +142,6 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType 
 			textures.push_back(texture);
 			textures_loaded.push_back(texture);
 		}
-		//TODO::Improve this
-		/*Texture texture;
-		texture.id = textureLoader->LoadTexture(str.C_Str());
-		texture.type = typeName;
-		texture.path = str.C_Str();
-		textures.push_back(texture);*/
 	}
 	return textures;
 }

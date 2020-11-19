@@ -1,13 +1,16 @@
 #include "Texture2D.h"
 #include <GL/glew.h>
 #include <IL/il.h> 
+#include "Application.h"
+#include "ModuleEditor.h"
+#include "ConsoleWindow.h"
 Texture2D::~Texture2D()
 {
    // ilBindImage(0);
    // ilDeleteImage(imageID);
 }
 
-ILuint Texture2D::LoadTexture(const std::string& filename, bool generateMipMaps)
+bool Texture2D::LoadTexture(const std::string& filename, bool generateMipMaps)
 {
     ILboolean success;
     ILuint imageID;
@@ -19,6 +22,10 @@ ILuint Texture2D::LoadTexture(const std::string& filename, bool generateMipMaps)
     // match image origin to OpenGL’s
     ilEnable(IL_ORIGIN_SET);
     ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+       
+    //Adding to application log
+    std::string buf("Begin texture:");
+    App->editor->consoleWindow->AddLog( buf.append(filename.c_str()).c_str() );
     // load  the image
     success = ilLoadImage((ILstring)filename.c_str());
     // check to see if everything went OK
@@ -26,6 +33,8 @@ ILuint Texture2D::LoadTexture(const std::string& filename, bool generateMipMaps)
         ilDeleteImages(1, &imageID); //
         return 0;
     }
+    buf= "Loaded texture:";
+    App->editor->consoleWindow->AddLog(buf.append(filename.c_str()).c_str());
     /*
     printf("Width: %d, Height %d, Bytes per Pixel %d",
         ilGetInteger(IL_IMAGE_WIDTH),
@@ -61,9 +70,9 @@ ILuint Texture2D::LoadTexture(const std::string& filename, bool generateMipMaps)
     /* Convert image to RGBA with unsigned byte data type */
     ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
 
+    //Open gl section
     glGenTextures(1, &imageID); // creating image in opengl
     glBindTexture(GL_TEXTURE_2D,imageID); //Bind texture
-   // glObjectLabel()
     glTexImage2D(
         GL_TEXTURE_2D, 
         0, 
@@ -76,10 +85,15 @@ ILuint Texture2D::LoadTexture(const std::string& filename, bool generateMipMaps)
         ilGetData()
     );
 
+    if (generateMipMaps) {
+        glGenerateMipmap(GL_TEXTURE_2D);
+    }
+
+
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); //linear interpolation for magnification filter
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); //linear interpolation for minifiying filter
 
     ilDeleteImage(imageID); //release from il since we have it in opengl
 
-    return imageID;
+    return success;
 }
