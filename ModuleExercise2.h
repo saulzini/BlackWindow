@@ -16,7 +16,10 @@ public:
 
 
 private:
-	Model *house;
+	Model* house;
+	Model *enemy1;
+
+
 
 	unsigned int program;
 
