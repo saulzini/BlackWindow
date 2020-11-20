@@ -167,7 +167,6 @@
     <ClCompile Include="ConfigurationWindow.cpp">
       <Filter>Graphics\UIWindow</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleExercise2.cpp" />
     <ClCompile Include="Model.cpp">
       <Filter>Core\Model</Filter>
     </ClCompile>
@@ -181,6 +180,7 @@
     <ClCompile Include="Texture.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleWorld.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -463,7 +463,6 @@
     <ClInclude Include="Core\Time.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleExercise2.h" />
     <ClInclude Include="Model.h">
       <Filter>Core\Model</Filter>
     </ClInclude>
@@ -480,6 +479,7 @@
     <ClInclude Include="PreviewWindow.h">
       <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleWorld.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
@@ -512,6 +512,12 @@
     <Filter Include="Shaders\Utils">
       <UniqueIdentifier>{95d2f25f-80a0-46f7-82b9-7f0cf855ab5e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders\Grid">
+      <UniqueIdentifier>{affccc95-e640-44fd-9a37-1bf44802bc42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Texture">
+      <UniqueIdentifier>{602c2e07-0396-4c5b-ab75-f7f609d4d3ca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="MathGeoLib-master\src\Geometry\KDTree.inl">
@@ -535,11 +541,17 @@
     <None Include="MathGeoLib-master\src\Math\Matrix.inl">
       <Filter>MathGeoLib</Filter>
     </None>
-    <None Include="Game\HelloWorld.frag">
-      <Filter>Shaders</Filter>
+    <None Include="Game\Grid.frag">
+      <Filter>Shaders\Grid</Filter>
     </None>
-    <None Include="Game\HelloWorld.vert">
-      <Filter>Shaders</Filter>
+    <None Include="Game\Grid.vert">
+      <Filter>Shaders\Grid</Filter>
+    </None>
+    <None Include="Game\Default.frag">
+      <Filter>Shaders\Texture</Filter>
+    </None>
+    <None Include="Game\Default.vert">
+      <Filter>Shaders\Texture</Filter>
     </None>
   </ItemGroup>
 </Project>

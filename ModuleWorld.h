@@ -1,12 +1,12 @@
 #pragma once
 #include "Module.h"
 #include "Model.h"
-class ModuleExercise2 :
+class ModuleWorld :
 	public Module
 {
 public:
-	ModuleExercise2();
-	~ModuleExercise2();
+	ModuleWorld();
+	~ModuleWorld();
 
 	bool Init();
 	update_status PreUpdate(float deltaTime);
@@ -19,9 +19,6 @@ private:
 	Model* house;
 	Model *enemy1;
 
-
-
 	unsigned int program;
-
 };
 

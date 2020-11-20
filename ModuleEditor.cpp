@@ -184,11 +184,11 @@ void ModuleEditor::ShowDockSpace(bool* pOpen)
             }
             //  showcase != showcase;
             if (ImGui::MenuItem("Documentation"))
-                App->RequestBrowser("https://github.com/saulzini/Engine/wiki");
+                App->RequestBrowser("https://github.com/saulzini/BlackWindow/wiki");
             if (ImGui::MenuItem("Download latest"))
-                App->RequestBrowser("https://github.com/saulzini/Engine/releases");
+                App->RequestBrowser("https://github.com/saulzini/BlackWindow/releases");
             if (ImGui::MenuItem("Report a bug"))
-                App->RequestBrowser("https://github.com/saulzini/Engine/issues");
+                App->RequestBrowser("https://github.com/saulzini/BlackWindow/issues");
             if (ImGui::MenuItem("About")) {
                 //open about
             }
