@@ -1,4 +1,4 @@
-﻿#include "ModuleExercise2.h"
+﻿#include "ModuleWorld.h"
 #include "GL/glew.h"
 #include "Application.h"
 #include "ModuleProgram.h"
@@ -8,29 +8,32 @@
 #include "Model.h"
 #include "MathGeoLib-master/src/Math/float4x4.h"
 
-ModuleExercise2::ModuleExercise2()
+ModuleWorld::ModuleWorld()
 {
 	house = nullptr;
 	enemy1 = nullptr;
 	program = 0;
 }
 
-bool ModuleExercise2::Init()
+bool ModuleWorld::Init()
 {
 	house = new Model("BakerHouse.fbx");
 	//enemy1 = new Model("OldBox/Box.fbx");
 	//enemy1 = new Model("mutant.fbx");
-	program = App->program->CreateProgramFromSource("HelloWorld.vert", "HelloWorld.frag");
+	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
 	return true;
 }
 
-update_status ModuleExercise2::PreUpdate(float deltaTime)
+update_status ModuleWorld::PreUpdate(float deltaTime)
 {
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleExercise2::Update(float deltaTime)
+update_status ModuleWorld::Update(float deltaTime)
 {
+
+
+
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
@@ -41,15 +44,17 @@ update_status ModuleExercise2::Update(float deltaTime)
 	
 	house->Draw(program);
 	//enemy1->Draw(program);
+
+
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleExercise2::PostUpdate(float deltaTime)
+update_status ModuleWorld::PostUpdate(float deltaTime)
 {
 	return UPDATE_CONTINUE;
 }
 
-bool ModuleExercise2::CleanUp()
+bool ModuleWorld::CleanUp()
 {
 	return true;
 }

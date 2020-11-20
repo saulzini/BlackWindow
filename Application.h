@@ -12,7 +12,7 @@ class ModuleProgram;
 class ModuleRenderExercise;
 class ModuleTextures;
 class ModuleEditor;
-class ModuleExercise2;
+class ModuleWorld;
 
 class Application
 {
@@ -35,7 +35,7 @@ public:
 
 	//Exercises
 	ModuleRenderExercise* exercise = nullptr;
-	ModuleExercise2* exercise2 = nullptr;
+	ModuleWorld* world= nullptr;
 	void RequestBrowser(const char* route);
 
 private:

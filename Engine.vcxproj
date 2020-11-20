@@ -244,7 +244,7 @@
     <ClInclude Include="Module.h" />
     <ClInclude Include="ModuleCamera.h" />
     <ClInclude Include="ModuleEditor.h" />
-    <ClInclude Include="ModuleExercise2.h" />
+    <ClInclude Include="ModuleWorld.h" />
     <ClInclude Include="ModuleInput.h" />
     <ClInclude Include="ModuleProgram.h" />
     <ClInclude Include="ModuleRender.h" />
@@ -316,7 +316,7 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="ModuleEditor.cpp" />
-    <ClCompile Include="ModuleExercise2.cpp" />
+    <ClCompile Include="ModuleWorld.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
     <ClCompile Include="ModuleProgram.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
@@ -328,8 +328,10 @@
     <ClCompile Include="DefaultImGuiWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Game\HelloWorld.frag" />
-    <None Include="Game\HelloWorld.vert" />
+    <None Include="Game\Grid.frag" />
+    <None Include="Game\Grid.vert" />
+    <None Include="Game\Default.frag" />
+    <None Include="Game\Default.vert" />
     <None Include="MathGeoLib-master\src\Geometry\KDTree.inl" />
     <None Include="MathGeoLib-master\src\Geometry\QuadTree.inl" />
     <None Include="MathGeoLib-master\src\Geometry\TriangleMesh_IntersectRay_AVX.inl" />
