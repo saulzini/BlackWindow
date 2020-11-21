@@ -89,7 +89,7 @@ private:
 	void Yaw(float deltaTime);
 	void CheckForResetCameraPosition();
 
-	void Rotate(const float3x3 rotation_matrix);
+	void Rotate(const float3x3 rotationMatrix);
 	
 	void MousePitch(float deltaTime);
 	void MouseZoom(float deltaTime);

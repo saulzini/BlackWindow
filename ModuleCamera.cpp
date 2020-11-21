@@ -183,12 +183,12 @@ void ModuleCamera::CheckForResetCameraPosition()
 	}
 }
 
-void ModuleCamera::Rotate(const float3x3 rotation_matrix)
+void ModuleCamera::Rotate(const float3x3 rotationMatrix)
 {
 	vec oldFront = frustum.Front().Normalized();
-	frustum.SetFront(rotation_matrix.MulDir(oldFront));
+	frustum.SetFront(rotationMatrix.MulDir(oldFront));
 	vec oldUp = frustum.Up().Normalized();
-	frustum.SetUp(rotation_matrix.MulDir(oldUp));
+	frustum.SetUp(rotationMatrix.MulDir(oldUp));
 }
 
 void ModuleCamera::MousePitch(float deltaTime)
@@ -228,7 +228,7 @@ void ModuleCamera::OrbitCamera(float deltaTime)
 		LOG("Orbit");
 
 		iPoint newMousePosition = App->input->GetMouseMotion();
-
+		float3 oldCameraPosition = float3(cameraPosition);
 		int directionX =	(mousePosition.x - newMousePosition.x );
 		int directionY =  (mousePosition.y - newMousePosition.y);
 		// float rotationAroundYAxis = -directionX * GetTurnSpeedFactor() * deltaTime ; // camera moves horizontally
@@ -244,43 +244,43 @@ void ModuleCamera::OrbitCamera(float deltaTime)
 		cameraPosition = dir + orbitPosition;
 		frustum.SetPos(cameraPosition);
 
-		
-		frustum.SetUp(float3::unitY);
 
-		
+		float3 lookAtVector = float3(orbitPosition - cameraPosition);
+		lookAtVector.Normalize();
+		float3 upVector = frustum.WorldRight().Cross(lookAtVector);
+		frustum.SetFront(lookAtVector);
+		frustum.SetUp(upVector);
 
-		// float3 lookAtVector = frustum.Front() * cos(rotationAroundYAxis * deltaTime) + float3::unitY * sin(rotationAroundXAxis * deltaTime);
+		// float3 vectorA = float3(orbitPosition - cameraPosition);
+		// float3 vectorB = float3(orbitPosition - oldCameraPosition);
+		// float angleDifference = vectorB.AngleBetweenNorm(vectorA);
+		// //float angleDifference  = orbitPosition.AngleBetweenNorm(cameraPosition);
+
+		// Rotate(frustum.WorldMatrix().RotatePart().RotateY( -angleDifference * GetTurnSpeedFactor() * deltaTime));
+
+
+		// Quat looktAt = Quat::RotateFromTo(frustum.Front(),orbitPosition,frustum.Up(),float3::unitY);
+		// float3 vector = looktAt.Transform(dir);
+		// vector.Normalize();
+		// float3 upVector = frustum.WorldRight().Cross(vector);
+		// frustum.SetFront(vector);
+		// frustum.SetUp(upVector);
+
+		// Quat looktAt = Quat::RotateFromTo(frustum.Front(),orbitPosition,frustum.Up(),float3::unitY);
+		
+		// float3 lookAtVector = looktAt *cameraPosition ;
 		// lookAtVector.Normalize();
+		// frustum.SetFront(-lookAtVector);
+		//frustum.SetUp(float3::unitY);
+
+		// setting look at
+		// Quat looktAt = Quat::LookAt(frustum.Front(),orbitPosition,frustum.Up(),float3::unitY);
+		// float3 lookAtVector = looktAt *cameraPosition ;
+		// lookAtVector.Normalize();
+		// frustum.SetPos(cameraPosition);
 		// frustum.SetFront(lookAtVector);
 
-		// 	 float3 tmp;
-        //  tmp.x = (cos(directionX * (3.1416 / 180)) * sin(directionY * (3.1416 / 180)) * difference + orbitPosition.x);
-        //  tmp.z = (sin(directionX * (3.1416 / 180)) * sin(directionY * (3.1416 / 180)) * difference + orbitPosition.z);
-        //  tmp.y = sin(directionY * (3.1416 / 180)) * difference + orbitPosition.y;
-        // //  transform.position = Vector3.Slerp(transform.position, tmp, TranslateSpeed * Time.deltaTime);
-        //  cameraPosition =tmp;
-		//  frustum.SetPos(cameraPosition);
 		
-		//  cameraPosition = cameraPosition + Quat(directionX,directionY,0);
-
-
-		//  frustum.SetUp(float3::unitY);
-		//  float3 lookAtVector = orbitPosition.Normalized();
-		//  frustum.SetFront(-lookAtVector);
-
-		 /*
-		 cameraPosition.x = orbitPosition.x + difference * sin(resultX);
-		 cameraPosition.z = orbitPosition.z + difference * cos(resultX);
-
-		  frustum.SetPos(cameraPosition);
-		  frustum.SetUp(float3::unitY);
-		  */
-		//Checking direction
-		// //Horizontal
-		// float3 difference = cameraPosition - orbitPosition;
-		// int resultX = mousePosition.x - newMousePosition.x;
-		// int resultY =  mousePosition.y - newMousePosition.y;
-
 
 
 		
