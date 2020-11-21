@@ -14,7 +14,6 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
 
 void Mesh::Draw(const unsigned int shader)
 {
-
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
     for (unsigned int i = 0; i < textures.size(); i++)
@@ -35,6 +34,8 @@ void Mesh::Draw(const unsigned int shader)
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray( 0 );
+
+
 }
 
 void Mesh::SetupMesh()

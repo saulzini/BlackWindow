@@ -1,15 +1,20 @@
 #include "ModuleCamera.h"
 #include "MathGeoLib-master/src/Math/float3x3.h"
+#include "MathGeoLib-master/src/Math/float3x4.h"
+#include "MathGeoLib-master/src/Math/Quat.h"
 #include "SDL.h"
 #include "GL/glew.h"
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
+#include "ModuleEditor.h"
+#include "ConsoleWindow.h"
 ModuleCamera::ModuleCamera()
 {
 	//initializing
-	initialCameraPosition = cameraPosition = lastCameraPosition = float3(1, 1, 3);
+	initialCameraPosition = cameraPosition = lastCameraPosition = orbitPosition = float3(1, 1, 3);
 	initialTurnSpeed = turnSpeed = 0.0009f;
+	radiansOrbit = initialRadiansOrbit = 0.009f;
 	initialMovementSpeed = movementSpeed = 0.005f;
 	initialRadiansAngle = radiansAngle = DEGTORAD(0.05);
 	mousePosition = iPoint(0, 0);
@@ -36,14 +41,16 @@ update_status ModuleCamera::PreUpdate(float deltaTime)
 	return UPDATE_CONTINUE;
 }
 
+
 update_status ModuleCamera::Update(float deltaTime)
 {
-	if (
+	
+	/*if (
 		lastCameraPosition.x != cameraPosition.x || 
 		lastCameraPosition.y != cameraPosition.y || 
 		lastCameraPosition.z == cameraPosition.z) {
 		frustum.SetPos(cameraPosition);
-	}
+	}*/
 
 	//Setting projection
 	float4x4 projectionGL = frustum.ProjectionMatrix().Transposed(); //<-- Important to transpose!
@@ -65,6 +72,9 @@ update_status ModuleCamera::Update(float deltaTime)
 	//Mouse movements
 	MousePitch(deltaTime);
 	MouseZoom(deltaTime);
+	//Orbit 
+	OrbitCamera(deltaTime);
+	
 	
 	
 
@@ -86,6 +96,7 @@ bool ModuleCamera::CleanUp()
 {
 	return true;
 }
+
 
 void ModuleCamera::MoveForward(float deltaTime)
 {
@@ -176,12 +187,12 @@ void ModuleCamera::CheckForResetCameraPosition()
 	}
 }
 
-void ModuleCamera::Rotate(const float3x3 rotation_matrix)
+void ModuleCamera::Rotate(const float3x3 rotationMatrix)
 {
-	vec oldFront = frustum.Front().Normalized();
-	frustum.SetFront(rotation_matrix.MulDir(oldFront));
-	vec oldUp = frustum.Up().Normalized();
-	frustum.SetUp(rotation_matrix.MulDir(oldUp));
+	float3 oldFront = frustum.Front().Normalized();
+	frustum.SetFront(rotationMatrix.MulDir(oldFront));
+	float3 oldUp = frustum.Up().Normalized();
+	frustum.SetUp(rotationMatrix.MulDir(oldUp));
 }
 
 void ModuleCamera::MousePitch(float deltaTime)
@@ -189,15 +200,15 @@ void ModuleCamera::MousePitch(float deltaTime)
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT)) {
 		LOG("Mouse R");
 
-		iPoint new_mousePosition = App->input->GetMouseMotion();
+		iPoint newMousePosition = App->input->GetMouseMotion();
 		//Checking direction
 		//Horizontal
-		int result = mousePosition.x - new_mousePosition.x;
+		int result = mousePosition.x - newMousePosition.x;
 		// turn right / left direction given by result 
 		Rotate(frustum.WorldMatrix().RotatePart().RotateY( result * GetTurnSpeedFactor() * deltaTime));
 		
 		// Vertical
-		result =  mousePosition.y - new_mousePosition.y;
+		result =  mousePosition.y - newMousePosition.y;
 		//turn up/down direction given by result
 		RotatePitch(result * GetRadiansAngleSpeedFactor(), deltaTime);
 	}
@@ -210,6 +221,47 @@ void ModuleCamera::MouseZoom(float deltaTime)
 	if (scrollAmount != 0) {
 		frustum.Translate(frustum.Front() * (scrollAmount + GetMovementSpeedFactor() ) * deltaTime);
 		cameraPosition = frustum.Pos();
+	}
+}
+
+
+void ModuleCamera::RotateAroundPoint(const float3& point, const float3& pivot, const float angleX, const float angleY)
+{
+	// std::string aux= std::to_string(rotationAroundXAxis)+ ":" +std::to_string(rotationAroundYAxis);
+	// App->editor->consoleWindow->AddLog(aux.c_str()); //Debug
+	// Calculating point around pivot
+	float3 dir = cameraPosition - orbitPosition; // get point direction relative to pivot
+	dir = Quat::RotateX(angleX) * dir; // yaw
+	dir = Quat::RotateY(angleY) * dir; // pitch
+	cameraPosition = dir + orbitPosition; //calculating the new point
+	frustum.SetPos(cameraPosition);
+}
+
+void ModuleCamera::LookAt(const float3& point)
+{
+	float3 dir = point - cameraPosition;
+	float3x3 m = float3x3::LookAt(frustum.Front(), dir.Normalized(), frustum.Up(), float3::unitY);
+	float3 lookAtVector = m.MulDir(frustum.Front()).Normalized();
+	float3 upVector = m.MulDir(frustum.Up()).Normalized();
+	frustum.SetFront(lookAtVector);
+	frustum.SetUp(upVector);
+}
+
+void ModuleCamera::OrbitCamera(float deltaTime)
+{
+	if (App->input->GetKey(SDL_SCANCODE_LALT) && App->input->GetMouseButtonDown(SDL_BUTTON_LEFT)) {
+		LOG("Orbit");
+
+		iPoint newMousePosition = App->input->GetMouseMotion();
+		float3 oldCameraPosition = float3(cameraPosition);
+		int directionX =	newMousePosition.x;
+		int directionY =  newMousePosition.y;
+	
+		float rotationAroundYAxis = -directionX * GetRadiansOrbit() * deltaTime ; // camera moves horizontally
+		float rotationAroundXAxis = directionY * GetRadiansOrbit() * deltaTime; // camera moves vertically
+		
+		RotateAroundPoint(cameraPosition,orbitPosition,rotationAroundXAxis,rotationAroundYAxis);
+		LookAt(orbitPosition);
 	}
 }
 
@@ -235,6 +287,14 @@ const float ModuleCamera::GetRadiansAngleSpeedFactor()
 		return radiansAngle * speedFactor;
 	}
 	return radiansAngle;
+}
+
+const float ModuleCamera::GetRadiansOrbit()
+{
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT)) {
+		return radiansOrbit * speedFactor;
+	}
+	return radiansOrbit;
 }
 
 void ModuleCamera::ResetCameraPosition()

@@ -36,10 +36,9 @@ void Model::LoadModel(std::string path)
 	{
 		buf = "Error loading:";
 		App->editor->consoleWindow->AddLog( buf.append(path.c_str()).append(importer.GetErrorString()).c_str() );
-		LOG("Error loading %s: %s", path, importer.GetErrorString());
+		//LOG("Error loading %s: %s", path, importer.GetErrorString());
 		return;
 	}
-
 	directory = path.substr(0, path.find_last_of('/'));
 	ProcessNode(scene->mRootNode, scene);
 
