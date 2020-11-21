@@ -5,7 +5,6 @@
 #include "MathGeoLib-master/src/Math/float3.h"
 #include "Point.h"
 #define DEGTORAD(angleDegrees) ((angleDegrees) * M_PI / 180.0)
-
 //class Frustum;
 //class float3;
 class ModuleCamera :
@@ -100,6 +99,7 @@ private:
 	const float GetMovementSpeedFactor();
 	const float GetTurnSpeedFactor();
 	const float GetRadiansAngleSpeedFactor();
+	const float GetRadiansOrbit();
 
 
 protected:
@@ -107,10 +107,12 @@ protected:
 	float turnSpeed;
 	float radiansAngle;
 	float3 lastCameraPosition;
+	float radiansOrbit;
 
 	float initialMovementSpeed;
 	float initialTurnSpeed;
 	float initialRadiansAngle;
+	float initialRadiansOrbit;
 	float3 initialCameraPosition;
 	float3 orbitPosition;
 
