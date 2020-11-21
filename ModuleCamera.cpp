@@ -249,9 +249,9 @@ void ModuleCamera::OrbitCamera(float deltaTime)
 
 		
 
-		float3 lookAtVector = frustum.Front() * cos(rotationAroundYAxis * deltaTime) + float3::unitY * sin(rotationAroundXAxis * deltaTime);
-		lookAtVector.Normalize();
-		frustum.SetFront(lookAtVector);
+		// float3 lookAtVector = frustum.Front() * cos(rotationAroundYAxis * deltaTime) + float3::unitY * sin(rotationAroundXAxis * deltaTime);
+		// lookAtVector.Normalize();
+		// frustum.SetFront(lookAtVector);
 
 		// 	 float3 tmp;
         //  tmp.x = (cos(directionX * (3.1416 / 180)) * sin(directionY * (3.1416 / 180)) * difference + orbitPosition.x);
