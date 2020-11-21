@@ -189,9 +189,9 @@ void ModuleCamera::CheckForResetCameraPosition()
 
 void ModuleCamera::Rotate(const float3x3 rotationMatrix)
 {
-	vec oldFront = frustum.Front().Normalized();
+	float3 oldFront = frustum.Front().Normalized();
 	frustum.SetFront(rotationMatrix.MulDir(oldFront));
-	vec oldUp = frustum.Up().Normalized();
+	float3 oldUp = frustum.Up().Normalized();
 	frustum.SetUp(rotationMatrix.MulDir(oldUp));
 }
 
@@ -249,9 +249,7 @@ void ModuleCamera::LookAt(const float3& point)
 
 void ModuleCamera::OrbitCamera(float deltaTime)
 {
-	//if (App->input->GetKey(SDL_SCANCODE_LALT) && App->input->GetMouseButtonDown(SDL_BUTTON_LEFT)) {
-
-	if (App->input->GetKey(SDL_SCANCODE_LALT)) {
+	if (App->input->GetKey(SDL_SCANCODE_LALT) && App->input->GetMouseButtonDown(SDL_BUTTON_LEFT)) {
 		LOG("Orbit");
 
 		iPoint newMousePosition = App->input->GetMouseMotion();
