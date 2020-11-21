@@ -1,5 +1,7 @@
 #include "ModuleCamera.h"
 #include "MathGeoLib-master/src/Math/float3x3.h"
+#include "MathGeoLib-master/src/Math/float3x4.h"
+#include "MathGeoLib-master/src/Math/Quat.h"
 #include "SDL.h"
 #include "GL/glew.h"
 #include "Application.h"
@@ -8,7 +10,7 @@
 ModuleCamera::ModuleCamera()
 {
 	//initializing
-	initialCameraPosition = cameraPosition = lastCameraPosition = float3(1, 1, 3);
+	initialCameraPosition = cameraPosition = lastCameraPosition = orbitPosition = float3(1, 1, 3);
 	initialTurnSpeed = turnSpeed = 0.0009f;
 	initialMovementSpeed = movementSpeed = 0.005f;
 	initialRadiansAngle = radiansAngle = DEGTORAD(0.05);
@@ -36,14 +38,16 @@ update_status ModuleCamera::PreUpdate(float deltaTime)
 	return UPDATE_CONTINUE;
 }
 
+
 update_status ModuleCamera::Update(float deltaTime)
 {
-	if (
+	
+	/*if (
 		lastCameraPosition.x != cameraPosition.x || 
 		lastCameraPosition.y != cameraPosition.y || 
 		lastCameraPosition.z == cameraPosition.z) {
 		frustum.SetPos(cameraPosition);
-	}
+	}*/
 
 	//Setting projection
 	float4x4 projectionGL = frustum.ProjectionMatrix().Transposed(); //<-- Important to transpose!
@@ -65,6 +69,9 @@ update_status ModuleCamera::Update(float deltaTime)
 	//Mouse movements
 	MousePitch(deltaTime);
 	MouseZoom(deltaTime);
+	//Orbit 
+	OrbitCamera(deltaTime);
+	
 	
 	
 
@@ -189,15 +196,15 @@ void ModuleCamera::MousePitch(float deltaTime)
 	if (App->input->GetMouseButtonDown(SDL_BUTTON_RIGHT)) {
 		LOG("Mouse R");
 
-		iPoint new_mousePosition = App->input->GetMouseMotion();
+		iPoint newMousePosition = App->input->GetMouseMotion();
 		//Checking direction
 		//Horizontal
-		int result = mousePosition.x - new_mousePosition.x;
+		int result = mousePosition.x - newMousePosition.x;
 		// turn right / left direction given by result 
 		Rotate(frustum.WorldMatrix().RotatePart().RotateY( result * GetTurnSpeedFactor() * deltaTime));
 		
 		// Vertical
-		result =  mousePosition.y - new_mousePosition.y;
+		result =  mousePosition.y - newMousePosition.y;
 		//turn up/down direction given by result
 		RotatePitch(result * GetRadiansAngleSpeedFactor(), deltaTime);
 	}
@@ -210,6 +217,74 @@ void ModuleCamera::MouseZoom(float deltaTime)
 	if (scrollAmount != 0) {
 		frustum.Translate(frustum.Front() * (scrollAmount + GetMovementSpeedFactor() ) * deltaTime);
 		cameraPosition = frustum.Pos();
+	}
+}
+
+void ModuleCamera::OrbitCamera(float deltaTime)
+{
+	//if (App->input->GetKey(SDL_SCANCODE_LALT) && App->input->GetMouseButtonDown(SDL_BUTTON_LEFT)) {
+
+	if (App->input->GetKey(SDL_SCANCODE_LALT)) {
+		LOG("Orbit");
+
+		iPoint newMousePosition = App->input->GetMouseMotion();
+
+		int directionX =	(mousePosition.x - newMousePosition.x );
+		int directionY =  (mousePosition.y - newMousePosition.y);
+		// float rotationAroundYAxis = -directionX * GetTurnSpeedFactor() * deltaTime ; // camera moves horizontally
+		// float rotationAroundXAxis = directionY * GetTurnSpeedFactor() * deltaTime; // camera moves vertically
+
+		float rotationAroundYAxis = -1 * GetTurnSpeedFactor() * deltaTime; // testing
+		float rotationAroundXAxis = 1 * GetTurnSpeedFactor() * deltaTime; // testing
+			
+		float3 dir =  cameraPosition - orbitPosition; // get point direction relative to pivot
+   		//dir = Quat::RotateX(rotationAroundXAxis) * dir; // yaw
+   		dir = Quat::RotateY(rotationAroundYAxis) * dir; // pitch
+   		// point = dir + pivot; // calculate rotated point
+		cameraPosition = dir + orbitPosition;
+		frustum.SetPos(cameraPosition);
+
+		
+		frustum.SetUp(float3::unitY);
+
+		
+
+		float3 lookAtVector = frustum.Front() * cos(rotationAroundYAxis * deltaTime) + float3::unitY * sin(rotationAroundXAxis * deltaTime);
+		lookAtVector.Normalize();
+		frustum.SetFront(lookAtVector);
+
+		// 	 float3 tmp;
+        //  tmp.x = (cos(directionX * (3.1416 / 180)) * sin(directionY * (3.1416 / 180)) * difference + orbitPosition.x);
+        //  tmp.z = (sin(directionX * (3.1416 / 180)) * sin(directionY * (3.1416 / 180)) * difference + orbitPosition.z);
+        //  tmp.y = sin(directionY * (3.1416 / 180)) * difference + orbitPosition.y;
+        // //  transform.position = Vector3.Slerp(transform.position, tmp, TranslateSpeed * Time.deltaTime);
+        //  cameraPosition =tmp;
+		//  frustum.SetPos(cameraPosition);
+		
+		//  cameraPosition = cameraPosition + Quat(directionX,directionY,0);
+
+
+		//  frustum.SetUp(float3::unitY);
+		//  float3 lookAtVector = orbitPosition.Normalized();
+		//  frustum.SetFront(-lookAtVector);
+
+		 /*
+		 cameraPosition.x = orbitPosition.x + difference * sin(resultX);
+		 cameraPosition.z = orbitPosition.z + difference * cos(resultX);
+
+		  frustum.SetPos(cameraPosition);
+		  frustum.SetUp(float3::unitY);
+		  */
+		//Checking direction
+		// //Horizontal
+		// float3 difference = cameraPosition - orbitPosition;
+		// int resultX = mousePosition.x - newMousePosition.x;
+		// int resultY =  mousePosition.y - newMousePosition.y;
+
+
+
+		
+
 	}
 }
 

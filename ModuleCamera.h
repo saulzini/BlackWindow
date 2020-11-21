@@ -93,12 +93,14 @@ private:
 	
 	void MousePitch(float deltaTime);
 	void MouseZoom(float deltaTime);
+	void OrbitCamera(float deltaTime);
 	void RotatePitch(float radians,float deltaTime);
-	
+	// void RotateAroundPoint(float3 point, float3 pivot, float3 angles);
 
 	const float GetMovementSpeedFactor();
 	const float GetTurnSpeedFactor();
 	const float GetRadiansAngleSpeedFactor();
+
 
 protected:
 	Frustum frustum;
@@ -110,6 +112,7 @@ protected:
 	float initialTurnSpeed;
 	float initialRadiansAngle;
 	float3 initialCameraPosition;
+	float3 orbitPosition;
 
 	float speedFactor;
 	//mouse

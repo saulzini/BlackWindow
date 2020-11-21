@@ -17,7 +17,9 @@ ModuleWorld::ModuleWorld()
 
 bool ModuleWorld::Init()
 {
+	//house = new Model("BakerHouse/BakerHouse.fbx");
 	house = new Model("BakerHouse.fbx");
+	//house = new Model("Cubo/cubo.fbx");
 	//enemy1 = new Model("OldBox/Box.fbx");
 	//enemy1 = new Model("mutant.fbx");
 	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
@@ -31,9 +33,6 @@ update_status ModuleWorld::PreUpdate(float deltaTime)
 
 update_status ModuleWorld::Update(float deltaTime)
 {
-
-
-
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
