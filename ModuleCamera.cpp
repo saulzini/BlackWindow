@@ -14,8 +14,7 @@ ModuleCamera::ModuleCamera()
 	//initializing
 	initialCameraPosition = cameraPosition = lastCameraPosition = orbitPosition = float3(1, 1, 3);
 	initialTurnSpeed = turnSpeed = 0.0009f;
-	//radiansOrbit = initialRadiansOrbit = 0.009f;
-	radiansOrbit = initialRadiansOrbit = 0.0009f;
+	radiansOrbit = initialRadiansOrbit = 0.009f;
 	initialMovementSpeed = movementSpeed = 0.005f;
 	initialRadiansAngle = radiansAngle = DEGTORAD(0.05);
 	mousePosition = iPoint(0, 0);
@@ -97,6 +96,7 @@ bool ModuleCamera::CleanUp()
 {
 	return true;
 }
+
 
 void ModuleCamera::MoveForward(float deltaTime)
 {
@@ -224,6 +224,29 @@ void ModuleCamera::MouseZoom(float deltaTime)
 	}
 }
 
+
+void ModuleCamera::RotateAroundPoint(const float3& point, const float3& pivot, const float angleX, const float angleY)
+{
+	// std::string aux= std::to_string(rotationAroundXAxis)+ ":" +std::to_string(rotationAroundYAxis);
+	// App->editor->consoleWindow->AddLog(aux.c_str()); //Debug
+	// Calculating point around pivot
+	float3 dir = cameraPosition - orbitPosition; // get point direction relative to pivot
+	dir = Quat::RotateX(angleX) * dir; // yaw
+	dir = Quat::RotateY(angleY) * dir; // pitch
+	cameraPosition = dir + orbitPosition; //calculating the new point
+	frustum.SetPos(cameraPosition);
+}
+
+void ModuleCamera::LookAt(const float3& point)
+{
+	float3 dir = point - cameraPosition;
+	float3x3 m = float3x3::LookAt(frustum.Front(), dir.Normalized(), frustum.Up(), float3::unitY);
+	float3 lookAtVector = m.MulDir(frustum.Front()).Normalized();
+	float3 upVector = m.MulDir(frustum.Up()).Normalized();
+	frustum.SetFront(lookAtVector);
+	frustum.SetUp(upVector);
+}
+
 void ModuleCamera::OrbitCamera(float deltaTime)
 {
 	//if (App->input->GetKey(SDL_SCANCODE_LALT) && App->input->GetMouseButtonDown(SDL_BUTTON_LEFT)) {
@@ -235,75 +258,12 @@ void ModuleCamera::OrbitCamera(float deltaTime)
 		float3 oldCameraPosition = float3(cameraPosition);
 		int directionX =	newMousePosition.x;
 		int directionY =  newMousePosition.y;
-
-
 	
 		float rotationAroundYAxis = -directionX * GetRadiansOrbit() * deltaTime ; // camera moves horizontally
 		float rotationAroundXAxis = directionY * GetRadiansOrbit() * deltaTime; // camera moves vertically
-		//float rotationAroundYAxis = -1 * GetRadiansOrbit() * deltaTime; // testing
-		//float rotationAroundXAxis = 1 * GetRadiansOrbit() * deltaTime; // testing
-
-		// if (rotationAroundYAxis < -360) {
-		// 	rotationAroundYAxis += 360;
-		// }
-		// else if (rotationAroundYAxis > 360) {
-		// 	rotationAroundYAxis -= 360;
-		// }
-		// if (rotationAroundXAxis < -360) {
-		// 	rotationAroundXAxis += 360;
-		// }
-		// else if (rotationAroundXAxis > 360) {
-		// 	rotationAroundXAxis -= 360;
-		// }
-			
-		// if (rotationAroundYAxis < 45){
-		// 	rotationAroundYAxis = 45;
-		// }
-		// else if(rotationAroundYAxis > 315){
-		// 	rotationAroundYAxis = 315;
-		// }
-
-		// if (rotationAroundXAxis < 45){
-		// 	rotationAroundXAxis = 45;
-		// }
-		// else if(rotationAroundXAxis > 315){
-		// 	rotationAroundXAxis = 315;
-		// }
-		std::string aux= std::to_string(rotationAroundXAxis)+ ":" +std::to_string(rotationAroundYAxis);
-		App->editor->consoleWindow->AddLog(aux.c_str());
 		
-		
-
-		float3 dir =  cameraPosition - orbitPosition; // get point direction relative to pivot
-   		dir = Quat::RotateX(rotationAroundXAxis) * dir; // yaw
-   		dir = Quat::RotateY(rotationAroundYAxis) * dir; // pitch
-		cameraPosition = dir + orbitPosition; //calculating the new point
-		frustum.SetPos(cameraPosition);
-
-
-
-		dir = orbitPosition - cameraPosition;
-
-		float3x3 m = float3x3::LookAt(frustum.Front(), dir.Normalized(), frustum.Up(), float3::unitY);
-
-		float3 lookAtVector = m.MulDir(frustum.Front()).Normalized();
-		float3 upVector = m.MulDir(frustum.Up()).Normalized();
-		frustum.SetFront(lookAtVector);
-		frustum.SetUp(upVector);
-
-		// Quat lookAt = Quat::LookAt(frustum.Front(),orbitPosition,frustum.Up(),float3::unitY);
-		// Rotate(lookAt.ToFloat3x3());
-		
-		// try
-		// float3 lookAtVector = float3(orbitPosition - cameraPosition);
-		// lookAtVector.Normalize();
-		// float3 upVector = frustum.WorldRight().Cross(lookAtVector);
-		// frustum.SetFront(lookAtVector);
-		// frustum.SetUp(upVector.Normalized());
-
-
-		//frustum.SetUp(float3::unitY);
-
+		RotateAroundPoint(cameraPosition,orbitPosition,rotationAroundXAxis,rotationAroundYAxis);
+		LookAt(orbitPosition);
 	}
 }
 

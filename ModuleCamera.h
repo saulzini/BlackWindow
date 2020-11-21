@@ -78,7 +78,9 @@ public:
 	void SetCameraPosition(float3 mCameraPosition) {
 		cameraPosition = mCameraPosition;
 	}
-
+	
+	void RotateAroundPoint(const float3& point,const float3& pivot,const float anglesX, const float anglesY);
+	void LookAt(const float3& point);
 
 private:
 	void MoveForward(float deltaTime);
@@ -94,13 +96,11 @@ private:
 	void MouseZoom(float deltaTime);
 	void OrbitCamera(float deltaTime);
 	void RotatePitch(float radians,float deltaTime);
-	// void RotateAroundPoint(float3 point, float3 pivot, float3 angles);
 
 	const float GetMovementSpeedFactor();
 	const float GetTurnSpeedFactor();
 	const float GetRadiansAngleSpeedFactor();
 	const float GetRadiansOrbit();
-
 
 protected:
 	Frustum frustum;
