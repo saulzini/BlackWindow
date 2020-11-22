@@ -228,8 +228,6 @@ void ModuleCamera::MouseZoom(float deltaTime)
 
 void ModuleCamera::RotateAroundPoint(const float3& point, const float3& pivot, const float angleX, const float angleY)
 {
-	// std::string aux= std::to_string(rotationAroundXAxis)+ ":" +std::to_string(rotationAroundYAxis);
-	App->editor->consoleWindow->AddLog(aux.c_str()); //Debug
 	// Calculating point around pivot
 	float3 dir = cameraPosition - orbitPosition; // get point direction relative to pivot
 	dir = Quat::RotateX(angleX) * dir; // yaw
