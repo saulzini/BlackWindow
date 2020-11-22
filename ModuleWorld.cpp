@@ -2,7 +2,6 @@
 #include "GL/glew.h"
 #include "Application.h"
 #include "ModuleProgram.h"
-#include "Texture2D.h"
 #include "ModuleCamera.h"
 #include "Mesh.h"
 #include "Model.h"

@@ -5,7 +5,6 @@
 #include "ModuleInput.h"
 #include "ModuleCamera.h"
 #include "ModuleProgram.h"
-#include "ModuleRenderExercise.h"
 #include "ModuleWorld.h"
 #include "ModuleEditor.h"
 #include "Core/Time.h"
@@ -25,8 +24,6 @@ Application::Application()
 	modules.push_back(camera = new ModuleCamera());
 	modules.push_back(editor = new ModuleEditor());
 
-
-	//modules.push_back(exercise = new ModuleRenderExercise());
 	modules.push_back(world = new ModuleWorld());
 
 	// init DevIL. This needs to be done only once per application

@@ -9,9 +9,9 @@
 #include "Vertex.h"
 #include "Assimp/vector3.h"
 #include "Assimp/vector2.h"
+#include "TextureLoader.h"
 Model::Model(std::string path)
 {
-	textureLoader = new Texture2D();
 	if (path == "") {
 		return;
 	}
@@ -135,7 +135,7 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* mat, aiTextureType 
 		}
 		if (!skip) {
 			Texture texture;
-			texture.id = textureLoader->LoadTexture(str.C_Str());
+			texture.id = TextureLoader::LoadTexture2D(str.C_Str());
 			texture.type = typeName;
 			texture.path = str.C_Str();
 			textures.push_back(texture);

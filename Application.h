@@ -9,7 +9,6 @@ class ModuleWindow;
 class ModuleInput;
 class ModuleCamera;
 class ModuleProgram;
-class ModuleRenderExercise;
 class ModuleTextures;
 class ModuleEditor;
 class ModuleWorld;
@@ -34,7 +33,6 @@ public:
 	ModuleEditor* editor = nullptr;
 
 	//Exercises
-	ModuleRenderExercise* exercise = nullptr;
 	ModuleWorld* world= nullptr;
 	void RequestBrowser(const char* route);
 

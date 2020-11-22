@@ -3,15 +3,12 @@
 
 class Texture
 {
-	public:
-		Texture() {
-			id = 0;
-		};
-		~Texture();
-		unsigned int id;
-		std::string type;
-		std::string path;
-
-	private:
-
+public:
+	Texture()
+	{
+		id = 0;
+	};
+	unsigned int id;
+	std::string type;
+	std::string path;
 };

@@ -135,10 +135,6 @@
     </ClCompile>
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="ModuleProgram.cpp" />
-    <ClCompile Include="ModuleRenderExercise.cpp" />
-    <ClCompile Include="Texture2D.cpp">
-      <Filter>Shaders\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
       <Filter>Graphics\ImGui</Filter>
     </ClCompile>
@@ -422,10 +418,6 @@
       <Filter>Shaders\Utils</Filter>
     </ClInclude>
     <ClInclude Include="ModuleProgram.h" />
-    <ClInclude Include="ModuleRenderExercise.h" />
-    <ClInclude Include="Texture2D.h">
-      <Filter>Shaders\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>Graphics\ImGui</Filter>
     </ClInclude>
@@ -480,6 +472,9 @@
       <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
     <ClInclude Include="ModuleWorld.h" />
+    <ClInclude Include="TextureLoader.h">
+      <Filter>Core\TextureLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
@@ -517,6 +512,9 @@
     </Filter>
     <Filter Include="Shaders\Texture">
       <UniqueIdentifier>{602c2e07-0396-4c5b-ab75-f7f609d4d3ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\TextureLoader">
+      <UniqueIdentifier>{f41250d8-502b-4f15-9fe7-eb26250ab752}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
