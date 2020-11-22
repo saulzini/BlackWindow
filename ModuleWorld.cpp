@@ -16,9 +16,9 @@ ModuleWorld::ModuleWorld()
 
 bool ModuleWorld::Init()
 {
-	 //house = new Model("BakerHouse.fbx");
-	// house = new Model("BakerHouse/BakerHouse.fbx");
-	house = new Model("Cubo/cubo.fbx");
+	 house = new Model("BakerHouse.fbx");
+	 //house = new Model("BakerHouse/BakerHouse.fbx");
+	//house = new Model("Cubo/cubo.fbx");
 	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
 	return true;
 }

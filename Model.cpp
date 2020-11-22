@@ -147,7 +147,7 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType 
 		if (!skip)
 		{
 			Texture texture;
-			texture.id = TextureLoader::LoadTexture2D(str.C_Str());
+			texture.id = TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
 			texture.type = typeName;
 			texture.path = str.C_Str();
 			textures.push_back(texture);

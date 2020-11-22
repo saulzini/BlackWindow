@@ -46,12 +46,12 @@ update_status ModuleCamera::PreUpdate(float deltaTime)
 update_status ModuleCamera::Update(float deltaTime)
 {
 	
-	/*if (
+	if (
 		lastCameraPosition.x != cameraPosition.x || 
 		lastCameraPosition.y != cameraPosition.y || 
 		lastCameraPosition.z == cameraPosition.z) {
 		frustum.SetPos(cameraPosition);
-	}*/
+	}
 
 	//Setting projection
 	float4x4 projectionGL = frustum.ProjectionMatrix().Transposed(); //<-- Important to transpose!

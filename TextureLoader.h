@@ -25,11 +25,13 @@ public:
 	/// <summary>
 	/// Method that returns 0 if an error has ocurred if not it returns the opengl id
 	/// </summary>
-	/// <param name="filename"></param>
+	/// <param name="path"></param>
 	/// <param name="generateMipMaps"></param>
 	/// <returns></returns>
-	static unsigned int LoadTexture2D(const std::string &filename, bool generateMipMaps = true)
+	static unsigned int LoadTexture2D(const std::string &path,const std::string &directory, bool generateMipMaps = true)
 	{
+		std::string filename = std::string(path);
+    	filename = directory + '/' + filename;
 
 		ILboolean success = false;
 		ILuint imageID;
@@ -66,6 +68,10 @@ public:
 				break;
 			case Strategy::Textures:
 				buf.append(std::string("textures strategy: ").c_str());
+				path.append(filename.c_str());
+				break;
+			default:
+				buf.append(std::string("white strategy: ").c_str());
 				path.append(filename.c_str());
 				break;
 			}
