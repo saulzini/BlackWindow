@@ -6,8 +6,8 @@
 #include "GL/glew.h"
 #include "Texture.h"
 #include "Mesh.h"
-#include "Texture2D.h"
-#include <string.h>
+#include "TextureLoader.h"
+#include <string>
 
 class Model
 {
@@ -28,8 +28,8 @@ public:
 private:
 	std::vector<Mesh> meshes;
 	std::string directory;
-	std::vector<Texture> textures_loaded;
-	Texture2D* textureLoader;
+	std::vector<Texture> texturesLoaded;
+	TextureLoader* textureLoader;
 
 };
 

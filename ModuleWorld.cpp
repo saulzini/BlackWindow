@@ -2,7 +2,6 @@
 #include "GL/glew.h"
 #include "Application.h"
 #include "ModuleProgram.h"
-#include "Texture2D.h"
 #include "ModuleCamera.h"
 #include "Mesh.h"
 #include "Model.h"
@@ -17,11 +16,9 @@ ModuleWorld::ModuleWorld()
 
 bool ModuleWorld::Init()
 {
-	//house = new Model("BakerHouse/BakerHouse.fbx");
-	house = new Model("BakerHouse.fbx");
+	//house = new Model("Assets/BakerHouse/BakerHouse.fbx");
+	house = new Model("Assets/Lampara/images/lamp.fbx");
 	//house = new Model("Cubo/cubo.fbx");
-	//enemy1 = new Model("OldBox/Box.fbx");
-	//enemy1 = new Model("mutant.fbx");
 	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
 	return true;
 }
