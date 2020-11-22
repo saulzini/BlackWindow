@@ -177,6 +177,9 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="ModuleWorld.cpp" />
+    <ClCompile Include="HierarchyWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -474,6 +477,9 @@
     <ClInclude Include="ModuleWorld.h" />
     <ClInclude Include="TextureLoader.h">
       <Filter>Core\TextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="HierarchyWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
