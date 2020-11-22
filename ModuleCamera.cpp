@@ -300,9 +300,10 @@ const float ModuleCamera::GetRadiansOrbit()
 
 void ModuleCamera::ResetCameraPosition()
 {
-	frustum.SetPos(initialCameraPosition);
-	frustum.SetFront(-float3::unitZ);
-	frustum.SetUp(float3::unitY);
+	// frustum.SetUp(float3::unitY);
+	// frustum.SetPos(initialCameraPosition);
+	// frustum.SetFront(-float3::unitZ);
+	frustum.SetFrame(initialCameraPosition,-float3::unitZ,float3::unitY);
 }
 
 void ModuleCamera::ResetToDefaultSpeeds()

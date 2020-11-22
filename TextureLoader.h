@@ -30,8 +30,7 @@ public:
 	/// <returns></returns>
 	static unsigned int LoadTexture2D(const std::string &path,const std::string &directory, bool generateMipMaps = true)
 	{
-		std::string filename = std::string(path);
-    	filename = directory + '/' + filename;
+		std::string filename= directory + '/' + path;
 
 		ILboolean success = false;
 		ILuint imageID;
@@ -55,30 +54,41 @@ public:
 		for (std::vector<Strategy>::iterator it = types.begin(); it != types.end() && !success; it++)
 		{
 			std::string buf("Begin loading texture ");
-			std::string path("");
+			std::string resultPath("");
+			std::size_t found = std::string::npos;
 			switch (*it)
 			{
 			case Strategy::Normal:
 				buf.append(std::string("normal strategy:").c_str());
-				path.append(filename.c_str());
+				resultPath = filename.c_str();
 				break;
 			case Strategy::SameFolder:
 				buf.append(std::string("same folder strategy:").c_str());
-				path.append(filename.c_str());
+				resultPath = directory.c_str();
+				found= path.rfind('/');
+				resultPath.append("/");
+
+				if (found != std::string::npos) {
+					resultPath.append(path.substr(found, path.length()).c_str());
+				}
+				else {
+					resultPath.append(path.c_str());
+				}
 				break;
 			case Strategy::Textures:
 				buf.append(std::string("textures strategy: ").c_str());
-				path.append(filename.c_str());
+				resultPath = "Textures/";
+				resultPath.append(path.c_str());
 				break;
 			default:
 				buf.append(std::string("white strategy: ").c_str());
-				path.append(filename.c_str());
+				resultPath = "Textures/White.png";
 				break;
 			}
 
-			App->editor->consoleWindow->AddLog(buf.append( path.c_str()).c_str());
+			App->editor->consoleWindow->AddLog(buf.append( resultPath.c_str()).c_str());
 			// load  the image
-			success = ilLoadImage((ILstring) path.c_str());
+			success = ilLoadImage((ILstring) resultPath.c_str());
 			// check to see if everything went OK
 			if (!success)
 			{
