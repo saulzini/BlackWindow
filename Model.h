@@ -7,7 +7,7 @@
 #include "Texture.h"
 #include "Mesh.h"
 #include "TextureLoader.h"
-#include <string.h>
+#include <string>
 
 class Model
 {

@@ -46,6 +46,16 @@ void Model::LoadModel(std::string path)
 
 	buf = "End loading model:";
 	App->editor->consoleWindow->AddLog(buf.append(path.c_str()).c_str());
+
+	//Printing details about model
+	buf = "Animations:" + std::to_string((int)scene->mNumAnimations) + " ";
+	buf += "Meshes:" + std::to_string((int)scene->mNumMeshes) + " ";
+	buf += "Materials:" + std::to_string((int)scene->mNumMaterials)+ " ";
+	buf += "Cameras:" + std::to_string((int)scene->mNumCameras) + " ";
+	buf += "Lights:" + std::to_string((int)scene->mNumLights)+ " ";
+	buf += "Textures:"+std::to_string( (int) scene->mNumTextures);
+	App->editor->consoleWindow->AddLog(buf.c_str());
+
 }
 
 void Model::ProcessNode(aiNode *node, const aiScene *scene)
