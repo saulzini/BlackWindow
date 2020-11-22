@@ -77,12 +77,12 @@ public:
 				break;
 			case Strategy::Textures:
 				buf.append(std::string("textures strategy: ").c_str());
-				resultPath = "Textures/";
+				resultPath = "Assets/Textures/";
 				resultPath.append(path.c_str());
 				break;
 			default:
 				buf.append(std::string("white strategy: ").c_str());
-				resultPath = "Textures/White.png";
+				resultPath = "Assets/Textures/White.png";
 				break;
 			}
 
