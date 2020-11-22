@@ -16,6 +16,11 @@ using namespace std;
 
 Application::Application()
 {
+	// init DevIL. This needs to be done only once per application
+	//TODO::IMPROVE THIS
+	ilInit();
+	iluInit();
+
 	// Order matters: they will Init/start/update in this order
 	modules.push_back(window = new ModuleWindow());
 	modules.push_back(renderer = new ModuleRender());
@@ -25,10 +30,6 @@ Application::Application()
 	modules.push_back(editor = new ModuleEditor());
 
 	modules.push_back(world = new ModuleWorld());
-
-	// init DevIL. This needs to be done only once per application
-	//TODO::IMPROVE THIS
-	ilInit();
 }
 
 Application::~Application()

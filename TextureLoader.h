@@ -2,16 +2,26 @@
 
 #include <string>
 #include <GL/glew.h>
-#include <IL/il.h> 
+#include <IL/il.h>
 #include "Application.h"
 #include "ModuleEditor.h"
 #include "ConsoleWindow.h"
+#include <IL/ilut.h>
+#include <IL/ilu.h>
 
+enum class Strategy
+{
+	Normal,
+	SameFolder,
+	Textures,
+	White
+};
 class TextureLoader
 {
 public:
+	// TODO::Check if is the best option to left static the method
 	TextureLoader(){};
-	
+
 	/// <summary>
 	/// Method that returns 0 if an error has ocurred if not it returns the opengl id
 	/// </summary>
@@ -21,29 +31,69 @@ public:
 	static unsigned int LoadTexture2D(const std::string &filename, bool generateMipMaps = true)
 	{
 
-		ILboolean success;
+		ILboolean success = false;
 		ILuint imageID;
 
 		// generate an image name
 		ilGenImages(1, &imageID);
 		// bind it
 		ilBindImage(imageID);
-		// match image origin to OpenGL�s
+		// match image origin to OpenGLs
 		ilEnable(IL_ORIGIN_SET);
 		ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+		
+		//Looping given the strategies defined
+		std::vector<Strategy> types{
+			Strategy::Normal,
+			Strategy::SameFolder,
+			Strategy::Textures,
+			Strategy::White,
+		};
 
-		//Adding to application log
-		std::string buf("Begin texture:");
-		App->editor->consoleWindow->AddLog(buf.append(filename.c_str()).c_str());
-		// load  the image
-		success = ilLoadImage((ILstring)filename.c_str());
-		// check to see if everything went OK
+		for (std::vector<Strategy>::iterator it = types.begin(); it != types.end() && !success; it++)
+		{
+			std::string buf("Begin loading texture ");
+			std::string path("");
+			switch (*it)
+			{
+			case Strategy::Normal:
+				buf.append(std::string("normal strategy:").c_str());
+				path.append(filename.c_str());
+				break;
+			case Strategy::SameFolder:
+				buf.append(std::string("same folder strategy:").c_str());
+				path.append(filename.c_str());
+				break;
+			case Strategy::Textures:
+				buf.append(std::string("textures strategy: ").c_str());
+				path.append(filename.c_str());
+				break;
+			}
+
+			App->editor->consoleWindow->AddLog(buf.append( path.c_str()).c_str());
+			// load  the image
+			success = ilLoadImage((ILstring) path.c_str());
+			// check to see if everything went OK
+			if (!success)
+			{
+				//Check for error
+				ILenum Error;
+				while ((Error = ilGetError()) != IL_NO_ERROR)
+				{
+					buf = "Error Loading texture: ";
+					App->editor->consoleWindow->AddLog(buf.append(iluErrorString(Error)).c_str());
+				}
+			}
+		}
+
+		//if not success find a white texture
 		if (!success)
 		{
 			ilDeleteImages(1, &imageID); //deleting image from il
 			return 0;
 		}
-		buf = "Loaded texture:";
+
+		std::string buf = "Loaded texture:";
 		App->editor->consoleWindow->AddLog(buf.append(filename.c_str()).c_str());
 
 		/* Convert image to RGBA with unsigned byte data type */
