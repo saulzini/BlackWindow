@@ -35,4 +35,6 @@ private:
 	void SetStyle(const ImGuiIO io);
 	void UpdateWindows();
 	bool showDemoWindow;
+	bool showDock;
+	update_status appStatus;
 };

@@ -12,6 +12,8 @@
 ModuleEditor::ModuleEditor()
 {
     showDemoWindow = false;
+    showDock = true;
+    appStatus = UPDATE_CONTINUE;
 }
 
 ModuleEditor::~ModuleEditor()
@@ -54,15 +56,14 @@ bool ModuleEditor::Init()
 
 update_status ModuleEditor::PreUpdate(float deltaTime)
 {
-    bool show = true;
     // Start the Dear ImGui frame
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame(App->window->window);
     ImGui::NewFrame();
 
-    ShowDockSpace(&show);
+    ShowDockSpace(&showDock);
 
-    return UPDATE_CONTINUE;
+    return appStatus;
 }
 
 update_status ModuleEditor::Update(float deltaTime)
@@ -214,6 +215,9 @@ void ModuleEditor::DrawMenu()
             }
             ImGui::EndMenu();
         }
+
+        if (ImGui::MenuItem("Quit"))
+            appStatus = UPDATE_STOP;
         ImGui::EndMenuBar();
     }
 }
