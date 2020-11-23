@@ -34,9 +34,7 @@ ModuleCamera::~ModuleCamera()
 
 bool ModuleCamera::Init()
 {
-	int width = SCREEN_WIDTH;
-	int height = SCREEN_HEIGHT;
-	WindowResized(width,height);
+	WindowResized(App->window->getWidth(),App->window->getHeight());
 	return true;
 }
 

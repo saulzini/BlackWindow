@@ -21,12 +21,24 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	int getWidth() const {
+		return width;
+	}
+
+	int getHeight() const {
+		return height;
+	}
+
 public:
 	//The window we'll be rendering to
 	SDL_Window* window = NULL;
 
 	//The surface contained by the window
 	SDL_Surface* screen_surface = NULL;
+
+private:
+	int width;
+	int height;
 };
 
 #endif // __ModuleWindow_H__
