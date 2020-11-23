@@ -249,30 +249,28 @@ void ModuleCamera::LookAt(const float3& point)
 	frustum.SetUp(upVector);
 }
 
-
+/// <summary>
+/// The window will mantain the same size when the window is resized
+/// </summary>
+/// <param name="width"></param>
+/// <param name="height"></param>
 void ModuleCamera::WindowResized(int width,int height) 
 {
-	if (height == 0.0f){
+	LOG("Window resized %d,%d",width,height);
+	
+	float newHeight = (width / frustum.AspectRatio()); 
+
+	if (newHeight == 0.0f) {
 		App->editor->consoleWindow->AddLog("Error cant set aspect ratio");
 		return;
 	}
-	LOG("Window resized %d,%d",width,height);
-	float aspectRatio = (float) width / (float) height;
-	SetAspectRatio(aspectRatio);
-	// float verticalFov = 2 * atan( tan( frustum.HorizontalFov()/2 ) * aspectRatio );
-	// frustum.SetPerspective(90.0f,verticalFov);
-	// frustum.SetVerticalFovAndAspectRatio(verticalFov,aspectRatio);
+	SetAspectRatio((float)width / (float)newHeight);
 }
 
 void ModuleCamera::SetAspectRatio(float aspectRatio) 
 {
-	// float horizontalFov = 2.f * atanf(tanf(frustum.VerticalFov() * 0.5) *  aspectRatio);
-	// frustum.horizontalFov = horizontalFov;
-	// frustum.SetPerspective(horizontalFov,frustum.VerticalFov() );
-	frustum.SetHorizontalFovAndAspectRatio(frustum.HorizontalFov() ,aspectRatio);
+	frustum.SetVerticalFovAndAspectRatio(frustum.VerticalFov() ,aspectRatio);
 }
-
-
 
 void ModuleCamera::OrbitCamera(float deltaTime)
 {
