@@ -2,8 +2,8 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
-//#include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_sdl.h"
+#include "ModuleCamera.h"
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput() : Module(), mouse({ 0, 0 }), mouse_motion({ 0,0 })
@@ -106,7 +106,12 @@ update_status ModuleInput::PreUpdate(float deltaTime)
 			case SDL_WINDOWEVENT_RESTORED:
 				windowEvents[WE_SHOW] = true;
 				break;
+
+			case SDL_WINDOWEVENT_SIZE_CHANGED:
+				App->camera->WindowResized(event.window.data1,event.window.data2);
+				break;
 			}
+
 			break;
 
 		case SDL_MOUSEBUTTONDOWN:

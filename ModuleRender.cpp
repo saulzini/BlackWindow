@@ -86,7 +86,7 @@ update_status ModuleRender::PreUpdate(float deltaTime)
 // Called every draw update
 update_status ModuleRender::Update(float deltaTime)
 {
-	glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 
 	int w = 0; int h = 0;
 	SDL_GetWindowSize(App->window->window, &w, &h);
@@ -144,10 +144,5 @@ bool ModuleRender::CleanUp()
 	//Destroy window
 	SDL_GL_DeleteContext(context);
 
-	//DestroyVBO(vbo);
 	return true;
-}
-
-void ModuleRender::WindowResized(unsigned width, unsigned height)
-{
 }

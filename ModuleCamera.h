@@ -5,8 +5,7 @@
 #include "MathGeoLib-master/src/Math/float3.h"
 #include "Point.h"
 #define DEGTORAD(angleDegrees) ((angleDegrees) * M_PI / 180.0)
-//class Frustum;
-//class float3;
+
 class ModuleCamera :
 	public Module
 {
@@ -82,6 +81,10 @@ public:
 	void RotateAroundPoint(const float3& point,const float3& pivot,const float anglesX, const float anglesY);
 	void LookAt(const float3& point);
 
+	
+	void WindowResized(int width,int height);
+	void SetAspectRatio(float aspectRatio);
+
 private:
 	void MoveForward(float deltaTime);
 	void MoveRight(float deltaTime);
@@ -101,7 +104,7 @@ private:
 	const float GetTurnSpeedFactor();
 	const float GetRadiansAngleSpeedFactor();
 	const float GetRadiansOrbit();
-
+	
 protected:
 	Frustum frustum;
 	float turnSpeed;

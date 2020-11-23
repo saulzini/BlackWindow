@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleProgram.h"
 #include "ModuleCamera.h"
+#include "ModuleWindow.h"
 #include "Mesh.h"
 #include "Model.h"
 #include "MathGeoLib-master/src/Math/float4x4.h"
@@ -16,7 +17,8 @@ ModuleWorld::ModuleWorld()
 
 bool ModuleWorld::Init()
 {
-	house = new Model("Assets/BakerHouse/BakerHouse.fbx");
+	 house = new Model("Assets/BakerHouse/BakerHouse.fbx");
+	//house = new Model("Assets/images/images/lamp.fbx");
 	//house = new Model("Assets/Lampara/images/lamp.fbx");
 	//house = new Model("Cubo/cubo.fbx");
 	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");

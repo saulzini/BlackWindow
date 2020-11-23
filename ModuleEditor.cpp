@@ -29,10 +29,10 @@ ModuleEditor::~ModuleEditor()
 bool ModuleEditor::Init()
 {
     //Creating windows
-    addWindow(consoleWindow = new ConsoleWindow("Console window1", ImGuiWindowFlags_MenuBar));
-    addWindow(configurationWindow = new ConfigurationWindow("Configuration window 1", ImGuiWindowFlags_MenuBar));
-    addWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar));
-    addWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar));
+    addWindow(consoleWindow = new ConsoleWindow("Console window1", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    addWindow(configurationWindow = new ConfigurationWindow("Configuration window 1", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    addWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar ));
+    addWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
