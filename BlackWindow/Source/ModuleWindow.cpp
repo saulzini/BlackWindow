@@ -104,24 +104,29 @@ bool ModuleWindow::CleanUp()
 
 void ModuleWindow::SetBrightness(float value) 
 {
+	if (brightness == value){
+		return;
+	}
 	brightness = value;
 	SDL_SetWindowBrightness(window,brightness);
 }
 
 void ModuleWindow::SetWidth(int value) 
 {
-	if (value != width){
-		width = value;
-		SDL_SetWindowSize(window,width,height);
+	if (value == width){
+		return;
 	}
+	width = value;
+	SDL_SetWindowSize(window,width,height);
 }
 
 void ModuleWindow::SetHeight(int value) 
 {
-	if (value != height){
-		height = value;
-		SDL_SetWindowSize(window,width,height);
+	if (value == height){
+		return;
 	}
+	height = value;
+	SDL_SetWindowSize(window,width,height);
 }
 
 
