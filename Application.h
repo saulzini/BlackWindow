@@ -9,9 +9,9 @@ class ModuleWindow;
 class ModuleInput;
 class ModuleCamera;
 class ModuleProgram;
-class ModuleRenderExercise;
 class ModuleTextures;
 class ModuleEditor;
+class ModuleWorld;
 
 class Application
 {
@@ -30,8 +30,10 @@ public:
 	ModuleInput* input = nullptr;
 	ModuleCamera* camera = nullptr;
 	ModuleProgram* program = nullptr;
-	ModuleRenderExercise* exercise = nullptr;
 	ModuleEditor* editor = nullptr;
+
+	//Exercises
+	ModuleWorld* world= nullptr;
 	void RequestBrowser(const char* route);
 
 private:

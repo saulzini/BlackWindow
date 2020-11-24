@@ -38,4 +38,4 @@ enum update_status
 #define SCREEN_SIZE 2
 #define FULLSCREEN false
 #define VSYNC true
-#define TITLE "Super Awesome Engine"
+#define TITLE "Black window"

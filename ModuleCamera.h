@@ -6,11 +6,13 @@
 #include "Point.h"
 #define DEGTORAD(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 
-//class Frustum;
-//class float3;
 class ModuleCamera :
 	public Module
 {
+
+public:
+	float3 cameraPosition;
+	float movementSpeed;
 
 public:
 	ModuleCamera();
@@ -68,6 +70,22 @@ public:
 	void ResetCameraPosition();
 	void ResetToDefaultSpeeds();
 
+	float3 GetCameraPosition() {
+		return cameraPosition;
+	}
+
+	void SetCameraPosition(float3 mCameraPosition) {
+		cameraPosition = mCameraPosition;
+	}
+	
+	void RotateAroundPoint(const float3& point,const float3& pivot,const float anglesX, const float anglesY);
+	void LookAt(const float3& point);
+
+	
+	void WindowResized(int width,int height);
+	void SetAspectRatio(float aspectRatio);
+
+	void MoveAccordingNewModelInScene(float3 dimensions);
 
 private:
 	void MoveForward(float deltaTime);
@@ -77,28 +95,31 @@ private:
 	void Yaw(float deltaTime);
 	void CheckForResetCameraPosition();
 
-	void Rotate(const float3x3 rotation_matrix);
+	void Rotate(const float3x3 rotationMatrix);
 	
 	void MousePitch(float deltaTime);
 	void MouseZoom(float deltaTime);
+	void OrbitCamera(float deltaTime);
 	void RotatePitch(float radians,float deltaTime);
-	
 
 	const float GetMovementSpeedFactor();
 	const float GetTurnSpeedFactor();
 	const float GetRadiansAngleSpeedFactor();
-
+	const float GetRadiansOrbit();
+	
 protected:
 	Frustum frustum;
-	float movementSpeed;
 	float turnSpeed;
 	float radiansAngle;
-	float3 cameraPosition;
+	float3 lastCameraPosition;
+	float radiansOrbit;
 
 	float initialMovementSpeed;
 	float initialTurnSpeed;
 	float initialRadiansAngle;
+	float initialRadiansOrbit;
 	float3 initialCameraPosition;
+	float3 orbitPosition;
 
 	float speedFactor;
 	//mouse

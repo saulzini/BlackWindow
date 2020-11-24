@@ -135,10 +135,6 @@
     </ClCompile>
     <ClCompile Include="ModuleCamera.cpp" />
     <ClCompile Include="ModuleProgram.cpp" />
-    <ClCompile Include="ModuleRenderExercise.cpp" />
-    <ClCompile Include="Texture2D.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
       <Filter>Graphics\ImGui</Filter>
     </ClCompile>
@@ -166,6 +162,32 @@
     </ClCompile>
     <ClCompile Include="ConfigurationWindow.cpp">
       <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Model.cpp">
+      <Filter>Core\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Core\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryLoader.cpp" />
+    <ClCompile Include="PreviewWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWorld.cpp" />
+    <ClCompile Include="HierarchyWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\gpudetect\DeviceId.cpp">
+      <Filter>Resources\gpudetect</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManager.cpp">
+      <Filter>Core\FileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -408,10 +430,6 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="ModuleProgram.h" />
-    <ClInclude Include="ModuleRenderExercise.h" />
-    <ClInclude Include="Texture2D.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="ImGui\imconfig.h">
       <Filter>Graphics\ImGui</Filter>
     </ClInclude>
@@ -449,13 +467,45 @@
     <ClInclude Include="Core\Time.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Core\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Core\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryLoader.h" />
+    <ClInclude Include="Vertex.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PreviewWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWorld.h" />
+    <ClInclude Include="TextureLoader.h">
+      <Filter>Core\TextureLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="HierarchyWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\gpudetect\DeviceId.h">
+      <Filter>Resources\gpudetect</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\gpudetect\dxgi1_4.h">
+      <Filter>Resources\gpudetect</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
+      <Filter>Core\FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
       <UniqueIdentifier>{3c8e6d0b-a7bb-4b43-b488-5b0d8a62f6c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{95d2f25f-80a0-46f7-82b9-7f0cf855ab5e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{2ddcefa5-5550-47b2-b0c9-3f33fe98bad0}</UniqueIdentifier>
@@ -471,6 +521,36 @@
     </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{ebb6cf58-a825-4957-9447-ace7c8bf1e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Model">
+      <UniqueIdentifier>{1800a3e0-dc82-4f1c-bc94-d9377714d235}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Mesh">
+      <UniqueIdentifier>{7a347214-cc5c-48de-bc20-d7cb9e6052e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GeometryLoader">
+      <UniqueIdentifier>{2513219a-37c0-4b2f-97b0-ca73ef54453c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Grid">
+      <UniqueIdentifier>{affccc95-e640-44fd-9a37-1bf44802bc42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Texture">
+      <UniqueIdentifier>{602c2e07-0396-4c5b-ab75-f7f609d4d3ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\TextureLoader">
+      <UniqueIdentifier>{f41250d8-502b-4f15-9fe7-eb26250ab752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{af913654-bbf6-4bad-952a-c44c891a2621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\gpudetect">
+      <UniqueIdentifier>{573a1af0-78a2-4fae-8d98-e8fc90badd4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\FileManager">
+      <UniqueIdentifier>{7bb5ab2f-8826-4db9-be29-578713cbbb48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{95d2f25f-80a0-46f7-82b9-7f0cf855ab5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -495,11 +575,25 @@
     <None Include="MathGeoLib-master\src\Math\Matrix.inl">
       <Filter>MathGeoLib</Filter>
     </None>
-    <None Include="Game\HelloWorld.frag">
-      <Filter>Shaders</Filter>
+    <None Include="Game\Grid.frag">
+      <Filter>Shaders\Grid</Filter>
     </None>
-    <None Include="Game\HelloWorld.vert">
-      <Filter>Shaders</Filter>
+    <None Include="Game\Grid.vert">
+      <Filter>Shaders\Grid</Filter>
     </None>
+    <None Include="Game\Default.frag">
+      <Filter>Shaders\Texture</Filter>
+    </None>
+    <None Include="Game\Default.vert">
+      <Filter>Shaders\Texture</Filter>
+    </None>
+    <None Include="Resources\gpudetect\readme.md">
+      <Filter>Resources\gpudetect</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\gpudetect\license.txt">
+      <Filter>Resources\gpudetect</Filter>
+    </Text>
   </ItemGroup>
 </Project>
