@@ -150,8 +150,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="ConfigurationWindow.h" />
     <ClInclude Include="Core\Time.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="GeometryLoader.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ConsoleWindow.h" />
@@ -261,8 +263,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="ConfigurationWindow.cpp" />
     <ClCompile Include="ConsoleWindow.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="GeometryLoader.cpp" />
     <ClCompile Include="HierarchyWindow.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />

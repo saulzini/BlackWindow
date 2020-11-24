@@ -10,6 +10,8 @@
 #include "Assimp/vector3.h"
 #include "Assimp/vector2.h"
 #include "TextureLoader.h"
+#include "BoundingBox.h"
+
 Model::Model(std::string path)
 {
 	if (path == "")
@@ -47,15 +49,23 @@ void Model::LoadModel(std::string path)
 	buf = "End loading model:";
 	App->editor->consoleWindow->AddLog(buf.append(path.c_str()).c_str());
 
+	
 	//Printing details about model
 	buf = "Animations:" + std::to_string((int)scene->mNumAnimations) + " ";
 	buf += "Meshes:" + std::to_string((int)scene->mNumMeshes) + " ";
 	buf += "Materials:" + std::to_string((int)scene->mNumMaterials)+ " ";
 	buf += "Cameras:" + std::to_string((int)scene->mNumCameras) + " ";
 	buf += "Lights:" + std::to_string((int)scene->mNumLights)+ " ";
-	buf += "Textures:"+std::to_string( (int) scene->mNumTextures);
+	buf += "Textures:" + std::to_string((int)scene->mNumTextures);
+
+	double factor(0.0);
+	bool result = scene->mMetaData->Get("UnitScaleFactor", factor);
+	buf += "Scale:"+std::to_string( result);
 	App->editor->consoleWindow->AddLog(buf.c_str());
 
+	BoundingBox boundingBox(scene);
+	boundingBox.GetBoundingBox(&boundBoxMin,&boundBoxMax);
+	CalculateBoxDimensions();
 }
 
 void Model::ProcessNode(aiNode *node, const aiScene *scene)
@@ -165,4 +175,11 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType 
 		}
 	}
 	return textures;
+}
+
+void Model::CalculateBoxDimensions() 
+{
+	dimensions.x = abs(boundBoxMax.x) - abs(boundBoxMin.x);
+	dimensions.y = abs(boundBoxMax.y) - abs(boundBoxMin.y);
+	dimensions.z = abs(boundBoxMax.z) - abs(boundBoxMin.z);
 }

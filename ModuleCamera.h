@@ -85,6 +85,8 @@ public:
 	void WindowResized(int width,int height);
 	void SetAspectRatio(float aspectRatio);
 
+	void MoveAccordingNewModelInScene(float3 dimensions);
+
 private:
 	void MoveForward(float deltaTime);
 	void MoveRight(float deltaTime);
