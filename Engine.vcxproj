@@ -94,7 +94,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/SDL/lib/x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -112,7 +112,7 @@
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/SDL/lib/x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -134,7 +134,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/SDL/lib/x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -156,7 +156,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/SDL/lib/x86</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -251,7 +251,40 @@
     <ClInclude Include="BlackWindow\Resources\ImGui\imstb_rectpack.h" />
     <ClInclude Include="BlackWindow\Resources\ImGui\imstb_textedit.h" />
     <ClInclude Include="BlackWindow\Resources\ImGui\imstb_truetype.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK2D.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\Random\LCG.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\SAT.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\emscripten\library_system.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\AABB.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\AABB2D.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Capsule.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Circle.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Circle2D.h" />
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Frustum.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\GeometryAll.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\GeomType.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\HitInfo.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\KDTree.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Line.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\LineSegment.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\LineSegment2D.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\OBB.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\OBB2D.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\PBVolume.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Plane.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Polygon.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Polygon2DRef.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Polyhedron.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\QuadTree.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Ray.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Sphere.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Triangle.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Triangle2D.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\MathBuildConfig.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\MathGeoLib.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\MathGeoLibFwd.h" />
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Math\assume.h" />
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Math\BitFuncs.h" />
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Math\BitOps.h" />
@@ -293,6 +326,7 @@
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Math\Swap.h" />
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Math\TransformOps.h" />
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Math\vec2d.h" />
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Time\Clock.h" />
     <ClInclude Include="BlackWindow\Resources\SDL\include\begin_code.h" />
     <ClInclude Include="BlackWindow\Resources\SDL\include\close_code.h" />
     <ClInclude Include="BlackWindow\Resources\SDL\include\SDL.h" />
@@ -410,7 +444,28 @@
     <ClCompile Include="BlackWindow\Resources\ImGui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="BlackWindow\Resources\ImGui\imgui_impl_sdl.cpp" />
     <ClCompile Include="BlackWindow\Resources\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK2D.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\Random\LCG.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\SAT.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\AABB.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Capsule.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Circle.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Circle2D.cpp" />
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Frustum.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Line.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\LineSegment.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\LineSegment2D.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\OBB.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\PBVolume.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Plane.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Polygon.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Polyhedron.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Ray.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Sphere.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Triangle.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Triangle2D.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh.cpp" />
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Math\BitOps.cpp" />
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Math\Callstack.cpp" />
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Math\float2.cpp" />
@@ -430,6 +485,7 @@
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Math\Quat.cpp" />
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Math\SSEMath.cpp" />
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Math\TransformOps.cpp" />
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Time\Clock.cpp" />
     <ClCompile Include="BlackWindow\Source\Application.cpp" />
     <ClCompile Include="BlackWindow\Source\BoundingBox.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\FileManager.cpp" />
@@ -462,6 +518,11 @@
     <None Include="BlackWindow\Resources\Assimp\include\assimp\SmoothingGroups.inl" />
     <None Include="BlackWindow\Resources\Assimp\include\assimp\vector2.inl" />
     <None Include="BlackWindow\Resources\Assimp\include\assimp\vector3.inl" />
+    <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\KDTree.inl" />
+    <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\QuadTree.inl" />
+    <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh_IntersectRay_AVX.inl" />
+    <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh_IntersectRay_CPP.inl" />
+    <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh_IntersectRay_SSE.inl" />
     <None Include="BlackWindow\Resources\MathGeoLib-master\src\Math\float2.inl" />
     <None Include="BlackWindow\Resources\MathGeoLib-master\src\Math\Matrix.inl" />
     <None Include="BlackWindow\Resources\SDL\include\SDL_config.h.cmake" />

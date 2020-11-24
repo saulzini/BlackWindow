@@ -123,6 +123,72 @@
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Frustum.cpp">
       <Filter>MathGeoLib</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\AABB.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Capsule.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Circle.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Circle2D.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Line.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\LineSegment.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\LineSegment2D.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\OBB.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\PBVolume.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Plane.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Polygon.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Polyhedron.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Ray.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Sphere.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Triangle.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Triangle2D.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK2D.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\SAT.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\Random\LCG.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Time\Clock.cpp">
+      <Filter>MathGeoLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
@@ -814,6 +880,108 @@
     <ClInclude Include="BlackWindow\Resources\SDL\include\SDL_vulkan.h">
       <Filter>Resources\SDL</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\AABB.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\AABB2D.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Capsule.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Circle.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Circle2D.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\GeometryAll.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\GeomType.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\HitInfo.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\KDTree.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Line.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\LineSegment.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\LineSegment2D.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\OBB.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\OBB2D.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\PBVolume.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Plane.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Polygon.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Polygon2DRef.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Polyhedron.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\QuadTree.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Ray.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Sphere.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Triangle.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Triangle2D.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\MathBuildConfig.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\MathGeoLib.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\MathGeoLibFwd.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\emscripten\library_system.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK2D.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\SAT.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\Random\LCG.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Time\Clock.h">
+      <Filter>MathGeoLib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -925,6 +1093,21 @@
     </None>
     <None Include="BlackWindow\Resources\SDL\include\SDL_config_macosx.h.orig">
       <Filter>Resources\SDL</Filter>
+    </None>
+    <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\KDTree.inl">
+      <Filter>MathGeoLib</Filter>
+    </None>
+    <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\QuadTree.inl">
+      <Filter>MathGeoLib</Filter>
+    </None>
+    <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh_IntersectRay_AVX.inl">
+      <Filter>MathGeoLib</Filter>
+    </None>
+    <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh_IntersectRay_CPP.inl">
+      <Filter>MathGeoLib</Filter>
+    </None>
+    <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh_IntersectRay_SSE.inl">
+      <Filter>MathGeoLib</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
