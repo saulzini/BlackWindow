@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "SDL.h"
-#include "ImGui/imgui_impl_sdl.h"
+#include "imgui_impl_sdl.h"
 #include "ModuleCamera.h"
 #define MAX_KEYS 300
 

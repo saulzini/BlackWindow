@@ -67,20 +67,35 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <LibraryPath>;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Source;$(ProjectDir)/BlackWindow/Resources/SDL/include;;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;;%(AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/MathGeoLib/src;$(ProjectDir)/BlackWindow/Resources/ImGui;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/SDL/lib/x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -92,13 +107,13 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Source;$(ProjectDir)/BlackWindow/Resources/SDL/include;glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;glew-2.1.0\include;%(AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/MathGeoLib/src;$(ProjectDir)/BlackWindow/Resources/ImGui;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/SDL/lib/x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -112,15 +127,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Source;$(ProjectDir)/BlackWindow/Resources/SDL/include;;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;;%(AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/MathGeoLib/src;$(ProjectDir)/BlackWindow/Resources/ImGui;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/SDL/lib/x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
@@ -134,15 +149,15 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Source;$(ProjectDir)/BlackWindow/Resources/SDL/include;glew-2.1.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;glew-2.1.0\include;%(AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/MathGeoLib/src;$(ProjectDir)/BlackWindow/Resources/ImGui;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/SDL/lib/x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>

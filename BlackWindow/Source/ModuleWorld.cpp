@@ -6,8 +6,7 @@
 #include "ModuleWindow.h"
 #include "Core/Mesh.h"
 #include "Core/Model.h"
-#include "MathGeoLib-master/src/Math/float4x4.h"
-
+#include "Math/float4x4.h"
 ModuleWorld::ModuleWorld()
 {
 	program = 0;

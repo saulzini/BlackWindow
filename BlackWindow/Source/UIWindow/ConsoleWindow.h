@@ -1,7 +1,7 @@
 #pragma once
 
 #include "DefaultImGuiWindow.h"
-#include "ImGui/imgui.h"
+#include "imgui.h"
 
 class ConsoleWindow :
     public DefaultImGuiWindow
