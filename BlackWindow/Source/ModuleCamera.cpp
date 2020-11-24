@@ -17,7 +17,7 @@ ModuleCamera::ModuleCamera()
 	orbitPosition = float3(1,1,1);
 	initialTurnSpeed = turnSpeed = 0.0009f;
 	radiansOrbit = initialRadiansOrbit = 0.009f;
-	initialMovementSpeed = movementSpeed = 0.005f;
+	initialMovementSpeed = movementSpeed = zoomSpeed = initialZoomSpeed = 0.005f;
 	initialRadiansAngle = radiansAngle = DEGTORAD(0.05);
 	mousePosition = iPoint(0, 0);
 	speedFactor = 2.0f;
@@ -98,6 +98,11 @@ update_status ModuleCamera::PostUpdate(float deltaTime)
 bool ModuleCamera::CleanUp()
 {
 	return true;
+}
+
+void ModuleCamera::SetFOV(float horizontalFov, float aspectRatio) 
+{
+	frustum.SetHorizontalFovAndAspectRatio(horizontalFov, aspectRatio);
 }
 
 
@@ -222,7 +227,7 @@ void ModuleCamera::MouseZoom(float deltaTime)
 {
 	int scrollAmount =  App->input->GetScrollAmount();
 	if (scrollAmount != 0) {
-		frustum.Translate(frustum.Front() * (scrollAmount + GetMovementSpeedFactor() ) * deltaTime);
+		frustum.Translate(frustum.Front() * (scrollAmount + GetZoomSpeedFactor() ) * deltaTime);
 		cameraPosition = frustum.Pos();
 	}
 }
@@ -300,7 +305,7 @@ void ModuleCamera::OrbitCamera(float deltaTime)
 	}
 }
 
-const float ModuleCamera::GetMovementSpeedFactor()
+float ModuleCamera::GetMovementSpeedFactor() const
 {
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT) ) {
 		return movementSpeed * speedFactor;
@@ -308,7 +313,15 @@ const float ModuleCamera::GetMovementSpeedFactor()
 	return movementSpeed;
 }
 
-const float ModuleCamera::GetTurnSpeedFactor()
+float ModuleCamera::GetZoomSpeedFactor() const
+{
+	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT) ) {
+		return zoomSpeed * speedFactor;
+	}
+	return zoomSpeed;
+}
+
+float ModuleCamera::GetTurnSpeedFactor() const
 {
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT)) {
 		return turnSpeed * speedFactor;
@@ -316,7 +329,7 @@ const float ModuleCamera::GetTurnSpeedFactor()
 	return turnSpeed;
 }
 
-const float ModuleCamera::GetRadiansAngleSpeedFactor()
+float ModuleCamera::GetRadiansAngleSpeedFactor() const
 {
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT)) {
 		return radiansAngle * speedFactor;
@@ -324,7 +337,7 @@ const float ModuleCamera::GetRadiansAngleSpeedFactor()
 	return radiansAngle;
 }
 
-const float ModuleCamera::GetRadiansOrbit()
+float ModuleCamera::GetRadiansOrbit() const
 {
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT)) {
 		return radiansOrbit * speedFactor;
@@ -345,6 +358,12 @@ void ModuleCamera::ResetToDefaultSpeeds()
 	turnSpeed = initialTurnSpeed;
 	movementSpeed = initialMovementSpeed;
 	radiansAngle = initialRadiansAngle;
+	zoomSpeed = initialZoomSpeed;
+}
+
+void ModuleCamera::SetCameraPosition(float3 mCameraPosition) 
+{
+	cameraPosition = mCameraPosition;
 }
 
 

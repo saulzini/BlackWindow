@@ -4,7 +4,7 @@
 #include "Application.h"
 #include "ModuleCamera.h"
 #include <math.h>
-
+#include "Math/float3.h"
 // GPU
 #include "SDL_version.h"
 #include "SDL_cpuinfo.h"
@@ -193,82 +193,79 @@ void ConfigurationWindow::Update()
                 ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemReserved) / (1024.f * 1024.f * 1024.f));
             }
         }
-        if (ImGui::CollapsingHeader("Camera")) {
-
-            // Active
-            static bool wActive = false;
-            ImGui::Checkbox("Active", &wActive);
-
-            // Front
-            static float vec4f[4] = { 0.10f, 0.20f, 0.30f, 0.44f };
-
-            ImGui::InputFloat3("Front", vec4f);
-
-            // Up
-            ImGui::InputFloat3("Up", vec4f);
-
-            // Position
-           // ImGui::InputFloat3("Position", vec4f);
-
-            
-            //ImGui::InputFloat3("Position", App->camera->cameraPosition[0] );
-            ImGui::InputFloat3("Position", &App->camera->cameraPosition.x);
-
-            // Move Speed
-            static float ms = 0.f;
-            ImGui::DragFloat("Move Speed", &ms, 1);
-
-            // Rot Speed
-            static float rs = 0.f;
-            ImGui::DragFloat("Rot Speed", &rs, 1);
-
-            //Zoom Speed
-            static float zs = 0.f;
-            ImGui::DragFloat("Zoom Speed", &zs, 1);
-
-            // Frustrum Culling
-            static bool fCulling = false;
-            ImGui::Checkbox("Frustrum Culling", &fCulling);
-
-            // Near Plane
-            static float np = 0.f;
-            ImGui::DragFloat("Near Plane", &np, 1);
-
-            // Far Plane
-            static float fp = 0.f;
-            ImGui::DragFloat("Far Plane", &fp, 1);
-
-            // Field of View
-            static float fv = 0.f;
-            ImGui::DragFloat("Field of View", &fv, 1);
-
-            // Aspect Ratio
-            static float ar = 0.f;
-            ImGui::DragFloat("Aspect Ratio", &ar, 1);
-
-            // Background
-            static float col1[3] = { 1.0f, 0.0f, 0.2f };
-            ImGui::ColorEdit3("color 1", col1);
-
-            // Current
-            ImGui::Text("Current ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", "- not assigned-");
-
-            // Pick Another
-            ImGui::PushID(1); //begin btn
-            ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(7.0f, 0.7f, 0.7f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(7.0f, 0.8f, 0.8f));
-            ImGui::Button("Pick Another");
-            ImGui::PopStyleColor(3);
-            ImGui::PopID(); //end btn
-
-            // Is Active Camera
-            static bool isActive = false;
-            ImGui::Checkbox("Is Active Camera", &isActive);
-
-        }
+        DrawCameraConfig();
         end();
+    }
+}
+
+void ConfigurationWindow::DrawCameraConfig() 
+{
+    if (ImGui::CollapsingHeader("Camera")) {
+
+        // Front
+        static float vec4f[4] = { 0.10f, 0.20f, 0.30f, 0.44f };
+
+        float3 frontVector = App->camera->GetFrontVector();
+        ImGui::InputFloat3("Front", &frontVector[0]);
+        App->camera->SetFrontVector(frontVector);
+
+        // Up
+        float3 upVector = App->camera->GetUpVector();
+        ImGui::InputFloat3("Up", &upVector[0]);
+        App->camera->SetUpVector(upVector);
+
+        // Position
+        float3 cameraPosition = App->camera->GetCameraPosition();
+        ImGui::InputFloat3("Position", &cameraPosition[0]);
+        App->camera->SetCameraPosition(cameraPosition);
+
+        // Move Speed
+        float movementSpeed = App->camera->GetMovementSpeed();
+        ImGui::DragFloat("Move Speed", &movementSpeed, 0.05);
+        App->camera->SetMovementSpeed(movementSpeed);
+
+        // Rot Speed
+        float turnSpeed = App->camera->GetTurnSpeed();
+        ImGui::DragFloat("Rot Speed", &turnSpeed, 0.05);
+        App->camera->SetTurnSpeed(turnSpeed);
+
+        //Zoom Speed
+        float zoomSpeed = App->camera->GetZoomSpeed();
+        ImGui::DragFloat("Zoom Speed", &zoomSpeed, 1);
+        App->camera->SetZoomSpeed(zoomSpeed);
+
+        // Frustrum Culling
+        static bool fCulling = false;
+        ImGui::Checkbox("Frustrum Culling", &fCulling);
+
+        // Near Plane
+        static float np = 0.f;
+        ImGui::DragFloat("Near Plane", &np, 1);
+
+        // Far Plane
+        static float fp = 0.f;
+        ImGui::DragFloat("Far Plane", &fp, 1);
+
+        // Field of View
+        static float fv = 0.f;
+        ImGui::DragFloat("Field of View", &fv, 1);
+
+        // Aspect Ratio
+        static float ar = 0.f;
+        ImGui::DragFloat("Aspect Ratio", &ar, 1);
+
+        // Background
+        static float col1[3] = { 1.0f, 0.0f, 0.2f };
+        ImGui::ColorEdit3("color 1", col1);
+
+        // Current
+        ImGui::Text("Current ");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", "- not assigned-");
+
+        // Is Active Camera
+        static bool isActive = false;
+        ImGui::Checkbox("Is Active Camera", &isActive);
+
     }
 }

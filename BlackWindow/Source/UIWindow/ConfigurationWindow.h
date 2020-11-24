@@ -12,6 +12,8 @@ public:
 	};
 	void Update() override;
 
+protected:
+	void DrawCameraConfig();
 
 };
 
