@@ -24,7 +24,7 @@ ModuleCamera::ModuleCamera()
 	//Setting frustum
 	frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
 	frustum.SetViewPlaneDistances(0.1f, 200.0f);
-	frustum.SetHorizontalFovAndAspectRatio(DEGTORAD(1) * 90.0f, 1.3f);
+	frustum.SetHorizontalFovAndAspectRatio( 90.0f,1.3f);
 	ResetCameraPosition();
 }
 
@@ -34,6 +34,7 @@ ModuleCamera::~ModuleCamera()
 
 bool ModuleCamera::Init()
 {
+	WindowResized(App->window->getWidth(),App->window->getHeight());
 	return true;
 }
 
@@ -246,6 +247,41 @@ void ModuleCamera::LookAt(const float3& point)
 	frustum.SetUp(upVector);
 }
 
+/// <summary>
+/// The window will mantain the same size when the window is resized
+/// </summary>
+/// <param name="width"></param>
+/// <param name="height"></param>
+void ModuleCamera::WindowResized(int width,int height) 
+{
+	LOG("Window resized %d,%d",width,height);
+	
+	float newHeight = (width / frustum.AspectRatio()); 
+
+	if (newHeight == 0.0f) {
+		App->editor->consoleWindow->AddLog("Error cant set aspect ratio");
+		return;
+	}
+	SetAspectRatio((float)width / (float)newHeight);
+}
+
+void ModuleCamera::SetAspectRatio(float aspectRatio) 
+{
+	frustum.SetVerticalFovAndAspectRatio(frustum.VerticalFov() ,aspectRatio);
+}
+
+void ModuleCamera::MoveAccordingNewModelInScene(float3 dimensions) 
+{
+	// calculate moving closer/near
+	float height = dimensions.y;
+	float offset = 0.7f;
+
+	frustum.Translate(frustum.Front() * -(height*offset) );
+	cameraPosition = frustum.Pos();
+	
+	LookAt(float3::zero +dimensions); //in this case the object is in the origin so it could be just dimensions
+}
+
 void ModuleCamera::OrbitCamera(float deltaTime)
 {
 	if (App->input->GetKey(SDL_SCANCODE_LALT) && App->input->GetMouseButtonDown(SDL_BUTTON_LEFT)) {
@@ -299,6 +335,8 @@ void ModuleCamera::ResetCameraPosition()
 {
 	cameraPosition = initialCameraPosition;
 	frustum.SetFrame(cameraPosition,-float3::unitZ,float3::unitY);
+	LookAt(float3::zero);
+
 }
 
 void ModuleCamera::ResetToDefaultSpeeds()

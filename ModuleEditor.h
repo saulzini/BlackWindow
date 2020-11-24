@@ -3,13 +3,12 @@
 #include <vector>
 #include "DefaultImGuiWindow.h"
 
-
 struct ImGuiIO;
 class ConsoleWindow;
 class ConfigurationWindow;
 class PreviewWindow;
-class ModuleEditor :
-	public Module
+class HierarchyWindow;
+class ModuleEditor : public Module
 {
 
 public:
@@ -24,14 +23,18 @@ public:
 
 	void addWindow(DefaultImGuiWindow *window); //method for adding multiple windows
 
-	ConsoleWindow* consoleWindow;
-	ConfigurationWindow* configurationWindow;
-	PreviewWindow* previewWindow;
+	ConsoleWindow *consoleWindow;
+	ConfigurationWindow *configurationWindow;
+	PreviewWindow *previewWindow;
+	HierarchyWindow *hierarchyWindow;
+
 private:
-	std::vector<DefaultImGuiWindow*> windows;
-	void ShowDockSpace(bool* pOpen);
+	std::vector<DefaultImGuiWindow *> windows;
+	void ShowDockSpace(bool *pOpen);
+	void DrawMenu();
 	void SetStyle(const ImGuiIO io);
 	void UpdateWindows();
-
+	bool showDemoWindow;
+	bool showDock;
+	update_status appStatus;
 };
-

@@ -4,8 +4,15 @@
 #include "Application.h"
 #include "ModuleCamera.h"
 #include <math.h>
+
+// GPU
+#include "SDL/include/SDL_version.h"
+#include "SDL/include/SDL_cpuinfo.h"
+#include "resources/gpudetect/DeviceId.h"
+
 void ConfigurationWindow::Update()
 {
+
     if (show)
     {
         ImGui::SetNextWindowContentSize(ImVec2(400, 70.0f));
@@ -40,7 +47,7 @@ void ConfigurationWindow::Update()
             ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", max1); //color text
 
             // Graph 1
-            static int values_offset = 0;
+            // static int values_offset = 0;
             static float arr[] = { 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f };
             char title1[25];
             sprintf_s(title1, 25, "Framerate %.1f", 20);
@@ -110,55 +117,82 @@ void ConfigurationWindow::Update()
         if (ImGui::CollapsingHeader("Input")) {}
         if (ImGui::CollapsingHeader("Hardware")) {
 
-            // Active
-            static bool wActive = false;
-            ImGui::Checkbox("Active", &wActive);
-
             // App Name
+            SDL_version version;
+            SDL_GetVersion(&version);
             ImGui::Text("SDL Version: ");
             ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", "2.0.4");
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), " %d.%d.%d", version.major, version.minor, version.patch);
 
             ImGui::Separator();
 
             ImGui::Text("CPUs: ");
             ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", "2.0.4");
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d (Cache: %dkb)", SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
 
 
             ImGui::Text("System RAM: ");
             ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", "2.0.4");
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d Gb", (float) SDL_GetSystemRAM() / (1024.f));
 
+            ///Caps
             ImGui::Text("Caps: ");
             ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", "2.0.4");
-
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasAVX() ? "AVX" : "");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasAVX2() ? "| AVX2" : "");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasAltiVec() ? "| AltiVec" : "");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasMMX() ? "| MMX" : "");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasRDTSC() ? "| RDTSC" : "");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE() ? "| SSE" : "");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE2() ? "| SSE2" : "");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE3() ? "| SSE3" : "");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE41() ? "| SSE41" : "");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE42() ? "| SSE42" : "");
+            ImGui::SameLine();
             ImGui::Separator();
 
-            ImGui::Text("GPU: ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", "2.0.4");
+            unsigned int vendor, deviceId;
+            std::wstring brand;
+            unsigned __int64 videoMemBudget;
+            unsigned __int64 videoMemUsage;
+            unsigned __int64 videoMemAvailable;
+            unsigned __int64 videoMemReserved;
 
-            ImGui::Text("Brand: ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", "2.0.4");
+            if (getGraphicsDeviceInfo(&vendor, &deviceId, &brand, &videoMemBudget, &videoMemUsage, &videoMemAvailable, &videoMemReserved))
+            {
+                ImGui::Text("GPU: ");
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "vendor %u device %u", vendor, deviceId);
 
-            ImGui::Text("VRAM Budget: ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s Mb", "2.0.4");
+                ImGui::Text("Brand: ");
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%S",  brand.c_str());
 
-            ImGui::Text("VRAM Usage: ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s Mb", "2.0.4");
+                ImGui::Text("VRAM Budget: ");
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemBudget) /  1073741824.0f);
 
-            ImGui::Text("VRAM Available: ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s Mb", "2.0.4");
+                ImGui::Text("VRAM Usage: ");
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemUsage) / (1024.f * 1024.f * 1024.f));
 
-            ImGui::Text("VRAM Reserved: ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s Mb", "2.0.4");
+                ImGui::Text("VRAM Available: ");
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemAvailable) / (1024.f * 1024.f * 1024.f));
+
+                ImGui::Text("VRAM Reserved: ");
+                ImGui::SameLine();
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemReserved) / (1024.f * 1024.f * 1024.f));
+            }
         }
         if (ImGui::CollapsingHeader("Camera")) {
 

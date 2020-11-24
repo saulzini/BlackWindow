@@ -177,6 +177,18 @@
       <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="ModuleWorld.cpp" />
+    <ClCompile Include="HierarchyWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
+    <ClCompile Include="Resources\gpudetect\DeviceId.cpp">
+      <Filter>Resources\gpudetect</Filter>
+    </ClCompile>
+    <ClCompile Include="FileManager.cpp">
+      <Filter>Core\FileManager</Filter>
+    </ClCompile>
+    <ClCompile Include="BoundingBox.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -415,7 +427,7 @@
     </ClInclude>
     <ClInclude Include="ModuleCamera.h" />
     <ClInclude Include="Point.h">
-      <Filter>Shaders\Utils</Filter>
+      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="ModuleProgram.h" />
     <ClInclude Include="ImGui\imconfig.h">
@@ -475,6 +487,21 @@
     <ClInclude Include="TextureLoader.h">
       <Filter>Core\TextureLoader</Filter>
     </ClInclude>
+    <ClInclude Include="HierarchyWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\gpudetect\DeviceId.h">
+      <Filter>Resources\gpudetect</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\gpudetect\dxgi1_4.h">
+      <Filter>Resources\gpudetect</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
+      <Filter>Core\FileManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BoundingBox.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MathGeoLib">
@@ -504,9 +531,6 @@
     <Filter Include="Core\GeometryLoader">
       <UniqueIdentifier>{2513219a-37c0-4b2f-97b0-ca73ef54453c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shaders\Utils">
-      <UniqueIdentifier>{95d2f25f-80a0-46f7-82b9-7f0cf855ab5e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Shaders\Grid">
       <UniqueIdentifier>{affccc95-e640-44fd-9a37-1bf44802bc42}</UniqueIdentifier>
     </Filter>
@@ -515,6 +539,18 @@
     </Filter>
     <Filter Include="Core\TextureLoader">
       <UniqueIdentifier>{f41250d8-502b-4f15-9fe7-eb26250ab752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{af913654-bbf6-4bad-952a-c44c891a2621}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\gpudetect">
+      <UniqueIdentifier>{573a1af0-78a2-4fae-8d98-e8fc90badd4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\FileManager">
+      <UniqueIdentifier>{7bb5ab2f-8826-4db9-be29-578713cbbb48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{95d2f25f-80a0-46f7-82b9-7f0cf855ab5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -551,5 +587,13 @@
     <None Include="Game\Default.vert">
       <Filter>Shaders\Texture</Filter>
     </None>
+    <None Include="Resources\gpudetect\readme.md">
+      <Filter>Resources\gpudetect</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\gpudetect\license.txt">
+      <Filter>Resources\gpudetect</Filter>
+    </Text>
   </ItemGroup>
 </Project>

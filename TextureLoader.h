@@ -8,7 +8,7 @@
 #include "ConsoleWindow.h"
 #include <IL/ilut.h>
 #include <IL/ilu.h>
-
+#include "FileManager.h"
 enum class Strategy
 {
 	Normal,
@@ -28,9 +28,9 @@ public:
 	/// <param name="path"></param>
 	/// <param name="generateMipMaps"></param>
 	/// <returns></returns>
-	static unsigned int LoadTexture2D(const std::string &path,const std::string &directory, bool generateMipMaps = true)
+	static unsigned int LoadTexture2D(const std::string &path, const std::string &directory, bool generateMipMaps = true)
 	{
-		std::string filename= directory + '/' + path;
+		std::string filename = directory + '/' + path;
 
 		ILboolean success = false;
 		ILuint imageID;
@@ -42,7 +42,7 @@ public:
 		// match image origin to OpenGLs
 		ilEnable(IL_ORIGIN_SET);
 		ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
-		
+
 		//Looping given the strategies defined
 		std::vector<Strategy> types{
 			Strategy::Normal,
@@ -65,13 +65,15 @@ public:
 			case Strategy::SameFolder:
 				buf.append(std::string("same folder strategy:").c_str());
 				resultPath = directory.c_str();
-				found= path.rfind('/');
+				found = path.rfind('/');
 				resultPath.append("/");
 
-				if (found != std::string::npos) {
+				if (found != std::string::npos)
+				{
 					resultPath.append(path.substr(found, path.length()).c_str());
 				}
-				else {
+				else
+				{
 					resultPath.append(path.c_str());
 				}
 				break;
@@ -86,23 +88,52 @@ public:
 				break;
 			}
 
-			App->editor->consoleWindow->AddLog(buf.append( resultPath.c_str()).c_str());
-			// load  the image
-			success = ilLoadImage((ILstring) resultPath.c_str());
-			// check to see if everything went OK
-			if (!success)
+			App->editor->consoleWindow->AddLog(buf.append(resultPath.c_str()).c_str());
+
+			//Reading file
+			FileManager fileTexture;
+
+			if (fileTexture.ReadFile(resultPath.c_str()))
 			{
-				//Check for error
-				ILenum Error;
-				while ((Error = ilGetError()) != IL_NO_ERROR)
+				success = ilLoadL(IL_TYPE_UNKNOWN, fileTexture.GetFile(), fileTexture.GetSize());
+				// ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);
+				// success = ilLoadL(IL_DDS,fileTexture.GetFile(),fileTexture.GetSize());
+
+				// if (success){
+				// }
+
+				// check to see if everything went OK
+				if (!success)
 				{
-					buf = "Error Loading texture: ";
-					App->editor->consoleWindow->AddLog(buf.append(iluErrorString(Error)).c_str());
+					//Check for error
+					ILenum Error;
+					while ((Error = ilGetError()) != IL_NO_ERROR)
+					{
+						buf = "Error Loading texture: ";
+						App->editor->consoleWindow->AddLog(buf.append(iluErrorString(Error)).c_str());
+					}
 				}
 			}
+			else {
+				buf = "Error reading texture file";
+				App->editor->consoleWindow->AddLog(buf.c_str());
+			}
+
+			// // load  the image
+			// success = ilLoad(IL_TYPE_UNKNOWN,(ILstring) resultPath.c_str());
+			// // check to see if everything went OK
+			// if (!success)
+			// {
+			// 	//Check for error
+			// 	ILenum Error;
+			// 	while ((Error = ilGetError()) != IL_NO_ERROR)
+			// 	{
+			// 		buf = "Error Loading texture: ";
+			// 		App->editor->consoleWindow->AddLog(buf.append(iluErrorString(Error)).c_str());
+			// 	}
+			// }
 		}
 
-		//if not success find a white texture
 		if (!success)
 		{
 			ilDeleteImages(1, &imageID); //deleting image from il

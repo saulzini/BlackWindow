@@ -14,10 +14,14 @@ public:
 	update_status PostUpdate(float deltaTime);
 	bool CleanUp();
 
+	Model* GetModel() const {
+		return model;
+	}
+
+	void SwapModel(const char *modelPath);
 
 private:
-	Model* house;
-	Model *enemy1;
+	Model* model;
 
 	unsigned int program;
 };

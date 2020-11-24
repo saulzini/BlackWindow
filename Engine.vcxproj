@@ -74,12 +74,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;./SDL/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;$(ProjectDir)/Resources/gpudetect;./SDL/include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release;$(ProjectDir)/Resources/gpudetect</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -92,12 +92,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;./SDL/include;glew-2.1.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;$(ProjectDir)/Resources/gpudetect;./SDL/include;glew-2.1.0\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release;$(ProjectDir)/Resources/gpudetect</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -112,14 +112,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;./SDL/include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;$(ProjectDir)/Resources/gpudetect;./SDL/include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release;$(ProjectDir)/Resources/gpudetect</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -134,14 +134,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;./SDL/include;glew-2.1.0\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>./glew-2.1.0/include;./MathGeoLib-master/src;./Devil/include;./Assimp/include;$(ProjectDir)/Resources/gpudetect;./SDL/include;glew-2.1.0\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>./glew-2.1.0/lib/Release/Win32;./Devil/lib/x86/Release;$(ProjectDir)/Resources/gpudetect</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -150,11 +150,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="BoundingBox.h" />
     <ClInclude Include="ConfigurationWindow.h" />
     <ClInclude Include="Core\Time.h" />
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="GeometryLoader.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="ConsoleWindow.h" />
+    <ClInclude Include="HierarchyWindow.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
     <ClInclude Include="ImGui\imgui_impl_opengl3.h" />
@@ -251,6 +254,8 @@
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="PreviewWindow.h" />
+    <ClInclude Include="Resources\gpudetect\DeviceId.h" />
+    <ClInclude Include="Resources\gpudetect\dxgi1_4.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="DefaultImGuiWindow.h" />
     <ClInclude Include="TextureLoader.h" />
@@ -258,9 +263,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="BoundingBox.cpp" />
     <ClCompile Include="ConfigurationWindow.cpp" />
     <ClCompile Include="ConsoleWindow.cpp" />
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="GeometryLoader.cpp" />
+    <ClCompile Include="HierarchyWindow.cpp" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_demo.cpp" />
     <ClCompile Include="ImGui\imgui_draw.cpp" />
@@ -321,6 +329,7 @@
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
     <ClCompile Include="PreviewWindow.cpp" />
+    <ClCompile Include="Resources\gpudetect\DeviceId.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="DefaultImGuiWindow.cpp" />
   </ItemGroup>
@@ -336,6 +345,10 @@
     <None Include="MathGeoLib-master\src\Geometry\TriangleMesh_IntersectRay_SSE.inl" />
     <None Include="MathGeoLib-master\src\Math\float2.inl" />
     <None Include="MathGeoLib-master\src\Math\Matrix.inl" />
+    <None Include="Resources\gpudetect\readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\gpudetect\license.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

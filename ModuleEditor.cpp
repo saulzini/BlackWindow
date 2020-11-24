@@ -8,8 +8,12 @@
 #include "ConsoleWindow.h"
 #include "ConfigurationWindow.h"
 #include "PreviewWindow.h"
+#include "HierarchyWindow.h"
 ModuleEditor::ModuleEditor()
 {
+    showDemoWindow = false;
+    showDock = true;
+    appStatus = UPDATE_CONTINUE;
 }
 
 ModuleEditor::~ModuleEditor()
@@ -17,7 +21,7 @@ ModuleEditor::~ModuleEditor()
     //Cleaning vector
     for (unsigned int i = 0; i < windows.size(); i++)
     {
-        delete(&windows[i]);
+        delete (&windows[i]);
         windows[i] = nullptr;
     }
 }
@@ -25,17 +29,19 @@ ModuleEditor::~ModuleEditor()
 bool ModuleEditor::Init()
 {
     //Creating windows
-    addWindow(consoleWindow = new ConsoleWindow("Console window1", ImGuiWindowFlags_MenuBar)); 
-    addWindow(configurationWindow = new ConfigurationWindow("Configuration window 1", ImGuiWindowFlags_MenuBar));
-    addWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar));
+    addWindow(consoleWindow = new ConsoleWindow("Console window1", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    addWindow(configurationWindow = new ConfigurationWindow("Configuration window 1", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    addWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar ));
+    addWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO &io = ImGui::GetIO();
+    (void)io;
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
     //io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
     //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
     io.ConfigViewportsNoAutoMerge = true;
     io.ConfigViewportsNoTaskBarIcon = true;
@@ -50,24 +56,21 @@ bool ModuleEditor::Init()
 
 update_status ModuleEditor::PreUpdate(float deltaTime)
 {
-    bool show = true;
     // Start the Dear ImGui frame
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame(App->window->window);
     ImGui::NewFrame();
 
+    ShowDockSpace(&showDock);
 
-    ShowDockSpace(&show);
-   // ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
-
-    
-	return UPDATE_CONTINUE;
+    return appStatus;
 }
 
 update_status ModuleEditor::Update(float deltaTime)
 {
-    bool showDemoWindow = true;
-    ImGui::ShowDemoWindow(&showDemoWindow);
+    if (showDemoWindow) {
+        ImGui::ShowDemoWindow(&showDemoWindow);
+    }
 
     UpdateWindows();
 
@@ -75,30 +78,28 @@ update_status ModuleEditor::Update(float deltaTime)
     ImGui::UpdatePlatformWindows();
     ImGui::RenderPlatformWindowsDefault();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-	return UPDATE_CONTINUE;
+    return UPDATE_CONTINUE;
 }
 
 update_status ModuleEditor::PostUpdate(float deltaTime)
 {
-	return UPDATE_CONTINUE;
+    return UPDATE_CONTINUE;
 }
 
 bool ModuleEditor::CleanUp()
 {
     LOG("Editor module clean");
-    ImGui_ImplOpenGL3_Shutdown(); 
+    ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();
 
-    
-	return true;
+    return true;
 }
 
-void ModuleEditor::addWindow(DefaultImGuiWindow* window)
+void ModuleEditor::addWindow(DefaultImGuiWindow *window)
 {
     windows.push_back(window);
 }
-
 
 void ModuleEditor::SetStyle(const ImGuiIO io)
 {
@@ -107,7 +108,7 @@ void ModuleEditor::SetStyle(const ImGuiIO io)
     ImGui::StyleColorsClassic();
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
-    ImGuiStyle& style = ImGui::GetStyle();
+    ImGuiStyle &style = ImGui::GetStyle();
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
     {
         style.WindowRounding = 0.0f;
@@ -123,8 +124,7 @@ void ModuleEditor::UpdateWindows()
     }
 }
 
-
-void ModuleEditor::ShowDockSpace(bool* pOpen)
+void ModuleEditor::ShowDockSpace(bool *pOpen)
 {
     static bool optFullScreenPersistant = true;
     bool optFullscreen = optFullScreenPersistant;
@@ -135,7 +135,7 @@ void ModuleEditor::ShowDockSpace(bool* pOpen)
     ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
     if (optFullscreen)
     {
-        ImGuiViewport* viewport = ImGui::GetMainViewport();
+        ImGuiViewport *viewport = ImGui::GetMainViewport();
         ImGui::SetNextWindowPos(viewport->Pos);
         ImGui::SetNextWindowSize(viewport->Size);
         ImGui::SetNextWindowViewport(viewport->ID);
@@ -145,7 +145,7 @@ void ModuleEditor::ShowDockSpace(bool* pOpen)
         window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
     }
 
-    // When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background 
+    // When using ImGuiDockNodeFlags_PassthruCentralNode, DockSpace() will render our background
     // and handle the pass-thru hole, so we ask Begin() to not render a background.
     if (dockspaceFlags & ImGuiDockNodeFlags_PassthruCentralNode)
         window_flags |= ImGuiWindowFlags_NoBackground;
@@ -163,7 +163,7 @@ void ModuleEditor::ShowDockSpace(bool* pOpen)
         ImGui::PopStyleVar(2);
 
     // DockSpace
-    ImGuiIO& io = ImGui::GetIO();
+    ImGuiIO &io = ImGui::GetIO();
     if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
     {
         ImGuiID dockspaceId = ImGui::GetID("MyDockSpace");
@@ -174,13 +174,33 @@ void ModuleEditor::ShowDockSpace(bool* pOpen)
         //ShowDockingDisabledMessage();
     }
 
-    //Adding help menu bar
-    if (ImGui::BeginMenuBar()) {
+    DrawMenu();
+    ImGui::End();
+}
 
-        if (ImGui::BeginMenu("Help")) {
-            if (ImGui::MenuItem("Gui Demo")) {
+void ModuleEditor::DrawMenu()
+{
+
+    //Adding help menu bar
+    if (ImGui::BeginMenuBar())
+    {
+        // Menu for view windows
+        if (ImGui::BeginMenu("View"))
+        {
+            if (ImGui::MenuItem("Console window"))
+                consoleWindow->toggleWindow();
+            if (ImGui::MenuItem("Hierarchy window"))
+                hierarchyWindow->toggleWindow();
+            if (ImGui::MenuItem("Config window"))
+                configurationWindow->toggleWindow();
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Help"))
+        {
+            if (ImGui::MenuItem("Gui Demo"))
+            {
                 //open demo
-                //demo_pressed();
+                showDemoWindow = !showDemoWindow;
             }
             //  showcase != showcase;
             if (ImGui::MenuItem("Documentation"))
@@ -189,13 +209,15 @@ void ModuleEditor::ShowDockSpace(bool* pOpen)
                 App->RequestBrowser("https://github.com/saulzini/BlackWindow/releases");
             if (ImGui::MenuItem("Report a bug"))
                 App->RequestBrowser("https://github.com/saulzini/BlackWindow/issues");
-            if (ImGui::MenuItem("About")) {
+            if (ImGui::MenuItem("About"))
+            {
                 //open about
             }
             ImGui::EndMenu();
         }
+
+        if (ImGui::MenuItem("Quit"))
+            appStatus = UPDATE_STOP;
         ImGui::EndMenuBar();
     }
-    //End menu bar
-    ImGui::End();
 }

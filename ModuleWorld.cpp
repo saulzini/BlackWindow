@@ -3,22 +3,28 @@
 #include "Application.h"
 #include "ModuleProgram.h"
 #include "ModuleCamera.h"
+#include "ModuleWindow.h"
 #include "Mesh.h"
 #include "Model.h"
 #include "MathGeoLib-master/src/Math/float4x4.h"
 
 ModuleWorld::ModuleWorld()
 {
-	house = nullptr;
-	enemy1 = nullptr;
 	program = 0;
+}
+
+ModuleWorld::~ModuleWorld() 
+{
+	delete(model);
+	model = nullptr;
 }
 
 bool ModuleWorld::Init()
 {
-	//house = new Model("Assets/BakerHouse/BakerHouse.fbx");
-	house = new Model("Assets/Lampara/images/lamp.fbx");
-	//house = new Model("Cubo/cubo.fbx");
+	model = new Model("Assets/BakerHouse/BakerHouse.fbx");
+	SwapModel("Assets/Lampara/lamp.fbx");
+	//model = new Model("Assets/images/images/lamp.fbx");
+	//model = new Model("Assets/Lampara/lamp.fbx");
 	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
 	return true;
 }
@@ -33,12 +39,12 @@ update_status ModuleWorld::Update(float deltaTime)
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
-	float4x4 model = float4x4::identity;
-	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &model[0][0]); //GL_TRUE transpose the matrix
+	float4x4 identityModel = float4x4::identity;
+	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &identityModel[0][0]); //GL_TRUE transpose the matrix
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
 	
-	house->Draw(program);
+	model->Draw(program);
 	//enemy1->Draw(program);
 
 
@@ -53,5 +59,15 @@ update_status ModuleWorld::PostUpdate(float deltaTime)
 bool ModuleWorld::CleanUp()
 {
 	return true;
+}
+
+void ModuleWorld::SwapModel(const char *modelPath) 
+{
+	// Free space of previous model
+	delete(model);
+	model = nullptr;
+	model = new Model(modelPath);
+	
+	App->camera->MoveAccordingNewModelInScene( model->GetDimensions() );
 }
 
