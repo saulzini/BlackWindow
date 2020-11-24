@@ -8,7 +8,8 @@
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 #include "ModuleEditor.h"
-#include "ConsoleWindow.h"
+#include "UIWindow/ConsoleWindow.h"
+
 ModuleCamera::ModuleCamera()
 {
 	//initializing

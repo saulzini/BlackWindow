@@ -4,8 +4,8 @@
 #include "ModuleProgram.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
-#include "Mesh.h"
-#include "Model.h"
+#include "Core/Mesh.h"
+#include "Core/Model.h"
 #include "MathGeoLib-master/src/Math/float4x4.h"
 
 ModuleWorld::ModuleWorld()

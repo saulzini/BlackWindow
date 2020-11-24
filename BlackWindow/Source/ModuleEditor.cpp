@@ -5,10 +5,11 @@
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_sdl.h"
 #include "ImGui/imgui_impl_opengl3.h"
-#include "ConsoleWindow.h"
-#include "ConfigurationWindow.h"
-#include "PreviewWindow.h"
-#include "HierarchyWindow.h"
+#include "UIWindow/ConsoleWindow.h"
+#include "UIWindow/ConfigurationWindow.h"
+#include "UIWindow/PreviewWindow.h"
+#include "UIWindow/HierarchyWindow.h"
+
 ModuleEditor::ModuleEditor()
 {
     showDemoWindow = false;

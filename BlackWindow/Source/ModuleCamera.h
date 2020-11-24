@@ -3,7 +3,8 @@
 #include "Globals.h"
 #include "MathGeoLib-master/src/Geometry/Frustum.h"
 #include "MathGeoLib-master/src/Math/float3.h"
-#include "Point.h"
+#include "Core/Point.h"
+
 #define DEGTORAD(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 
 class ModuleCamera :

@@ -1,8 +1,7 @@
 #pragma once
 #include "Module.h"
 #include <vector>
-#include "DefaultImGuiWindow.h"
-
+#include "UIWindow/DefaultImGuiWindow.h"
 struct ImGuiIO;
 class ConsoleWindow;
 class ConfigurationWindow;
