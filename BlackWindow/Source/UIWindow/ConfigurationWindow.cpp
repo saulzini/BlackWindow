@@ -1,6 +1,6 @@
 #include "ConfigurationWindow.h"
-#include <stdio.h>          // vsnprintf, sscanf, printf
-#include <stdlib.h>         // NULL, malloc, free, atoi
+#include <stdio.h>  // vsnprintf, sscanf, printf
+#include <stdlib.h> // NULL, malloc, free, atoi
 #include "Application.h"
 #include "ModuleCamera.h"
 #include <math.h>
@@ -25,7 +25,8 @@ void ConfigurationWindow::Update()
 
         ImGui::Text("Console window");
         ImGui::Spacing(); //new line
-        if (ImGui::CollapsingHeader("Application")) { //collapsables
+        if (ImGui::CollapsingHeader("Application"))
+        { //collapsables
 
             // App Name
             static char str0[128] = "Black Screen Engine";
@@ -47,7 +48,7 @@ void ConfigurationWindow::Update()
 
             // Graph 1
             // static int values_offset = 0;
-            static float arr[] = { 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f };
+            static float arr[] = {0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f};
             char title1[25];
             sprintf_s(title1, 25, "Framerate %.1f", 20);
             ImGui::PlotHistogram("##framerate", arr, IM_ARRAYSIZE(arr), 0, title1, 0.0f, 1.0f, ImVec2(310, 100)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
@@ -68,7 +69,8 @@ void ConfigurationWindow::Update()
             ImGui::Text("Accumulated Unit Count: %d", 1);
             ImGui::Text("Peak Alloc Unit Count: %d", 1);
         }
-        if (ImGui::CollapsingHeader("Window")) {
+        if (ImGui::CollapsingHeader("Window"))
+        {
 
             // Active
             static bool wActive = false;
@@ -99,22 +101,27 @@ void ConfigurationWindow::Update()
             ImGui::SameLine();
             ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", max1);
 
-
             // Options
             static bool fullscreen;
             static bool resizable;
             static bool borderless;
             static bool fullDesktop;
 
-            ImGui::Checkbox("Fullscreen", &fullscreen); ImGui::SameLine(300);
+            ImGui::Checkbox("Fullscreen", &fullscreen);
+            ImGui::SameLine(300);
             ImGui::Checkbox("Resizable", &resizable);
-            ImGui::Checkbox("Borderless", &borderless); ImGui::SameLine(300);
+            ImGui::Checkbox("Borderless", &borderless);
+            ImGui::SameLine(300);
             ImGui::Checkbox("Full Desktop", &fullDesktop);
-
         }
-        if (ImGui::CollapsingHeader("File Sytem")) {}
-        if (ImGui::CollapsingHeader("Input")) {}
-        if (ImGui::CollapsingHeader("Hardware")) {
+        if (ImGui::CollapsingHeader("File Sytem"))
+        {
+        }
+        if (ImGui::CollapsingHeader("Input"))
+        {
+        }
+        if (ImGui::CollapsingHeader("Hardware"))
+        {
 
             // App Name
             SDL_version version;
@@ -129,10 +136,9 @@ void ConfigurationWindow::Update()
             ImGui::SameLine();
             ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d (Cache: %dkb)", SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
 
-
             ImGui::Text("System RAM: ");
             ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d Gb", (float) SDL_GetSystemRAM() / (1024.f));
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d Gb", (float)SDL_GetSystemRAM() / (1024.f));
 
             ///Caps
             ImGui::Text("Caps: ");
@@ -174,11 +180,11 @@ void ConfigurationWindow::Update()
 
                 ImGui::Text("Brand: ");
                 ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%S",  brand.c_str());
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%S", brand.c_str());
 
                 ImGui::Text("VRAM Budget: ");
                 ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemBudget) /  1073741824.0f);
+                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemBudget) / 1073741824.0f);
 
                 ImGui::Text("VRAM Usage: ");
                 ImGui::SameLine();
@@ -198,13 +204,17 @@ void ConfigurationWindow::Update()
     }
 }
 
-void ConfigurationWindow::DrawCameraConfig() 
+void ConfigurationWindow::DrawCameraConfig()
 {
-    if (ImGui::CollapsingHeader("Camera")) {
+    if (ImGui::CollapsingHeader("Camera"))
+    {
+
+        if (ImGui::Button("Reset camera settings"))
+        {
+            App->camera->ResetCamera();
+        }
 
         // Front
-        static float vec4f[4] = { 0.10f, 0.20f, 0.30f, 0.44f };
-
         float3 frontVector = App->camera->GetFrontVector();
         ImGui::InputFloat3("Front", &frontVector[0]);
         App->camera->SetFrontVector(frontVector);
@@ -235,37 +245,27 @@ void ConfigurationWindow::DrawCameraConfig()
         App->camera->SetZoomSpeed(zoomSpeed);
 
         // Frustrum Culling
-        static bool fCulling = false;
-        ImGui::Checkbox("Frustrum Culling", &fCulling);
+        // static bool fCulling = false;
+        // ImGui::Checkbox("Frustrum Culling", &fCulling);
 
         // Near Plane
-        static float np = 0.f;
-        ImGui::DragFloat("Near Plane", &np, 1);
+        float nearPlane = App->camera->GetNearPlaneDistance();
+        ImGui::DragFloat("Near Plane", &nearPlane, 0.5);
+        App->camera->SetNearPlaneDistance(nearPlane);
 
         // Far Plane
-        static float fp = 0.f;
-        ImGui::DragFloat("Far Plane", &fp, 1);
+        float farPlane = App->camera->GetFarPlaneDistance();
+        ImGui::DragFloat("Far Plane", &farPlane, 0.5);
+        App->camera->SetFarPlaneDistance(farPlane);
 
-        // Field of View
-        static float fv = 0.f;
-        ImGui::DragFloat("Field of View", &fv, 1);
+        // Horizontal Field of View
+        float horizontalFOV = App->camera->GetHorizontalDegreesFieldOfView();
+        ImGui::DragFloat("Horizontal (DEG) FOV", &horizontalFOV, 0.05);
+        App->camera->SetHorizontalDegreesFieldOfView(horizontalFOV);
 
         // Aspect Ratio
-        static float ar = 0.f;
-        ImGui::DragFloat("Aspect Ratio", &ar, 1);
-
-        // Background
-        static float col1[3] = { 1.0f, 0.0f, 0.2f };
-        ImGui::ColorEdit3("color 1", col1);
-
-        // Current
-        ImGui::Text("Current ");
-        ImGui::SameLine();
-        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", "- not assigned-");
-
-        // Is Active Camera
-        static bool isActive = false;
-        ImGui::Checkbox("Is Active Camera", &isActive);
-
+        float aspectRatio = App->camera->GetAspectRatio();
+        ImGui::DragFloat("Aspect Ratio", &aspectRatio, 0.05);
+        App->camera->SetAspectRatio(aspectRatio);
     }
 }

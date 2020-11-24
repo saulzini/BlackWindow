@@ -48,7 +48,7 @@ update_status ModuleCamera::PreUpdate(float deltaTime)
 update_status ModuleCamera::Update(float deltaTime)
 {
 	
-	if (
+	if ( //Updating given ui
 		lastCameraPosition.x != cameraPosition.x || 
 		lastCameraPosition.y != cameraPosition.y || 
 		lastCameraPosition.z == cameraPosition.z) {
@@ -78,9 +78,6 @@ update_status ModuleCamera::Update(float deltaTime)
 	//Orbit 
 	OrbitCamera(deltaTime);
 	
-	
-	
-
 	//Passing view matrix to opengl
 	float4x4 view = frustum.ViewMatrix(); //<-- Important to transpose!
 	view.Transpose();
@@ -351,6 +348,15 @@ void ModuleCamera::ResetCameraPosition()
 	frustum.SetFrame(cameraPosition,-float3::unitZ,float3::unitY);
 	LookAt(float3::zero);
 
+}
+
+void ModuleCamera::ResetCamera() 
+{
+	frustum.SetViewPlaneDistances(0.1f, 200.0f);
+	frustum.SetHorizontalFovAndAspectRatio( 90.0f,1.3f);
+	WindowResized(App->window->getWidth(),App->window->getHeight());
+	ResetCameraPosition();
+	ResetToDefaultSpeeds();
 }
 
 void ModuleCamera::ResetToDefaultSpeeds()

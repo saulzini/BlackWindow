@@ -5,15 +5,43 @@
 #include "Math/float3.h"
 #include "Core/Point.h"
 
-#define DEGTORAD(angleDegrees) ((angleDegrees) * M_PI / 180.0)
+#define DEGTORAD(angleDegrees) ((angleDegrees) * pi / 180.0)
 
 class ModuleCamera :
 	public Module
 {
 
+
 public:
 	float3 cameraPosition;
 	float movementSpeed;
+
+protected:
+	Frustum frustum;
+	float turnSpeed;
+	float zoomSpeed;
+	float radiansAngle;
+	float3 lastCameraPosition;
+	float radiansOrbit;
+
+	float initialMovementSpeed;
+	float initialTurnSpeed;
+	float initialZoomSpeed;
+	float initialRadiansAngle;
+	float initialRadiansOrbit;
+	float3 initialCameraPosition;
+	float3 orbitPosition;
+
+	float speedFactor;
+	//mouse
+	iPoint mousePosition;
+
+	float GetMovementSpeedFactor() const;
+	float GetZoomSpeedFactor() const;
+	float GetTurnSpeedFactor() const;
+	float GetRadiansAngleSpeedFactor() const;
+	float GetRadiansOrbit() const;
+
 
 public:
 	ModuleCamera();
@@ -70,6 +98,7 @@ public:
 	}
 
 	void ResetCameraPosition();
+	void ResetCamera();
 	void ResetToDefaultSpeeds();
 
 	float3 GetCameraPosition() const{
@@ -86,7 +115,6 @@ public:
 
 	void MoveAccordingNewModelInScene(float3 dimensions);
 
-
 	float3 GetFrontVector() const{
 		return frustum.Front();
 	}
@@ -101,7 +129,34 @@ public:
 		frustum.SetUp(Up);
 	}
 
+	float GetNearPlaneDistance() const{
+		return frustum.NearPlaneDistance();
+	}
+	void SetNearPlaneDistance(float nearPlane){
+		frustum.SetViewPlaneDistances(nearPlane,frustum.FarPlaneDistance());
+	}
 
+	float GetFarPlaneDistance() const{
+		return frustum.FarPlaneDistance();
+	}
+	void SetFarPlaneDistance(float farPlane){
+		frustum.SetViewPlaneDistances(frustum.NearPlaneDistance(),farPlane);
+	}
+
+
+	float GetHorizontalFieldOfView() const{
+		return frustum.HorizontalFov();
+	}
+	float GetHorizontalDegreesFieldOfView() const{
+		return frustum.HorizontalFov() * 180.f/pi;
+	}
+	void SetHorizontalDegreesFieldOfView(float degreesHorizontalFOV){
+		frustum.SetHorizontalFovAndAspectRatio( (float) DEGTORAD(degreesHorizontalFOV) , frustum.AspectRatio());
+	}
+
+	float GetAspectRatio() const{
+		return frustum.AspectRatio();
+	}
 
 private:
 	void MoveForward(float deltaTime);
@@ -118,30 +173,5 @@ private:
 	void OrbitCamera(float deltaTime);
 	void RotatePitch(float radians,float deltaTime);
 	
-protected:
-	Frustum frustum;
-	float turnSpeed;
-	float zoomSpeed;
-	float radiansAngle;
-	float3 lastCameraPosition;
-	float radiansOrbit;
-
-	float initialMovementSpeed;
-	float initialTurnSpeed;
-	float initialZoomSpeed;
-	float initialRadiansAngle;
-	float initialRadiansOrbit;
-	float3 initialCameraPosition;
-	float3 orbitPosition;
-
-	float speedFactor;
-	//mouse
-	iPoint mousePosition;
-
-	float GetMovementSpeedFactor() const;
-	float GetZoomSpeedFactor() const;
-	float GetTurnSpeedFactor() const;
-	float GetRadiansAngleSpeedFactor() const;
-	float GetRadiansOrbit() const;
 };
 
