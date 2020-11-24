@@ -121,8 +121,8 @@ void ConfigurationWindow::Update()
         {
         }
 
-        DrawCameraConfig();
         DrawHardwareConfig();
+        DrawCameraConfig();
         end();
     }
 }
@@ -213,7 +213,7 @@ void ConfigurationWindow::DrawHardwareConfig()
 
         ImGui::Text("System RAM: ");
         ImGui::SameLine();
-        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d Gb", (float)SDL_GetSystemRAM() / (1024.f));
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d Gb", (float)SDL_GetSystemRAM());
 
         ///Caps
         ImGui::Text("Caps: ");

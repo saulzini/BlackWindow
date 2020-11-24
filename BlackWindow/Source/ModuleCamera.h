@@ -132,16 +132,12 @@ public:
 	float GetNearPlaneDistance() const{
 		return frustum.NearPlaneDistance();
 	}
-	void SetNearPlaneDistance(float nearPlane){
-		frustum.SetViewPlaneDistances(nearPlane,frustum.FarPlaneDistance());
-	}
+	void SetNearPlaneDistance(float nearPlane);
 
 	float GetFarPlaneDistance() const{
 		return frustum.FarPlaneDistance();
 	}
-	void SetFarPlaneDistance(float farPlane){
-		frustum.SetViewPlaneDistances(frustum.NearPlaneDistance(),farPlane);
-	}
+	void SetFarPlaneDistance(float farPlane);
 
 
 	float GetHorizontalFieldOfView() const{
@@ -150,9 +146,7 @@ public:
 	float GetHorizontalDegreesFieldOfView() const{
 		return frustum.HorizontalFov() * 180.f/pi;
 	}
-	void SetHorizontalDegreesFieldOfView(float degreesHorizontalFOV){
-		frustum.SetHorizontalFovAndAspectRatio( (float) DEGTORAD(degreesHorizontalFOV) , frustum.AspectRatio());
-	}
+	void SetHorizontalDegreesFieldOfView(float degreesHorizontalFOV);
 
 	float GetAspectRatio() const{
 		return frustum.AspectRatio();
