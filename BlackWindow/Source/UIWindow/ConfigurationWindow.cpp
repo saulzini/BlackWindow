@@ -120,86 +120,9 @@ void ConfigurationWindow::Update()
         if (ImGui::CollapsingHeader("Input"))
         {
         }
-        if (ImGui::CollapsingHeader("Hardware"))
-        {
 
-            // App Name
-            SDL_version version;
-            SDL_GetVersion(&version);
-            ImGui::Text("SDL Version: ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), " %d.%d.%d", version.major, version.minor, version.patch);
-
-            ImGui::Separator();
-
-            ImGui::Text("CPUs: ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d (Cache: %dkb)", SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
-
-            ImGui::Text("System RAM: ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d Gb", (float)SDL_GetSystemRAM() / (1024.f));
-
-            ///Caps
-            ImGui::Text("Caps: ");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasAVX() ? "AVX" : "");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasAVX2() ? "| AVX2" : "");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasAltiVec() ? "| AltiVec" : "");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasMMX() ? "| MMX" : "");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasRDTSC() ? "| RDTSC" : "");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE() ? "| SSE" : "");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE2() ? "| SSE2" : "");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE3() ? "| SSE3" : "");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE41() ? "| SSE41" : "");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE42() ? "| SSE42" : "");
-            ImGui::SameLine();
-            ImGui::Separator();
-
-            unsigned int vendor, deviceId;
-            std::wstring brand;
-            unsigned __int64 videoMemBudget;
-            unsigned __int64 videoMemUsage;
-            unsigned __int64 videoMemAvailable;
-            unsigned __int64 videoMemReserved;
-
-            if (getGraphicsDeviceInfo(&vendor, &deviceId, &brand, &videoMemBudget, &videoMemUsage, &videoMemAvailable, &videoMemReserved))
-            {
-                ImGui::Text("GPU: ");
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "vendor %u device %u", vendor, deviceId);
-
-                ImGui::Text("Brand: ");
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%S", brand.c_str());
-
-                ImGui::Text("VRAM Budget: ");
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemBudget) / 1073741824.0f);
-
-                ImGui::Text("VRAM Usage: ");
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemUsage) / (1024.f * 1024.f * 1024.f));
-
-                ImGui::Text("VRAM Available: ");
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemAvailable) / (1024.f * 1024.f * 1024.f));
-
-                ImGui::Text("VRAM Reserved: ");
-                ImGui::SameLine();
-                ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemReserved) / (1024.f * 1024.f * 1024.f));
-            }
-        }
         DrawCameraConfig();
+        DrawHardwareConfig();
         end();
     }
 }
@@ -267,5 +190,88 @@ void ConfigurationWindow::DrawCameraConfig()
         float aspectRatio = App->camera->GetAspectRatio();
         ImGui::DragFloat("Aspect Ratio", &aspectRatio, 0.05);
         App->camera->SetAspectRatio(aspectRatio);
+    }
+}
+
+void ConfigurationWindow::DrawHardwareConfig()
+{
+    if (ImGui::CollapsingHeader("Hardware"))
+    {
+
+        // App Name
+        SDL_version version;
+        SDL_GetVersion(&version);
+        ImGui::Text("SDL Version: ");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), " %d.%d.%d", version.major, version.minor, version.patch);
+
+        ImGui::Separator();
+
+        ImGui::Text("CPUs: ");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d (Cache: %dkb)", SDL_GetCPUCount(), SDL_GetCPUCacheLineSize());
+
+        ImGui::Text("System RAM: ");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d Gb", (float)SDL_GetSystemRAM() / (1024.f));
+
+        ///Caps
+        ImGui::Text("Caps: ");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasAVX() ? "AVX" : "");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasAVX2() ? "| AVX2" : "");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasAltiVec() ? "| AltiVec" : "");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasMMX() ? "| MMX" : "");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasRDTSC() ? "| RDTSC" : "");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE() ? "| SSE" : "");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE2() ? "| SSE2" : "");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE3() ? "| SSE3" : "");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE41() ? "| SSE41" : "");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%s", SDL_HasSSE42() ? "| SSE42" : "");
+        ImGui::SameLine();
+        ImGui::Separator();
+
+        unsigned int vendor, deviceId;
+        std::wstring brand;
+        unsigned __int64 videoMemBudget;
+        unsigned __int64 videoMemUsage;
+        unsigned __int64 videoMemAvailable;
+        unsigned __int64 videoMemReserved;
+
+        if (getGraphicsDeviceInfo(&vendor, &deviceId, &brand, &videoMemBudget, &videoMemUsage, &videoMemAvailable, &videoMemReserved))
+        {
+            ImGui::Text("GPU: ");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "vendor %u device %u", vendor, deviceId);
+
+            ImGui::Text("Brand: ");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%S", brand.c_str());
+
+            ImGui::Text("VRAM Budget: ");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemBudget) / 1073741824.0f);
+
+            ImGui::Text("VRAM Usage: ");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemUsage) / (1024.f * 1024.f * 1024.f));
+
+            ImGui::Text("VRAM Available: ");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemAvailable) / (1024.f * 1024.f * 1024.f));
+
+            ImGui::Text("VRAM Reserved: ");
+            ImGui::SameLine();
+            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemReserved) / (1024.f * 1024.f * 1024.f));
+        }
     }
 }

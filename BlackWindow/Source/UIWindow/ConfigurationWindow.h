@@ -14,6 +14,7 @@ public:
 
 protected:
 	void DrawCameraConfig();
+	void DrawHardwareConfig();
 
 };
 
