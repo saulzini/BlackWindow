@@ -2,9 +2,9 @@
 #define __MODULEINPUT_H__
 
 #include "Module.h"
-#include "Point.h"
+#include "Core/Point.h"
 
-#include "SDL/include/SDL_scancode.h"
+#include "SDL_scancode.h"
 
 #define NUM_MOUSE_BUTTONS 5
 

@@ -8,8 +8,7 @@
 #include "Mesh.h"
 #include "TextureLoader.h"
 #include <string>
-#include "MathGeoLib-master/src/Math/float3.h"
-
+#include "Math/float3.h"
 class Model
 {
 public:
