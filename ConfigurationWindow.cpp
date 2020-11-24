@@ -6,9 +6,10 @@
 #include <math.h>
 
 // GPU
-#include "SDL_version.h"
-#include "SDL_cpuinfo.h"
-#include "DeviceId.h"
+#include "SDL/include/SDL_version.h"
+#include "SDL/include/SDL_cpuinfo.h"
+#include "resources/gpudetect/DeviceId.h"
+
 void ConfigurationWindow::Update()
 {
 

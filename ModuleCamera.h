@@ -1,10 +1,9 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
-#include "Geometry/Frustum.h"
-#include "Math/float3.h"
-#include "Core/Point.h"
-
+#include "MathGeoLib-master/src/Geometry/Frustum.h"
+#include "MathGeoLib-master/src/Math/float3.h"
+#include "Point.h"
 #define DEGTORAD(angleDegrees) ((angleDegrees) * M_PI / 180.0)
 
 class ModuleCamera :

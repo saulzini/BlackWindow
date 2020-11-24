@@ -5,7 +5,7 @@
 #include <IL/il.h>
 #include "Application.h"
 #include "ModuleEditor.h"
-#include "UIWindow/ConsoleWindow.h"
+#include "ConsoleWindow.h"
 #include <IL/ilut.h>
 #include <IL/ilu.h>
 #include "FileManager.h"

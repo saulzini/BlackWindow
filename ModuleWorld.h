@@ -1,6 +1,6 @@
 #pragma once
 #include "Module.h"
-#include "Core/Model.h"
+#include "Model.h"
 class ModuleWorld :
 	public Module
 {

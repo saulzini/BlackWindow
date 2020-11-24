@@ -4,7 +4,7 @@
 #include <assimp/postprocess.h>
 #include "Application.h"
 #include "ModuleEditor.h"
-#include "UIWindow/ConsoleWindow.h"
+#include "ConsoleWindow.h"
 #include "Globals.h"
 #include "Vertex.h"
 #include "Assimp/vector3.h"

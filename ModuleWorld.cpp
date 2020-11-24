@@ -4,9 +4,10 @@
 #include "ModuleProgram.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
-#include "Core/Mesh.h"
-#include "Core/Model.h"
-#include "Math/float4x4.h"
+#include "Mesh.h"
+#include "Model.h"
+#include "MathGeoLib-master/src/Math/float4x4.h"
+
 ModuleWorld::ModuleWorld()
 {
 	program = 0;
@@ -20,11 +21,11 @@ ModuleWorld::~ModuleWorld()
 
 bool ModuleWorld::Init()
 {
-	model = new Model("../Assets/BakerHouse/BakerHouse.fbx");
-	SwapModel("../Assets/Lampara/lamp.fbx");
+	model = new Model("Assets/BakerHouse/BakerHouse.fbx");
+	SwapModel("Assets/Lampara/lamp.fbx");
 	//model = new Model("Assets/images/images/lamp.fbx");
 	//model = new Model("Assets/Lampara/lamp.fbx");
-	program = App->program->CreateProgramFromSource("../Source/Shaders/Default.vert", "../Source/Shaders/Default.frag");
+	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
 	return true;
 }
 

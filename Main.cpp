@@ -2,9 +2,10 @@
 #include "Application.h"
 #include "ModuleRender.h"
 #include "Globals.h"
-#include "SDL.h"
-#pragma comment( lib, "BlackWindow/Resources/SDL/lib/x86/SDL2.lib" )
-#pragma comment( lib, "BlackWindow/Resources/SDL/lib/x86/SDL2main.lib" )
+
+#include "SDL/include/SDL.h"
+#pragma comment( lib, "SDL/lib/x86/SDL2.lib" )
+#pragma comment( lib, "SDL/lib/x86/SDL2main.lib" )
 
 enum main_states
 {

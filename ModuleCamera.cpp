@@ -1,15 +1,14 @@
 #include "ModuleCamera.h"
-#include "Math/float3x3.h"
-#include "Math/float3x4.h"
-#include "Math/Quat.h"
+#include "MathGeoLib-master/src/Math/float3x3.h"
+#include "MathGeoLib-master/src/Math/float3x4.h"
+#include "MathGeoLib-master/src/Math/Quat.h"
 #include "SDL.h"
 #include "GL/glew.h"
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
 #include "ModuleEditor.h"
-#include "UIWindow/ConsoleWindow.h"
-
+#include "ConsoleWindow.h"
 ModuleCamera::ModuleCamera()
 {
 	//initializing
