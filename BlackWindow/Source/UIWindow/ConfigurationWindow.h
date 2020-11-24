@@ -18,7 +18,7 @@ protected:
 	void DrawCameraConfig();
 	void DrawHardwareConfig();
 	void DrawWindowConfig();
-
+	void DrawApplicationConfig();
 
 };
 

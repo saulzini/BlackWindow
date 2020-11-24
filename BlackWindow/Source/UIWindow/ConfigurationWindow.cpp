@@ -25,50 +25,7 @@ void ConfigurationWindow::Update()
 
         ImGui::Text("Console window");
         ImGui::Spacing(); //new line
-        if (ImGui::CollapsingHeader("Application"))
-        { //collapsables
-
-            // App Name
-            static char str0[128] = "Black Screen Engine";
-            ImGui::InputText("App Name", str0, IM_ARRAYSIZE(str0)); //always pass chars and size
-
-            // Organization
-            static char str1[128] = "UPC";
-            ImGui::InputText("Organization", str1, IM_ARRAYSIZE(str1));
-
-            // Max FPS
-            static int i1 = 0;
-            static int max1 = 255;
-            ImGui::SliderInt("slider int", &i1, 1, max1); //slider value, int step, int max
-
-            // Limit Frame Rate
-            ImGui::Text("Limit Framerate:");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", max1); //color text
-
-            // Graph 1
-            // static int values_offset = 0;
-            static float arr[] = {0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f};
-            char title1[25];
-            sprintf_s(title1, 25, "Framerate %.1f", 20);
-            ImGui::PlotHistogram("##framerate", arr, IM_ARRAYSIZE(arr), 0, title1, 0.0f, 1.0f, ImVec2(310, 100)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
-
-            // Graph 2
-            char title2[25];
-            sprintf_s(title2, 25, "Milliseconds %.1f", 20);
-            ImGui::PlotHistogram("##milliseconds", arr, IM_ARRAYSIZE(arr), 0, title2, 0.0f, 1.0f, ImVec2(310, 100));
-
-            // Total Report
-            ImGui::Text("Total Reported Mem: %d", 1);
-            ImGui::Text("Total Actual Mem: %d", 1);
-            ImGui::Text("Peak Reported Mem: %d", 1);
-            ImGui::Text("Peak Actual Mem: %d", 1);
-            ImGui::Text("Accumulated Reported Mem: %d", 1);
-            ImGui::Text("Accumulated Actual Mem: %d", 1);
-            ImGui::Text("Accumulated Alloc Unit Count: %d", 1);
-            ImGui::Text("Accumulated Unit Count: %d", 1);
-            ImGui::Text("Peak Alloc Unit Count: %d", 1);
-        }
+        DrawApplicationConfig();
         DrawWindowConfig();
         if (ImGui::CollapsingHeader("File Sytem"))
         {
@@ -238,12 +195,12 @@ void ConfigurationWindow::DrawWindowConfig()
 
         // Width
         int width = App->window->GetWidth();
-        ImGui::DragInt("Width", &width,1, 200,2000);
+        ImGui::DragInt("Width", &width, 1, 200, 2000);
         App->window->SetWidth(width);
 
         // Height
         int height = App->window->GetHeight();
-        ImGui::DragInt("Height", &height,1, 200,2000);
+        ImGui::DragInt("Height", &height, 1, 200, 2000);
         App->window->SetHeight(height);
 
         // Refresh rate
@@ -269,6 +226,53 @@ void ConfigurationWindow::DrawWindowConfig()
         bool fullDesktop = App->window->GetFullDesktop();
         ImGui::Checkbox("Full Desktop", &fullDesktop);
         App->window->SetFullDesktop(fullDesktop);
+    }
+}
 
+void ConfigurationWindow::DrawApplicationConfig()
+{
+    if (ImGui::CollapsingHeader("Application"))
+    { //collapsables
+
+        // App Name
+        static char str0[128] = "Black Screen Engine";
+        ImGui::InputText("App Name", str0, IM_ARRAYSIZE(str0)); //always pass chars and size
+
+        // Organization
+        static char str1[128] = "UPC";
+        ImGui::InputText("Organization", str1, IM_ARRAYSIZE(str1));
+
+        // Max FPS
+        static int i1 = 0;
+        static int max1 = 255;
+        ImGui::SliderInt("slider int", &i1, 1, max1); //slider value, int step, int max
+
+        // Limit Frame Rate
+        ImGui::Text("Limit Framerate:");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", max1); //color text
+
+        // Graph 1
+        // static int values_offset = 0;
+        static float arr[] = {0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f};
+        char title1[25] = "";
+        sprintf_s(title1, 25, "Framerate %.1f", arr);
+        ImGui::PlotHistogram("##framerate", arr, IM_ARRAYSIZE(arr), 0, title1, 0.0f, 1.0f, ImVec2(310, 100)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
+
+        // Graph 2
+        char title2[25];
+        sprintf_s(title2, 25, "Milliseconds %.1f", 20);
+        ImGui::PlotHistogram("##milliseconds", arr, IM_ARRAYSIZE(arr), 0, title2, 0.0f, 1.0f, ImVec2(310, 100));
+
+        // Total Report
+        ImGui::Text("Total Reported Mem: %d", 1);
+        ImGui::Text("Total Actual Mem: %d", 1);
+        ImGui::Text("Peak Reported Mem: %d", 1);
+        ImGui::Text("Peak Actual Mem: %d", 1);
+        ImGui::Text("Accumulated Reported Mem: %d", 1);
+        ImGui::Text("Accumulated Actual Mem: %d", 1);
+        ImGui::Text("Accumulated Alloc Unit Count: %d", 1);
+        ImGui::Text("Accumulated Unit Count: %d", 1);
+        ImGui::Text("Peak Alloc Unit Count: %d", 1);
     }
 }
