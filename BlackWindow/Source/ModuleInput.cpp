@@ -1,6 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include "ModuleWindow.h"
 #include "SDL.h"
 #include "imgui_impl_sdl.h"
 #include "ModuleCamera.h"
@@ -109,6 +110,7 @@ update_status ModuleInput::PreUpdate(float deltaTime)
 
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
 				App->camera->WindowResized(event.window.data1,event.window.data2);
+				App->window->SetWindowDimensions(event.window.data1,event.window.data2);
 				break;
 			}
 

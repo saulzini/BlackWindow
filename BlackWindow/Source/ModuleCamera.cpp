@@ -35,7 +35,7 @@ ModuleCamera::~ModuleCamera()
 
 bool ModuleCamera::Init()
 {
-	WindowResized(App->window->getWidth(), App->window->getHeight());
+	WindowResized(App->window->GetWidth(), App->window->GetHeight());
 	return true;
 }
 
@@ -381,7 +381,7 @@ void ModuleCamera::ResetCamera()
 {
 	frustum.SetViewPlaneDistances(0.1f, 200.0f);
 	frustum.SetHorizontalFovAndAspectRatio(90.0f, 1.3f);
-	WindowResized(App->window->getWidth(), App->window->getHeight());
+	WindowResized(App->window->GetWidth(), App->window->GetHeight());
 	ResetCameraPosition();
 	ResetToDefaultSpeeds();
 }

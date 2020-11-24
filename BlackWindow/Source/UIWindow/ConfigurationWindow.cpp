@@ -1,10 +1,10 @@
 #include "ConfigurationWindow.h"
 #include <stdio.h>  // vsnprintf, sscanf, printf
 #include <stdlib.h> // NULL, malloc, free, atoi
-#include "Application.h"
-#include "ModuleCamera.h"
 #include <math.h>
 #include "Math/float3.h"
+#include "ModuleCamera.h"
+
 // GPU
 #include "SDL_version.h"
 #include "SDL_cpuinfo.h"
@@ -69,58 +69,10 @@ void ConfigurationWindow::Update()
             ImGui::Text("Accumulated Unit Count: %d", 1);
             ImGui::Text("Peak Alloc Unit Count: %d", 1);
         }
-        if (ImGui::CollapsingHeader("Window"))
-        {
-
-            // Active
-            static bool wActive = false;
-            ImGui::Checkbox("Active", &wActive);
-
-            //Icon
-            ImGui::Text("Icon: %s", "ddwdw");
-
-            // Brightness
-            static int brightness = 0;
-            static int brightnessMax = 255;
-            ImGui::SliderInt("Brightness", &brightness, 1, brightnessMax);
-
-            // Width
-            static int width = 0;
-            static int widthMax = 255;
-            ImGui::SliderInt("Width", &width, 1, widthMax);
-
-            // Height
-            static int height = 0;
-            static int heightMax = 255;
-            ImGui::SliderInt("Height", &height, 1, heightMax);
-
-            // Refresh rate
-            static int i1 = 0;
-            static int max1 = 50;
-            ImGui::Text("Refresh rate:");
-            ImGui::SameLine();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", max1);
-
-            // Options
-            static bool fullscreen;
-            static bool resizable;
-            static bool borderless;
-            static bool fullDesktop;
-
-            ImGui::Checkbox("Fullscreen", &fullscreen);
-            ImGui::SameLine(300);
-            ImGui::Checkbox("Resizable", &resizable);
-            ImGui::Checkbox("Borderless", &borderless);
-            ImGui::SameLine(300);
-            ImGui::Checkbox("Full Desktop", &fullDesktop);
-        }
+        DrawWindowConfig();
         if (ImGui::CollapsingHeader("File Sytem"))
         {
         }
-        if (ImGui::CollapsingHeader("Input"))
-        {
-        }
-
         DrawHardwareConfig();
         DrawCameraConfig();
         end();
@@ -197,7 +149,6 @@ void ConfigurationWindow::DrawHardwareConfig()
 {
     if (ImGui::CollapsingHeader("Hardware"))
     {
-
         // App Name
         SDL_version version;
         SDL_GetVersion(&version);
@@ -213,7 +164,7 @@ void ConfigurationWindow::DrawHardwareConfig()
 
         ImGui::Text("System RAM: ");
         ImGui::SameLine();
-        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d Gb", (float)SDL_GetSystemRAM());
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%f Gb", ((float)SDL_GetSystemRAM() / 1024.0f));
 
         ///Caps
         ImGui::Text("Caps: ");
@@ -273,5 +224,51 @@ void ConfigurationWindow::DrawHardwareConfig()
             ImGui::SameLine();
             ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%.1f Mb", float(videoMemReserved) / (1024.f * 1024.f * 1024.f));
         }
+    }
+}
+
+void ConfigurationWindow::DrawWindowConfig()
+{
+    if (ImGui::CollapsingHeader("Window"))
+    {
+        // Brightness
+        float brightness = App->window->GetBrightnesss();
+        ImGui::SliderFloat("Brightness", &brightness, 0, 1);
+        App->window->SetBrightness(brightness);
+
+        // Width
+        int width = App->window->GetWidth();
+        ImGui::DragInt("Width", &width,1, 200,2000);
+        App->window->SetWidth(width);
+
+        // Height
+        int height = App->window->GetHeight();
+        ImGui::DragInt("Height", &height,1, 200,2000);
+        App->window->SetHeight(height);
+
+        // Refresh rate
+        ImGui::Text("Refresh rate:");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", App->window->GetRefreshRate());
+
+        // Options
+        bool fullscreen = App->window->GetFullscreen();
+        ImGui::Checkbox("Fullscreen", &fullscreen);
+        App->window->SetFullscreen(fullscreen);
+
+        ImGui::SameLine(200);
+        bool resizable = App->window->GetResizable();
+        ImGui::Checkbox("Resizable", &resizable);
+        App->window->SetResizable(resizable);
+
+        bool border = App->window->GetBorder();
+        ImGui::Checkbox("With border", &border);
+        App->window->SetBorder(border);
+
+        ImGui::SameLine(200);
+        bool fullDesktop = App->window->GetFullDesktop();
+        ImGui::Checkbox("Full Desktop", &fullDesktop);
+        App->window->SetFullDesktop(fullDesktop);
+
     }
 }
