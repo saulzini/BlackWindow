@@ -99,8 +99,10 @@ void Application::CalculateFPS(float previousTicks,float currentTicks)
 	static int currentFrame = 0;
 
 	float frameTime = currentTicks -previousTicks;
-	frameTimesResults[currentFrame % SAMPLESFPS] = frameTime; //Saving the frame time
-	fpsResults[currentFrame % SAMPLESFPS] = fps; //Saving the frame time
+
+	int index = currentFrame % SAMPLESFPS;
+	frameTimesResults[index] = frameTime; //Saving the frame time
+	fpsResults[index] = fps; //Saving the fps time
 
 	previousTicks = currentTicks;
 	int count;

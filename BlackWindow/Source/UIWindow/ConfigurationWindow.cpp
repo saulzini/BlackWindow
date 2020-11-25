@@ -241,9 +241,8 @@ void ConfigurationWindow::DrawApplicationConfig()
         ImGui::Text("UPC");
       
         // Max FPS
-        int fps = App->GetMaxFps();
-        int maxFps = 255;
-        ImGui::SliderInt("slider int", &fps, 1, maxFps); //slider value, int step, int max
+        float fps = App->GetMaxFps();
+        ImGui::DragFloat("Max fps", &fps, 1.0f,1.0f,255.0f);
         App->SetMaxFps(fps);
         // Limit Frame Rate
         int frameRate = 0;
@@ -252,18 +251,16 @@ void ConfigurationWindow::DrawApplicationConfig()
         ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", frameRate); //color text
 
         // Graph 1
-        // static int values_offset = 0;
-        // static float arr[] = {0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f};
-        float* arr = App->GetFpsResults();
-        
+        float* fpsResults = App->GetFpsResults();
         char title1[25] = "";
-        sprintf_s(title1, 25, "Framerate %.1f", arr);
-        ImGui::PlotHistogram("##framerate", arr, sizeof(float)*SAMPLESFPS, SAMPLESFPS, title1, 0.0f, (float)SAMPLESFPS, ImVec2(310, 120)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
+        sprintf_s(title1, 25, "Framerate %.1f", fpsResults[0]);
+        ImGui::PlotHistogram("##framerate", fpsResults, SAMPLESFPS, 0,title1, 0.0f, 300.0f, ImVec2(310, 120)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
 
         // Graph 2
+        float* frameTimesResults = App->GetFrameTimes();
         char title2[25];
-        sprintf_s(title2, 25, "Milliseconds %.1f", 20);
-        ImGui::PlotHistogram("##milliseconds", arr, IM_ARRAYSIZE(arr), 0, title2, 0.0f, 1.0f, ImVec2(310, 100));
+        sprintf_s(title2, 25, "Milliseconds %.1f", frameTimesResults[0]);
+        ImGui::PlotHistogram("##milliseconds", frameTimesResults, SAMPLESFPS, 0, title2, 0.0f, 300.0f, ImVec2(310, 100));
 
         // Total Report
         ImGui::Text("Total Reported Mem: %d", 1);

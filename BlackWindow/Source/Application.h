@@ -44,10 +44,10 @@ public:
 	}
 
 	void SetMaxFps(float value){
-		if (fps == value ){
+		if (maxFps == value ){
 			return;
 		}
-		fps = value;
+		maxFps = value;
 	}
 
 	float* GetFpsResults(){
