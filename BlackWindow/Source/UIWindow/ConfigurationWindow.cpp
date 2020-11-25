@@ -245,13 +245,12 @@ void ConfigurationWindow::DrawApplicationConfig()
         ImGui::DragFloat("Max fps", &fps, 1.0f,1.0f,255.0f);
         App->SetMaxFps(fps);
         // Limit Frame Rate
-        int frameRate = 0;
+        float* fpsResults = App->GetFpsResults();
         ImGui::Text("Limit Framerate:");
         ImGui::SameLine();
-        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", frameRate); //color text
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%f", fpsResults[0]); //color text
 
         // Graph 1
-        float* fpsResults = App->GetFpsResults();
         char title1[25] = "";
         sprintf_s(title1, 25, "Framerate %.1f", fpsResults[0]);
         ImGui::PlotHistogram("##framerate", fpsResults, SAMPLESFPS, 0,title1, 0.0f, 300.0f, ImVec2(310, 120)); // name (not forget #) , arr of values, size of arr, offset, min , size of col

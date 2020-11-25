@@ -63,6 +63,7 @@ private:
 	std::list<Module*> modules;
 	float lastFrame;
 	Time currentTime;
+
 	float fps;
 	float maxFps;
 	void CalculateFPS(float previousTicks,float currentTicks);
