@@ -189,6 +189,9 @@
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Time\Clock.cpp">
       <Filter>MathGeoLib</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Source\UIWindow\GameObjectWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
@@ -981,6 +984,9 @@
     </ClInclude>
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Time\Clock.h">
       <Filter>MathGeoLib</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\UIWindow\GameObjectWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

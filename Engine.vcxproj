@@ -433,6 +433,7 @@
     <ClInclude Include="BlackWindow\Source\UIWindow\ConfigurationWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\ConsoleWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\DefaultImGuiWindow.h" />
+    <ClInclude Include="BlackWindow\Source\UIWindow\GameObjectWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\HierarchyWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\PreviewWindow.h" />
   </ItemGroup>
@@ -505,6 +506,7 @@
     <ClCompile Include="BlackWindow\Source\UIWindow\ConfigurationWindow.cpp" />
     <ClCompile Include="BlackWindow\Source\UIWindow\ConsoleWindow.cpp" />
     <ClCompile Include="BlackWindow\Source\UIWindow\DefaultImGuiWindow.cpp" />
+    <ClCompile Include="BlackWindow\Source\UIWindow\GameObjectWindow.cpp" />
     <ClCompile Include="BlackWindow\Source\UIWindow\HierarchyWindow.cpp" />
     <ClCompile Include="BlackWindow\Source\UIWindow\PreviewWindow.cpp" />
   </ItemGroup>

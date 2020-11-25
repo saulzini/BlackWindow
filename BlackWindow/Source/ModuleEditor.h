@@ -7,6 +7,7 @@ class ConsoleWindow;
 class ConfigurationWindow;
 class PreviewWindow;
 class HierarchyWindow;
+class GameObjectWindow;
 class ModuleEditor : public Module
 {
 
@@ -26,6 +27,7 @@ public:
 	ConfigurationWindow *configurationWindow;
 	PreviewWindow *previewWindow;
 	HierarchyWindow *hierarchyWindow;
+	GameObjectWindow *gameObjectWindow;
 
 private:
 	std::vector<DefaultImGuiWindow *> windows;
