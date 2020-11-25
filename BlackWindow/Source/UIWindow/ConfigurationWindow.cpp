@@ -10,6 +10,9 @@
 #include "SDL_version.h"
 #include "SDL_cpuinfo.h"
 #include "DeviceId.h"
+
+#include <windows.h> //memory consumption
+#include "psapi.h"
 void ConfigurationWindow::Update()
 {
 
@@ -261,15 +264,29 @@ void ConfigurationWindow::DrawApplicationConfig()
         sprintf_s(title2, 25, "Milliseconds %.1f", frameTimesResults[0]);
         ImGui::PlotHistogram("##milliseconds", frameTimesResults, SAMPLESFPS, 0, title2, 0.0f, 300.0f, ImVec2(310, 100));
 
+        //reference : https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
         // Total Report
-        ImGui::Text("Total Reported Mem: %d", 1);
-        ImGui::Text("Total Actual Mem: %d", 1);
-        ImGui::Text("Peak Reported Mem: %d", 1);
-        ImGui::Text("Peak Actual Mem: %d", 1);
-        ImGui::Text("Accumulated Reported Mem: %d", 1);
-        ImGui::Text("Accumulated Actual Mem: %d", 1);
-        ImGui::Text("Accumulated Alloc Unit Count: %d", 1);
-        ImGui::Text("Accumulated Unit Count: %d", 1);
-        ImGui::Text("Peak Alloc Unit Count: %d", 1);
+        MEMORYSTATUSEX memInfo;
+        memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+        ;
+
+        if (GlobalMemoryStatusEx(&memInfo)) {
+            DWORDLONG totalVirtualMem = memInfo.ullTotalPageFile;
+            DWORDLONG virtualMemUsed =memInfo.ullTotalPageFile - memInfo.ullAvailPageFile;
+            PROCESS_MEMORY_COUNTERS_EX pmc;
+            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+            SIZE_T virtualMemUsedByMe = pmc.PrivateUsage;
+            DWORDLONG totalPhysMem = memInfo.ullTotalPhys;
+            DWORDLONG physMemUsed = memInfo.ullTotalPhys - memInfo.ullAvailPhys;
+            SIZE_T physMemUsedByMe = pmc.WorkingSetSize;
+            ImGui::TextWrapped("Total VM available: %f MB", (float)totalVirtualMem / 1024.0f);
+            ImGui::TextWrapped("VM used: %f MB", (float)virtualMemUsed / 1024.0f);
+            ImGui::TextWrapped("VM used by my process: %f MB", (float)virtualMemUsedByMe / 1024.0f);
+            ImGui::TextWrapped("Total RAM available: %f MB", (float)totalPhysMem / 1024.0f);
+
+            ImGui::TextWrapped("RAM used: %f MB", (float)physMemUsed / 1024.0f);
+            ImGui::TextWrapped("RAM used by my process: %f MB", (float)physMemUsedByMe / 1024.0f);
+        }
+        
     }
 }
