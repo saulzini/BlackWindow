@@ -30,6 +30,9 @@ Application::Application()
 	modules.push_back(editor = new ModuleEditor());
 
 	modules.push_back(world = new ModuleWorld());
+
+	// FPS
+	maxFps = 60;
 }
 
 Application::~Application()
@@ -54,8 +57,10 @@ update_status Application::Update()
 {
 	update_status ret = UPDATE_CONTINUE;
 
+	// Used for time measuring
 	float time = (float) SDL_GetTicks();
-	Time currentTime = time-lastFrame; 
+	CalculateFPS(lastFrame,time); //Calculating FPS
+	currentTime = time-lastFrame; //Delta time
 	lastFrame = time;
 	
 
@@ -67,6 +72,9 @@ update_status Application::Update()
 
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
 		ret = (*it)->PostUpdate(currentTime);
+
+
+	RegulateFPS(time); //Regulate the frame given the max fps
 
 	return ret;
 }
@@ -84,4 +92,48 @@ bool Application::CleanUp()
 void Application::RequestBrowser(const char* route)
 {
 	ShellExecute(NULL, "open", route, nullptr, nullptr, SW_SHOWNORMAL);
+}
+
+void Application::CalculateFPS(float previousTicks,float currentTicks) 
+{
+	static int currentFrame = 0;
+
+	float frameTime = currentTicks -previousTicks;
+	frameTimesResults[currentFrame % SAMPLESFPS] = frameTime; //Saving the frame time
+	fpsResults[currentFrame % SAMPLESFPS] = fps; //Saving the frame time
+
+	previousTicks = currentTicks;
+	int count;
+	currentFrame++;
+
+	if (currentFrame < SAMPLESFPS){
+		count = currentFrame;
+	}
+	else {
+		count = SAMPLESFPS;
+	}
+
+	float frameTimeAverage = 0;
+	// getting average
+	for(unsigned int i=0; i<count; i++){ 
+		frameTimeAverage += frameTimesResults[i];
+	}
+
+	frameTimeAverage /=count;
+	// Getting fps
+	if (frameTimeAverage > 0){
+		fps = 1000.0f/frameTimeAverage;
+	}
+	else {
+		fps = 0;
+	}
+}
+
+void Application::RegulateFPS(float currentTime) 
+{
+	float frameTicks = SDL_GetTicks()-currentTime;
+	if (1000.0f / maxFps > frameTicks){
+		// force frame to delay
+		SDL_Delay(1000.0f / (maxFps - frameTicks));
+	}
 }

@@ -63,10 +63,10 @@ bool ModuleRender::Init()
 		return false;
 	}
 
-	LOG("Vendor: %s", glGetString(GL_VENDOR));
-	LOG("Renderer: %s", glGetString(GL_RENDERER));
-	LOG("OpenGL version supported %s", glGetString(GL_VERSION));
-	LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+	// LOG("Vendor: %s", glGetString(GL_VENDOR));
+	// LOG("Renderer: %s", glGetString(GL_RENDERER));
+	// LOG("OpenGL version supported %s", glGetString(GL_VERSION));
+	// LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 	glDebugMessageCallback(&OurOpenGLErrorFunction, nullptr);
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, true);
 

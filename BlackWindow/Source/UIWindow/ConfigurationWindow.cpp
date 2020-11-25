@@ -4,7 +4,8 @@
 #include <math.h>
 #include "Math/float3.h"
 #include "ModuleCamera.h"
-
+#include "Globals.h"
+#include "Application.h"
 // GPU
 #include "SDL_version.h"
 #include "SDL_cpuinfo.h"
@@ -23,8 +24,6 @@ void ConfigurationWindow::Update()
             return;
         }
 
-        ImGui::Text("Console window");
-        ImGui::Spacing(); //new line
         DrawApplicationConfig();
         DrawWindowConfig();
         if (ImGui::CollapsingHeader("File Sytem"))
@@ -235,29 +234,31 @@ void ConfigurationWindow::DrawApplicationConfig()
     { //collapsables
 
         // App Name
-        static char str0[128] = "Black Screen Engine";
-        ImGui::InputText("App Name", str0, IM_ARRAYSIZE(str0)); //always pass chars and size
-
-        // Organization
-        static char str1[128] = "UPC";
-        ImGui::InputText("Organization", str1, IM_ARRAYSIZE(str1));
-
+        // static char str0[128] = "Black Screen Engine";
+        // ImGui::InputText("App Name", str0, IM_ARRAYSIZE(str0)); //always pass chars and size
+        ImGui::Text(TITLE);
+        ImGui::Spacing();
+        ImGui::Text("UPC");
+      
         // Max FPS
-        static int i1 = 0;
-        static int max1 = 255;
-        ImGui::SliderInt("slider int", &i1, 1, max1); //slider value, int step, int max
-
+        int fps = App->GetMaxFps();
+        int maxFps = 255;
+        ImGui::SliderInt("slider int", &fps, 1, maxFps); //slider value, int step, int max
+        App->SetMaxFps(fps);
         // Limit Frame Rate
+        int frameRate = 0;
         ImGui::Text("Limit Framerate:");
         ImGui::SameLine();
-        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", max1); //color text
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%d", frameRate); //color text
 
         // Graph 1
         // static int values_offset = 0;
-        static float arr[] = {0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f};
+        // static float arr[] = {0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f, 0.6f, 0.1f, 1.0f, 0.5f, 0.92f, 0.1f, 0.2f};
+        float* arr = App->GetFpsResults();
+        
         char title1[25] = "";
         sprintf_s(title1, 25, "Framerate %.1f", arr);
-        ImGui::PlotHistogram("##framerate", arr, IM_ARRAYSIZE(arr), 0, title1, 0.0f, 1.0f, ImVec2(310, 100)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
+        ImGui::PlotHistogram("##framerate", arr, sizeof(float)*SAMPLESFPS, SAMPLESFPS, title1, 0.0f, (float)SAMPLESFPS, ImVec2(310, 120)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
 
         // Graph 2
         char title2[25];
