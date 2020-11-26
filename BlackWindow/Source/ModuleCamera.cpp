@@ -282,13 +282,6 @@ void ModuleCamera::SetAspectRatio(float aspectRatio)
 
 void ModuleCamera::MoveAccordingNewModelInScene(float3 dimensions)
 {
-	// calculate moving closer/near
-	// float height = dimensions.y;
-	// float offset = 0.7f;
-
-	// frustum.Translate(frustum.Front() * -(height * offset));
-	// cameraPosition = frustum.Pos();
-
 	LookAt(float3::zero + dimensions); //in this case the object is in the origin so it could be just dimensions
 }
 
