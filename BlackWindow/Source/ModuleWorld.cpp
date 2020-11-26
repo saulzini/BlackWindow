@@ -12,17 +12,17 @@ ModuleWorld::ModuleWorld()
 	program = 0;
 }
 
-ModuleWorld::~ModuleWorld() 
+ModuleWorld::~ModuleWorld()
 {
-	delete(model);
+	delete (model);
 	model = nullptr;
 }
 
 bool ModuleWorld::Init()
 {
-	// model = new Model("../Assets/BakerHouse/BakerHouse.fbx");
+	model = new Model("../Assets/BakerHouse/BakerHouse.fbx");
 	// SwapModel("../Assets/Lampara/lamp.fbx");
-	model = new Model("..\\Assets\\Banca\\banca.fbx");
+	// model = new Model("..\\Assets\\Banca\\banca.fbx");
 	program = App->program->CreateProgramFromSource("..\\Source\\Shaders\\Default.vert", "..\\Source\\Shaders\\Default.frag");
 	return true;
 }
@@ -41,10 +41,8 @@ update_status ModuleWorld::Update(float deltaTime)
 	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &identityModel[0][0]); //GL_TRUE transpose the matrix
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
-	
-	model->Draw(program);
-	//enemy1->Draw(program);
 
+	model->Draw(program);
 
 	return UPDATE_CONTINUE;
 }
@@ -59,13 +57,12 @@ bool ModuleWorld::CleanUp()
 	return true;
 }
 
-void ModuleWorld::SwapModel(const char *modelPath) 
+void ModuleWorld::SwapModel(const char *modelPath)
 {
 	// Free space of previous model
-	delete(model);
+	delete (model);
 	model = nullptr;
 	model = new Model(modelPath);
-	
-	App->camera->MoveAccordingNewModelInScene( model->GetDimensions() );
-}
 
+	App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
+}

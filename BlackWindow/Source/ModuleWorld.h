@@ -22,7 +22,6 @@ public:
 
 private:
 	Model* model;
-
 	unsigned int program;
 };
 
