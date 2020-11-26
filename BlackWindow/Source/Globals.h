@@ -39,3 +39,4 @@ enum update_status
 #define FULLSCREEN false
 #define VSYNC true
 #define TITLE "Black window"
+#define SAMPLESFPS 10

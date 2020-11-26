@@ -30,7 +30,7 @@ public:
 	/// <returns></returns>
 	static unsigned int LoadTexture2D(const std::string &path, const std::string &directory, bool generateMipMaps = true)
 	{
-		std::string filename = directory + '/' + path;
+		std::string filename = directory + '\\' + path;
 
 		ILboolean success = false;
 		ILuint imageID;
@@ -65,8 +65,8 @@ public:
 			case Strategy::SameFolder:
 				buf.append(std::string("same folder strategy:").c_str());
 				resultPath = directory.c_str();
-				found = path.rfind('/');
-				resultPath.append("/");
+				found = path.rfind('\\');
+				resultPath.append("\\");
 
 				if (found != std::string::npos)
 				{
@@ -79,12 +79,12 @@ public:
 				break;
 			case Strategy::Textures:
 				buf.append(std::string("textures strategy: ").c_str());
-				resultPath = "Assets/Textures/";
+				resultPath = "..\\Assets\\Textures\\";
 				resultPath.append(path.c_str());
 				break;
 			default:
 				buf.append(std::string("white strategy: ").c_str());
-				resultPath = "Assets/Textures/White.png";
+				resultPath = "..\\Assets\\Textures\\White.png";
 				break;
 			}
 

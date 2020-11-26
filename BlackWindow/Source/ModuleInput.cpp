@@ -1,9 +1,12 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include "ModuleWindow.h"
+#include "ModuleWorld.h"
 #include "SDL.h"
 #include "imgui_impl_sdl.h"
 #include "ModuleCamera.h"
+#include <string>
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput() : Module(), mouse({ 0, 0 }), mouse_motion({ 0,0 })
@@ -45,7 +48,8 @@ bool ModuleInput::Start()
 update_status ModuleInput::PreUpdate(float deltaTime)
 {
 	static SDL_Event event;
-
+	char* filePath;
+	char * found;
 	mouse_motion = { 0, 0 };
 	scrollAmount = 0;
 	memset(windowEvents, false, WE_COUNT * sizeof(bool));
@@ -109,9 +113,26 @@ update_status ModuleInput::PreUpdate(float deltaTime)
 
 			case SDL_WINDOWEVENT_SIZE_CHANGED:
 				App->camera->WindowResized(event.window.data1,event.window.data2);
+				App->window->SetWindowDimensions(event.window.data1,event.window.data2);
 				break;
 			}
+			break;
+			case SDL_DROPFILE:       // In case if dropped file
+				filePath = event.drop.file;
+				found = strstr (filePath,"fbx");
+  				if (found == NULL){
+					SDL_ShowSimpleMessageBox(
+						SDL_MESSAGEBOX_INFORMATION,
+						"File extension not accepted for the moment",
+						filePath,
+						App->window->window
+					);
+					SDL_free(filePath);    // Free dropped_filedir memory
+					break;
+				}
 
+				App->world->SwapModel(filePath);
+				SDL_free(filePath);    // Free dropped_filedir memory
 			break;
 
 		case SDL_MOUSEBUTTONDOWN:
