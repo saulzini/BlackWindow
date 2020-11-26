@@ -63,10 +63,10 @@ bool ModuleRender::Init()
 		return false;
 	}
 
-	LOG("Vendor: %s", glGetString(GL_VENDOR));
-	LOG("Renderer: %s", glGetString(GL_RENDERER));
-	LOG("OpenGL version supported %s", glGetString(GL_VERSION));
-	LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+	// LOG("Vendor: %s", glGetString(GL_VENDOR));
+	// LOG("Renderer: %s", glGetString(GL_RENDERER));
+	// LOG("OpenGL version supported %s", glGetString(GL_VERSION));
+	// LOG("GLSL: %s\n", glGetString(GL_SHADING_LANGUAGE_VERSION));
 	glDebugMessageCallback(&OurOpenGLErrorFunction, nullptr);
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, true);
 
@@ -88,9 +88,10 @@ update_status ModuleRender::Update(float deltaTime)
 {
 	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 
-	int w = 0; int h = 0;
+	int w = 0;
+	int h = 0;
 	SDL_GetWindowSize(App->window->window, &w, &h);
-	glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+	glClearColor(0.439f, 0.439f, 0.439f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLineWidth(1.0f);
@@ -105,26 +106,37 @@ update_status ModuleRender::Update(float deltaTime)
 	}
 	glEnd();
 
-	glLineWidth(2.0f);
+	glLineWidth(1.0f);
 	glBegin(GL_LINES);
 	// red X
 	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f); glVertex3f(1.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.1f, 0.0f); glVertex3f(1.1f, -0.1f, 0.0f);
-	glVertex3f(1.1f, 0.1f, 0.0f); glVertex3f(1.0f, -0.1f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(1.0f, 0.1f, 0.0f);
+	glVertex3f(1.1f, -0.1f, 0.0f);
+	glVertex3f(1.1f, 0.1f, 0.0f);
+	glVertex3f(1.0f, -0.1f, 0.0f);
 	// green Y
 	glColor4f(0.0f, 1.0f, 0.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f); glVertex3f(0.0f, 1.0f, 0.0f);
-	glVertex3f(-0.05f, 1.25f, 0.0f); glVertex3f(0.0f, 1.15f, 0.0f);
-	glVertex3f(0.05f, 1.25f, 0.0f); glVertex3f(0.0f, 1.15f, 0.0f);
-	glVertex3f(0.0f, 1.15f, 0.0f); glVertex3f(0.0f, 1.05f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(-0.05f, 1.25f, 0.0f);
+	glVertex3f(0.0f, 1.15f, 0.0f);
+	glVertex3f(0.05f, 1.25f, 0.0f);
+	glVertex3f(0.0f, 1.15f, 0.0f);
+	glVertex3f(0.0f, 1.15f, 0.0f);
+	glVertex3f(0.0f, 1.05f, 0.0f);
 
 	// blue Z
 	glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f); glVertex3f(0.0f, 0.0f, 1.0f);
-	glVertex3f(-0.05f, 0.1f, 1.05f); glVertex3f(0.05f, 0.1f, 1.05f);
-	glVertex3f(0.05f, 0.1f, 1.05f); glVertex3f(-0.05f, -0.1f, 1.05f);
-	glVertex3f(-0.05f, -0.1f, 1.05f); glVertex3f(0.05f, -0.1f, 1.05f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(-0.05f, 0.1f, 1.05f);
+	glVertex3f(0.05f, 0.1f, 1.05f);
+	glVertex3f(0.05f, 0.1f, 1.05f);
+	glVertex3f(-0.05f, -0.1f, 1.05f);
+	glVertex3f(-0.05f, -0.1f, 1.05f);
+	glVertex3f(0.05f, -0.1f, 1.05f);
 	glEnd();
 	glLineWidth(1.0f);
 

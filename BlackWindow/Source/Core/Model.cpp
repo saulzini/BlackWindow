@@ -43,7 +43,7 @@ void Model::LoadModel(std::string path)
 		//LOG("Error loading %s: %s", path, importer.GetErrorString());
 		return;
 	}
-	directory = path.substr(0, path.find_last_of('/'));
+	directory = path.substr(0, path.find_last_of('\\'));
 	ProcessNode(scene->mRootNode, scene);
 
 	buf = "End loading model:";
