@@ -23,7 +23,7 @@ bool ModuleWorld::Init()
 	// model = new Model("../Assets/BakerHouse/BakerHouse.fbx");
 	// SwapModel("../Assets/Lampara/lamp.fbx");
 	model = new Model("..\\Assets\\Banca\\banca.fbx");
-	program = App->program->CreateProgramFromSource("../Source/Shaders/Default.vert", "../Source/Shaders/Default.frag");
+	program = App->program->CreateProgramFromSource("..\\Source\\Shaders\\Default.vert", "..\\Source\\Shaders\\Default.frag");
 	return true;
 }
 
