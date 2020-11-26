@@ -20,10 +20,9 @@ ModuleWorld::~ModuleWorld()
 
 bool ModuleWorld::Init()
 {
-	model = new Model("../Assets/BakerHouse/BakerHouse.fbx");
-	SwapModel("../Assets/Lampara/lamp.fbx");
-	//model = new Model("Assets/images/images/lamp.fbx");
-	//model = new Model("Assets/Lampara/lamp.fbx");
+	// model = new Model("../Assets/BakerHouse/BakerHouse.fbx");
+	// SwapModel("../Assets/Lampara/lamp.fbx");
+	model = new Model("..\\Assets\\Banca\\banca.fbx");
 	program = App->program->CreateProgramFromSource("../Source/Shaders/Default.vert", "../Source/Shaders/Default.frag");
 	return true;
 }
