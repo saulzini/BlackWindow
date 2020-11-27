@@ -41,7 +41,11 @@ void __stdcall OurOpenGLErrorFunction(GLenum source, GLenum type, GLuint id, GLe
 
 
 ModuleRender::ModuleRender()
-{
+{	
+	glCullFaceCap = true;
+	glDepthTestCap = true;
+	glAlphaTestCap = false;
+	glBlendCap = false;
 }
 
 // Destructor
@@ -70,9 +74,12 @@ bool ModuleRender::Init()
 	glDebugMessageCallback(&OurOpenGLErrorFunction, nullptr);
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, true);
 
-
-	glEnable(GL_DEPTH_TEST); // Enable depth test
-	glEnable(GL_CULL_FACE); // Enable cull backward faces
+	if (glDepthTestCap){
+		glEnable(GL_DEPTH_TEST); // Enable depth test
+	}
+	if (glCullFaceCap){
+		glEnable(GL_CULL_FACE); // Enable cull backward faces
+	}
 	glFrontFace(GL_CCW); // Front faces will be counter clockwise
 
 	return true;
@@ -157,4 +164,60 @@ bool ModuleRender::CleanUp()
 	SDL_GL_DeleteContext(context);
 
 	return true;
+}
+
+void ModuleRender::SetGlCullFaceCap(bool value) 
+{
+	if (glCullFaceCap == value){
+		return;
+	}
+	glCullFaceCap = value;
+	if (glCullFaceCap){
+		glEnable(GL_CULL_FACE);
+	}
+	else {
+		glDisable(GL_CULL_FACE);
+	}
+}
+
+void ModuleRender::SetGlAlphaTestCap(bool value) 
+{
+	if (glAlphaTestCap == value){
+		return;
+	}
+	glAlphaTestCap = value;
+	if (glAlphaTestCap){
+		glEnable(GL_ALPHA_TEST);
+	}
+	else {
+		glDisable(GL_ALPHA_TEST);
+	}
+}
+
+void ModuleRender::SetGlBlendCap(bool value) 
+{
+	if (glBlendCap == value){
+		return;
+	}
+	glBlendCap = value;
+	if (glBlendCap){
+		glEnable(GL_BLEND);
+	}
+	else {
+		glDisable(GL_BLEND);
+	}
+}
+
+void ModuleRender::SetGlDepthTestCap(bool value) 
+{
+	if (glDepthTestCap == value){
+		return;
+	}
+	glDepthTestCap = value;
+	if (glDepthTestCap){
+		glEnable(GL_DEPTH_TEST);
+	}
+	else {
+		glDisable(GL_DEPTH_TEST);
+	}
 }

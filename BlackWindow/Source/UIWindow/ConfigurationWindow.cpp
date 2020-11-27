@@ -5,6 +5,7 @@
 #include "Math/float3.h"
 #include "ModuleCamera.h"
 #include "ModuleInput.h"
+#include "ModuleRender.h"
 #include "Globals.h"
 #include "Application.h"
 // GPU
@@ -36,6 +37,7 @@ void ConfigurationWindow::Update()
         }
         DrawHardwareConfig();
         DrawInputConfig();
+        DrawRenderConfig();
         DrawCameraConfig();
         end();
     }
@@ -111,12 +113,36 @@ void ConfigurationWindow::DrawInputConfig()
 {
     if (ImGui::CollapsingHeader("Input"))
     {
-        // Brightness
         iPoint mousePosition = App->input->GetMousePosition();
         ImGui::Text("Mouse motion");
         ImGui::Text("X:%d  Y:%d",mousePosition.x,mousePosition.y); 
     }
 }
+
+
+void ConfigurationWindow::DrawRenderConfig() 
+{
+    if (ImGui::CollapsingHeader("Render"))
+    {
+        bool glCullFaceCap = App->renderer->GetGlCullFaceCap();
+        ImGui::Checkbox("Cull face", &glCullFaceCap);
+        App->renderer->SetGlCullFaceCap(glCullFaceCap);
+
+        bool glAlphaTestCap = App->renderer->GetGlAlphaTestCap();
+        ImGui::Checkbox("Alpha face", &glAlphaTestCap);
+        App->renderer->SetGlAlphaTestCap(glAlphaTestCap);
+
+        bool glBlendCap = App->renderer->GetGlBlendCap();
+        ImGui::Checkbox("Blend face", &glBlendCap);
+        App->renderer->SetGlBlendCap(glBlendCap);
+
+        bool glDepthTestCap = App->renderer->GetGlDepthTestCap();
+        ImGui::Checkbox("Depth face", &glDepthTestCap);
+        App->renderer->SetGlDepthTestCap(glDepthTestCap);
+
+    }
+}
+
 
 void ConfigurationWindow::DrawHardwareConfig()
 {
