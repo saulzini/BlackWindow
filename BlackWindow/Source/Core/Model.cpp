@@ -18,8 +18,17 @@ Model::Model(std::string path)
 	{
 		return;
 	}
+	animationsCount = 0;
+	meshesCount = 0;
+	materialsCount = 0;
+	camerasCount = 0;
+	lightsCount = 0;
+	texturesCount = 0;
+
 	this->LoadModel(path);
 }
+
+
 void Model::Draw(unsigned int shader)
 {
 	for (GLuint i = 0; i < meshes.size(); i++)
@@ -51,12 +60,19 @@ void Model::LoadModel(std::string path)
 
 	
 	//Printing details about model
-	buf = "Animations:" + std::to_string((int)scene->mNumAnimations) + " ";
-	buf += "Meshes:" + std::to_string((int)scene->mNumMeshes) + " ";
-	buf += "Materials:" + std::to_string((int)scene->mNumMaterials)+ " ";
-	buf += "Cameras:" + std::to_string((int)scene->mNumCameras) + " ";
-	buf += "Lights:" + std::to_string((int)scene->mNumLights)+ " ";
-	buf += "Textures:" + std::to_string((int)scene->mNumTextures);
+	animationsCount = (int)scene->mNumAnimations;
+	meshesCount = (int)scene->mNumMeshes;
+	materialsCount = (int)scene->mNumMaterials;
+	camerasCount = (int)scene->mNumCameras;
+	lightsCount = (int)scene->mNumLights;
+	texturesCount = (int)scene->mNumTextures;
+
+	buf = "Animations:" + std::to_string(animationsCount) + " ";
+	buf += "Meshes:" + std::to_string(meshesCount) + " ";
+	buf += "Materials:" + std::to_string(materialsCount)+ " ";
+	buf += "Cameras:" + std::to_string(camerasCount) + " ";
+	buf += "Lights:" + std::to_string(lightsCount)+ " ";
+	buf += "Textures:" + std::to_string(texturesCount);
 
 	double factor(0.0);
 	bool result = scene->mMetaData->Get("UnitScaleFactor", factor);

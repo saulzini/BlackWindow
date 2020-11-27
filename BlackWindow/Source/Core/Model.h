@@ -35,6 +35,28 @@ public:
 		return float3(dimensions.x,dimensions.y,dimensions.z);
 	}
 	
+	int GetAnimationsCount() const{
+		return animationsCount;
+	}
+
+	int GetMeshesCount() const{
+		return meshesCount;
+	}
+
+	int GetMaterialsCount() const{
+		return materialsCount;
+	}
+
+	int GetCamerasCount() const{
+		return camerasCount;
+	}
+
+	int GetLightsCount() const{
+		return lightsCount;
+	}
+	int GetTexturesCount() const{
+		return texturesCount;
+	}
 
 private:
 	std::vector<Mesh> meshes;
@@ -48,5 +70,12 @@ private:
 
 	// storing dimensions in the 3 axis
 	aiVector3D dimensions;
+
+	int animationsCount;
+	int meshesCount;
+	int materialsCount;
+	int camerasCount;
+	int lightsCount;
+	int texturesCount;
 	void CalculateBoxDimensions();
 };
