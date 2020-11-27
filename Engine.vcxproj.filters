@@ -192,6 +192,9 @@
     <ClCompile Include="BlackWindow\Source\UIWindow\GameObjectWindow.cpp">
       <Filter>Graphics\UIWindow</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Events\DropperHandler.cpp">
+      <Filter>Core\Events</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
@@ -988,6 +991,9 @@
     <ClInclude Include="BlackWindow\Source\UIWindow\GameObjectWindow.h">
       <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Events\DropperHandler.h">
+      <Filter>Core\Events</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -1043,6 +1049,9 @@
     </Filter>
     <Filter Include="MathGeoLib">
       <UniqueIdentifier>{3c8e6d0b-a7bb-4b43-b488-5b0d8a62f6c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Events">
+      <UniqueIdentifier>{ecb6e54f-cbfc-446e-9a22-17f1c5304934}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

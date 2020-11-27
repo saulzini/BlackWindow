@@ -283,6 +283,7 @@ void ModuleCamera::SetAspectRatio(float aspectRatio)
 void ModuleCamera::MoveAccordingNewModelInScene(float3 dimensions)
 {
 	LookAt(float3::zero + dimensions); //in this case the object is in the origin so it could be just dimensions
+	frustum.Translate(-dimensions);
 }
 
 void ModuleCamera::SetNearPlaneDistance(float nearPlane)

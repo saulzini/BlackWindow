@@ -413,6 +413,7 @@
     <ClInclude Include="BlackWindow\Resources\SDL\include\SDL_vulkan.h" />
     <ClInclude Include="BlackWindow\Source\Application.h" />
     <ClInclude Include="BlackWindow\Source\BoundingBox.h" />
+    <ClInclude Include="BlackWindow\Source\Core\Events\DropperHandler.h" />
     <ClInclude Include="BlackWindow\Source\Core\FileManager.h" />
     <ClInclude Include="BlackWindow\Source\Core\Mesh.h" />
     <ClInclude Include="BlackWindow\Source\Core\Model.h" />
@@ -489,6 +490,7 @@
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Time\Clock.cpp" />
     <ClCompile Include="BlackWindow\Source\Application.cpp" />
     <ClCompile Include="BlackWindow\Source\BoundingBox.cpp" />
+    <ClCompile Include="BlackWindow\Source\Core\Events\DropperHandler.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\FileManager.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\Mesh.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\Model.cpp" />
