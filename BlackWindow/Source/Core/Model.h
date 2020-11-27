@@ -28,6 +28,8 @@ public:
 		return texturesLoaded;
 	};
 
+	void ApplyTextureToModel(unsigned int id, const char *path);
+
 	// TODO::Improve this
 	float3 GetDimensions() const{
 		return float3(dimensions.x,dimensions.y,dimensions.z);
@@ -38,7 +40,7 @@ private:
 	std::vector<Mesh> meshes;
 	std::string directory;
 	std::vector<Texture> texturesLoaded;
-	TextureLoader *textureLoader;
+	// TextureLoader *textureLoader;
 
 
 	aiVector3D boundBoxMin;

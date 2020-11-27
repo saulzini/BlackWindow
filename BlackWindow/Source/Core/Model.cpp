@@ -177,6 +177,20 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType 
 	return textures;
 }
 
+void Model::ApplyTextureToModel(unsigned int id, const char *path) 
+{
+	for (GLuint i = 0; i < texturesLoaded.size(); i++)
+	{	
+		texturesLoaded[i].id = id;
+		texturesLoaded[i].path == path;
+	}
+
+	for (GLuint i = 0; i < meshes.size(); i++)
+	{	
+		meshes[i].ChangeTextures(texturesLoaded);
+	}
+}
+
 void Model::CalculateBoxDimensions() 
 {
 	dimensions.x = abs(boundBoxMax.x) - abs(boundBoxMin.x);
