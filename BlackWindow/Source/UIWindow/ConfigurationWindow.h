@@ -16,6 +16,7 @@ public:
 
 protected:
 	void DrawCameraConfig();
+	void DrawInputConfig();
 	void DrawApplicationConfig();
 	void DrawHardwareConfig();
 	void DrawWindowConfig();

@@ -4,6 +4,7 @@
 #include <math.h>
 #include "Math/float3.h"
 #include "ModuleCamera.h"
+#include "ModuleInput.h"
 #include "Globals.h"
 #include "Application.h"
 // GPU
@@ -13,6 +14,7 @@
 
 #include <windows.h> //memory consumption
 #include "psapi.h"
+#include "Core/Point.h"
 void ConfigurationWindow::Update()
 {
 
@@ -33,6 +35,7 @@ void ConfigurationWindow::Update()
         {
         }
         DrawHardwareConfig();
+        DrawInputConfig();
         DrawCameraConfig();
         end();
     }
@@ -101,6 +104,17 @@ void ConfigurationWindow::DrawCameraConfig()
         float aspectRatio = App->camera->GetAspectRatio();
         ImGui::DragFloat("Aspect Ratio", &aspectRatio, 0.05);
         App->camera->SetAspectRatio(aspectRatio);
+    }
+}
+
+void ConfigurationWindow::DrawInputConfig() 
+{
+    if (ImGui::CollapsingHeader("Input"))
+    {
+        // Brightness
+        iPoint mousePosition = App->input->GetMousePosition();
+        ImGui::Text("Mouse motion");
+        ImGui::Text("X:%d  Y:%d",mousePosition.x,mousePosition.y); 
     }
 }
 
