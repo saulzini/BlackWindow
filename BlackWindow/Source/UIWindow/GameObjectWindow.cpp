@@ -7,7 +7,8 @@ void GameObjectWindow::Update()
 {
     if (show)
     {
-       
+        model = App->world->GetModel();
+        
         ImGui::SetWindowPos(ImVec2(20, 30), true);
         if (!begin())
         {
@@ -16,10 +17,14 @@ void GameObjectWindow::Update()
             return;
         }
 
-        DrawTransformation();
-        DrawGeometry();
-        DrawTexture();
-
+        if (model ==nullptr){
+            ImGui::Text("No Model");
+        }
+        else {
+            DrawTransformation();
+            DrawGeometry();
+            DrawTexture();
+        }
         end();
     }
 }
@@ -48,30 +53,20 @@ void GameObjectWindow::DrawGeometry()
 {
     if (ImGui::CollapsingHeader("Geometry"))
     {
-        // Position
-        float3 position(0,0,0);
-        ImGui::InputFloat3("Front", &position[0]);
-        // App->camera->SetFrontVector(frontVector);
-
-        // Rotation
-        float3 rotation(0,0,0);
-        ImGui::InputFloat3("Up", &rotation[0]);
-        // App->camera->SetUpVector(upVector);
-
-        // Scale
-        float3 scale(0,0,0);
-        ImGui::InputFloat3("Position", &scale[0]);
+        ImGui::Text("Animations count %d", model->GetAnimationsCount());
+        ImGui::Text("Meshes count %d", model->GetMeshesCount());
+        ImGui::Text("Materials count %d", model->GetMaterialsCount());
+        ImGui::Text("Cameras count %d", model->GetCamerasCount());
+        ImGui::Text("Lights count %d", model->GetLightsCount());
+        ImGui::Text("Textures count %d", model->GetTexturesCount());
+        
+        float3 dimensions =model->GetDimensions();
+        ImGui::Text("Bounding box dimension: %f,%f,%f", dimensions.x,dimensions.y,dimensions.z);
     }
 }
 
 void GameObjectWindow::DrawTexture() 
 {
-    Model* model = App->world->GetModel();
-
-    if (model ==nullptr){
-        ImGui::Text("No Model");
-        return;
-    }
     if (ImGui::CollapsingHeader("Texture"))
     {
 

@@ -7,6 +7,7 @@
 #include "Core/Mesh.h"
 #include "Core/Model.h"
 #include "Math/float4x4.h"
+#include <string>
 ModuleWorld::ModuleWorld()
 {
 	program = 0;
@@ -20,7 +21,8 @@ ModuleWorld::~ModuleWorld()
 
 bool ModuleWorld::Init()
 {
-	model = new Model("../Assets/BakerHouse/BakerHouse.fbx");
+	// model = new Model("../Assets/BakerHouse/BakerHouse.fbx");
+	model = new Model("..\\Assets\\BakerHouse\\BakerHouse.fbx");
 	// SwapModel("../Assets/Lampara/lamp.fbx");
 	// model = new Model("..\\Assets\\Banca\\banca.fbx");
 	program = App->program->CreateProgramFromSource("..\\Source\\Shaders\\Default.vert", "..\\Source\\Shaders\\Default.frag");
@@ -55,6 +57,19 @@ update_status ModuleWorld::PostUpdate(float deltaTime)
 bool ModuleWorld::CleanUp()
 {
 	return true;
+}
+
+void ModuleWorld::SwapTexture(const char *texturePath) 
+{
+	std::string textPath(texturePath);
+	std::string directory = textPath.substr(0, textPath.find_last_of('\\'));
+	unsigned int id = TextureLoader::LoadTexture2D(textPath.c_str(),directory.c_str());
+	if (id == 0){
+		App->editor->consoleWindow->AddLog("Error in swapping texture");
+		return;
+	}
+	model->ApplyTextureToModel(id,textPath.c_str() );
+	
 }
 
 void ModuleWorld::SwapModel(const char *modelPath)

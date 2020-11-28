@@ -12,6 +12,8 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
     SetupMesh();
 }
 
+
+
 void Mesh::Draw(const unsigned int shader)
 {
     unsigned int diffuseNr = 1;
@@ -62,4 +64,9 @@ void Mesh::SetupMesh()
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void *)offsetof(Vertex, TexCoords));
 
     glBindVertexArray(0);
+}
+
+void Mesh::ChangeTextures(std::vector<Texture> textures){
+    this->textures = textures;
+    SetupMesh();
 }

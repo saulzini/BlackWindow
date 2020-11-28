@@ -10,6 +10,7 @@
 #include "UIWindow/PreviewWindow.h"
 #include "UIWindow/HierarchyWindow.h"
 #include "UIWindow/GameObjectWindow.h"
+#include "UIWindow/AboutWindow.h"
 
 ModuleEditor::ModuleEditor()
 {
@@ -36,6 +37,7 @@ bool ModuleEditor::Init()
     addWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar ));
     addWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     addWindow(gameObjectWindow = new GameObjectWindow("GameObject", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    addWindow(aboutWindow = new AboutWindow("About", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -198,6 +200,8 @@ void ModuleEditor::DrawMenu()
                 configurationWindow->toggleWindow();
             if (ImGui::MenuItem("GameObject window"))
                 gameObjectWindow->toggleWindow();
+            if (ImGui::MenuItem("About window"))
+                aboutWindow->toggleWindow();
             ImGui::EndMenu();
         }
         if (ImGui::BeginMenu("Help"))

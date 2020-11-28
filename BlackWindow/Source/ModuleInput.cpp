@@ -6,6 +6,7 @@
 #include "SDL.h"
 #include "imgui_impl_sdl.h"
 #include "ModuleCamera.h"
+#include "Core/Events/DropperHandler.h"
 #include <string>
 #define MAX_KEYS 300
 
@@ -49,7 +50,6 @@ update_status ModuleInput::PreUpdate(float deltaTime)
 {
 	static SDL_Event event;
 	char* filePath;
-	char * found;
 	mouse_motion = { 0, 0 };
 	scrollAmount = 0;
 	memset(windowEvents, false, WE_COUNT * sizeof(bool));
@@ -119,19 +119,7 @@ update_status ModuleInput::PreUpdate(float deltaTime)
 			break;
 			case SDL_DROPFILE:       // In case if dropped file
 				filePath = event.drop.file;
-				found = strstr (filePath,"fbx");
-  				if (found == NULL){
-					SDL_ShowSimpleMessageBox(
-						SDL_MESSAGEBOX_INFORMATION,
-						"File extension not accepted for the moment",
-						filePath,
-						App->window->window
-					);
-					SDL_free(filePath);    // Free dropped_filedir memory
-					break;
-				}
-
-				App->world->SwapModel(filePath);
+				DropperHandler::DropFileIntoWindow(filePath);
 				SDL_free(filePath);    // Free dropped_filedir memory
 			break;
 

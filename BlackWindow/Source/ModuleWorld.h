@@ -18,6 +18,9 @@ public:
 		return model;
 	}
 
+
+	// For testing
+	void SwapTexture(const char *texturePath);
 	void SwapModel(const char *modelPath);
 
 private:
