@@ -23,6 +23,35 @@ public:
 		return context;
 	}
 
+	bool GetGlCullFaceCap() const{
+		return glCullFaceCap;
+	}
+
+	void SetGlCullFaceCap(bool value);
+
+	bool GetGlAlphaTestCap() const{
+		return glAlphaTestCap;
+	}
+
+	void SetGlAlphaTestCap(bool value);
+
+	bool GetGlBlendCap() const{
+		return glBlendCap;
+	}
+
+	void SetGlBlendCap(bool value);
+
+	bool GetGlDepthTestCap() const{
+		return glDepthTestCap;
+	}
+
+	void SetGlDepthTestCap(bool value);
+
 private:
 	void* context;
+
+	bool glCullFaceCap;
+	bool glAlphaTestCap;
+	bool glBlendCap;
+	bool glDepthTestCap;
 };

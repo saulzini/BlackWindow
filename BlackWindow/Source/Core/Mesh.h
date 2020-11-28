@@ -15,9 +15,12 @@ public:
     std::vector<unsigned int> indices;
     std::vector<Texture>      textures;
     void Draw(const unsigned int shader);
+    void ChangeTextures(std::vector<Texture> textures);
+
 private:
     //  render data
     unsigned int VAO, VBO, EBO;
 
     void SetupMesh();
+
 };

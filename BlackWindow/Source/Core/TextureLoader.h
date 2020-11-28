@@ -96,10 +96,12 @@ public:
 			if (fileTexture.ReadFile(resultPath.c_str()))
 			{
 				success = ilLoadL(IL_TYPE_UNKNOWN, fileTexture.GetFile(), fileTexture.GetSize());
+
 				// ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);
 				// success = ilLoadL(IL_DDS,fileTexture.GetFile(),fileTexture.GetSize());
-
 				// if (success){
+					
+				
 				// }
 
 				// check to see if everything went OK
