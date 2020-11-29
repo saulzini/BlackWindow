@@ -162,7 +162,7 @@ bool ModuleRender::CleanUp()
 	LOG("Destroying renderer");
 	//Destroy window
 	SDL_GL_DeleteContext(context);
-
+	context =nullptr;
 	return true;
 }
 

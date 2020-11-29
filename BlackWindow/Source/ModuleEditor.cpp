@@ -92,6 +92,7 @@ bool ModuleEditor::CleanUp()
     //Cleaning vector
     for (unsigned int i = 0; i < windows.size(); ++i)
     {
+        windows[i]->CleanUp();
         delete (windows[i]);
         windows[i] = nullptr;
     }
