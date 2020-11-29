@@ -10,7 +10,6 @@ private:
 
 public:
     
-    
     FileManager(){
         size = 0;
         memblock = nullptr;
@@ -18,6 +17,7 @@ public:
 
     ~FileManager() {
         delete(memblock);
+        memblock = nullptr;
     }
 
 	bool ReadFile(const char* path);

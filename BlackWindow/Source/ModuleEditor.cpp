@@ -11,7 +11,6 @@
 #include "UIWindow/HierarchyWindow.h"
 #include "UIWindow/GameObjectWindow.h"
 #include "UIWindow/AboutWindow.h"
-
 ModuleEditor::ModuleEditor()
 {
     showDemoWindow = false;
@@ -21,12 +20,7 @@ ModuleEditor::ModuleEditor()
 
 ModuleEditor::~ModuleEditor()
 {
-    //Cleaning vector
-    for (unsigned int i = 0; i < windows.size(); i++)
-    {
-        delete (&windows[i]);
-        windows[i] = nullptr;
-    }
+    
 }
 
 bool ModuleEditor::Init()
@@ -94,6 +88,14 @@ update_status ModuleEditor::PostUpdate(float deltaTime)
 bool ModuleEditor::CleanUp()
 {
     LOG("Editor module clean");
+
+    //Cleaning vector
+    for (unsigned int i = 0; i < windows.size(); ++i)
+    {
+        delete (windows[i]);
+        windows[i] = nullptr;
+    }
+
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplSDL2_Shutdown();
     ImGui::DestroyContext();

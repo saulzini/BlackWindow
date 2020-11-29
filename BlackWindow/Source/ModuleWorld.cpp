@@ -16,16 +16,12 @@ ModuleWorld::ModuleWorld()
 
 ModuleWorld::~ModuleWorld()
 {
-	delete (model);
-	model = nullptr;
+	
 }
 
 bool ModuleWorld::Init()
 {
-	// model = new Model("../Assets/BakerHouse/BakerHouse.fbx");
 	model = new Model("..\\Assets\\BakerHouse\\BakerHouse.fbx");
-	// SwapModel("../Assets/Lampara/lamp.fbx");
-	// model = new Model("..\\Assets\\Banca\\banca.fbx");
 	program = App->program->CreateProgramFromSource("..\\Source\\Shaders\\Default.vert", "..\\Source\\Shaders\\Default.frag");
 	return true;
 }
@@ -57,6 +53,9 @@ update_status ModuleWorld::PostUpdate(float deltaTime)
 
 bool ModuleWorld::CleanUp()
 {
+	delete (model);
+	model = nullptr;
+	
 	return true;
 }
 
