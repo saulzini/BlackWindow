@@ -21,6 +21,7 @@ public:
     ~ConsoleWindow();
     void Update() override;
     void ClearLog();
+    void CleanUp() override;
     void AddLog(const char* fmt, ...) IM_FMTARGS(2);
 
 private:
