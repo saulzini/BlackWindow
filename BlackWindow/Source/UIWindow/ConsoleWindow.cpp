@@ -7,7 +7,6 @@
 
 ConsoleWindow::~ConsoleWindow()
 {
-    //TODO::Check this
 }
 
 void ConsoleWindow::Update()
@@ -110,6 +109,11 @@ void ConsoleWindow::ClearLog()
         free(Items[i]);
     Items.clear();
 }
+
+void ConsoleWindow::CleanUp() {
+    ClearLog();
+}
+
 void ConsoleWindow::AddLog(const char* fmt, ...) IM_FMTARGS(2)
 {
     // FIXME-OPT
