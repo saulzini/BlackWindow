@@ -106,7 +106,7 @@ void ModuleEditor::addWindow(DefaultImGuiWindow *window)
     windows.push_back(window);
 }
 
-void ModuleEditor::SetStyle(const ImGuiIO io)
+void ModuleEditor::SetStyle(const ImGuiIO& io)
 {
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();

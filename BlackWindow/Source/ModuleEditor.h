@@ -34,7 +34,7 @@ private:
 	std::vector<DefaultImGuiWindow *> windows;
 	void ShowDockSpace(bool *pOpen);
 	void DrawMenu();
-	void SetStyle(const ImGuiIO io);
+	void SetStyle(const ImGuiIO& io);
 	void UpdateWindows();
 	bool showDemoWindow;
 	bool showDock;

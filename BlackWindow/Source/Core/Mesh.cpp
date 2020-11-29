@@ -3,7 +3,7 @@
 #include "Vertex.h"
 #include "Texture.h"
 using namespace std;
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+Mesh::Mesh(const std::vector<Vertex>& vertices,const std::vector<unsigned int> &indices,const std::vector<Texture> &textures)
 {
     this->vertices = vertices;
     this->indices = indices;
@@ -66,7 +66,7 @@ void Mesh::SetupMesh()
     glBindVertexArray(0);
 }
 
-void Mesh::ChangeTextures(std::vector<Texture> textures){
+void Mesh::ChangeTextures(const std::vector<Texture>& textures){
     this->textures = textures;
     SetupMesh();
 }

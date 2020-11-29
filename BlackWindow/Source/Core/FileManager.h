@@ -11,8 +11,8 @@ private:
 public:
     
     
-    FileManager(std::streampos mSize = 0){
-        size = mSize;
+    FileManager(){
+        size = 0;
         memblock = nullptr;
     }
 
