@@ -22,7 +22,7 @@ public:
 	update_status PostUpdate(float deltaTime) override;
 	bool CleanUp() override;
 
-	void addWindow(DefaultImGuiWindow *window); //method for adding multiple windows
+	void AddWindow(DefaultImGuiWindow *window); //method for adding multiple windows
 
 	ConsoleWindow *consoleWindow;
 	ConfigurationWindow *configurationWindow;

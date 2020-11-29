@@ -26,12 +26,12 @@ ModuleEditor::~ModuleEditor()
 bool ModuleEditor::Init()
 {
     //Creating windows
-    addWindow(consoleWindow = new ConsoleWindow("Console window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    addWindow(configurationWindow = new ConfigurationWindow("Configuration window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    addWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar ));
-    addWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    addWindow(gameObjectWindow = new GameObjectWindow("GameObject", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    addWindow(aboutWindow = new AboutWindow("About", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(consoleWindow = new ConsoleWindow("Console window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(configurationWindow = new ConfigurationWindow("Configuration window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar ));
+    AddWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(gameObjectWindow = new GameObjectWindow("GameObject", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(aboutWindow = new AboutWindow("About", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
@@ -103,7 +103,7 @@ bool ModuleEditor::CleanUp()
     return true;
 }
 
-void ModuleEditor::addWindow(DefaultImGuiWindow *window)
+void ModuleEditor::AddWindow(DefaultImGuiWindow *window)
 {
     windows.push_back(window);
 }
@@ -220,10 +220,6 @@ void ModuleEditor::DrawMenu()
                 App->RequestBrowser("https://github.com/saulzini/BlackWindow/releases");
             if (ImGui::MenuItem("Report a bug"))
                 App->RequestBrowser("https://github.com/saulzini/BlackWindow/issues");
-            if (ImGui::MenuItem("About"))
-            {
-                //open about
-            }
             ImGui::EndMenu();
         }
 

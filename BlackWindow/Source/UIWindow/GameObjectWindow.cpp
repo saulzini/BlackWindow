@@ -61,7 +61,8 @@ void GameObjectWindow::DrawGeometry()
         ImGui::Text("Textures count %d", model->GetTexturesCount());
         
         float3 dimensions =model->GetDimensions();
-        ImGui::Text("Bounding box dimension: %f,%f,%f", dimensions.x,dimensions.y,dimensions.z);
+        ImGui::TextWrapped("Bounding box dimensions", dimensions.x,dimensions.y,dimensions.z);
+        ImGui::TextWrapped("X: %f\nY: %f\nZ: %f", dimensions.x,dimensions.y,dimensions.z);
     }
 }
 
