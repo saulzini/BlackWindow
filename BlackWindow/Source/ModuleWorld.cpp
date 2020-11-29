@@ -10,6 +10,7 @@
 #include <string>
 ModuleWorld::ModuleWorld()
 {
+	model = nullptr;
 	program = 0;
 }
 

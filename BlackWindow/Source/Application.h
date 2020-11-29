@@ -69,8 +69,8 @@ private:
 	void CalculateFPS(float previousTicks,float currentTicks);
 	void RegulateFPS(float currentTime);
 
-	float fpsResults[SAMPLESFPS]; //Array for saving fps records
-	float frameTimesResults[SAMPLESFPS]; //Array for saving frame times recods
+	float fpsResults[SAMPLESFPS]={0.0f}; //Array for saving fps records
+	float frameTimesResults[SAMPLESFPS]={0.0f}; //Array for saving frame times recods
 	
 };
 

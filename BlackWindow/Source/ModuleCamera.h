@@ -17,11 +17,13 @@ public:
 	float movementSpeed;
 
 protected:
+	float3 initialCameraPosition;
+	float3 lastCameraPosition;
+
 	Frustum frustum;
 	float turnSpeed;
 	float zoomSpeed;
 	float radiansAngle;
-	float3 lastCameraPosition;
 	float radiansOrbit;
 
 	float initialMovementSpeed;
@@ -29,7 +31,6 @@ protected:
 	float initialZoomSpeed;
 	float initialRadiansAngle;
 	float initialRadiansOrbit;
-	float3 initialCameraPosition;
 	float3 orbitPosition;
 
 	float speedFactor;
@@ -47,11 +48,11 @@ public:
 	ModuleCamera();
 	~ModuleCamera();
 
-	bool Init();
-	update_status PreUpdate(float deltaTime);
-	update_status Update(float deltaTime);
-	update_status PostUpdate(float deltaTime);
-	bool CleanUp();
+	bool Init() override;
+	update_status PreUpdate(float deltaTime) override;
+	update_status Update(float deltaTime) override;
+	update_status PostUpdate(float deltaTime) override;
+	bool CleanUp() override;
 	
 	float GetMovementSpeed() const  {
 		return movementSpeed;
