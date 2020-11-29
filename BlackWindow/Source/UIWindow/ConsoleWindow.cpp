@@ -119,5 +119,5 @@ void ConsoleWindow::AddLog(const char* fmt, ...) IM_FMTARGS(2)
     vsnprintf(buf, IM_ARRAYSIZE(buf), fmt, args);
     buf[IM_ARRAYSIZE(buf) - 1] = 0;
     va_end(args);
-    Items.push_back(strdup(buf));
+    Items.push_back(_strdup(buf));
 }

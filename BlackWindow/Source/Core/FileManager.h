@@ -4,8 +4,11 @@
 #include <fstream>
 class FileManager
 {
+private:
+	std::streampos size;
+	char* memblock;
+
 public:
-    
     
     FileManager(){
         size = 0;
@@ -14,6 +17,7 @@ public:
 
     ~FileManager() {
         delete(memblock);
+        memblock = nullptr;
     }
 
 	bool ReadFile(const char* path);
@@ -25,11 +29,6 @@ public:
     char* GetFile() const {
         return memblock;
     }
-
-
-private:
-	std::streampos size;
-	char* memblock;
 
 };
 

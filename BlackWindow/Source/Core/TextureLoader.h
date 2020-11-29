@@ -51,7 +51,7 @@ public:
 			Strategy::White,
 		};
 
-		for (std::vector<Strategy>::iterator it = types.begin(); it != types.end() && !success; it++)
+		for (std::vector<Strategy>::iterator it = types.begin(); it != types.end() && !success; ++it)
 		{
 			std::string buf("Begin loading texture ");
 			std::string resultPath("");

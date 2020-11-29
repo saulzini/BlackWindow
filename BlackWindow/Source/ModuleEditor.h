@@ -16,11 +16,11 @@ public:
 	ModuleEditor();
 	~ModuleEditor();
 
-	bool Init();
-	update_status PreUpdate(float deltaTime);
-	update_status Update(float deltaTime);
-	update_status PostUpdate(float deltaTime);
-	bool CleanUp();
+	bool Init() override;
+	update_status PreUpdate(float deltaTime) override;
+	update_status Update(float deltaTime) override;
+	update_status PostUpdate(float deltaTime) override;
+	bool CleanUp() override;
 
 	void addWindow(DefaultImGuiWindow *window); //method for adding multiple windows
 
@@ -34,7 +34,7 @@ private:
 	std::vector<DefaultImGuiWindow *> windows;
 	void ShowDockSpace(bool *pOpen);
 	void DrawMenu();
-	void SetStyle(const ImGuiIO io);
+	void SetStyle(const ImGuiIO& io);
 	void UpdateWindows();
 	bool showDemoWindow;
 	bool showDock;

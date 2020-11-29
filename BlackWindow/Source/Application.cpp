@@ -33,6 +33,8 @@ Application::Application()
 
 	// FPS
 	maxFps = 60;
+	lastFrame = 0;
+	fps = 0;
 }
 
 Application::~Application()
@@ -104,7 +106,6 @@ void Application::CalculateFPS(float previousTicks,float currentTicks)
 	frameTimesResults[index] = frameTime; //Saving the frame time
 	fpsResults[index] = fps; //Saving the fps time
 
-	previousTicks = currentTicks;
 	int count;
 	currentFrame++;
 

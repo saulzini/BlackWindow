@@ -160,7 +160,7 @@ Mesh Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 	return Mesh(vertices, indices, textures);
 }
 
-std::vector<Texture> Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName)
+std::vector<Texture> Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType type,const std::string& typeName)
 {
 	std::vector<Texture> textures;
 
