@@ -21,8 +21,8 @@ ModuleWorld::~ModuleWorld()
 
 bool ModuleWorld::Init()
 {
-	model = new Model("..\\Assets\\BakerHouse\\BakerHouse.fbx");
-	program = App->program->CreateProgramFromSource("..\\Source\\Shaders\\Default.vert", "..\\Source\\Shaders\\Default.frag");
+	model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
+	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
 	return true;
 }
 
