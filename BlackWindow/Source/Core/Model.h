@@ -21,7 +21,7 @@ public:
 
 	Mesh ProcessMesh(aiMesh *mesh, const aiScene *scene);
 
-	std::vector<Texture> LoadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
+	std::vector<Texture> LoadMaterialTextures(aiMaterial *mat, aiTextureType type,const std::string& typeName);
 
 	std::vector<Texture> GetTexturesLoaded() const
 	{

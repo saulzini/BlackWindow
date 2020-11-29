@@ -16,7 +16,7 @@ class BoundingBox
 
 public:
 
-    BoundingBox(const aiScene* mScene){
+    BoundingBox(const aiScene* mScene = nullptr){
         scene = mScene;
     }
 

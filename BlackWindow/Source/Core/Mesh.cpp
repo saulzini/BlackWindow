@@ -3,7 +3,7 @@
 #include "Vertex.h"
 #include "Texture.h"
 using namespace std;
-Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+Mesh::Mesh(const std::vector<Vertex>& vertices,const std::vector<unsigned int> &indices,const std::vector<Texture> &textures)
 {
     this->vertices = vertices;
     this->indices = indices;
@@ -17,7 +17,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std:
 void Mesh::Draw(const unsigned int shader)
 {
     unsigned int diffuseNr = 1;
-    unsigned int specularNr = 1;
+    // unsigned int specularNr = 1;
     for (unsigned int i = 0; i < textures.size(); i++)
     {
         glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
@@ -66,7 +66,7 @@ void Mesh::SetupMesh()
     glBindVertexArray(0);
 }
 
-void Mesh::ChangeTextures(std::vector<Texture> textures){
+void Mesh::ChangeTextures(const std::vector<Texture>& textures){
     this->textures = textures;
     SetupMesh();
 }

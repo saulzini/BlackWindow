@@ -11,7 +11,7 @@ void DropperHandler::DropFileIntoWindow(char *filePath)
 	char * found = strstr (filePath,"fbx");
     if (found == NULL){ // force to check if image
         App->world->SwapTexture(filePath);
-        // TODO::Validate trought the list of extensions
+        // TODO::Validate through a list of extensions
         // SDL_ShowSimpleMessageBox(
         //     SDL_MESSAGEBOX_INFORMATION,
         //     "File extension not accepted for the moment",

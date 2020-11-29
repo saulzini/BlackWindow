@@ -198,7 +198,7 @@ void ModuleCamera::CheckForResetCameraPosition()
 	}
 }
 
-void ModuleCamera::Rotate(const float3x3 rotationMatrix)
+void ModuleCamera::Rotate(const float3x3& rotationMatrix)
 {
 	float3 oldFront = frustum.Front().Normalized();
 	frustum.SetFront(rotationMatrix.MulDir(oldFront));
@@ -280,7 +280,7 @@ void ModuleCamera::SetAspectRatio(float aspectRatio)
 	frustum.SetVerticalFovAndAspectRatio(frustum.VerticalFov(), aspectRatio);
 }
 
-void ModuleCamera::MoveAccordingNewModelInScene(float3 dimensions)
+void ModuleCamera::MoveAccordingNewModelInScene(const float3& dimensions)
 {
 	LookAt(float3::zero + dimensions); //in this case the object is in the origin so it could be just dimensions
 	frustum.Translate(-dimensions);
@@ -307,7 +307,6 @@ void ModuleCamera::OrbitCamera(float deltaTime)
 	{
 		// LOG("Orbit");
 		iPoint newMousePosition = App->input->GetMouseMotion();
-		float3 oldCameraPosition = float3(cameraPosition);
 		int directionX = newMousePosition.x;
 		int directionY = newMousePosition.y;
 
@@ -388,7 +387,7 @@ void ModuleCamera::ResetToDefaultSpeeds()
 	zoomSpeed = initialZoomSpeed;
 }
 
-void ModuleCamera::SetCameraPosition(float3 mCameraPosition)
+void ModuleCamera::SetCameraPosition(const float3& mCameraPosition)
 {
 	cameraPosition = mCameraPosition;
 }

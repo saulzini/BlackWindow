@@ -7,7 +7,7 @@
 
 class Mesh {
 public:
-    Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+    Mesh(const std::vector<Vertex>& vertices,const std::vector<unsigned int> &indices,const std::vector<Texture> &textures);
 
 public:
     // mesh data
@@ -15,7 +15,7 @@ public:
     std::vector<unsigned int> indices;
     std::vector<Texture>      textures;
     void Draw(const unsigned int shader);
-    void ChangeTextures(std::vector<Texture> textures);
+    void ChangeTextures(const std::vector<Texture>& textures);
 
 private:
     //  render data
