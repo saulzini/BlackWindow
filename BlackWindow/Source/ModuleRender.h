@@ -12,11 +12,11 @@ public:
 	ModuleRender();
 	~ModuleRender();
 
-	bool Init();
-	update_status PreUpdate(float deltaTime);
-	update_status Update(float deltaTime);
-	update_status PostUpdate(float deltaTime);
-	bool CleanUp();
+	bool Init() override;
+	update_status PreUpdate(float deltaTime) override;
+	update_status Update(float deltaTime) override;
+	update_status PostUpdate(float deltaTime) override;
+	bool CleanUp() override;
 	void WindowResized(unsigned width, unsigned height);
 
 	void* GetContext() {

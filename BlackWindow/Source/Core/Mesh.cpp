@@ -17,7 +17,7 @@ Mesh::Mesh(const std::vector<Vertex>& vertices,const std::vector<unsigned int> &
 void Mesh::Draw(const unsigned int shader)
 {
     unsigned int diffuseNr = 1;
-    unsigned int specularNr = 1;
+    // unsigned int specularNr = 1;
     for (unsigned int i = 0; i < textures.size(); i++)
     {
         glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding

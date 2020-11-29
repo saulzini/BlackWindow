@@ -106,7 +106,7 @@ public:
 		return cameraPosition;
 	}
 
-	void SetCameraPosition(float3 mCameraPosition);
+	void SetCameraPosition(const float3& mCameraPosition);
 	
 	void RotateAroundPoint(const float3& point,const float3& pivot,const float anglesX, const float anglesY);
 	void LookAt(const float3& point);
@@ -114,7 +114,7 @@ public:
 	void WindowResized(int width,int height);
 	void SetAspectRatio(float aspectRatio);
 
-	void MoveAccordingNewModelInScene(float3 dimensions);
+	void MoveAccordingNewModelInScene(const float3& dimensions);
 
 	float3 GetFrontVector() const{
 		return frustum.Front();
@@ -161,7 +161,7 @@ private:
 	void Yaw(float deltaTime);
 	void CheckForResetCameraPosition();
 
-	void Rotate(const float3x3 rotationMatrix);
+	void Rotate(const float3x3& rotationMatrix);
 	
 	void MousePitch(float deltaTime);
 	void MouseZoom(float deltaTime);
