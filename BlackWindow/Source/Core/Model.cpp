@@ -12,7 +12,7 @@
 #include "TextureLoader.h"
 #include "BoundingBox.h"
 
-Model::Model(std::string path)
+Model::Model(std::string path="")
 {
 	if (path == "")
 	{
@@ -209,7 +209,7 @@ void Model::ApplyTextureToModel(unsigned int id, const char *path)
 
 void Model::CalculateBoxDimensions() 
 {
-	dimensions.x = abs(boundBoxMax.x) - abs(boundBoxMin.x);
-	dimensions.y = abs(boundBoxMax.y) - abs(boundBoxMin.y);
-	dimensions.z = abs(boundBoxMax.z) - abs(boundBoxMin.z);
+	dimensions.x = abs(abs(boundBoxMax.x) - abs(boundBoxMin.x));
+	dimensions.y = abs(abs(boundBoxMax.y) - abs(boundBoxMin.y));
+	dimensions.z = abs(abs(boundBoxMax.z) - abs(boundBoxMin.z));
 }
