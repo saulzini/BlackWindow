@@ -11,6 +11,7 @@
 #include "UIWindow/HierarchyWindow.h"
 #include "UIWindow/GameObjectWindow.h"
 #include "UIWindow/AboutWindow.h"
+#include "Leaks.h"
 ModuleEditor::ModuleEditor()
 {
     showDemoWindow = false;

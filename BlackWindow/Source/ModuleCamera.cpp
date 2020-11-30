@@ -9,7 +9,7 @@
 #include "ModuleWindow.h"
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
-
+#include "Leaks.h"
 ModuleCamera::ModuleCamera()
 {
 	//initializing
