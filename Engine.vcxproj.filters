@@ -1000,6 +1000,7 @@
     <ClInclude Include="BlackWindow\Source\UIWindow\AboutWindow.h">
       <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
+    <ClInclude Include="Leaks.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">

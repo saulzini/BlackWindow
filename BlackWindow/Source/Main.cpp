@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "Globals.h"
 #include "SDL.h"
+#include "Leaks.h"
 #pragma comment( lib, "BlackWindow/Resources/SDL/lib/x86/SDL2.lib" )
 #pragma comment( lib, "BlackWindow/Resources/SDL/lib/x86/SDL2main.lib" )
 
@@ -14,6 +15,12 @@ enum main_states
 	MAIN_FINISH,
 	MAIN_EXIT
 };
+
+void DumpLeaks(void)
+{
+	_CrtDumpMemoryLeaks(); // show leaks with file and line where allocation was made
+}
+
 
 Application* App = NULL;
 

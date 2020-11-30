@@ -438,6 +438,7 @@
     <ClInclude Include="BlackWindow\Source\UIWindow\GameObjectWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\HierarchyWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\PreviewWindow.h" />
+    <ClInclude Include="Leaks.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlackWindow\Resources\gpudetect\DeviceId.cpp" />
