@@ -9,7 +9,7 @@
 #include "ModuleEditor.h"
 #include "Core/Time.h"
 #include "SDL.h"
-#include "Leaks.h"
+
 #include <IL/ilut.h> 
 
 using namespace std;

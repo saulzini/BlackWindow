@@ -8,7 +8,6 @@
 #include "Core/Model.h"
 #include "Math/float4x4.h"
 #include <string>
-#include "Leaks.h"
 ModuleWorld::ModuleWorld()
 {
 	model = nullptr;

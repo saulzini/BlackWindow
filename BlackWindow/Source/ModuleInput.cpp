@@ -8,7 +8,6 @@
 #include "ModuleCamera.h"
 #include "Core/Events/DropperHandler.h"
 #include <string>
-#include "Leaks.h"
 #define MAX_KEYS 300
 
 ModuleInput::ModuleInput() : Module(), mouse({ 0, 0 }), mouse_motion({ 0,0 })
