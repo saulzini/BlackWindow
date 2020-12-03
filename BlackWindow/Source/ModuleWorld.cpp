@@ -56,14 +56,14 @@ update_status ModuleWorld::Update(float deltaTime)
 	GLint viewPos = glGetUniformLocation(program, "viewPos");
 	GLint colorAmbient = glGetUniformLocation(program, "colorAmbient");
 
-	glUniform1f(ks, 0.8f);
-	glUniform1f(kd, 0.6f);
-	glUniform1f(N, 128);
+	glUniform1f(ks, 0.2f);
+	glUniform1f(kd, 0.1f);
+	glUniform1f(N, 32);
 
 	float3 lightpos = { 1.0f, 0.0f, 0.0f };
 	float3 lightcolor = { 1.0f, 1.0f, 1.0f };
 	float3 view_Pos = App->camera->cameraPosition;
-	float3 color_Ambient = { 1.0f, 0.0f, 0.0f };
+	float3 color_Ambient = { 0.5f, 0.5f, 0.5f };
 
 	glUniform1i(glGetUniformLocation(program, "texture_diffuse"), 0);
 	glUniform3f( light_pos, lightpos[0], lightpos[1], lightpos[2]);
