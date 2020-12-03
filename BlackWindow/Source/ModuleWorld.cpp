@@ -9,6 +9,8 @@
 #include "Math/float4x4.h"
 #include <string>
 #include "Leaks.h"
+#include "../glm/glm.hpp"
+
 ModuleWorld::ModuleWorld()
 {
 	model = nullptr;
@@ -24,6 +26,7 @@ bool ModuleWorld::Init()
 {
 	model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
 	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
+	
 	return true;
 }
 
@@ -34,6 +37,7 @@ update_status ModuleWorld::PreUpdate(float deltaTime)
 
 update_status ModuleWorld::Update(float deltaTime)
 {
+	
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
@@ -41,6 +45,31 @@ update_status ModuleWorld::Update(float deltaTime)
 	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &identityModel[0][0]); //GL_TRUE transpose the matrix
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
+
+
+	GLint ks = glGetUniformLocation(program, "ks");
+	GLint kd = glGetUniformLocation(program, "kd");
+	GLint N =  glGetUniformLocation(program, "N");
+	GLint light_pos = glGetUniformLocation(program, "light_pos");
+	GLint light_color = glGetUniformLocation(program, "light_color");
+	GLint viewPos = glGetUniformLocation(program, "viewPos");
+	GLint colorAmbient = glGetUniformLocation(program, "colorAmbient");
+
+	glUniform1f(ks, 0.8);
+	glUniform1f(kd, 0.6);
+	glUniform1f(N, 32);
+
+	float3 lightpos = { 1.0f, 0.0f, 0.0 };
+	float3 lightcolor = { 1.0f, 1.0f, 1.0 };
+	float3 view_Pos = App->camera->cameraPosition;
+	float3 color_Ambient = { 1.0f, 0.0f, 0.0 };
+
+	glUniform3f( light_pos, lightpos[0], lightpos[1], lightpos[2]);
+	glUniform3f(light_color, lightcolor[0], lightcolor[1], lightcolor[2]);
+	glUniform3f(viewPos, view_Pos[0], view_Pos[1], view_Pos[2]);
+	glUniform3f(colorAmbient, color_Ambient[0], color_Ambient[1], color_Ambient[2]);
+
+	std::cout << glGetError() << std::endl; // returns 0 (no error)
 
 	model->Draw(program);
 
