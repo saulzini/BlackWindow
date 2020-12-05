@@ -6,6 +6,7 @@
 #include "GL/glew.h"
 #include "ModuleCamera.h"
 #include "ModuleProgram.h"
+#include "ModuleWorld.h"
 #include "Leaks.h"
 void __stdcall OurOpenGLErrorFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
@@ -56,6 +57,8 @@ ModuleRender::~ModuleRender()
 // Called before render is available
 bool ModuleRender::Init()
 {
+
+
 	context = SDL_GL_CreateContext(App->window->window); //init context with window
 	//SDL_WINDOW_OPENGL(SDL_WINDOW_SHOWN);
 
@@ -93,13 +96,16 @@ update_status ModuleRender::PreUpdate(float deltaTime)
 // Called every draw update
 update_status ModuleRender::Update(float deltaTime)
 {
-	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 
+	//glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 	int w = 0;
 	int h = 0;
 	SDL_GetWindowSize(App->window->window, &w, &h);
-	glClearColor(0.439f, 0.439f, 0.439f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glClearColor(0.439f, 0.439f, 0.439f, 1.0f);
+	glDisable(GL_DEPTH_TEST);
+	App->world->sky->Draw();
+
+	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLineWidth(1.0f);
 	float d = 200.0f;

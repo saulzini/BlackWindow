@@ -31,6 +31,7 @@ void main(){
 
 	//-----------------------------------
 
-	vec3 res = (ambient + diff + specular);
+	vec3 res = (ambient );
 	color = vec4(res,1.0);
+
 }

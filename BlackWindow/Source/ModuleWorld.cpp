@@ -15,6 +15,9 @@ ModuleWorld::ModuleWorld()
 {
 	model = nullptr;
 	program = 0;
+
+	sky = nullptr;
+	programSky = 0;
 }
 
 ModuleWorld::~ModuleWorld()
@@ -24,8 +27,13 @@ ModuleWorld::~ModuleWorld()
 
 bool ModuleWorld::Init()
 {
+
+
+	
 	model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
 	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
+	programSky = App->program->CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
+	sky = new Skybox();
 	
 	return true;
 }
@@ -37,7 +45,8 @@ update_status ModuleWorld::PreUpdate(float deltaTime)
 
 update_status ModuleWorld::Update(float deltaTime)
 {
-	
+
+
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
@@ -49,7 +58,7 @@ update_status ModuleWorld::Update(float deltaTime)
 
 	GLint ks = glGetUniformLocation(program, "ks");
 	GLint kd = glGetUniformLocation(program, "kd");
-	GLint N =  glGetUniformLocation(program, "N");
+	GLint N = glGetUniformLocation(program, "N");
 
 	GLint light_pos = glGetUniformLocation(program, "light_pos");
 	GLint light_color = glGetUniformLocation(program, "light_color");
@@ -66,7 +75,7 @@ update_status ModuleWorld::Update(float deltaTime)
 	float3 color_Ambient = { 0.5f, 0.5f, 0.5f };
 
 	glUniform1i(glGetUniformLocation(program, "texture_diffuse"), 0);
-	glUniform3f( light_pos, lightpos[0], lightpos[1], lightpos[2]);
+	glUniform3f(light_pos, lightpos[0], lightpos[1], lightpos[2]);
 	glUniform3f(light_color, lightcolor[0], lightcolor[1], lightcolor[2]);
 	glUniform3f(viewPos, view_Pos[0], view_Pos[1], view_Pos[2]);
 	glUniform3f(colorAmbient, color_Ambient[0], color_Ambient[1], color_Ambient[2]);
@@ -74,7 +83,6 @@ update_status ModuleWorld::Update(float deltaTime)
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 
 	model->Draw(program);
-
 	return UPDATE_CONTINUE;
 }
 

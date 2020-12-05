@@ -54,4 +54,6 @@ private:
 	bool glAlphaTestCap;
 	bool glBlendCap;
 	bool glDepthTestCap;
+
+
 };
