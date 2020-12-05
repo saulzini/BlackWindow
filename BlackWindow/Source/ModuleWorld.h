@@ -1,6 +1,8 @@
 #pragma once
 #include "Module.h"
 #include "Core/Model.h"
+#include "Core/Time/WorldTimer.h"
+
 class ModuleWorld :
 	public Module
 {
@@ -26,5 +28,6 @@ public:
 private:
 	Model* model;
 	unsigned int program;
+	WorldTimer worldTimer;
 };
 

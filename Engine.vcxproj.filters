@@ -201,6 +201,9 @@
     <ClCompile Include="BlackWindow\Source\Core\Time\Timer.cpp">
       <Filter>Core\Timers</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Time\WorldTimer.cpp">
+      <Filter>Core\Timers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
@@ -1011,6 +1014,9 @@
       <Filter>Core\Timers</Filter>
     </ClInclude>
     <ClInclude Include="BlackWindow\Source\Core\Time\TimerState.h">
+      <Filter>Core\Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Time\WorldTimer.h">
       <Filter>Core\Timers</Filter>
     </ClInclude>
   </ItemGroup>

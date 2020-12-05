@@ -43,24 +43,24 @@ public:
 	// 	return currentTime;
 	// }
 
-	float GetMaxFps() const{
-		return maxFps;
-	}
+	// float GetMaxFps() const{
+	// 	return maxFps;
+	// }
 
-	void SetMaxFps(float value){
-		if (maxFps == value ){
-			return;
-		}
-		maxFps = value;
-	}
+	// void SetMaxFps(float value){
+	// 	if (maxFps == value ){
+	// 		return;
+	// 	}
+	// 	maxFps = value;
+	// }
 
-	float* GetFpsResults(){
-		return fpsResults;
-	}
+	// float* GetFpsResults(){
+	// 	return fpsResults;
+	// }
 
-	float* GetFrameTimes(){
-		return frameTimesResults;
-	}
+	// float* GetFrameTimes(){
+	// 	return frameTimesResults;
+	// }
 
 private:
 
@@ -68,13 +68,13 @@ private:
 	// float lastFrame;
 	// Time currentTime;
 
-	float fps;
-	float maxFps;
-	void CalculateFPS(float previousTicks,float currentTicks);
-	void RegulateFPS(float currentTime);
+	// float fps;
+	// float maxFps;
+	// void CalculateFPS(float previousTicks,float currentTicks);
+	// void RegulateFPS(float currentTime);
 
-	float fpsResults[SAMPLESFPS]={0.0f}; //Array for saving fps records
-	float frameTimesResults[SAMPLESFPS]={0.0f}; //Array for saving frame times recods
+	// float fpsResults[SAMPLESFPS]={0.0f}; //Array for saving fps records
+	// float frameTimesResults[SAMPLESFPS]={0.0f}; //Array for saving frame times recods
 	
 };
 

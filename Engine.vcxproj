@@ -423,6 +423,7 @@
     <ClInclude Include="BlackWindow\Source\Core\Time\DeltaTime.h" />
     <ClInclude Include="BlackWindow\Source\Core\Time\Timer.h" />
     <ClInclude Include="BlackWindow\Source\Core\Time\TimerState.h" />
+    <ClInclude Include="BlackWindow\Source\Core\Time\WorldTimer.h" />
     <ClInclude Include="BlackWindow\Source\Core\Vertex.h" />
     <ClInclude Include="BlackWindow\Source\GeometryLoader.h" />
     <ClInclude Include="BlackWindow\Source\Globals.h" />
@@ -501,6 +502,7 @@
     <ClCompile Include="BlackWindow\Source\Core\Model.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\Texture.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\Time\Timer.cpp" />
+    <ClCompile Include="BlackWindow\Source\Core\Time\WorldTimer.cpp" />
     <ClCompile Include="BlackWindow\Source\GeometryLoader.cpp" />
     <ClCompile Include="BlackWindow\Source\log.cpp" />
     <ClCompile Include="BlackWindow\Source\Main.cpp" />
