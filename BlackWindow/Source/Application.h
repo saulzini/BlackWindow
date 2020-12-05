@@ -3,7 +3,9 @@
 #include<list>
 #include "Globals.h"
 #include "Module.h"
-#include "Core/Time.h"
+// #include "Core/Time.h"
+#include "Core/Time/DeltaTime.h"
+
 class ModuleRender;
 class ModuleWindow;
 class ModuleInput;
@@ -12,6 +14,7 @@ class ModuleProgram;
 class ModuleTextures;
 class ModuleEditor;
 class ModuleWorld;
+
 class Application
 {
 public:
@@ -30,14 +33,15 @@ public:
 	ModuleCamera* camera = nullptr;
 	ModuleProgram* program = nullptr;
 	ModuleEditor* editor = nullptr;
+	DeltaTime deltaTime;
 
 	//Exercises
 	ModuleWorld* world= nullptr;
 	void RequestBrowser(const char* route);
 
-	Time GetTime() const{
-		return currentTime;
-	}
+	// Time GetTime() const{
+	// 	return currentTime;
+	// }
 
 	float GetMaxFps() const{
 		return maxFps;
@@ -61,8 +65,8 @@ public:
 private:
 
 	std::list<Module*> modules;
-	float lastFrame;
-	Time currentTime;
+	// float lastFrame;
+	// Time currentTime;
 
 	float fps;
 	float maxFps;

@@ -17,7 +17,7 @@ public:
     ImGuiWindowFlags window_flags;
 
     virtual void Update() {};
-    virtual void CleanUp() {}
+    virtual void CleanUp() {};
 
     const bool getShow() {
         return show;

@@ -7,11 +7,10 @@
 #include "ModuleProgram.h"
 #include "ModuleWorld.h"
 #include "ModuleEditor.h"
-#include "Core/Time.h"
+// #include "Core/Time.h"
 #include "SDL.h"
 #include "Leaks.h"
 #include <IL/ilut.h> 
-
 using namespace std;
 
 Application::Application()
@@ -33,7 +32,7 @@ Application::Application()
 
 	// FPS
 	maxFps = 60;
-	lastFrame = 0;
+	// lastFrame = 0;
 	fps = 0;
 }
 
@@ -52,6 +51,8 @@ bool Application::Init()
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret; ++it)
 		ret = (*it)->Init();
 
+	deltaTime.Start();
+
 	return ret;
 }
 
@@ -59,11 +60,13 @@ update_status Application::Update()
 {
 	update_status ret = UPDATE_CONTINUE;
 
+	deltaTime.CalculateDeltaTime();
+	float currentTime = deltaTime.GetMiliseconds();
 	// Used for time measuring
-	float time = (float) SDL_GetTicks();
-	CalculateFPS(lastFrame,time); //Calculating FPS
-	currentTime = time-lastFrame; //Delta time
-	lastFrame = time;
+	// float time = (float) SDL_GetTicks();
+	// CalculateFPS(lastFrame,time); //Calculating FPS
+	// currentTime = time-lastFrame; //Delta time
+	// lastFrame = time;
 	
 
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
@@ -76,7 +79,7 @@ update_status Application::Update()
 		ret = (*it)->PostUpdate(currentTime);
 
 
-	RegulateFPS(time); //Regulate the frame given the max fps
+	// RegulateFPS(time); //Regulate the frame given the max fps
 
 	return ret;
 }
