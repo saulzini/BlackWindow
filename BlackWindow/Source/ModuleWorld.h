@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Core/Model.h"
+#include "Core/Time/WorldTimer.h"
 #include "Core/Skybox.h"
 
 class ModuleWorld :
@@ -29,9 +30,14 @@ public:
 	void SwapTexture(const char *texturePath);
 	void SwapModel(const char *modelPath);
 
+	WorldTimer* GetWorldTimer() const{
+		return worldTimer;
+	}
+
 private:
 	Model* model;
 	//unsigned int programSky;
 	unsigned int program;
+	WorldTimer* worldTimer;
 };
 

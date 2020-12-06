@@ -10,11 +10,12 @@
 #include <string>
 #include "Leaks.h"
 #include "../glm/glm.hpp"
-
+#include "Core/Time/WorldTimer.h"
 ModuleWorld::ModuleWorld()
 {
 	model = nullptr;
 	program = 0;
+	worldTimer = new WorldTimer();
 
 	sky = nullptr;
 	programSky = 0;
@@ -27,9 +28,6 @@ ModuleWorld::~ModuleWorld()
 
 bool ModuleWorld::Init()
 {
-
-
-	
 	model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
 	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
 	programSky = App->program->CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
@@ -45,8 +43,7 @@ update_status ModuleWorld::PreUpdate(float deltaTime)
 
 update_status ModuleWorld::Update(float deltaTime)
 {
-
-
+	worldTimer->Update();
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
@@ -83,6 +80,9 @@ update_status ModuleWorld::Update(float deltaTime)
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 
 	model->Draw(program);
+
+	worldTimer->RegulateFPS();
+
 	return UPDATE_CONTINUE;
 }
 
@@ -95,6 +95,9 @@ bool ModuleWorld::CleanUp()
 {
 	delete (model);
 	model = nullptr;
+
+	delete (worldTimer);
+	worldTimer = nullptr;
 	
 	return true;
 }
