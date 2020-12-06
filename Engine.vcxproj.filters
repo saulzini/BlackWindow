@@ -204,6 +204,9 @@
     <ClCompile Include="BlackWindow\Source\Core\Time\WorldTimer.cpp">
       <Filter>Core\Timers</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Skybox.cpp">
+      <Filter>Core\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
@@ -1019,6 +1022,10 @@
     <ClInclude Include="BlackWindow\Source\Core\Time\WorldTimer.h">
       <Filter>Core\Timers</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Skybox.h">
+      <Filter>Core\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -1083,6 +1090,9 @@
     </Filter>
     <Filter Include="Core\Timers">
       <UniqueIdentifier>{55a56728-bbae-4a4a-92ad-d69115ce8bfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\SkyBox">
+      <UniqueIdentifier>{bb7a0a9b-17d2-43e5-8c72-ee246a36f533}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1154,6 +1164,12 @@
     </None>
     <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh_IntersectRay_SSE.inl">
       <Filter>MathGeoLib</Filter>
+    </None>
+    <None Include="BlackWindow\Source\Shaders\Default1.frag">
+      <Filter>Shaders\Texture</Filter>
+    </None>
+    <None Include="BlackWindow\Source\Shaders\Default1.vert">
+      <Filter>Shaders\Texture</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

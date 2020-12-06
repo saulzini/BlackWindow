@@ -174,4 +174,8 @@ public:
 
 		return imageID;
 	}
+
+
+	/// <returns></returns>
+	
 };
