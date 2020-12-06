@@ -444,6 +444,7 @@
     <ClInclude Include="BlackWindow\Source\UIWindow\GameObjectWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\HierarchyWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\PreviewWindow.h" />
+    <ClInclude Include="BlackWindow\Source\UIWindow\ToolbarWindow.h" />
     <ClInclude Include="Leaks.h" />
   </ItemGroup>
   <ItemGroup>
@@ -523,6 +524,7 @@
     <ClCompile Include="BlackWindow\Source\UIWindow\GameObjectWindow.cpp" />
     <ClCompile Include="BlackWindow\Source\UIWindow\HierarchyWindow.cpp" />
     <ClCompile Include="BlackWindow\Source\UIWindow\PreviewWindow.cpp" />
+    <ClCompile Include="BlackWindow\Source\UIWindow\ToolbarWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BlackWindow\Resources\Assimp\include\assimp\color4.inl" />

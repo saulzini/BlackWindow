@@ -207,6 +207,9 @@
     <ClCompile Include="BlackWindow\Source\Core\Skybox.cpp">
       <Filter>Core\Model</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Source\UIWindow\ToolbarWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
@@ -1026,6 +1029,9 @@
       <Filter>Core\Model</Filter>
     </ClInclude>
     <ClInclude Include="BlackWindow\Source\stb_image.h" />
+    <ClInclude Include="BlackWindow\Source\UIWindow\ToolbarWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">

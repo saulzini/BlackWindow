@@ -9,6 +9,7 @@ class PreviewWindow;
 class HierarchyWindow;
 class GameObjectWindow;
 class AboutWindow;
+class ToolbarWindow;
 class ModuleEditor : public Module
 {
 
@@ -30,6 +31,7 @@ public:
 	HierarchyWindow *hierarchyWindow;
 	GameObjectWindow *gameObjectWindow;
 	AboutWindow *aboutWindow;
+	ToolbarWindow *toolbarWindow;
 private:
 	std::vector<DefaultImGuiWindow *> windows;
 	void ShowDockSpace(bool *pOpen);
