@@ -16,6 +16,7 @@ ModuleWorld::ModuleWorld()
 {
 	model = nullptr;
 	program = 0;
+	worldTimer = new WorldTimer();
 }
 
 ModuleWorld::~ModuleWorld()
@@ -38,6 +39,7 @@ update_status ModuleWorld::PreUpdate(float deltaTime)
 
 update_status ModuleWorld::Update(float deltaTime)
 {
+	worldTimer->Update();
 	
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
@@ -76,6 +78,8 @@ update_status ModuleWorld::Update(float deltaTime)
 
 	model->Draw(program);
 
+	worldTimer->RegulateFPS();
+
 	return UPDATE_CONTINUE;
 }
 
@@ -88,6 +92,9 @@ bool ModuleWorld::CleanUp()
 {
 	delete (model);
 	model = nullptr;
+
+	delete (worldTimer);
+	worldTimer = nullptr;
 	
 	return true;
 }

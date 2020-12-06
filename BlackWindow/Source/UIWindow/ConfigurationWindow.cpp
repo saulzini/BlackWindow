@@ -16,6 +16,8 @@
 #include <windows.h> //memory consumption
 #include "psapi.h"
 #include "Core/Point.h"
+#include "Core/Time/WorldTimer.h"
+#include "ModuleWorld.h"
 void ConfigurationWindow::Update()
 {
 
@@ -30,7 +32,7 @@ void ConfigurationWindow::Update()
             return;
         }
 
-        // DrawApplicationConfig();
+        DrawApplicationConfig();
         DrawWindowConfig();
         if (ImGui::CollapsingHeader("File Sytem"))
         {
@@ -271,62 +273,62 @@ void ConfigurationWindow::DrawWindowConfig()
     }
 }
 
-// void ConfigurationWindow::DrawApplicationConfig()
-// {
-//     if (ImGui::CollapsingHeader("Application"))
-//     { //collapsables
+void ConfigurationWindow::DrawApplicationConfig()
+{
+    if (ImGui::CollapsingHeader("Application"))
+    { //collapsables
 
-//         // App Name
-//         // static char str0[128] = "Black Screen Engine";
-//         // ImGui::InputText("App Name", str0, IM_ARRAYSIZE(str0)); //always pass chars and size
-//         ImGui::Text(TITLE);
-//         ImGui::Spacing();
-//         ImGui::Text("UPC");
-      
-//         // Max FPS
-//         float fps = App->GetMaxFps();
-//         ImGui::DragFloat("Max fps", &fps, 1.0f,1.0f,255.0f);
-//         App->SetMaxFps(fps);
-//         // Limit Frame Rate
-//         float* fpsResults = App->GetFpsResults();
-//         ImGui::Text("Limit Framerate:");
-//         ImGui::SameLine();
-//         ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%f", fpsResults[0]); //color text
+        // App Name
+        // static char str0[128] = "Black Screen Engine";
+        // ImGui::InputText("App Name", str0, IM_ARRAYSIZE(str0)); //always pass chars and size
+        ImGui::Text(TITLE);
+        ImGui::Spacing();
+        ImGui::Text("UPC");
 
-//         // Graph 1
-//         char title1[25] = "";
-//         sprintf_s(title1, 25, "Framerate %.1f", fpsResults[0]);
-//         ImGui::PlotHistogram("##framerate", fpsResults, SAMPLESFPS, 0,title1, 0.0f, 300.0f, ImVec2(310, 120)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
+        // Max FPS
+        float fps = App->world->GetWorldTimer()->GetMaxFps();
+        ImGui::DragFloat("Max fps", &fps, 1.0f,10.0f,255.0f);
+        App->world->GetWorldTimer()->SetMaxFps(fps);
+        // Limit Frame Rate
+        const float* fpsResults = App->world->GetWorldTimer()->GetFpsResults();
+        ImGui::Text("Limit Framerate:");
+        ImGui::SameLine();
+        ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%f", fpsResults[0]); //color text
 
-//         // Graph 2
-//         float* frameTimesResults = App->GetFrameTimes();
-//         char title2[25];
-//         sprintf_s(title2, 25, "Milliseconds %.1f", frameTimesResults[0]);
-//         ImGui::PlotHistogram("##milliseconds", frameTimesResults, SAMPLESFPS, 0, title2, 0.0f, 300.0f, ImVec2(310, 100));
+        // Graph 1
+        char title1[25] = "";
+        sprintf_s(title1, 25, "Framerate %.1f", fpsResults[0]);
+        ImGui::PlotHistogram("##framerate", fpsResults, SAMPLESFPS, 0,title1, 0.0f, 300.0f, ImVec2(310, 120)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
 
-//         //reference : https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
-//         // Total Report
-//         MEMORYSTATUSEX memInfo;
-//         memInfo.dwLength = sizeof(MEMORYSTATUSEX);
-//         ;
+        // Graph 2
+        const float* frameTimesResults = App->world->GetWorldTimer()->GetFrameTimesResults();
+        char title2[25] = "";
+        sprintf_s(title2, 25, "Milliseconds %.1f", frameTimesResults[0]);
+        ImGui::PlotHistogram("##milliseconds", frameTimesResults, SAMPLESFPS, 0, title2, 0.0f, 300.0f, ImVec2(310, 100));
 
-//         if (GlobalMemoryStatusEx(&memInfo)) {
-//             DWORDLONG totalVirtualMem = memInfo.ullTotalPageFile;
-//             DWORDLONG virtualMemUsed =memInfo.ullTotalPageFile - memInfo.ullAvailPageFile;
-//             PROCESS_MEMORY_COUNTERS_EX pmc;
-//             GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
-//             SIZE_T virtualMemUsedByMe = pmc.PrivateUsage;
-//             DWORDLONG totalPhysMem = memInfo.ullTotalPhys;
-//             DWORDLONG physMemUsed = memInfo.ullTotalPhys - memInfo.ullAvailPhys;
-//             SIZE_T physMemUsedByMe = pmc.WorkingSetSize;
-//             ImGui::TextWrapped("Total VM available: %f MB", (float)totalVirtualMem / 1024.0f);
-//             ImGui::TextWrapped("VM used: %f MB", (float)virtualMemUsed / 1024.0f);
-//             ImGui::TextWrapped("VM used by my process: %f MB", (float)virtualMemUsedByMe / 1024.0f);
-//             ImGui::TextWrapped("Total RAM available: %f MB", (float)totalPhysMem / 1024.0f);
+        //reference : https://stackoverflow.com/questions/63166/how-to-determine-cpu-and-memory-consumption-from-inside-a-process
+        // Total Report
+        MEMORYSTATUSEX memInfo;
+        memInfo.dwLength = sizeof(MEMORYSTATUSEX);
+        ;
 
-//             ImGui::TextWrapped("RAM used: %f MB", (float)physMemUsed / 1024.0f);
-//             ImGui::TextWrapped("RAM used by my process: %f MB", (float)physMemUsedByMe / 1024.0f);
-//         }
+        if (GlobalMemoryStatusEx(&memInfo)) {
+            DWORDLONG totalVirtualMem = memInfo.ullTotalPageFile;
+            DWORDLONG virtualMemUsed =memInfo.ullTotalPageFile - memInfo.ullAvailPageFile;
+            PROCESS_MEMORY_COUNTERS_EX pmc;
+            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+            SIZE_T virtualMemUsedByMe = pmc.PrivateUsage;
+            DWORDLONG totalPhysMem = memInfo.ullTotalPhys;
+            DWORDLONG physMemUsed = memInfo.ullTotalPhys - memInfo.ullAvailPhys;
+            SIZE_T physMemUsedByMe = pmc.WorkingSetSize;
+            ImGui::TextWrapped("Total VM available: %f MB", (float)totalVirtualMem / 1024.0f);
+            ImGui::TextWrapped("VM used: %f MB", (float)virtualMemUsed / 1024.0f);
+            ImGui::TextWrapped("VM used by my process: %f MB", (float)virtualMemUsedByMe / 1024.0f);
+            ImGui::TextWrapped("Total RAM available: %f MB", (float)totalPhysMem / 1024.0f);
+
+            ImGui::TextWrapped("RAM used: %f MB", (float)physMemUsed / 1024.0f);
+            ImGui::TextWrapped("RAM used by my process: %f MB", (float)physMemUsedByMe / 1024.0f);
+        }
         
-//     }
-// }
+    }
+}

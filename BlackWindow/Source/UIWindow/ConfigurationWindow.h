@@ -2,6 +2,7 @@
 #include "DefaultImGuiWindow.h"
 #include "Application.h"
 #include "ModuleWindow.h"
+#include "ModuleWorld.h"
 
 class ConfigurationWindow :
 	public DefaultImGuiWindow
@@ -18,7 +19,7 @@ protected:
 	void DrawCameraConfig();
 	void DrawInputConfig();
 	void DrawRenderConfig(); 
-	// void DrawApplicationConfig();
+	void DrawApplicationConfig();
 	void DrawHardwareConfig();
 	void DrawWindowConfig();
 

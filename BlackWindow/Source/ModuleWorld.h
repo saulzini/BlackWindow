@@ -25,9 +25,13 @@ public:
 	void SwapTexture(const char *texturePath);
 	void SwapModel(const char *modelPath);
 
+	WorldTimer* GetWorldTimer() const{
+		return worldTimer;
+	}
+
 private:
 	Model* model;
 	unsigned int program;
-	WorldTimer worldTimer;
+	WorldTimer* worldTimer;
 };
 
