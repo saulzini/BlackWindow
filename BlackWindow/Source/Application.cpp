@@ -60,8 +60,16 @@ update_status Application::Update()
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
 		ret = (*it)->PreUpdate(currentTime);
 
-	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
-		ret = (*it)->Update(currentTime);
+	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it){
+
+		// if ( (*it) == world || (*it) == camera){ //Testing purposes at the end only let the world
+		if ( (*it) == world ){ 
+			ret = (*it)->Update( deltaTime.GetDeltaTimeWorldAdjusted() );
+		}
+		else {
+			ret = (*it)->Update(currentTime);
+		}
+	}
 
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it)
 		ret = (*it)->PostUpdate(currentTime);
