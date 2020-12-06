@@ -198,8 +198,17 @@
     <ClCompile Include="BlackWindow\Source\UIWindow\AboutWindow.cpp">
       <Filter>Graphics\UIWindow</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Time\Timer.cpp">
+      <Filter>Core\Timers</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Time\WorldTimer.cpp">
+      <Filter>Core\Timers</Filter>
+    </ClCompile>
     <ClCompile Include="BlackWindow\Source\Core\Skybox.cpp">
       <Filter>Core\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Source\UIWindow\ToolbarWindow.cpp">
+      <Filter>Graphics\UIWindow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -631,9 +640,6 @@
     <ClInclude Include="BlackWindow\Source\Core\Texture.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="BlackWindow\Source\Core\Time.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="BlackWindow\Source\Core\Vertex.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -1007,10 +1013,25 @@
     <ClInclude Include="BlackWindow\Resources\glm\glm.hpp">
       <Filter>Resources\glm</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Time\Timer.h">
+      <Filter>Core\Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Time\DeltaTime.h">
+      <Filter>Core\Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Time\TimerState.h">
+      <Filter>Core\Timers</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Time\WorldTimer.h">
+      <Filter>Core\Timers</Filter>
+    </ClInclude>
     <ClInclude Include="BlackWindow\Source\Core\Skybox.h">
       <Filter>Core\Model</Filter>
     </ClInclude>
     <ClInclude Include="BlackWindow\Source\stb_image.h" />
+    <ClInclude Include="BlackWindow\Source\UIWindow\ToolbarWindow.h">
+      <Filter>Graphics\UIWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -1072,6 +1093,9 @@
     </Filter>
     <Filter Include="Resources\glm">
       <UniqueIdentifier>{02d97ce4-8084-4439-88e3-29378b119024}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Timers">
+      <UniqueIdentifier>{55a56728-bbae-4a4a-92ad-d69115ce8bfb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\SkyBox">
       <UniqueIdentifier>{bb7a0a9b-17d2-43e5-8c72-ee246a36f533}</UniqueIdentifier>

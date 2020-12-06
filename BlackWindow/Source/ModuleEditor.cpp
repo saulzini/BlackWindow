@@ -11,6 +11,7 @@
 #include "UIWindow/HierarchyWindow.h"
 #include "UIWindow/GameObjectWindow.h"
 #include "UIWindow/AboutWindow.h"
+#include "UIWindow/ToolbarWindow.h"
 #include "Leaks.h"
 ModuleEditor::ModuleEditor()
 {
@@ -33,6 +34,7 @@ bool ModuleEditor::Init()
     AddWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     AddWindow(gameObjectWindow = new GameObjectWindow("GameObject", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     AddWindow(aboutWindow = new AboutWindow("About", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(toolbarWindow = new ToolbarWindow("Toolbar", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();

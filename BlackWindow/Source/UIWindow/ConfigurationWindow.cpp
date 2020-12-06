@@ -16,6 +16,8 @@
 #include <windows.h> //memory consumption
 #include "psapi.h"
 #include "Core/Point.h"
+#include "Core/Time/WorldTimer.h"
+#include "ModuleWorld.h"
 void ConfigurationWindow::Update()
 {
 
@@ -282,13 +284,13 @@ void ConfigurationWindow::DrawApplicationConfig()
         ImGui::Text(TITLE);
         ImGui::Spacing();
         ImGui::Text("UPC");
-      
+
         // Max FPS
-        float fps = App->GetMaxFps();
-        ImGui::DragFloat("Max fps", &fps, 1.0f,1.0f,255.0f);
-        App->SetMaxFps(fps);
+        float fps = App->world->GetWorldTimer()->GetMaxFps();
+        ImGui::DragFloat("Max fps", &fps, 1.0f,10.0f,255.0f);
+        App->world->GetWorldTimer()->SetMaxFps(fps);
         // Limit Frame Rate
-        float* fpsResults = App->GetFpsResults();
+        const float* fpsResults = App->world->GetWorldTimer()->GetFpsResults();
         ImGui::Text("Limit Framerate:");
         ImGui::SameLine();
         ImGui::TextColored(ImVec4(1.0f, 0.0f, 1.0f, 1.0f), "%f", fpsResults[0]); //color text
@@ -299,8 +301,8 @@ void ConfigurationWindow::DrawApplicationConfig()
         ImGui::PlotHistogram("##framerate", fpsResults, SAMPLESFPS, 0,title1, 0.0f, 300.0f, ImVec2(310, 120)); // name (not forget #) , arr of values, size of arr, offset, min , size of col
 
         // Graph 2
-        float* frameTimesResults = App->GetFrameTimes();
-        char title2[25];
+        const float* frameTimesResults = App->world->GetWorldTimer()->GetFrameTimesResults();
+        char title2[25] = "";
         sprintf_s(title2, 25, "Milliseconds %.1f", frameTimesResults[0]);
         ImGui::PlotHistogram("##milliseconds", frameTimesResults, SAMPLESFPS, 0, title2, 0.0f, 300.0f, ImVec2(310, 100));
 

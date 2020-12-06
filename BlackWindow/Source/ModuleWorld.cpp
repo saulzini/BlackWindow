@@ -10,11 +10,12 @@
 #include <string>
 #include "Leaks.h"
 #include "../glm/glm.hpp"
-
+#include "Core/Time/WorldTimer.h"
 ModuleWorld::ModuleWorld()
 {
 	model = nullptr;
 	program = 0;
+	worldTimer = new WorldTimer();
 
 	sky = nullptr;
 	programSky = 0;
@@ -47,6 +48,7 @@ update_status ModuleWorld::Update(float deltaTime)
 	
 	//glDisable(GL_DEPTH_TEST);
 	//App->world->sky->Draw();
+	worldTimer->Update();
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
@@ -88,6 +90,8 @@ update_status ModuleWorld::Update(float deltaTime)
 	//App->world->sky->Draw();
 	//glEnable(GL_DEPTH_TEST);
 	//(glEnable(GL_DEPTH_TEST);
+	worldTimer->RegulateFPS();
+
 	return UPDATE_CONTINUE;
 }
 
@@ -100,6 +104,9 @@ bool ModuleWorld::CleanUp()
 {
 	delete (model);
 	model = nullptr;
+
+	delete (worldTimer);
+	worldTimer = nullptr;
 	
 	return true;
 }
