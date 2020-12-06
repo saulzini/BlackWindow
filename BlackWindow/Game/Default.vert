@@ -6,7 +6,7 @@ layout(location = 2) in vec2 TexCoords;
 uniform mat4 proj;
 uniform mat4 view;
 uniform mat4 model;
-uniform vec3 viewDire;
+
 
 out vec3 FragPos;
 out vec3 fragment_normal;

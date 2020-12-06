@@ -69,8 +69,8 @@ public:
 	{
 			"right.jpg",
 			"left.jpg",
-			"top.jpg",
 			"bottom.jpg",
+			"top.jpg",
 			"front.jpg",
 			"back.jpg"
 	};

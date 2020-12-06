@@ -64,7 +64,7 @@ update_status ModuleCamera::Update(float deltaTime)
 
 	// Check for reset camera position
 	CheckForResetCameraPosition();
-
+	
 	//Keyboard movements
 	MoveForward(deltaTime);
 	MoveRight(deltaTime);

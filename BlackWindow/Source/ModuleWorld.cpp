@@ -29,7 +29,6 @@ bool ModuleWorld::Init()
 {
 
 
-	
 	model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
 	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
 	programSky = App->program->CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
@@ -45,8 +44,9 @@ update_status ModuleWorld::PreUpdate(float deltaTime)
 
 update_status ModuleWorld::Update(float deltaTime)
 {
-
-
+	
+	//glDisable(GL_DEPTH_TEST);
+	//App->world->sky->Draw();
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
@@ -65,24 +65,29 @@ update_status ModuleWorld::Update(float deltaTime)
 	GLint viewPos = glGetUniformLocation(program, "viewPos");
 	GLint colorAmbient = glGetUniformLocation(program, "colorAmbient");
 
-	glUniform1f(ks, 0.2f);
-	glUniform1f(kd, 0.1f);
+	glUniform1f(ks, 0.8f);
+	glUniform1f(kd, 0.6f);
 	glUniform1f(N, 32);
 
 	float3 lightpos = { 1.0f, 0.0f, 0.0f };
 	float3 lightcolor = { 1.0f, 1.0f, 1.0f };
 	float3 view_Pos = App->camera->cameraPosition;
-	float3 color_Ambient = { 0.5f, 0.5f, 0.5f };
+	float3 color_Ambient = { 1.0f, 1.0f, 1.0f };
 
 	glUniform1i(glGetUniformLocation(program, "texture_diffuse"), 0);
-	glUniform3f(light_pos, lightpos[0], lightpos[1], lightpos[2]);
-	glUniform3f(light_color, lightcolor[0], lightcolor[1], lightcolor[2]);
-	glUniform3f(viewPos, view_Pos[0], view_Pos[1], view_Pos[2]);
-	glUniform3f(colorAmbient, color_Ambient[0], color_Ambient[1], color_Ambient[2]);
+	glUniform3f(light_pos,		   lightpos[0],		 lightpos[1],		lightpos[2]);
+	glUniform3f(light_color,	 lightcolor[0],    lightcolor[1],	  lightcolor[2]);
+	glUniform3f(viewPos,		   view_Pos[0],		 view_Pos[1],		view_Pos[2]);
+	glUniform3f(colorAmbient, color_Ambient[0], color_Ambient[1],  color_Ambient[2]);
 
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 
 	model->Draw(program);
+
+	//glDisable(GL_DEPTH_TEST);
+	//App->world->sky->Draw();
+	//glEnable(GL_DEPTH_TEST);
+	//(glEnable(GL_DEPTH_TEST);
 	return UPDATE_CONTINUE;
 }
 

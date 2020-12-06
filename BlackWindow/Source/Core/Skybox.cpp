@@ -17,14 +17,7 @@
 Skybox::Skybox()
 {
 
-    glGenVertexArrays(1, &skyboxVAO);
-    glGenBuffers(1, &skyboxVBO);
-    glBindVertexArray(skyboxVAO);
-    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-    programSky = App->world->programSky;
+    //programSky = App->world->programSky;
     
    // this->loadCubemap(files);
 
@@ -48,22 +41,26 @@ unsigned int Skybox::loadCubemap(std::vector<std::string> files)
     ilEnable(IL_ORIGIN_SET);
     ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
     ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
    
     for (unsigned int i = 0; i < files.size(); i++)
     {
         FileManager fileTexture;
+        std::string resultPath("");
+        resultPath = "";
+        resultPath.append(files[i].c_str());
 
-        if (fileTexture.ReadFile(files[i].c_str()))
+        if (fileTexture.ReadFile(resultPath.c_str()))
         {
 
             success = ilLoadL(IL_TYPE_UNKNOWN, fileTexture.GetFile(), fileTexture.GetSize());
             if (success)
             {
-                ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
-                glGenTextures(1, &textureID);
-                glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, textureID);
+               // ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+               // glGenTextures(1, &textureID);
+               // glBindTexture(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, textureID);
                 glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
                     0,
                     ilGetInteger(IL_IMAGE_BPP),
@@ -73,8 +70,8 @@ unsigned int Skybox::loadCubemap(std::vector<std::string> files)
                     ilGetInteger(IL_IMAGE_FORMAT),
                     GL_UNSIGNED_BYTE,
                     ilGetData());
-                glGenerateMipmap(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
-                ilDeleteImage(textureID); //release from il since we have it in opengl
+               // glGenerateMipmap(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i);
+                //ilDeleteImage(textureID); //release from il since we have it in opengl
             }
         }
         else
@@ -84,13 +81,15 @@ unsigned int Skybox::loadCubemap(std::vector<std::string> files)
         }
 
     }
+    glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+    ilDeleteImage(textureID); //release from il since we have it in opengl
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-
-   //lDeleteImage(textureID); //release from il since we have it in opengl
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+    //glDeleteTextures(1,textureID); //release from il since we have it in opengl
     return textureID;
 
 }
@@ -100,18 +99,28 @@ unsigned int Skybox::loadCubemap(std::vector<std::string> files)
 void Skybox::Draw() {
 
 
+    glGenVertexArrays(1, &skyboxVAO);
+    glGenBuffers(1, &skyboxVBO);
+    glBindVertexArray(skyboxVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, skyboxVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), &skyboxVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-    glUseProgram(programSky);
+
+    glDepthMask(GL_TRUE); // superfluous
+    glDepthFunc(GL_ALWAYS);
+    glUseProgram(App->world->programSky);
     float4x4 proj = App->camera->GetProjection();
     float4x4 view = App->camera->GetView();
-    
+   // view = glm::mat4(glm::mat3(App->camera->GetView())); // remove translation from the view matrix
     float4x4 identityModel = float4x4::identity;
-    glDepthFunc(GL_LEQUAL);
+    //glDepthFunc(GL_LEQUAL);
 
-    glUniform1i(glGetUniformLocation(programSky, "skybox"), 0);
+    glUniform1i(glGetUniformLocation(App->world->programSky, "Skybox"), 0);
     //glUniformMatrix4fv(glGetUniformLocation(programSky, "model"), 1, GL_TRUE, &identityModel[0][0]); //GL_TRUE transpose the matrix
-    glUniformMatrix4fv(glGetUniformLocation(programSky, "view"), 1, GL_TRUE, &view[0][0]);
-    glUniformMatrix4fv(glGetUniformLocation(programSky, "proj"), 1, GL_TRUE, &proj[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(App->world->programSky, "view"), 1, GL_TRUE, &view[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(App->world->programSky, "proj"), 1, GL_TRUE, &proj[0][0]);
 
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
@@ -119,11 +128,12 @@ void Skybox::Draw() {
     glActiveTexture(GL_TEXTURE0);
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
-    glDepthFunc(GL_LESS); // set depth function back to default
+    //glDepthFunc(GL_LESS); // set depth function back to default
     glBindVertexArray(0);
+    glDepthFunc(GL_LESS);
     glDeleteVertexArrays(1, &skyboxVAO);
     glDeleteBuffers(1, &skyboxVAO);
-      
+   /// glDeleteProgram(App->world->programSky);
 }
 
 

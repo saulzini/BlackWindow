@@ -80,12 +80,15 @@ public:
 	}
 
 	void SetFOV(float horizontalFov, float aspectRatio);
-	
+
 
 	float4x4 GetView() const{
 		return frustum.ViewMatrix();
 	};
 
+	float4x4 GetViewProjectionM() const {
+		return frustum.ViewProjMatrix();
+	};
 
 	float4x4 GetProjection() const {
 		return frustum.ProjectionMatrix();

@@ -44,8 +44,6 @@ void Mesh::Draw(const unsigned int shader)
 void Mesh::SetupMesh()
 {
 
-    
-    
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     glGenBuffers(1, &EBO);
