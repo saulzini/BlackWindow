@@ -101,13 +101,16 @@ update_status ModuleRender::Update(float deltaTime)
 	int w = 0;
 	int h = 0;
 	SDL_GetWindowSize(App->window->window, &w, &h);
-	//glClearColor(0.439f, 0.439f, 0.439f, 1.0f);
-	glDisable(GL_DEPTH_TEST);
-	App->world->sky->Draw();
+	glClearColor(0.439f, 0.439f, 0.439f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	//glDisable(GL_DEPTH_TEST);
+	//App->world->sky->Draw();
+
 	//glDepthMask(GL_TRUE);
 	//glEnable(GL_DEPTH_TEST);
 	//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	/*
 	glLineWidth(1.0f);
 	float d = 200.0f;
 	glBegin(GL_LINES);
@@ -153,7 +156,7 @@ update_status ModuleRender::Update(float deltaTime)
 	glVertex3f(0.05f, -0.1f, 1.05f);
 	glEnd();
 	glLineWidth(1.0f);
-
+	*/
 	return UPDATE_CONTINUE;
 }
 

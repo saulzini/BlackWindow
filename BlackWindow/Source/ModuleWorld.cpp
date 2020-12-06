@@ -34,7 +34,7 @@ bool ModuleWorld::Init()
 	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
 	programSky = App->program->CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
 	sky = new Skybox();
-	
+
 	return true;
 }
 
@@ -48,6 +48,7 @@ update_status ModuleWorld::Update(float deltaTime)
 	
 	//glDisable(GL_DEPTH_TEST);
 	//App->world->sky->Draw();
+
 	worldTimer->Update();
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
@@ -83,11 +84,15 @@ update_status ModuleWorld::Update(float deltaTime)
 	glUniform3f(colorAmbient, color_Ambient[0], color_Ambient[1],  color_Ambient[2]);
 
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
-
+	
+	//glDisable(GL_DEPTH_TEST);
+	//sky->Draw();
+	//glEnable(GL_DEPTH_TEST);
 	model->Draw(program);
 
+	//sky->Draw();
 	//glDisable(GL_DEPTH_TEST);
-	//App->world->sky->Draw();
+	App->world->sky->Draw();
 	//glEnable(GL_DEPTH_TEST);
 	//(glEnable(GL_DEPTH_TEST);
 	worldTimer->RegulateFPS();
