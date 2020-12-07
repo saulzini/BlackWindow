@@ -426,10 +426,13 @@
     <ClInclude Include="BlackWindow\Source\Core\Time\TimerState.h" />
     <ClInclude Include="BlackWindow\Source\Core\Time\WorldTimer.h" />
     <ClInclude Include="BlackWindow\Source\Core\Vertex.h" />
+    <ClInclude Include="BlackWindow\Source\debugdraw.h" />
+    <ClInclude Include="BlackWindow\Source\debug_draw.hpp" />
     <ClInclude Include="BlackWindow\Source\GeometryLoader.h" />
     <ClInclude Include="BlackWindow\Source\Globals.h" />
     <ClInclude Include="BlackWindow\Source\Module.h" />
     <ClInclude Include="BlackWindow\Source\ModuleCamera.h" />
+    <ClInclude Include="BlackWindow\Source\ModuleDebugDraw.h" />
     <ClInclude Include="BlackWindow\Source\ModuleEditor.h" />
     <ClInclude Include="BlackWindow\Source\ModuleInput.h" />
     <ClInclude Include="BlackWindow\Source\ModuleProgram.h" />
@@ -511,6 +514,7 @@
     <ClCompile Include="BlackWindow\Source\log.cpp" />
     <ClCompile Include="BlackWindow\Source\Main.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleCamera.cpp" />
+    <ClCompile Include="BlackWindow\Source\ModuleDebugDraw.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleEditor.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleInput.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleProgram.cpp" />
