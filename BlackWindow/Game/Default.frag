@@ -5,7 +5,7 @@ uniform vec3 light_color;
 uniform vec3 viewPos;
 uniform float ks,kd;
 uniform vec3 colorAmbient;
-uniform int N;
+uniform float N;
 in vec2 uv;
 uniform sampler2D texture_diffuse;
 in vec3 fragment_normal;

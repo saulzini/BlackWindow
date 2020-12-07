@@ -45,9 +45,6 @@ update_status ModuleWorld::PreUpdate(float deltaTime)
 
 update_status ModuleWorld::Update(float deltaTime)
 {
-	
-	//glDisable(GL_DEPTH_TEST);
-	//App->world->sky->Draw();
 
 	worldTimer->Update();
 	glUseProgram(program);
@@ -85,16 +82,10 @@ update_status ModuleWorld::Update(float deltaTime)
 
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 	
-	//glDisable(GL_DEPTH_TEST);
-	//sky->Draw();
-	//glEnable(GL_DEPTH_TEST);
+
 	model->Draw(program);
 
-	//sky->Draw();
-	//glDisable(GL_DEPTH_TEST);
 	App->world->sky->Draw();
-	//glEnable(GL_DEPTH_TEST);
-	//(glEnable(GL_DEPTH_TEST);
 	worldTimer->RegulateFPS();
 
 	return UPDATE_CONTINUE;
