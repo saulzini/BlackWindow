@@ -7,6 +7,7 @@
 #include "ModuleProgram.h"
 #include "ModuleWorld.h"
 #include "ModuleEditor.h"
+#include "ModuleDebugDraw.h"
 #include "SDL.h"
 #include "Leaks.h"
 #include <IL/ilut.h> 
@@ -26,10 +27,10 @@ Application::Application()
 	modules.push_back(renderer = new ModuleRender());
 	modules.push_back(input = new ModuleInput());
 	modules.push_back(camera = new ModuleCamera());
-	modules.push_back(editor = new ModuleEditor());
-
+ 	//modules.push_back(editor = new ModuleEditor());
+	modules.push_back(draw = new ModuleDebugDraw());
 	modules.push_back(world = new ModuleWorld());
-
+	modules.push_back(editor = new ModuleEditor());
 }
 
 Application::~Application()

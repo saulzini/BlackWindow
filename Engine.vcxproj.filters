@@ -210,6 +210,7 @@
     <ClCompile Include="BlackWindow\Source\UIWindow\ToolbarWindow.cpp">
       <Filter>Graphics\UIWindow</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Source\ModuleDebugDraw.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
@@ -1032,6 +1033,9 @@
     <ClInclude Include="BlackWindow\Source\UIWindow\ToolbarWindow.h">
       <Filter>Graphics\UIWindow</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\debugdraw.h" />
+    <ClInclude Include="BlackWindow\Source\debug_draw.hpp" />
+    <ClInclude Include="BlackWindow\Source\ModuleDebugDraw.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">

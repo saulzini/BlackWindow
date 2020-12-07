@@ -13,7 +13,7 @@ class ModuleProgram;
 class ModuleTextures;
 class ModuleEditor;
 class ModuleWorld;
-
+class ModuleDebugDraw;
 class Application
 {
 public:
@@ -31,6 +31,7 @@ public:
 	ModuleInput* input = nullptr;
 	ModuleCamera* camera = nullptr;
 	ModuleProgram* program = nullptr;
+	ModuleDebugDraw* draw = nullptr;
 	ModuleEditor* editor = nullptr;
 	DeltaTime deltaTime;
 
