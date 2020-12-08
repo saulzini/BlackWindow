@@ -28,7 +28,7 @@ ModuleEditor::~ModuleEditor()
 bool ModuleEditor::Init()
 {
     //Creating windows
-    AddWindow(consoleWindow = new ConsoleWindow("Console window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    // AddWindow(consoleWindow = new ConsoleWindow("Console window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     AddWindow(configurationWindow = new ConfigurationWindow("Configuration window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     AddWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar ));
     AddWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
@@ -133,6 +133,7 @@ void ModuleEditor::UpdateWindows()
     {
         windows[i]->Update();
     }
+    App->consoleWindow->Update();
 }
 
 void ModuleEditor::ShowDockSpace(bool *pOpen)
@@ -199,7 +200,7 @@ void ModuleEditor::DrawMenu()
         if (ImGui::BeginMenu("View"))
         {
             if (ImGui::MenuItem("Console window"))
-                consoleWindow->toggleWindow();
+                App->consoleWindow->toggleWindow();
             if (ImGui::MenuItem("Hierarchy window"))
                 hierarchyWindow->toggleWindow();
             if (ImGui::MenuItem("Config window"))

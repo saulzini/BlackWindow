@@ -269,7 +269,7 @@ void ModuleCamera::WindowResized(int width, int height)
 
 	if (newHeight == 0.0f)
 	{
-		App->editor->consoleWindow->AddLog("Error cant set aspect ratio");
+		App->consoleWindow->AddLog("Error cant set aspect ratio");
 		return;
 	}
 	SetAspectRatio((float)width / (float)newHeight);
