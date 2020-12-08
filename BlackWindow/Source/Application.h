@@ -14,6 +14,8 @@ class ModuleTextures;
 class ModuleEditor;
 class ModuleWorld;
 class ModuleDebugDraw;
+class ConsoleWindow;
+
 class Application
 {
 public:
@@ -37,6 +39,8 @@ public:
 
 	ModuleWorld* world= nullptr;
 	void RequestBrowser(const char* route);
+
+	ConsoleWindow* consoleWindow;
 
 private:
 	std::list<Module*> modules;

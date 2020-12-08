@@ -62,8 +62,6 @@ private:
 	std::vector<Mesh> meshes;
 	std::string directory;
 	std::vector<Texture> texturesLoaded;
-	// TextureLoader *textureLoader;
-
 
 	aiVector3D boundBoxMin;
 	aiVector3D boundBoxMax;
