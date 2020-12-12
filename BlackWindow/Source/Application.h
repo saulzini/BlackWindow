@@ -12,7 +12,7 @@ class ModuleCamera;
 class ModuleProgram;
 class ModuleTextures;
 class ModuleEditor;
-class ModuleWorld;
+class ModuleScene;
 class ModuleDebugDraw;
 class ConsoleWindow;
 
@@ -32,12 +32,11 @@ public:
 	ModuleWindow* window = nullptr;
 	ModuleInput* input = nullptr;
 	ModuleCamera* camera = nullptr;
-	ModuleProgram* program = nullptr;
 	ModuleDebugDraw* draw = nullptr;
 	ModuleEditor* editor = nullptr;
 	DeltaTime deltaTime;
 
-	ModuleWorld* world= nullptr;
+	ModuleScene* scene= nullptr;
 	void RequestBrowser(const char* route);
 
 	ConsoleWindow* consoleWindow;

@@ -2,7 +2,7 @@
 #include "DefaultImGuiWindow.h"
 #include "Application.h"
 #include "ModuleWindow.h"
-#include "ModuleWorld.h"
+#include "ModuleScene.h"
 
 class ConfigurationWindow :
 	public DefaultImGuiWindow

@@ -2,7 +2,7 @@
 #include "Application.h"
 #include "ModuleInput.h"
 #include "ModuleWindow.h"
-#include "ModuleWorld.h"
+#include "ModuleScene.h"
 #include "SDL.h"
 #include "imgui_impl_sdl.h"
 #include "ModuleCamera.h"

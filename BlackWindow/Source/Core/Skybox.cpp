@@ -8,9 +8,9 @@
 #include "UIWindow/ConsoleWindow.h"
 #include "Application.h"
 #include "ModuleCamera.h"
-#include "ModuleProgram.h"
+#include "Core/Program/Program.h"
 #include "Math/float4x4.h"
-#include "ModuleWorld.h"
+#include "ModuleScene.h"
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include "../../Resources/glm/ext/matrix_float4x4.hpp"
@@ -24,7 +24,7 @@ Skybox::Skybox()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
-    //programSky = App->world->programSky;
+    //programSky = App->scene->programSky;
     
    // this->loadCubemap(files);
 
@@ -107,17 +107,17 @@ void Skybox::Draw() {
 
     glDepthMask(GL_FALSE); // superfluous
     glDepthFunc(GL_LEQUAL);
-    glUseProgram(App->world->programSky);
+    glUseProgram(App->scene->programSky);
     float4x4 proj = App->camera->GetProjection();
     float4x4 view = App->camera->GetView();
    // view = glm::mat4(glm::mat3(App->camera->GetView())); // remove translation from the view matrix
     //float4x4 identityModel = float4x4::identity;
    // glDepthFunc(GL_LEQUAL);
 
-    glUniform1i(glGetUniformLocation(App->world->programSky, "Skybox"), 0);
+    glUniform1i(glGetUniformLocation(App->scene->programSky, "Skybox"), 0);
     //glUniformMatrix4fv(glGetUniformLocation(programSky, "model"), 1, GL_TRUE, &identityModel[0][0]); //GL_TRUE transpose the matrix
-    glUniformMatrix4fv(glGetUniformLocation(App->world->programSky, "view"), 1, GL_TRUE, &view[0][0]);
-    glUniformMatrix4fv(glGetUniformLocation(App->world->programSky, "proj"), 1, GL_TRUE, &proj[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(App->scene->programSky, "view"), 1, GL_TRUE, &view[0][0]);
+    glUniformMatrix4fv(glGetUniformLocation(App->scene->programSky, "proj"), 1, GL_TRUE, &proj[0][0]);
 
 
 
@@ -131,7 +131,7 @@ void Skybox::Draw() {
     glDepthMask(GL_TRUE); // superfluous
     //glDeleteVertexArrays(1, &skyboxVAO);
    // glDeleteBuffers(1, &skyboxVAO);
-   /// glDeleteProgram(App->world->programSky);
+   /// glDeleteProgram(App->scene->programSky);
 }
 
 

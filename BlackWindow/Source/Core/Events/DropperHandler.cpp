@@ -1,7 +1,7 @@
 #include "DropperHandler.h"
 #include <string>
 #include "Application.h"
-#include "ModuleWorld.h"
+#include "ModuleScene.h"
 #include "ModuleWindow.h"
 #include "SDL.h"
 
@@ -10,7 +10,7 @@ void DropperHandler::DropFileIntoWindow(char *filePath)
 {
 	char * found = strstr (filePath,"fbx");
     if (found == NULL){ // force to check if image
-        App->world->SwapTexture(filePath);
+        App->scene->SwapTexture(filePath);
         // TODO::Validate through a list of extensions
         // SDL_ShowSimpleMessageBox(
         //     SDL_MESSAGEBOX_INFORMATION,
@@ -22,5 +22,5 @@ void DropperHandler::DropFileIntoWindow(char *filePath)
         return;
     }
 
-    App->world->SwapModel(filePath);
+    App->scene->SwapModel(filePath);
 }

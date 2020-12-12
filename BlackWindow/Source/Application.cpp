@@ -4,8 +4,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleCamera.h"
-#include "ModuleProgram.h"
-#include "ModuleWorld.h"
+#include "ModuleScene.h"
 #include "ModuleEditor.h"
 #include "ModuleDebugDraw.h"
 #include "SDL.h"
@@ -23,13 +22,11 @@ Application::Application()
 
 	// Order matters: they will Init/start/update in this order
 	modules.push_back(window = new ModuleWindow());
-	modules.push_back(program = new ModuleProgram());
-
 	modules.push_back(renderer = new ModuleRender());
 	modules.push_back(input = new ModuleInput());
 	modules.push_back(camera = new ModuleCamera());
 	modules.push_back(draw = new ModuleDebugDraw());
-	modules.push_back(world = new ModuleWorld());
+	modules.push_back(scene = new ModuleScene());
 	modules.push_back(editor = new ModuleEditor());
 
     consoleWindow = new ConsoleWindow("Console window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground);
@@ -72,8 +69,8 @@ update_status Application::Update()
 
 	for(list<Module*>::iterator it = modules.begin(); it != modules.end() && ret == UPDATE_CONTINUE; ++it){
 
-		// if ( (*it) == world || (*it) == camera){ //Testing purposes at the end only let the world
-		if ( (*it) == world ){ 
+		// if ( (*it) == scene || (*it) == camera){ //Testing purposes at the end only let the world
+		if ( (*it) == scene){
 			ret = (*it)->Update( deltaTime.GetDeltaTimeWorldAdjusted() );
 		}
 		else {

@@ -4,12 +4,14 @@
 #include "Core/Time/WorldTimer.h"
 #include "Core/Skybox.h"
 
-class ModuleWorld :
+class GameObject;
+
+class ModuleScene :
 	public Module
 {
 public:
-	ModuleWorld();
-	~ModuleWorld();
+	ModuleScene();
+	~ModuleScene();
 	unsigned int programSky;
 	bool Init() override;
 	update_status PreUpdate(float deltaTime) override;
@@ -33,6 +35,8 @@ public:
 	WorldTimer* GetWorldTimer() const{
 		return worldTimer;
 	}
+
+	GameObject* CreateGameObject();
 
 private:
 	Model* model;

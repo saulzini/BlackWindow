@@ -1,7 +1,7 @@
-﻿#include "ModuleWorld.h"
+﻿#include "ModuleScene.h"
 #include "GL/glew.h"
 #include "Application.h"
-#include "ModuleProgram.h"
+#include "Core/Program/Program.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
 #include "Core/Mesh.h"
@@ -11,7 +11,8 @@
 #include "Leaks.h"
 #include "../glm/glm.hpp"
 #include "Core/Time/WorldTimer.h"
-ModuleWorld::ModuleWorld()
+
+ModuleScene::ModuleScene()
 {
 	model = nullptr;
 	program = 0;
@@ -21,29 +22,30 @@ ModuleWorld::ModuleWorld()
 	programSky = 0;
 }
 
-ModuleWorld::~ModuleWorld()
+ModuleScene::~ModuleScene()
 {
 	
 }
 
-bool ModuleWorld::Init()
+bool ModuleScene::Init()
 {
+	Program programClass;
 
 
 	model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
-	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
-	programSky = App->program->CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
+	program = programClass.CreateProgramFromSource("Default.vert", "Default.frag");
+	programSky = programClass.CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
 	sky = new Skybox();
 
 	return true;
 }
 
-update_status ModuleWorld::PreUpdate(float deltaTime)
+update_status ModuleScene::PreUpdate(float deltaTime)
 {
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleWorld::Update(float deltaTime)
+update_status ModuleScene::Update(float deltaTime)
 {
 
 	worldTimer->Update();
@@ -85,18 +87,18 @@ update_status ModuleWorld::Update(float deltaTime)
 
 	model->Draw(program);
 
-	App->world->sky->Draw();
+	App->scene->sky->Draw();
 	worldTimer->RegulateFPS();
 
 	return UPDATE_CONTINUE;
 }
 
-update_status ModuleWorld::PostUpdate(float deltaTime)
+update_status ModuleScene::PostUpdate(float deltaTime)
 {
 	return UPDATE_CONTINUE;
 }
 
-bool ModuleWorld::CleanUp()
+bool ModuleScene::CleanUp()
 {
 	delete (model);
 	model = nullptr;
@@ -107,7 +109,7 @@ bool ModuleWorld::CleanUp()
 	return true;
 }
 
-void ModuleWorld::SwapTexture(const char *texturePath) 
+void ModuleScene::SwapTexture(const char *texturePath) 
 {
 	std::string textPath(texturePath);
 	std::string directory = textPath.substr(0, textPath.find_last_of('\\'));
@@ -120,7 +122,7 @@ void ModuleWorld::SwapTexture(const char *texturePath)
 	
 }
 
-void ModuleWorld::SwapModel(const char *modelPath)
+void ModuleScene::SwapModel(const char *modelPath)
 {
 	// Free space of previous model
 	delete (model);
