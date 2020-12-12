@@ -199,7 +199,7 @@ void ModuleEditor::DrawMenu()
         if (ImGui::BeginMenu("View"))
         {
             if (ImGui::MenuItem("Console window"))
-                App->editor->consoleWindow->toggleWindow();
+                consoleWindow->toggleWindow();
             if (ImGui::MenuItem("Hierarchy window"))
                 hierarchyWindow->toggleWindow();
             if (ImGui::MenuItem("Config window"))
