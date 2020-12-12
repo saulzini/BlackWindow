@@ -419,6 +419,8 @@
     <ClInclude Include="BlackWindow\Source\Core\Events\DropperHandler.h" />
     <ClInclude Include="BlackWindow\Source\Core\FileManager.h" />
     <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObject.h" />
+    <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObjectFactory.h" />
+    <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObjectTypes.h" />
     <ClInclude Include="BlackWindow\Source\Core\Mesh.h" />
     <ClInclude Include="BlackWindow\Source\Core\Model.h" />
     <ClInclude Include="BlackWindow\Source\Core\Program\Program.h" />

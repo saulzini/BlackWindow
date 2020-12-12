@@ -3,12 +3,18 @@
 #include "Core/Model.h"
 #include "Core/Time/WorldTimer.h"
 #include "Core/Skybox.h"
-
+#include "Core/GameObject/GameObjectTypes.h"
 class GameObject;
 
-class ModuleScene :
-	public Module
+class ModuleScene : public Module
 {
+
+private:
+	Model* model;
+	//unsigned int programSky;
+	unsigned int program;
+	WorldTimer* worldTimer;
+
 public:
 	ModuleScene();
 	~ModuleScene();
@@ -36,12 +42,8 @@ public:
 		return worldTimer;
 	}
 
-	GameObject* CreateGameObject();
+	GameObject* CreateGameObject(GameObjectTypes type);
 
-private:
-	Model* model;
-	//unsigned int programSky;
-	unsigned int program;
-	WorldTimer* worldTimer;
+	std::vector<GameObject *> gameObjects;
 };
 

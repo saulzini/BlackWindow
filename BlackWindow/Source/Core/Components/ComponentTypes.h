@@ -1,9 +1,10 @@
 #pragma once
 
 enum class ComponentTypes { 
-    Transform,
-    Mesh,
-    Material,
-    Texture2D,
-    Script,
+    NONE,
+    TRANSFORM,
+    MESH,
+    MATERIAL,
+    TEXTURE2D,
+    SCRIPT,
 };

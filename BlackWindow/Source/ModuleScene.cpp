@@ -11,7 +11,7 @@
 #include "Leaks.h"
 #include "../glm/glm.hpp"
 #include "Core/Time/WorldTimer.h"
-
+#include "Core/GameObject/GameObjectFactory.h"
 ModuleScene::ModuleScene()
 {
 	model = nullptr;
@@ -130,4 +130,9 @@ void ModuleScene::SwapModel(const char *modelPath)
 	model = new Model(modelPath);
 
 	App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
+}
+
+GameObject* ModuleScene::CreateGameObject(GameObjectTypes type) 
+{
+	return GameObjectFactory::CreateGameObject(type);
 }

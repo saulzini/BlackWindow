@@ -7,6 +7,28 @@ class Application;
 
 class ModuleWindow : public Module
 {
+
+public:
+	//The window we'll be rendering to
+	SDL_Window* window = NULL;
+
+	//The surface contained by the window
+	SDL_Surface* screen_surface = NULL;
+
+private:
+	int width;
+	int height;
+
+	int maxWidth;
+	int maxHeight;
+	int refreshRate;
+	float brightness;
+
+	bool fullscreen;
+	bool resizable;
+	bool border;
+	bool fullDesktop;
+
 public:
 
 	ModuleWindow();
@@ -79,24 +101,4 @@ public:
 
 	void SetFullDesktop(bool value);
 
-public:
-	//The window we'll be rendering to
-	SDL_Window* window = NULL;
-
-	//The surface contained by the window
-	SDL_Surface* screen_surface = NULL;
-
-private:
-	int width;
-	int height;
-
-	int maxWidth;
-	int maxHeight;
-	int refreshRate;
-	float brightness;
-
-	bool fullscreen;
-	bool resizable;
-	bool border;
-	bool fullDesktop;
 };
