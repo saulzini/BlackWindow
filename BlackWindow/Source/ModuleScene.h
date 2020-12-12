@@ -4,6 +4,8 @@
 #include "Core/Time/WorldTimer.h"
 #include "Core/Skybox.h"
 
+class GameObject;
+
 class ModuleScene :
 	public Module
 {
@@ -33,6 +35,8 @@ public:
 	WorldTimer* GetWorldTimer() const{
 		return worldTimer;
 	}
+
+	GameObject* CreateGameObject();
 
 private:
 	Model* model;
