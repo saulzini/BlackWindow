@@ -12,8 +12,11 @@ namespace GameObjectFactory
             case GameObjectTypes::SCRIPT:
                 gameObject->AddComponent(ComponentTypes::SCRIPT);
                 break;
+            case GameObjectTypes::DEFAULT:
+                gameObject->AddComponent(ComponentTypes::TRANSFORM);
+                break;
             default:
-                gameObject->AddComponent(ComponentTypes::TRANSFORM); 
+                gameObject->AddComponent(ComponentTypes::NONE);
                 break;
         }   
         return gameObject;
