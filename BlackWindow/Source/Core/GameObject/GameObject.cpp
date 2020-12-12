@@ -1,8 +1,8 @@
 #pragma once
 #include "GameObject.h"
-#include "Core/Components/Component.h"
+#include "Core/Components/ComponentFactory.h"
 
-Component* GameObject::CreateComponent(ComponentTypes type)
+void GameObject::AddComponent(ComponentTypes type)
 {
-    return new Component(type);
+    components.push_back( ComponentFactory::CreateComponent(type) );
 }

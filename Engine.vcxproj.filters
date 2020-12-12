@@ -1052,6 +1052,12 @@
     <ClInclude Include="BlackWindow\Source\Core\Program\Program.h">
       <Filter>Core\Program</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObjectFactory.h">
+      <Filter>Core\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObjectTypes.h">
+      <Filter>Core\GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">

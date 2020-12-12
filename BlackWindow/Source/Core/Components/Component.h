@@ -11,14 +11,13 @@ private:
 
 public:
     
-    Component(ComponentTypes type){
+    Component(ComponentTypes type = ComponentTypes::NONE){
         this->type = type;
         active = false;
         owner = nullptr;
     }
 
-    ~Component() {
-    }
+    ~Component() {}
 
     virtual void Enable(){}
     virtual void Update(){}

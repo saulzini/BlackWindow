@@ -17,5 +17,5 @@ public:
     }
     ~GameObject(){}
     virtual void Update(){}
-    Component* CreateComponent(ComponentTypes type);
+    void AddComponent(ComponentTypes type);
 };
