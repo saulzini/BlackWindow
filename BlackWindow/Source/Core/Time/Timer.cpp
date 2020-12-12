@@ -7,7 +7,7 @@ void Timer::Start()
 {
     if (currentState == TimerState::RUNNING)
     {
-        App->consoleWindow->AddLog("Timer already runnning");
+        App->editor->consoleWindow->AddLog("Timer already runnning");
         return;
     }
 

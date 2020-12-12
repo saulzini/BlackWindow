@@ -39,7 +39,6 @@ public:
 	ModuleScene* scene= nullptr;
 	void RequestBrowser(const char* route);
 
-	ConsoleWindow* consoleWindow;
 
 private:
 	std::list<Module*> modules;

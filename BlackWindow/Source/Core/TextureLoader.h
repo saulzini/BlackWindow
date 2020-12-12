@@ -88,7 +88,7 @@ public:
 				break;
 			}
 
-			App->consoleWindow->AddLog(buf.append(resultPath.c_str()).c_str());
+			App->editor->consoleWindow->AddLog(buf.append(resultPath.c_str()).c_str());
 
 			//Reading file
 			FileManager fileTexture;
@@ -112,13 +112,13 @@ public:
 					while ((Error = ilGetError()) != IL_NO_ERROR)
 					{
 						buf = "Error Loading texture: ";
-						App->consoleWindow->AddLog(buf.append(iluErrorString(Error)).c_str());
+						App->editor->consoleWindow->AddLog(buf.append(iluErrorString(Error)).c_str());
 					}
 				}
 			}
 			else {
 				buf = "Error reading texture file";
-				App->consoleWindow->AddLog(buf.c_str());
+				App->editor->consoleWindow->AddLog(buf.c_str());
 			}
 
 			// // load  the image
@@ -131,7 +131,7 @@ public:
 			// 	while ((Error = ilGetError()) != IL_NO_ERROR)
 			// 	{
 			// 		buf = "Error Loading texture: ";
-			// 		App->consoleWindow->AddLog(buf.append(iluErrorString(Error)).c_str());
+			// 		App->editor->consoleWindow->AddLog(buf.append(iluErrorString(Error)).c_str());
 			// 	}
 			// }
 		}
@@ -143,7 +143,7 @@ public:
 		}
 
 		std::string buf = "Loaded texture:";
-		App->consoleWindow->AddLog(buf.append(filename.c_str()).c_str());
+		App->editor->consoleWindow->AddLog(buf.append(filename.c_str()).c_str());
 
 		/* Convert image to RGBA with unsigned byte data type */
 		ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);

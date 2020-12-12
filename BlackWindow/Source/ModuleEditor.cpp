@@ -18,6 +18,15 @@ ModuleEditor::ModuleEditor()
     showDemoWindow = false;
     showDock = true;
     appStatus = UPDATE_CONTINUE;
+
+    //Creating windows
+    AddWindow(consoleWindow = new ConsoleWindow("Console window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(configurationWindow = new ConfigurationWindow("Configuration window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar ));
+    AddWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(gameObjectWindow = new GameObjectWindow("GameObject", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(aboutWindow = new AboutWindow("About", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    AddWindow(toolbarWindow = new ToolbarWindow("Toolbar", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
 }
 
 ModuleEditor::~ModuleEditor()
@@ -27,15 +36,6 @@ ModuleEditor::~ModuleEditor()
 
 bool ModuleEditor::Init()
 {
-    //Creating windows
-    // AddWindow(consoleWindow = new ConsoleWindow("Console window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    AddWindow(configurationWindow = new ConfigurationWindow("Configuration window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    AddWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar ));
-    AddWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    AddWindow(gameObjectWindow = new GameObjectWindow("GameObject", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    AddWindow(aboutWindow = new AboutWindow("About", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    AddWindow(toolbarWindow = new ToolbarWindow("Toolbar", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -133,7 +133,6 @@ void ModuleEditor::UpdateWindows()
     {
         windows[i]->Update();
     }
-    App->consoleWindow->Update();
 }
 
 void ModuleEditor::ShowDockSpace(bool *pOpen)
@@ -200,7 +199,7 @@ void ModuleEditor::DrawMenu()
         if (ImGui::BeginMenu("View"))
         {
             if (ImGui::MenuItem("Console window"))
-                App->consoleWindow->toggleWindow();
+                App->editor->consoleWindow->toggleWindow();
             if (ImGui::MenuItem("Hierarchy window"))
                 hierarchyWindow->toggleWindow();
             if (ImGui::MenuItem("Config window"))

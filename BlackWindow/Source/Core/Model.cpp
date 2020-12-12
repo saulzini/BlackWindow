@@ -43,12 +43,12 @@ void Model::LoadModel(std::string path)
 	const aiScene *scene = importer.ReadFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 	// If the import failed, report it
 	std::string buf("Loading model:");
-	App->consoleWindow->AddLog(buf.append(path.c_str()).c_str());
+	App->editor->consoleWindow->AddLog(buf.append(path.c_str()).c_str());
 
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
 		buf = "Error loading:";
-		App->consoleWindow->AddLog(buf.append(path.c_str()).append(importer.GetErrorString()).c_str());
+		App->editor->consoleWindow->AddLog(buf.append(path.c_str()).append(importer.GetErrorString()).c_str());
 		//LOG("Error loading %s: %s", path, importer.GetErrorString());
 		return;
 	}
@@ -56,7 +56,7 @@ void Model::LoadModel(std::string path)
 	ProcessNode(scene->mRootNode, scene);
 
 	buf = "End loading model:";
-	App->consoleWindow->AddLog(buf.append(path.c_str()).c_str());
+	App->editor->consoleWindow->AddLog(buf.append(path.c_str()).c_str());
 
 	
 	//Printing details about model
@@ -77,7 +77,7 @@ void Model::LoadModel(std::string path)
 	double factor(0.0);
 	bool result = scene->mMetaData->Get("UnitScaleFactor", factor);
 	buf += "Scale:"+std::to_string( result);
-	App->consoleWindow->AddLog(buf.c_str());
+	App->editor->consoleWindow->AddLog(buf.c_str());
 
 	BoundingBox boundingBox(scene);
 	boundingBox.GetBoundingBox(&boundBoxMin,&boundBoxMax);
