@@ -8,7 +8,6 @@
     <ClCompile Include="BlackWindow\Source\ModuleCamera.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleEditor.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleInput.cpp" />
-    <ClCompile Include="BlackWindow\Source\ModuleProgram.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleRender.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleWindow.cpp" />
     <ClCompile Include="BlackWindow\Source\BoundingBox.cpp">
@@ -203,14 +202,20 @@
     <ClCompile Include="BlackWindow\Source\Core\Time\WorldTimer.cpp">
       <Filter>Core\Timers</Filter>
     </ClCompile>
-    <ClCompile Include="BlackWindow\Source\Core\Skybox.cpp">
-      <Filter>Core\Model</Filter>
-    </ClCompile>
     <ClCompile Include="BlackWindow\Source\UIWindow\ToolbarWindow.cpp">
       <Filter>Graphics\UIWindow</Filter>
     </ClCompile>
     <ClCompile Include="BlackWindow\Source\ModuleDebugDraw.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleScene.cpp" />
+    <ClCompile Include="BlackWindow\Source\Core\GameObject\GameObject.cpp">
+      <Filter>Core\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Skybox.cpp">
+      <Filter>Core\SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Program\Program.cpp">
+      <Filter>Core\Program</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
@@ -220,7 +225,6 @@
     <ClInclude Include="BlackWindow\Source\ModuleCamera.h" />
     <ClInclude Include="BlackWindow\Source\ModuleEditor.h" />
     <ClInclude Include="BlackWindow\Source\ModuleInput.h" />
-    <ClInclude Include="BlackWindow\Source\ModuleProgram.h" />
     <ClInclude Include="BlackWindow\Source\ModuleRender.h" />
     <ClInclude Include="BlackWindow\Source\ModuleWindow.h" />
     <ClInclude Include="BlackWindow\Source\BoundingBox.h">
@@ -1025,9 +1029,6 @@
     <ClInclude Include="BlackWindow\Source\Core\Time\WorldTimer.h">
       <Filter>Core\Timers</Filter>
     </ClInclude>
-    <ClInclude Include="BlackWindow\Source\Core\Skybox.h">
-      <Filter>Core\Model</Filter>
-    </ClInclude>
     <ClInclude Include="BlackWindow\Source\stb_image.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\ToolbarWindow.h">
       <Filter>Graphics\UIWindow</Filter>
@@ -1036,6 +1037,21 @@
     <ClInclude Include="BlackWindow\Source\debug_draw.hpp" />
     <ClInclude Include="BlackWindow\Source\ModuleDebugDraw.h" />
     <ClInclude Include="BlackWindow\Source\ModuleScene.h" />
+    <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObject.h">
+      <Filter>Core\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Components\Component.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentTypes.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Skybox.h">
+      <Filter>Core\SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Program\Program.h">
+      <Filter>Core\Program</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -1103,6 +1119,15 @@
     </Filter>
     <Filter Include="Core\SkyBox">
       <UniqueIdentifier>{bb7a0a9b-17d2-43e5-8c72-ee246a36f533}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\GameObject">
+      <UniqueIdentifier>{5ea4a2a3-2787-44dd-b2eb-98f8c90df6f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Components">
+      <UniqueIdentifier>{0f313ea3-8432-4200-8204-6fadd324dd87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Program">
+      <UniqueIdentifier>{64046af7-cad0-4a22-8d21-d9293d8fe77a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

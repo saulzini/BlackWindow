@@ -1,36 +1,12 @@
-#include "ModuleProgram.h"
+#include "Program.h"
 #include <stdio.h>
 #include <stdlib.h>  
 #include <GL\glew.h>
 #include "Globals.h"
 #include <assert.h>  
 #include "Leaks.h"
-bool ModuleProgram::Init()
-{
-    return true;
-}
 
-update_status ModuleProgram::PreUpdate(float deltaTime)
-{
-    return UPDATE_CONTINUE;
-}
-
-update_status ModuleProgram::Update(float deltaTime)
-{
-    return UPDATE_CONTINUE;
-}
-
-update_status ModuleProgram::PostUpdate(float deltaTime)
-{
-    return UPDATE_CONTINUE;
-}
-
-bool ModuleProgram::CleanUp()
-{
-    return true;
-}
-
-char* ModuleProgram::LoadShaderSource(const char* shaderFileName)
+char* Program::LoadShaderSource(const char* shaderFileName)
 {
     char* data = nullptr;
     FILE* file = nullptr;
@@ -48,7 +24,7 @@ char* ModuleProgram::LoadShaderSource(const char* shaderFileName)
     return data;
 }
 
-unsigned ModuleProgram::CompileShader(unsigned type, const char* source)
+unsigned Program::CompileShader(unsigned type, const char* source)
 {
     unsigned shaderId = glCreateShader(type);
     glShaderSource(shaderId, 1, &source, 0);
@@ -72,7 +48,7 @@ unsigned ModuleProgram::CompileShader(unsigned type, const char* source)
     return shaderId;
 }
 
-unsigned ModuleProgram::CreateProgram(unsigned vtxShader, unsigned frgShader)
+unsigned Program::CreateProgram(unsigned vtxShader, unsigned frgShader)
 {
     unsigned programId = glCreateProgram();
     glAttachShader(programId, vtxShader);
@@ -98,7 +74,7 @@ unsigned ModuleProgram::CreateProgram(unsigned vtxShader, unsigned frgShader)
     return programId;
 }
 
-unsigned ModuleProgram::CreateProgramFromSource(const char* vtxShader, const char* frgShader)
+unsigned Program::CreateProgramFromSource(const char* vtxShader, const char* frgShader)
 {
     char* vtxSource = LoadShaderSource(vtxShader);
     char* frgSource = LoadShaderSource(frgShader);

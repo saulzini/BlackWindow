@@ -32,7 +32,6 @@ public:
 	ModuleWindow* window = nullptr;
 	ModuleInput* input = nullptr;
 	ModuleCamera* camera = nullptr;
-	ModuleProgram* program = nullptr;
 	ModuleDebugDraw* draw = nullptr;
 	ModuleEditor* editor = nullptr;
 	DeltaTime deltaTime;

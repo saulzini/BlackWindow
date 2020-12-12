@@ -1,7 +1,7 @@
 ﻿#include "ModuleScene.h"
 #include "GL/glew.h"
 #include "Application.h"
-#include "ModuleProgram.h"
+#include "Core/Program/Program.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
 #include "Core/Mesh.h"
@@ -29,11 +29,12 @@ ModuleScene::~ModuleScene()
 
 bool ModuleScene::Init()
 {
+	Program programClass;
 
 
 	model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
-	program = App->program->CreateProgramFromSource("Default.vert", "Default.frag");
-	programSky = App->program->CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
+	program = programClass.CreateProgramFromSource("Default.vert", "Default.frag");
+	programSky = programClass.CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
 	sky = new Skybox();
 
 	return true;

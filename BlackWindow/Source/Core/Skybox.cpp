@@ -8,7 +8,7 @@
 #include "UIWindow/ConsoleWindow.h"
 #include "Application.h"
 #include "ModuleCamera.h"
-#include "ModuleProgram.h"
+#include "Core/Program/Program.h"
 #include "Math/float4x4.h"
 #include "ModuleScene.h"
 #define STB_IMAGE_IMPLEMENTATION
