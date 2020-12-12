@@ -4,12 +4,12 @@
 #include "Core/Time/WorldTimer.h"
 #include "Core/Skybox.h"
 
-class ModuleWorld :
+class ModuleScene :
 	public Module
 {
 public:
-	ModuleWorld();
-	~ModuleWorld();
+	ModuleScene();
+	~ModuleScene();
 	unsigned int programSky;
 	bool Init() override;
 	update_status PreUpdate(float deltaTime) override;

@@ -1,13 +1,13 @@
 #include "GameObjectWindow.h"
 #include "Math/float3.h"
 #include "Application.h"
-#include "ModuleWorld.h"
+#include "ModuleScene.h"
 #include "Core/Model.h"
 void GameObjectWindow::Update()
 {
     if (show)
     {
-        model = App->world->GetModel();
+        model = App->scene->GetModel();
         
         ImGui::SetWindowPos(ImVec2(20, 30), true);
         if (!begin())
