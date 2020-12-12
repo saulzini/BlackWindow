@@ -5,7 +5,6 @@
 class ComponentTransform : public Component
 {
 public:
-    
-    ComponentTransform(ComponentTypes type = ComponentTypes::NONE) : Component(type){};
+    ComponentTransform(ComponentTypes type = ComponentTypes::TRANSFORM) : Component(type){};
 };
 

@@ -5,21 +5,22 @@
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
 #include "Core/Mesh.h"
-#include "Core/Model.h"
 #include "Math/float4x4.h"
 #include <string>
 #include "Leaks.h"
 #include "../glm/glm.hpp"
 #include "Core/Time/WorldTimer.h"
 #include "Core/GameObject/GameObjectFactory.h"
+#include <Core/Importers/Texture/TextureLoader.h>
 ModuleScene::ModuleScene()
 {
-	model = nullptr;
 	program = 0;
 	worldTimer = new WorldTimer();
 
 	sky = nullptr;
 	programSky = 0;
+
+	root = new GameObject();
 }
 
 ModuleScene::~ModuleScene()
@@ -30,9 +31,10 @@ ModuleScene::~ModuleScene()
 bool ModuleScene::Init()
 {
 	Program programClass;
-
-
-	model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
+	GameObject *house = new GameObject(root,"BakerHouse");
+	
+	// model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
+	root->AddChildren(house);
 	program = programClass.CreateProgramFromSource("Default.vert", "Default.frag");
 	programSky = programClass.CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
 	sky = new Skybox();
@@ -85,7 +87,7 @@ update_status ModuleScene::Update(float deltaTime)
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 	
 
-	model->Draw(program);
+	// model->Draw(program);
 
 	App->scene->sky->Draw();
 	worldTimer->RegulateFPS();
@@ -100,9 +102,6 @@ update_status ModuleScene::PostUpdate(float deltaTime)
 
 bool ModuleScene::CleanUp()
 {
-	delete (model);
-	model = nullptr;
-
 	delete (worldTimer);
 	worldTimer = nullptr;
 	
@@ -111,25 +110,25 @@ bool ModuleScene::CleanUp()
 
 void ModuleScene::SwapTexture(const char *texturePath) 
 {
-	std::string textPath(texturePath);
-	std::string directory = textPath.substr(0, textPath.find_last_of('\\'));
-	unsigned int id = TextureLoader::LoadTexture2D(textPath.c_str(),directory.c_str());
-	if (id == 0){
-		App->editor->consoleWindow->AddLog("Error in swapping texture");
-		return;
-	}
-	model->ApplyTextureToModel(id,textPath.c_str() );
+	// std::string textPath(texturePath);
+	// std::string directory = textPath.substr(0, textPath.find_last_of('\\'));
+	// unsigned int id = TextureLoader::LoadTexture2D(textPath.c_str(),directory.c_str());
+	// if (id == 0){
+	// 	App->editor->consoleWindow->AddLog("Error in swapping texture");
+	// 	return;
+	// }
+	// model->ApplyTextureToModel(id,textPath.c_str() );
 	
 }
 
 void ModuleScene::SwapModel(const char *modelPath)
 {
-	// Free space of previous model
-	delete (model);
-	model = nullptr;
-	model = new Model(modelPath);
+	// // Free space of previous model
+	// delete (model);
+	// model = nullptr;
+	// model = new Model(modelPath);
 
-	App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
+	// App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
 }
 
 GameObject* ModuleScene::CreateGameObject(GameObjectTypes type) 

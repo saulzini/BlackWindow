@@ -11,11 +11,15 @@ protected:
     std::vector<Component*> components;
     GameObject *parent;
 public:
-    GameObject(){
-        name = "";
-        parent = nullptr;
+    GameObject(GameObject* parent = nullptr, const char* name = ""){
+        this->name = name;
+        this->parent = parent;
     }
     ~GameObject(){}
     virtual void Update(){}
+
     void AddComponent(ComponentTypes type);
+    void AddChildren(GameObject* gameObject);
+    
+	void Draw(unsigned int shader);
 };

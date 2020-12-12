@@ -3,16 +3,16 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include "Application.h"
-//#include "ModuleEditor.h"
+#include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
 #include "Globals.h"
-#include "Vertex.h"
+#include "Core/Vertex.h"
 #include "Assimp/vector3.h"
 #include "Assimp/vector2.h"
-#include "TextureLoader.h"
+#include "Core/Importers/Texture/TextureLoader.h"
 #include "BoundingBox.h"
 
-Model::Model(std::string path="")
+ModelImporter::Model::Model(std::string path="")
 {
 	if (path == "")
 	{
@@ -29,15 +29,7 @@ Model::Model(std::string path="")
 }
 
 
-void Model::Draw(unsigned int shader)
-{
-	for (GLuint i = 0; i < meshes.size(); i++)
-	{
-		meshes[i].Draw(shader);
-	}
-}
-
-void Model::LoadModel(std::string path)
+void ModelImporter::Model::LoadModel(std::string path)
 {
 	Assimp::Importer importer;
 	const aiScene *scene = importer.ReadFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
@@ -72,7 +64,7 @@ void Model::LoadModel(std::string path)
 	buf += "Materials:" + std::to_string(materialsCount)+ " ";
 	buf += "Cameras:" + std::to_string(camerasCount) + " ";
 	buf += "Lights:" + std::to_string(lightsCount)+ " ";
-	buf += "Textures:" + std::to_string(texturesCount);
+	buf += "Textures:" + std::to_string(texturesCount)+ " ";
 
 	double factor(0.0);
 	bool result = scene->mMetaData->Get("UnitScaleFactor", factor);
@@ -84,7 +76,7 @@ void Model::LoadModel(std::string path)
 	CalculateBoxDimensions();
 }
 
-void Model::ProcessNode(aiNode *node, const aiScene *scene)
+void ModelImporter::Model::ProcessNode(aiNode *node, const aiScene *scene)
 {
 	// process all the node's meshes (if any)
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
@@ -99,7 +91,7 @@ void Model::ProcessNode(aiNode *node, const aiScene *scene)
 	}
 }
 
-Mesh Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
+Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 {
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
@@ -160,7 +152,7 @@ Mesh Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 	return Mesh(vertices, indices, textures);
 }
 
-std::vector<Texture> Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType type,const std::string& typeName)
+std::vector<Texture> ModelImporter::Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType type,const std::string& typeName)
 {
 	std::vector<Texture> textures;
 
@@ -193,21 +185,22 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType 
 	return textures;
 }
 
-void Model::ApplyTextureToModel(unsigned int id, const char *path) 
-{
-	for (GLuint i = 0; i < texturesLoaded.size(); i++)
-	{	
-		texturesLoaded[i].id = id;
-		texturesLoaded[i].path == path;
-	}
 
-	for (GLuint i = 0; i < meshes.size(); i++)
-	{	
-		meshes[i].ChangeTextures(texturesLoaded);
-	}
-}
+// void ModelImporter::Model::ApplyTextureToModel(unsigned int id, const char *path) 
+// {
+// 	for (GLuint i = 0; i < texturesLoaded.size(); i++)
+// 	{	
+// 		texturesLoaded[i].id = id;
+// 		texturesLoaded[i].path == path;
+// 	}
 
-void Model::CalculateBoxDimensions() 
+// 	for (GLuint i = 0; i < meshes.size(); i++)
+// 	{	
+// 		meshes[i].ChangeTextures(texturesLoaded);
+// 	}
+// }
+
+void ModelImporter::Model::CalculateBoxDimensions() 
 {
 	dimensions.x = abs(abs(boundBoxMax.x) - abs(boundBoxMin.x));
 	dimensions.y = abs(abs(boundBoxMax.y) - abs(boundBoxMin.y));
