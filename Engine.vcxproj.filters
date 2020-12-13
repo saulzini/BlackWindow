@@ -1058,6 +1058,15 @@
     <ClInclude Include="BlackWindow\Source\Core\Importers\Texture\TextureLoader.h">
       <Filter>Core\Importers\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentFactory.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentMesh.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentTransform.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">

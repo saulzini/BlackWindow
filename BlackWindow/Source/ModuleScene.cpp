@@ -12,6 +12,9 @@
 #include "Core/Time/WorldTimer.h"
 #include "Core/GameObject/GameObjectFactory.h"
 #include <Core/Importers/Texture/TextureLoader.h>
+#include "Core/Importers/Model/Model.h"
+#include "Core/Components/ComponentTypes.h"
+#include "Core/Components/ComponentMesh.h"
 ModuleScene::ModuleScene()
 {
 	program = 0;
@@ -31,14 +34,26 @@ ModuleScene::~ModuleScene()
 bool ModuleScene::Init()
 {
 	Program programClass;
-	GameObject *house = new GameObject(root,"BakerHouse");
 	
 	// model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
-	root->AddChildren(house);
 	program = programClass.CreateProgramFromSource("Default.vert", "Default.frag");
 	programSky = programClass.CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
 	sky = new Skybox();
 
+	// Setting gameobject
+	GameObject *house = new GameObject(root,"BakerHouse");
+	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx"); 
+	model->LoadModel();
+	std::vector<Mesh> meshes = model->GetMeshes();
+	for (unsigned int i = 0; i < meshes.size(); i++)
+	{
+		ComponentMesh *component = (ComponentMesh*) house->AddComponent(ComponentTypes::MESH);
+		component->SetShader(program);
+		component->SetMesh(&meshes[i]);
+ 	}
+	
+
+	root->AddChildren(house);
 	return true;
 }
 
@@ -88,6 +103,7 @@ update_status ModuleScene::Update(float deltaTime)
 	
 
 	// model->Draw(program);
+	root->Update();
 
 	App->scene->sky->Draw();
 	worldTimer->RegulateFPS();

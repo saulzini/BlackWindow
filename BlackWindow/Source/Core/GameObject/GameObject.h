@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Core/Components/ComponentTypes.h"
+
 class Component;
 class GameObject
 {
@@ -16,10 +17,9 @@ public:
         this->parent = parent;
     }
     ~GameObject(){}
-    virtual void Update(){}
+    virtual void Update();
 
-    void AddComponent(ComponentTypes type);
+    Component* AddComponent(ComponentTypes type);
     void AddChildren(GameObject* gameObject);
     
-	void Draw(unsigned int shader);
 };

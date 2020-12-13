@@ -5,6 +5,6 @@
 class ComponentTransform : public Component
 {
 public:
-    ComponentTransform(ComponentTypes type = ComponentTypes::TRANSFORM) : Component(type){};
+    ComponentTransform(GameObject *owner , ComponentTypes type = ComponentTypes::TRANSFORM) : Component(owner,type){};
 };
 

@@ -14,22 +14,22 @@
 
 ModelImporter::Model::Model(std::string path="")
 {
-	if (path == "")
-	{
-		return;
-	}
 	animationsCount = 0;
 	meshesCount = 0;
 	materialsCount = 0;
 	camerasCount = 0;
 	lightsCount = 0;
 	texturesCount = 0;
-
-	this->LoadModel(path);
+	if (path == "")
+	{
+		return;
+	}
+	this->path = path;
+	
 }
 
 
-void ModelImporter::Model::LoadModel(std::string path)
+void ModelImporter::Model::LoadModel()
 {
 	Assimp::Importer importer;
 	const aiScene *scene = importer.ReadFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
@@ -42,7 +42,6 @@ void ModelImporter::Model::LoadModel(std::string path)
 		buf = "Error loading:";
 		App->editor->consoleWindow->AddLog(buf.append(path.c_str()).append(importer.GetErrorString()).c_str());
 		//LOG("Error loading %s: %s", path, importer.GetErrorString());
-		return;
 	}
 	directory = path.substr(0, path.find_last_of('\\'));
 	ProcessNode(scene->mRootNode, scene);
