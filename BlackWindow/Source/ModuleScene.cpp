@@ -47,8 +47,10 @@ update_status ModuleScene::PreUpdate(float deltaTime)
 
 update_status ModuleScene::Update(float deltaTime)
 {
+	App->scene->sky->Draw();
 
 	worldTimer->Update();
+
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
@@ -84,10 +86,11 @@ update_status ModuleScene::Update(float deltaTime)
 
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 	
-
+	
+	
 	model->Draw(program);
 
-	App->scene->sky->Draw();
+	///App->scene->sky->Draw();
 	worldTimer->RegulateFPS();
 
 	return UPDATE_CONTINUE;

@@ -105,8 +105,11 @@ unsigned int Skybox::loadCubemap(std::vector<std::string> files)
 
 void Skybox::Draw() {
 
-    glDepthMask(GL_FALSE); // superfluous
-    glDepthFunc(GL_LEQUAL);
+
+    glDepthMask(GL_TRUE);
+  //  glDepthMask(GL_FALSE); // superfluous
+   // glDepthFunc(GL_LEQUAL);
+    glDisable(GL_DEPTH_TEST);
     glUseProgram(App->scene->programSky);
     float4x4 proj = App->camera->GetProjection();
     float4x4 view = App->camera->GetView();
@@ -127,8 +130,9 @@ void Skybox::Draw() {
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
     glBindVertexArray(0);
-    glDepthFunc(GL_LESS); // set depth function back to default
-    glDepthMask(GL_TRUE); // superfluous
+   // glDepthFunc(GL_LESS); // set depth function back to default
+    //glDepthMask(GL_TRUE); // superfluous
+    glEnable(GL_DEPTH_TEST);
     //glDeleteVertexArrays(1, &skyboxVAO);
    // glDeleteBuffers(1, &skyboxVAO);
    /// glDeleteProgram(App->scene->programSky);

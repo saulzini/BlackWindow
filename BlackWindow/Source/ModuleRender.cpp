@@ -104,7 +104,8 @@ update_status ModuleRender::Update(float deltaTime)
 	float4x4 view = App->camera->GetView();
 	SDL_GetWindowSize(App->window->window, &w, &h);
 	glClearColor(0.439f, 0.439f, 0.439f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearDepth(1.0);
+	glClear( GL_DEPTH_BUFFER_BIT);
 	App->draw->Update();
 	App->draw->Draw(view, proj, w, h);
 
