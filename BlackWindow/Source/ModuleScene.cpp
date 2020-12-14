@@ -45,12 +45,12 @@ bool ModuleScene::Init()
 	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx"); 
 	model->LoadModel();
 	std::vector<Mesh> meshes = model->GetMeshes();
-	for (unsigned int i = 0; i < meshes.size(); i++)
-	{
+	
+	for (std::vector<Mesh>::iterator it = meshes.begin() ; it != meshes.end(); ++it){
 		ComponentMesh *component = (ComponentMesh*) house->AddComponent(ComponentTypes::MESH);
 		component->SetShader(program);
-		component->SetMesh(&meshes[i]);
- 	}
+		component->SetMesh( (Mesh*) &it );
+	}
 	
 
 	root->AddChildren(house);

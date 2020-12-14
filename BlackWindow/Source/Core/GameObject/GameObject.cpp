@@ -16,15 +16,16 @@ void GameObject::AddChildren(GameObject* gameObject)
 
 void GameObject::Update() 
 {
-    for (unsigned int i = 0; i < components.size(); i++)
-	{
-        if (components[i]->GetType() == ComponentTypes::MESH){
-		    components[i]->Update();
+    
+    for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); ++it){
+        
+		if ( ( (Component *) *it)->GetType() == ComponentTypes::MESH){
+		    ( (Component *) *it)->Update();
         }
 	}
 
-    for (unsigned int i = 0; i < children.size(); i++)
-	{
-        children[i]->Update();
+    for (std::vector<GameObject *>::iterator it = children.begin() ; it != children.end(); ++it){
+        ( (GameObject *) *it)->Update();
 	}
+
 }
