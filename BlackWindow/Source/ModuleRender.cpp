@@ -8,6 +8,7 @@
 #include "ModuleCamera.h"
 #include "ModuleScene.h"
 #include "Leaks.h"
+#include <Brofiler/Brofiler.h>
 void __stdcall OurOpenGLErrorFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, const void* userParam)
 {
 	const char* tmp_source = "", * tmp_type = "", * tmp_severity = "";
@@ -96,7 +97,6 @@ update_status ModuleRender::PreUpdate(float deltaTime)
 // Called every draw update
 update_status ModuleRender::Update(float deltaTime)
 {
-
 	//glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
 	int w = 0;
 	int h = 0;

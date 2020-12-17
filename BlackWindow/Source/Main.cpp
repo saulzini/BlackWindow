@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include "SDL.h"
 #include "Leaks.h"
+#include <Brofiler/Brofiler.h>
 #pragma comment( lib, "BlackWindow/Resources/SDL/lib/x86/SDL2.lib" )
 #pragma comment( lib, "BlackWindow/Resources/SDL/lib/x86/SDL2main.lib" )
 
@@ -31,6 +32,7 @@ int main(int argc, char ** argv)
 
 	while (state != MAIN_EXIT)
 	{
+		BROFILER_FRAME("HOLA");
 		switch (state)
 		{
 		case MAIN_CREATION:

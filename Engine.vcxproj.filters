@@ -1058,6 +1058,9 @@
     <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObjectTypes.h">
       <Filter>Core\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\Brofiler\Brofiler\Brofiler\Brofiler.h">
+      <Filter>Resources\Brofiler</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -1134,6 +1137,9 @@
     </Filter>
     <Filter Include="Core\Program">
       <UniqueIdentifier>{64046af7-cad0-4a22-8d21-d9293d8fe77a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Brofiler">
+      <UniqueIdentifier>{14c71c3b-30da-4b7d-b0d4-d07a35173d31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

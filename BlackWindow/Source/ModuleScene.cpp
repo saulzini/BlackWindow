@@ -12,6 +12,7 @@
 #include "../glm/glm.hpp"
 #include "Core/Time/WorldTimer.h"
 #include "Core/GameObject/GameObjectFactory.h"
+#include <Brofiler/Brofiler.h>
 ModuleScene::ModuleScene()
 {
 	model = nullptr;
@@ -42,11 +43,16 @@ bool ModuleScene::Init()
 
 update_status ModuleScene::PreUpdate(float deltaTime)
 {
+	BROFILER_CATEGORY("PreUpdateLogic", Profiler::Color::Orchid)
+
 	return UPDATE_CONTINUE;
 }
 
 update_status ModuleScene::Update(float deltaTime)
 {
+
+	BROFILER_CATEGORY("UpdateLogic", Profiler::Color::Orchid)
+
 	App->scene->sky->Draw();
 
 	worldTimer->Update();
@@ -98,6 +104,8 @@ update_status ModuleScene::Update(float deltaTime)
 
 update_status ModuleScene::PostUpdate(float deltaTime)
 {
+	BROFILER_CATEGORY("PostUpdateLogic", Profiler::Color::Orchid)
+
 	return UPDATE_CONTINUE;
 }
 
