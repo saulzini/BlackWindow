@@ -7,7 +7,12 @@
 
 class Mesh {
 public:
-    Mesh(std::vector<Vertex>& mVertices,std::vector<unsigned int> &mIndices,std::vector<Texture> &mTextures);
+    Mesh() {
+        VAO = 0;
+        VBO = 0;
+        EBO = 0;
+    }
+    Mesh(std::vector<Vertex>& mVertices, std::vector<unsigned int>& mIndices, std::vector<Texture>& mTextures);
 
 public:
     // mesh data

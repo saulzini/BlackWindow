@@ -49,7 +49,7 @@ bool ModuleScene::Init()
 	for (std::vector<Mesh>::iterator it = meshes.begin() ; it != meshes.end(); ++it){
 		ComponentMesh *component = (ComponentMesh*) house->AddComponent(ComponentTypes::MESH);
 		component->SetShader(program);
-		component->SetMesh( (Mesh*) &it );
+		component->SetMesh( *it );
 	}
 	
 
