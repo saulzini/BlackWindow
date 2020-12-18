@@ -9,16 +9,18 @@
 #include <string>
 #include "Math/float3.h"
 #include "Core/Texture.h"
+#include "Core/GameObject/GameObject.h"
+#include <unordered_map> 
 namespace ModelImporter
 {
 
 	class Model
 	{
 	public:
-		Model(std::string path);
+		Model(std::string path,unsigned int program);
 
-		void LoadModel();
-		void ProcessNode(aiNode *node, const aiScene *scene);
+		GameObject* LoadModel();
+		GameObject* ProcessNode(GameObject *parent,aiNode *node, const aiScene *scene);
 
 		Mesh ProcessMesh(aiMesh *mesh, const aiScene *scene);
 
@@ -32,7 +34,8 @@ namespace ModelImporter
 		std::vector<Mesh> meshes;
 		std::string directory;
 		std::string path;
-		std::vector<Texture> texturesLoaded;
+		// std::vector<Texture> texturesLoaded;
+		std::unordered_map<std::string, Texture> texturesLoaded; 
 
 		aiVector3D boundBoxMin;
 		aiVector3D boundBoxMax;
@@ -46,6 +49,7 @@ namespace ModelImporter
 		int camerasCount;
 		int lightsCount;
 		int texturesCount;
+		unsigned int program;
 		void CalculateBoxDimensions();
 	};
 } // namespace ModelImporter

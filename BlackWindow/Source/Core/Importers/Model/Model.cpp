@@ -11,8 +11,9 @@
 #include "Assimp/vector2.h"
 #include "Core/Importers/Texture/TextureLoader.h"
 #include "BoundingBox.h"
-
-ModelImporter::Model::Model(std::string path="")
+#include "Core/Components/ComponentMesh.h"
+#include "Core/Components/ComponentTransform.h"
+ModelImporter::Model::Model(std::string path="",unsigned int mProgram=0)
 {
 	animationsCount = 0;
 	meshesCount = 0;
@@ -20,6 +21,7 @@ ModelImporter::Model::Model(std::string path="")
 	camerasCount = 0;
 	lightsCount = 0;
 	texturesCount = 0;
+	program = mProgram;
 	if (path == "")
 	{
 		return;
@@ -29,8 +31,9 @@ ModelImporter::Model::Model(std::string path="")
 }
 
 
-void ModelImporter::Model::LoadModel()
+GameObject* ModelImporter::Model::LoadModel()
 {
+	GameObject* root = nullptr;
 	Assimp::Importer importer;
 	const aiScene *scene = importer.ReadFile(path, aiProcessPreset_TargetRealtime_MaxQuality);
 	// If the import failed, report it
@@ -42,9 +45,10 @@ void ModelImporter::Model::LoadModel()
 		buf = "Error loading:";
 		App->editor->consoleWindow->AddLog(buf.append(path.c_str()).append(importer.GetErrorString()).c_str());
 		//LOG("Error loading %s: %s", path, importer.GetErrorString());
+		return root;
 	}
 	directory = path.substr(0, path.find_last_of('\\'));
-	ProcessNode(scene->mRootNode, scene);
+	root =ProcessNode(nullptr,scene->mRootNode, scene);
 
 	buf = "End loading model:";
 	App->editor->consoleWindow->AddLog(buf.append(path.c_str()).c_str());
@@ -73,21 +77,36 @@ void ModelImporter::Model::LoadModel()
 	BoundingBox boundingBox(scene);
 	boundingBox.GetBoundingBox(&boundBoxMin,&boundBoxMax);
 	CalculateBoxDimensions();
+
+	return root;
 }
 
-void ModelImporter::Model::ProcessNode(aiNode *node, const aiScene *scene)
+GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, const aiScene *scene)
 {
+	std::string name = "GameObject";
+
+	if (parent != nullptr) {
+		name = node->mName.C_Str();
+	}
+	GameObject* root = new GameObject(parent,name.c_str());
 	// process all the node's meshes (if any)
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
-		this->meshes.push_back(ProcessMesh(mesh, scene));
+		// It always needs a transform component
+		ComponentTransform* componentTransform = (ComponentTransform*)root->AddComponent(ComponentTypes::TRANSFORM);
+
+		ComponentMesh *componentMesh = (ComponentMesh*) root->AddComponent(ComponentTypes::MESH);
+		componentMesh->SetShader(program);
+		componentMesh->SetMesh( ProcessMesh(mesh, scene) );
 	}
 	// process all the node's meshes (if any)
 	for (GLuint i = 0; i < node->mNumChildren; i++)
 	{
-		ProcessNode(node->mChildren[i], scene);
+		root->AddChildren( ProcessNode(root,node->mChildren[i], scene) );
 	}
+
+	return root;
 }
 
 Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
@@ -160,25 +179,18 @@ std::vector<Texture> ModelImporter::Model::LoadMaterialTextures(aiMaterial *mat,
 		aiString str;
 		mat->GetTexture(type, i, &str);
 
-		GLboolean skip = false;
-
-		for (GLuint j = 0; j < texturesLoaded.size(); j++)
-		{
-			if (texturesLoaded[j].path == str.C_Str())
-			{
-				textures.push_back(texturesLoaded[j]);
-				skip = true;
-				break;
-			}
-		}
-		if (!skip)
-		{
+		std::unordered_map<std::string,Texture>::const_iterator found = texturesLoaded.find(str.C_Str());
+		// not found in hash
+		if (found == texturesLoaded.end()){
 			Texture texture;
 			texture.id = TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
 			texture.type = typeName;
 			texture.path = str.C_Str();
 			textures.push_back(texture);
-			texturesLoaded.push_back(texture);
+			texturesLoaded.insert( std::make_pair(str.C_Str(), texture ) ); 
+		}
+		else{
+			textures.push_back(found->second);
 		}
 	}
 	return textures;

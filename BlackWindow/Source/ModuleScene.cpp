@@ -41,16 +41,16 @@ bool ModuleScene::Init()
 	sky = new Skybox();
 
 	// Setting gameobject
-	GameObject *house = new GameObject(root,"BakerHouse");
-	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx"); 
-	model->LoadModel();
-	std::vector<Mesh> meshes = model->GetMeshes();
+	//GameObject *house = new GameObject(root,"BakerHouse");
+	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx",program); 
+	GameObject *house = model->LoadModel();
+	/*std::vector<Mesh> meshes = model->GetMeshes();
 	
 	for (std::vector<Mesh>::iterator it = meshes.begin() ; it != meshes.end(); ++it){
 		ComponentMesh *component = (ComponentMesh*) house->AddComponent(ComponentTypes::MESH);
 		component->SetShader(program);
 		component->SetMesh( *it );
-	}
+	}*/
 	
 
 	root->AddChildren(house);
