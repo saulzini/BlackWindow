@@ -105,10 +105,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	float3 translation;
 	Quat rotation;
 	float3 scale;
-	//aux.Inverted();
-	//float4x4 aux = aiMatrix4x4ToMathGeo(&node->mTransformation);
 	aiMatrix4x4ToMathGeo(&node->mTransformation).Decompose(translation,rotation,scale);
-	//float3 rotationAux = rotation;
 	float3 rotationRadians = rotation.ToEulerXYZ().Abs();
 
 	// It always needs a transform component
