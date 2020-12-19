@@ -13,6 +13,20 @@
 #include "BoundingBox.h"
 #include "Core/Components/ComponentMesh.h"
 #include "Core/Components/ComponentTransform.h"
+#include "Math/float4x4.h"
+
+inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
+{
+    float4x4 to;
+
+    to[0][0] = (float)from->a1; to[0][1] = (float)from->b1;  to[0][2] = (float)from->c1; to[0][3] = (float)from->d1;
+    to[1][0] = (float)from->a2; to[1][1] = (float)from->b2;  to[1][2] = (float)from->c2; to[1][3] = (float)from->d2;
+    to[2][0] = (float)from->a3; to[2][1] = (float)from->b3;  to[2][2] = (float)from->c3; to[2][3] = (float)from->d3;
+    to[3][0] = (float)from->a4; to[3][1] = (float)from->b4;  to[3][2] = (float)from->c4; to[3][3] = (float)from->d4;
+
+    return to;
+}
+
 ModelImporter::Model::Model(std::string path="",unsigned int mProgram=0)
 {
 	animationsCount = 0;
@@ -90,12 +104,16 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	}
 	GameObject* root = new GameObject(parent,name.c_str());
 	// process all the node's meshes (if any)
+	// It always needs a transform component
+	ComponentTransform* componentTransform = (ComponentTransform*)root->AddComponent(ComponentTypes::TRANSFORM);
+	float4x4 aux =	aiMatrix4x4ToMathGeo(&node->mTransformation).Inverted();
+	//aux.Inverted();
+	
+	// glm::inverse(node->mTransformation)
+
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
-		// It always needs a transform component
-		ComponentTransform* componentTransform = (ComponentTransform*)root->AddComponent(ComponentTypes::TRANSFORM);
-
 		ComponentMesh *componentMesh = (ComponentMesh*) root->AddComponent(ComponentTypes::MESH);
 		componentMesh->SetShader(program);
 		componentMesh->SetMesh( ProcessMesh(mesh, scene) );
