@@ -11,30 +11,17 @@
 #include "Core/Texture.h"
 #include "Core/GameObject/GameObject.h"
 #include <unordered_map> 
+#include "Math/float4x4.h"
 namespace ModelImporter
 {
 
 	class Model
 	{
-	public:
-		Model(std::string path,unsigned int program);
-
-		GameObject* LoadModel();
-		GameObject* ProcessNode(GameObject *parent,aiNode *node, const aiScene *scene);
-
-		Mesh ProcessMesh(aiMesh *mesh, const aiScene *scene);
-
-		std::vector<Texture> LoadMaterialTextures(aiMaterial *mat, aiTextureType type, const std::string &typeName);
-
-		std::vector<Mesh> GetMeshes(){
-			return meshes;
-		}
-		
 	private:
 		std::vector<Mesh> meshes;
 		std::string directory;
 		std::string path;
-		// std::vector<Texture> texturesLoaded;
+		// float4x4 globalInversed;
 		std::unordered_map<std::string, Texture> texturesLoaded; 
 
 		aiVector3D boundBoxMin;
@@ -50,6 +37,21 @@ namespace ModelImporter
 		int lightsCount;
 		int texturesCount;
 		unsigned int program;
+	public:
+		Model(std::string path,unsigned int program);
+
+		GameObject* LoadModel();
+		GameObject* ProcessNode(GameObject *parent,aiNode *node, const aiScene *scene);
+
+		Mesh ProcessMesh(aiMesh *mesh, const aiScene *scene);
+
+		std::vector<Texture> LoadMaterialTextures(aiMaterial *mat, aiTextureType type, const std::string &typeName);
+
+		std::vector<Mesh> GetMeshes(){
+			return meshes;
+		}
+		
+	private:
 		void CalculateBoxDimensions();
 	};
 } // namespace ModelImporter

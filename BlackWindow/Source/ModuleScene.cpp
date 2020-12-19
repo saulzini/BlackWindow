@@ -8,7 +8,7 @@
 #include "Math/float4x4.h"
 #include <string>
 #include "Leaks.h"
-#include "../glm/glm.hpp"
+// #include "../glm/glm.hpp"
 #include "Core/Time/WorldTimer.h"
 #include "Core/GameObject/GameObjectFactory.h"
 #include <Core/Importers/Texture/TextureLoader.h>

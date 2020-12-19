@@ -13,8 +13,7 @@
 #include "BoundingBox.h"
 #include "Core/Components/ComponentMesh.h"
 #include "Core/Components/ComponentTransform.h"
-#include "Math/float4x4.h"
-
+#include "Math/Quat.h"
 inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
 {
     float4x4 to;
@@ -103,16 +102,25 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 		name = node->mName.C_Str();
 	}
 	GameObject* root = new GameObject(parent,name.c_str());
-	// process all the node's meshes (if any)
+	float3 translation;
+	Quat rotation;
+	float3 scale;
+	//aux.Inverted();
+	//float4x4 aux = aiMatrix4x4ToMathGeo(&node->mTransformation);
+	aiMatrix4x4ToMathGeo(&node->mTransformation).Decompose(translation,rotation,scale);
+	//float3 rotationAux = rotation;
+	float3 rotationRadians = rotation.ToEulerXYZ().Abs();
+
 	// It always needs a transform component
 	ComponentTransform* componentTransform = (ComponentTransform*)root->AddComponent(ComponentTypes::TRANSFORM);
-	float4x4 aux =	aiMatrix4x4ToMathGeo(&node->mTransformation).Inverted();
-	//aux.Inverted();
+	componentTransform->SetTransform(translation);
+	componentTransform->SetRotation(rotationRadians);
+	componentTransform->SetScale(scale);
 	
-	// glm::inverse(node->mTransformation)
 
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
+		// Adding default components when loading
 		aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
 		ComponentMesh *componentMesh = (ComponentMesh*) root->AddComponent(ComponentTypes::MESH);
 		componentMesh->SetShader(program);
