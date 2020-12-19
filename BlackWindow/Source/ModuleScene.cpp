@@ -15,6 +15,8 @@
 #include "Core/Importers/Model/Model.h"
 #include "Core/Components/ComponentTypes.h"
 #include "Core/Components/ComponentMesh.h"
+#include "MathGeoLibFwd.h"
+#include "Math/Quat.h"
 ModuleScene::ModuleScene()
 {
 	program = 0;
@@ -41,17 +43,8 @@ bool ModuleScene::Init()
 	sky = new Skybox();
 
 	// Setting gameobject
-	//GameObject *house = new GameObject(root,"BakerHouse");
 	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx",program); 
 	GameObject *house = model->LoadModel();
-	/*std::vector<Mesh> meshes = model->GetMeshes();
-	
-	for (std::vector<Mesh>::iterator it = meshes.begin() ; it != meshes.end(); ++it){
-		ComponentMesh *component = (ComponentMesh*) house->AddComponent(ComponentTypes::MESH);
-		component->SetShader(program);
-		component->SetMesh( *it );
-	}*/
-	
 
 	root->AddChildren(house);
 	return true;
@@ -69,8 +62,18 @@ update_status ModuleScene::Update(float deltaTime)
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
+
 	float4x4 identityModel = float4x4::identity;
-	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &identityModel[0][0]); //GL_TRUE transpose the matrix
+	float3 transformVector(10.0f,2.0f,2.0f); 
+	Quat rotationQuat(0.0f,0.0f,0.0f,0.0f);
+	float3 scaleVector(2.0f,2.0f,2.0f);
+	float4x4 calculatedModel = float4x4::FromTRS(transformVector, rotationQuat , scaleVector);
+
+	float4x4 model = identityModel * calculatedModel;
+
+
+
+	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &model[0][0]); //GL_TRUE transpose the matrix
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
 
