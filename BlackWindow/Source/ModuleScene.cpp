@@ -57,8 +57,10 @@ update_status ModuleScene::PreUpdate(float deltaTime)
 
 update_status ModuleScene::Update(float deltaTime)
 {
+	//App->scene->sky->Draw();
 
 	worldTimer->Update();
+
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
@@ -74,9 +76,6 @@ update_status ModuleScene::Update(float deltaTime)
 	// float4x4 calculatedModel = float4x4::FromTRS(transformVector, rotationQuat , scaleVector);
 
 	// float4x4 model = identityModel * calculatedModel;
-
-
-
 	// glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &model[0][0]); //GL_TRUE transpose the matrix
 	// glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
 	// glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
@@ -108,10 +107,7 @@ update_status ModuleScene::Update(float deltaTime)
 
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 	
-
-	// model->Draw(program);
-
-	App->scene->sky->Draw();
+	///App->scene->sky->Draw();
 	worldTimer->RegulateFPS();
 
 	return UPDATE_CONTINUE;

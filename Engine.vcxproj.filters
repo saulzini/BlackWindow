@@ -1218,10 +1218,10 @@
     <None Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\TriangleMesh_IntersectRay_SSE.inl">
       <Filter>MathGeoLib</Filter>
     </None>
-    <None Include="BlackWindow\Source\Shaders\Default1.frag">
+    <None Include="BlackWindow\Game\DefaultBox.frag">
       <Filter>Shaders\Texture</Filter>
     </None>
-    <None Include="BlackWindow\Source\Shaders\Default1.vert">
+    <None Include="BlackWindow\Game\DefaultBox.vert">
       <Filter>Shaders\Texture</Filter>
     </None>
   </ItemGroup>
