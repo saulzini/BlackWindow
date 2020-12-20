@@ -24,7 +24,7 @@ ModuleEditor::ModuleEditor()
     AddWindow(configurationWindow = new ConfigurationWindow("Configuration window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     AddWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar ));
     AddWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    AddWindow(gameObjectWindow = new GameObjectWindow("GameObject", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+    // AddWindow(gameObjectWindow = new GameObjectWindow("GameObject", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     AddWindow(aboutWindow = new AboutWindow("About", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     AddWindow(toolbarWindow = new ToolbarWindow("Toolbar", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
 }
@@ -199,13 +199,13 @@ void ModuleEditor::DrawMenu()
         if (ImGui::BeginMenu("View"))
         {
             if (ImGui::MenuItem("Console window"))
-                App->editor->consoleWindow->toggleWindow();
+                consoleWindow->toggleWindow();
             if (ImGui::MenuItem("Hierarchy window"))
                 hierarchyWindow->toggleWindow();
             if (ImGui::MenuItem("Config window"))
                 configurationWindow->toggleWindow();
-            if (ImGui::MenuItem("GameObject window"))
-                gameObjectWindow->toggleWindow();
+            // if (ImGui::MenuItem("GameObject window"))
+            //     gameObjectWindow->toggleWindow();
             if (ImGui::MenuItem("About window"))
                 aboutWindow->toggleWindow();
             ImGui::EndMenu();

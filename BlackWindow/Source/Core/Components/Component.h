@@ -4,21 +4,24 @@
 class GameObject;
 class Component
 {
-private:
+protected:
 	ComponentTypes type; 
     bool active;
     GameObject *owner;
 
 public:
     
-    Component(ComponentTypes type = ComponentTypes::NONE){
+    Component(GameObject *owner ,ComponentTypes type = ComponentTypes::NONE){
+        this->owner = owner;
         this->type = type;
-        active = false;
-        owner = nullptr;
+        active = true;
     }
 
     ~Component() {}
 
+    ComponentTypes GetType() const{
+        return type;
+    }
     virtual void Enable(){}
     virtual void Update(){}
     virtual void Disable(){}

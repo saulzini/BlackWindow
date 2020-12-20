@@ -8,7 +8,7 @@
 #include "UIWindow/ConsoleWindow.h"
 #include <IL/ilut.h>
 #include <IL/ilu.h>
-#include "FileManager.h"
+#include "Core/FileManager.h"
 enum class Strategy
 {
 	Normal,

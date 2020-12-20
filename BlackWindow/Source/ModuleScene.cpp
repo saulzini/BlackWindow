@@ -5,21 +5,27 @@
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
 #include "Core/Mesh.h"
-#include "Core/Model.h"
 #include "Math/float4x4.h"
 #include <string>
 #include "Leaks.h"
-#include "../glm/glm.hpp"
+// #include "../glm/glm.hpp"
 #include "Core/Time/WorldTimer.h"
 #include "Core/GameObject/GameObjectFactory.h"
+#include <Core/Importers/Texture/TextureLoader.h>
+#include "Core/Importers/Model/Model.h"
+#include "Core/Components/ComponentTypes.h"
+#include "Core/Components/ComponentMesh.h"
+#include "MathGeoLibFwd.h"
+#include "Math/Quat.h"
 ModuleScene::ModuleScene()
 {
-	model = nullptr;
 	program = 0;
 	worldTimer = new WorldTimer();
 
 	sky = nullptr;
 	programSky = 0;
+
+	root = new GameObject();
 }
 
 ModuleScene::~ModuleScene()
@@ -30,13 +36,17 @@ ModuleScene::~ModuleScene()
 bool ModuleScene::Init()
 {
 	Program programClass;
-
-
-	model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
+	
+	// model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
 	program = programClass.CreateProgramFromSource("Default.vert", "Default.frag");
 	programSky = programClass.CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
 	sky = new Skybox();
 
+	// Setting gameobject
+	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx",program); 
+	GameObject *house = model->LoadModel();
+
+	root->AddChildren(house);
 	return true;
 }
 
@@ -47,17 +57,28 @@ update_status ModuleScene::PreUpdate(float deltaTime)
 
 update_status ModuleScene::Update(float deltaTime)
 {
-	App->scene->sky->Draw();
+	//App->scene->sky->Draw();
 
 	worldTimer->Update();
 
 	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
-	float4x4 identityModel = float4x4::identity;
-	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &identityModel[0][0]); //GL_TRUE transpose the matrix
-	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
-	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
+
+	root->SetProjectionMatrix(proj);
+	root->SetViewMatrix(view);
+	root->Update();
+
+	// float4x4 identityModel = float4x4::identity;
+	// float3 transformVector(10.0f,2.0f,2.0f); 
+	// Quat rotationQuat(0.0f,0.0f,0.0f,0.0f);
+	// float3 scaleVector(2.0f,2.0f,2.0f);
+	// float4x4 calculatedModel = float4x4::FromTRS(transformVector, rotationQuat , scaleVector);
+
+	// float4x4 model = identityModel * calculatedModel;
+	// glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &model[0][0]); //GL_TRUE transpose the matrix
+	// glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
+	// glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
 
 
 	GLint ks = glGetUniformLocation(program, "ks");
@@ -86,10 +107,6 @@ update_status ModuleScene::Update(float deltaTime)
 
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 	
-	
-	
-	model->Draw(program);
-
 	///App->scene->sky->Draw();
 	worldTimer->RegulateFPS();
 
@@ -103,9 +120,6 @@ update_status ModuleScene::PostUpdate(float deltaTime)
 
 bool ModuleScene::CleanUp()
 {
-	delete (model);
-	model = nullptr;
-
 	delete (worldTimer);
 	worldTimer = nullptr;
 	
@@ -114,25 +128,25 @@ bool ModuleScene::CleanUp()
 
 void ModuleScene::SwapTexture(const char *texturePath) 
 {
-	std::string textPath(texturePath);
-	std::string directory = textPath.substr(0, textPath.find_last_of('\\'));
-	unsigned int id = TextureLoader::LoadTexture2D(textPath.c_str(),directory.c_str());
-	if (id == 0){
-		App->editor->consoleWindow->AddLog("Error in swapping texture");
-		return;
-	}
-	model->ApplyTextureToModel(id,textPath.c_str() );
+	// std::string textPath(texturePath);
+	// std::string directory = textPath.substr(0, textPath.find_last_of('\\'));
+	// unsigned int id = TextureLoader::LoadTexture2D(textPath.c_str(),directory.c_str());
+	// if (id == 0){
+	// 	App->editor->consoleWindow->AddLog("Error in swapping texture");
+	// 	return;
+	// }
+	// model->ApplyTextureToModel(id,textPath.c_str() );
 	
 }
 
 void ModuleScene::SwapModel(const char *modelPath)
 {
-	// Free space of previous model
-	delete (model);
-	model = nullptr;
-	model = new Model(modelPath);
+	// // Free space of previous model
+	// delete (model);
+	// model = nullptr;
+	// model = new Model(modelPath);
 
-	App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
+	// App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
 }
 
 GameObject* ModuleScene::CreateGameObject(GameObjectTypes type) 

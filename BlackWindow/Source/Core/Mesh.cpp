@@ -9,9 +9,13 @@ Mesh::Mesh(
     std::vector<unsigned int> &mIndices, 
     std::vector<Texture> &mTextures)
 {
+    VAO = 0;
+    VBO = 0;
+    EBO = 0;
     this->vertices = mVertices;
     this->indices = mIndices;
     this->textures = mTextures;
+    
 
     SetupMesh();
 }

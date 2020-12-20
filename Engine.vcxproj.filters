@@ -112,9 +112,6 @@
     <ClCompile Include="BlackWindow\Source\Core\Mesh.cpp">
       <Filter>Core\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="BlackWindow\Source\Core\Model.cpp">
-      <Filter>Core\Model</Filter>
-    </ClCompile>
     <ClCompile Include="BlackWindow\Source\Core\Texture.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -215,6 +212,9 @@
     </ClCompile>
     <ClCompile Include="BlackWindow\Source\Core\Program\Program.cpp">
       <Filter>Core\Program</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Importers\Model\Model.cpp">
+      <Filter>Core\Importers\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -635,12 +635,6 @@
     <ClInclude Include="BlackWindow\Source\Core\Mesh.h">
       <Filter>Core\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="BlackWindow\Source\Core\Model.h">
-      <Filter>Core\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="BlackWindow\Source\Core\TextureLoader.h">
-      <Filter>Core\TextureLoader</Filter>
-    </ClInclude>
     <ClInclude Include="BlackWindow\Source\Core\Texture.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -1058,6 +1052,21 @@
     <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObjectTypes.h">
       <Filter>Core\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Importers\Model\Model.h">
+      <Filter>Core\Importers\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Importers\Texture\TextureLoader.h">
+      <Filter>Core\Importers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentFactory.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentMesh.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentTransform.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -1069,9 +1078,6 @@
     <Filter Include="Core">
       <UniqueIdentifier>{ebb6cf58-a825-4957-9447-ace7c8bf1e2c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Core\Model">
-      <UniqueIdentifier>{1800a3e0-dc82-4f1c-bc94-d9377714d235}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\Mesh">
       <UniqueIdentifier>{7a347214-cc5c-48de-bc20-d7cb9e6052e3}</UniqueIdentifier>
     </Filter>
@@ -1080,9 +1086,6 @@
     </Filter>
     <Filter Include="Shaders\Texture">
       <UniqueIdentifier>{602c2e07-0396-4c5b-ab75-f7f609d4d3ca}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\TextureLoader">
-      <UniqueIdentifier>{f41250d8-502b-4f15-9fe7-eb26250ab752}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{af913654-bbf6-4bad-952a-c44c891a2621}</UniqueIdentifier>
@@ -1134,6 +1137,15 @@
     </Filter>
     <Filter Include="Core\Program">
       <UniqueIdentifier>{64046af7-cad0-4a22-8d21-d9293d8fe77a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Importers">
+      <UniqueIdentifier>{e532dd38-1746-4a33-a98f-e9f15f9cf9d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Importers\Texture">
+      <UniqueIdentifier>{f41250d8-502b-4f15-9fe7-eb26250ab752}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Importers\Model">
+      <UniqueIdentifier>{931f86fa-ffd4-422c-b469-ac3a0fe36fca}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

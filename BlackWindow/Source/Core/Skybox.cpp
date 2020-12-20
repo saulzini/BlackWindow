@@ -1,5 +1,4 @@
 #include "Skybox.h"
-#include "Model.h"
 #include <assimp/scene.h>
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
@@ -14,6 +13,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
 #include "../../Resources/glm/ext/matrix_float4x4.hpp"
+#include <IL/il.h>
+#include <Core/FileManager.h>
 Skybox::Skybox()
 {
     glGenVertexArrays(1, &skyboxVAO);

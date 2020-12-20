@@ -8,7 +8,6 @@
 
 #include "Texture.h"
 #include "Mesh.h"
-#include "TextureLoader.h"
 #include <string>
 #include "Math/float3.h"
 class Skybox
