@@ -63,19 +63,23 @@ update_status ModuleScene::Update(float deltaTime)
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
 
-	float4x4 identityModel = float4x4::identity;
-	float3 transformVector(10.0f,2.0f,2.0f); 
-	Quat rotationQuat(0.0f,0.0f,0.0f,0.0f);
-	float3 scaleVector(2.0f,2.0f,2.0f);
-	float4x4 calculatedModel = float4x4::FromTRS(transformVector, rotationQuat , scaleVector);
+	root->SetProjectionMatrix(proj);
+	root->SetViewMatrix(view);
+	root->Update();
 
-	float4x4 model = identityModel * calculatedModel;
+	// float4x4 identityModel = float4x4::identity;
+	// float3 transformVector(10.0f,2.0f,2.0f); 
+	// Quat rotationQuat(0.0f,0.0f,0.0f,0.0f);
+	// float3 scaleVector(2.0f,2.0f,2.0f);
+	// float4x4 calculatedModel = float4x4::FromTRS(transformVector, rotationQuat , scaleVector);
+
+	// float4x4 model = identityModel * calculatedModel;
 
 
 
-	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &model[0][0]); //GL_TRUE transpose the matrix
-	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
-	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
+	// glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &model[0][0]); //GL_TRUE transpose the matrix
+	// glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
+	// glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
 
 
 	GLint ks = glGetUniformLocation(program, "ks");
@@ -106,7 +110,6 @@ update_status ModuleScene::Update(float deltaTime)
 	
 
 	// model->Draw(program);
-	root->Update();
 
 	App->scene->sky->Draw();
 	worldTimer->RegulateFPS();

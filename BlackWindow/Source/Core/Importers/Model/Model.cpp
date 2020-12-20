@@ -26,7 +26,7 @@ inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
     return to;
 }
 
-ModelImporter::Model::Model(std::string path="",unsigned int mProgram=0)
+ModelImporter::Model::Model(std::string path="",unsigned int program=0)
 {
 	animationsCount = 0;
 	meshesCount = 0;
@@ -34,7 +34,7 @@ ModelImporter::Model::Model(std::string path="",unsigned int mProgram=0)
 	camerasCount = 0;
 	lightsCount = 0;
 	texturesCount = 0;
-	program = mProgram;
+	this->program = program;
 	if (path == "")
 	{
 		return;
@@ -101,7 +101,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	if (parent != nullptr) {
 		name = node->mName.C_Str();
 	}
-	GameObject* root = new GameObject(parent,name.c_str());
+	GameObject* root = new GameObject(parent,name.c_str(),program);
 	float3 translation;
 	Quat rotation;
 	float3 scale;
