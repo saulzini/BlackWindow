@@ -55,13 +55,6 @@ update_status ModuleCamera::Update(float deltaTime)
 		frustum.SetPos(cameraPosition);
 	}
 
-	//Setting projection
-	float4x4 projectionGL = frustum.ProjectionMatrix().Transposed(); //<-- Important to transpose!
-
-	//Send the frustum projection matrix to OpenGL
-	glMatrixMode(GL_PROJECTION);
-	glLoadMatrixf(*(projectionGL.v));
-
 	// Check for reset camera position
 	CheckForResetCameraPosition();
 	
