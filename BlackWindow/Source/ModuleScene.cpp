@@ -25,7 +25,7 @@ ModuleScene::ModuleScene()
 	sky = nullptr;
 	programSky = 0;
 
-	root = new GameObject();
+	root = nullptr;
 }
 
 ModuleScene::~ModuleScene()
@@ -37,11 +37,11 @@ bool ModuleScene::Init()
 {
 	Program programClass;
 	
-	// model = new Model(".\\Assets\\BakerHouse\\BakerHouse.fbx");
 	program = programClass.CreateProgramFromSource("Default.vert", "Default.frag");
 	programSky = programClass.CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
+	
+	root = new GameObject(nullptr,"Scene",program);
 	sky = new Skybox();
-
 	// Setting gameobject
 	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx",program); 
 	GameObject *house = model->LoadModel();
@@ -68,18 +68,6 @@ update_status ModuleScene::Update(float deltaTime)
 	root->SetProjectionMatrix(proj);
 	root->SetViewMatrix(view);
 	root->Update();
-
-	// float4x4 identityModel = float4x4::identity;
-	// float3 transformVector(10.0f,2.0f,2.0f); 
-	// Quat rotationQuat(0.0f,0.0f,0.0f,0.0f);
-	// float3 scaleVector(2.0f,2.0f,2.0f);
-	// float4x4 calculatedModel = float4x4::FromTRS(transformVector, rotationQuat , scaleVector);
-
-	// float4x4 model = identityModel * calculatedModel;
-	// glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &model[0][0]); //GL_TRUE transpose the matrix
-	// glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &view[0][0]);
-	// glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &proj[0][0]);
-
 
 	GLint ks = glGetUniformLocation(program, "ks");
 	GLint kd = glGetUniformLocation(program, "kd");

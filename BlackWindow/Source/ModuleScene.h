@@ -28,6 +28,10 @@ public:
 		return sky;
 	}
 
+	GameObject* GetRoot() const {
+		return root;
+	}
+
 
 	// For testing
 	Skybox* sky;
