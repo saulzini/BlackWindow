@@ -4,7 +4,7 @@
 #include "Globals.h"
 #include "Module.h"
 #include "Core/Time/DeltaTime.h"
-
+#include "Algorithm/Random/LCG.h"
 class ModuleRender;
 class ModuleWindow;
 class ModuleInput;
@@ -39,9 +39,14 @@ public:
 	ModuleScene* scene= nullptr;
 	void RequestBrowser(const char* route);
 
+	LCG* GetLcg() const{
+		return lcg;
+	}
 
 private:
 	std::list<Module*> modules;
+	LCG* lcg;
+
 };
 
 extern Application* App;
