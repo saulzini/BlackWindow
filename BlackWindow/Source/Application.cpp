@@ -19,6 +19,7 @@ Application::Application()
 	//TODO::IMPROVE THIS
 	ilInit();
 	iluInit();
+	lcg = new LCG();
 
 	// Order matters: they will Init/start/update in this order
 	modules.push_back(window = new ModuleWindow());
