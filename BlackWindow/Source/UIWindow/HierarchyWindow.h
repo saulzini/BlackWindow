@@ -12,7 +12,7 @@ public:
 		originalNodeFlags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
 	};
 	void Update() override;
-	void TreeChildren(ImGuiTreeNodeFlags node_flags, bool isOpen,GameObject *currentNode);
+	void TreeChildren(bool isOpen,GameObject *currentNode);
 
 protected:
 	GameObject *selected;

@@ -36,8 +36,7 @@ void HierarchyWindow::Update()
                 {
                     IM_ASSERT(payload->DataSize == sizeof(GameObject*));
                     GameObject* sourceId = (GameObject*)payload->Data;
-
-                    App->editor->consoleWindow->AddLog("Dragged %s to %i ", root->GetName().c_str(), sourceId);
+                    App->editor->consoleWindow->AddLog("From %s to %s ", selected->GetName().c_str(), root->GetName().c_str());
                 }
                 ImGui::EndDragDropTarget();
             }
@@ -54,7 +53,7 @@ void HierarchyWindow::Update()
                     nodeFlags |= ImGuiTreeNodeFlags_Selected;
                 }
                 bool open = ImGui::TreeNodeEx((void *)gameObject->GetId(), nodeFlags, gameObject->GetName().c_str());
-                TreeChildren(nodeFlags, open, gameObject);
+                TreeChildren(open, gameObject);
             }
             ImGui::TreePop();
             ImGui::PopStyleVar();
@@ -64,7 +63,7 @@ void HierarchyWindow::Update()
     }
 }
 
-void HierarchyWindow::TreeChildren(ImGuiTreeNodeFlags nodeFlags, bool isOpen, GameObject *currentNode)
+void HierarchyWindow::TreeChildren(bool isOpen, GameObject *currentNode)
 {
     if (isOpen)
     {
@@ -92,9 +91,9 @@ void HierarchyWindow::TreeChildren(ImGuiTreeNodeFlags nodeFlags, bool isOpen, Ga
             if (const ImGuiPayload *payload = ImGui::AcceptDragDropPayload("HierarchyNodeZone"))
             {
                 IM_ASSERT(payload->DataSize == sizeof(GameObject *));
-                GameObject *sourceId = (GameObject *)payload->Data;
+                // GameObject *sourceId = (GameObject *)payload->Data;
 
-                App->editor->consoleWindow->AddLog("From %i to %s ",  sourceId, currentNode->GetName().c_str());
+                App->editor->consoleWindow->AddLog("From %s to %s ",  selected->GetName().c_str(), currentNode->GetName().c_str());
             }
             ImGui::EndDragDropTarget();
         }
@@ -115,7 +114,7 @@ void HierarchyWindow::TreeChildren(ImGuiTreeNodeFlags nodeFlags, bool isOpen, Ga
                     flags |= ImGuiTreeNodeFlags_Selected;
                 }
                 bool open = ImGui::TreeNodeEx((void *)gameObject->GetId(), flags, gameObject->GetName().c_str());
-                TreeChildren(flags, open, gameObject);
+                TreeChildren(open, gameObject);
             }
         }
         ImGui::PopID();
