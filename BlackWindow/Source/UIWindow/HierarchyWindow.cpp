@@ -28,6 +28,21 @@ void HierarchyWindow::Update()
                 return;
             }
 
+            selected = App->scene->GetSelected();
+
+            if (ImGui::BeginDragDropTarget())
+            {
+                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("HierarchyNodeZone"))
+                {
+                    IM_ASSERT(payload->DataSize == sizeof(GameObject*));
+                    GameObject* sourceId = (GameObject*)payload->Data;
+
+                    App->editor->consoleWindow->AddLog("Dragged %s to %i ", root->GetName().c_str(), sourceId);
+                }
+                ImGui::EndDragDropTarget();
+            }
+
+
             ImGui::PushStyleVar(ImGuiStyleVar_IndentSpacing, ImGui::GetFontSize() * 3);
             std::vector<GameObject *> gameObjects = root->GetChildren();
             ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
@@ -35,6 +50,9 @@ void HierarchyWindow::Update()
             for (std::vector<GameObject *>::iterator it = gameObjects.begin(); it != gameObjects.end(); ++it)
             {
                 GameObject *gameObject = (GameObject *)*it;
+                if (selected != nullptr && gameObject == selected){
+                    nodeFlags |= ImGuiTreeNodeFlags_Selected;
+                }
                 bool open = ImGui::TreeNodeEx((void *)gameObject->GetId(), nodeFlags, gameObject->GetName().c_str());
                 TreeChildren(nodeFlags, open, gameObject);
             }
@@ -50,16 +68,12 @@ void HierarchyWindow::TreeChildren(ImGuiTreeNodeFlags nodeFlags, bool isOpen, Ga
 {
     if (isOpen)
     {
-        if (currentNode->GetChildren().size() > 0)
-        {
-            nodeFlags |= ImGuiTreeNodeFlags_Leaf;
-        }
-
         ImGui::PushID(currentNode->GetId());
 
         if (ImGui::IsItemClicked())
         {
             App->editor->consoleWindow->AddLog("Clicked %s", currentNode->GetName().c_str());
+            App->scene->SetSelected(currentNode);
         }
 
         // Our buttons are both drag sources and drag targets here!
@@ -80,7 +94,7 @@ void HierarchyWindow::TreeChildren(ImGuiTreeNodeFlags nodeFlags, bool isOpen, Ga
                 IM_ASSERT(payload->DataSize == sizeof(GameObject *));
                 GameObject *sourceId = (GameObject *)payload->Data;
 
-                App->editor->consoleWindow->AddLog("Dragged %s to %i ", currentNode->GetName().c_str(), sourceId);
+                App->editor->consoleWindow->AddLog("From %i to %s ",  sourceId, currentNode->GetName().c_str());
             }
             ImGui::EndDragDropTarget();
         }
@@ -91,8 +105,17 @@ void HierarchyWindow::TreeChildren(ImGuiTreeNodeFlags nodeFlags, bool isOpen, Ga
             for (std::vector<GameObject *>::iterator it = gameObjects.begin(); it != gameObjects.end(); ++it)
             {
                 GameObject *gameObject = (GameObject *)*it;
-                bool open = ImGui::TreeNodeEx((void *)gameObject->GetId(), nodeFlags, gameObject->GetName().c_str());
-                TreeChildren(nodeFlags, open, gameObject);
+            	ImGuiTreeNodeFlags flags = originalNodeFlags;
+
+                if (gameObject->GetChildren().size() <= 0)
+                {
+                    flags |= ImGuiTreeNodeFlags_Leaf;
+                }
+                if (selected != nullptr && gameObject == selected){
+                    flags |= ImGuiTreeNodeFlags_Selected;
+                }
+                bool open = ImGui::TreeNodeEx((void *)gameObject->GetId(), flags, gameObject->GetName().c_str());
+                TreeChildren(flags, open, gameObject);
             }
         }
         ImGui::PopID();

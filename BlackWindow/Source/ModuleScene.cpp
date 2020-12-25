@@ -26,6 +26,7 @@ ModuleScene::ModuleScene()
 	programSky = 0;
 
 	root = nullptr;
+	selected = nullptr;
 }
 
 ModuleScene::~ModuleScene()
