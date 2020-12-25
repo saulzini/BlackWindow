@@ -43,8 +43,6 @@ void GameObject::Update()
         
         Draw();
         ( (GameObject *) *it)->Update();
-
-
 	}
 
 }

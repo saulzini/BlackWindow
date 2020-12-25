@@ -48,5 +48,24 @@ public:
         return id;
     }
 
+    void RemoveChild(const GameObject* child){
+        if (children.size() <= 0){
+            return;
+        }
+        children.erase(std::remove(children.begin(), children.end(), child), children.end());
+    }
+
+
+
+    void SetParent(GameObject *parent){
+        // delete from parent
+        if (this->parent != nullptr){
+            this->parent->RemoveChild(this);
+        }
+        // asssigning new parent
+        this->parent = parent;
+        this->parent->AddChildren(this);
+    }
+
     
 };

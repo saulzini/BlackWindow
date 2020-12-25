@@ -38,7 +38,9 @@ public:
 	}
 
 	void SetSelected(GameObject *gameObject){
-		selected = gameObject;
+		if (selected != gameObject) {
+			selected = gameObject;
+		}
 	}
 
 
