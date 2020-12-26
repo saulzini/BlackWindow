@@ -115,7 +115,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 
 	// It always needs a transform component
 	ComponentTransform* componentTransform = (ComponentTransform*)root->AddComponent(ComponentTypes::TRANSFORM);
-	componentTransform->SetTransform(translation);
+	componentTransform->SetPosition(translation);
 	componentTransform->SetRotation(rotationRadians);
 	componentTransform->SetScale(scale);
 	

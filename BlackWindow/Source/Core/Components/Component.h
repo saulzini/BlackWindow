@@ -1,6 +1,7 @@
 #pragma once
 #include "ComponentTypes.h"
-
+//#include "Core/GameObject/GameObject.h"
+//#include "Core/GameObject/GameObject.h"
 class GameObject;
 class Component
 {
@@ -11,7 +12,7 @@ protected:
 
 public:
     
-    Component(GameObject *owner ,ComponentTypes type = ComponentTypes::NONE){
+    Component(GameObject *owner = nullptr,ComponentTypes type = ComponentTypes::NONE){
         this->owner = owner;
         this->type = type;
         active = true;
