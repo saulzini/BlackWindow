@@ -13,6 +13,7 @@ private:
 	unsigned int program;
 	WorldTimer* worldTimer;
 	GameObject* root;
+	GameObject* selected;
 
 public:
 	ModuleScene();
@@ -30,6 +31,19 @@ public:
 
 	GameObject* GetRoot() const {
 		return root;
+	}
+
+	GameObject* GetSelected() const {
+		if (selected == root){
+			return nullptr;
+		}
+		return selected;
+	}
+
+	void SetSelected(GameObject *gameObject){
+		if (selected != gameObject) {
+			selected = gameObject;
+		}
 	}
 
 

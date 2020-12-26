@@ -8,6 +8,11 @@ Component* GameObject::AddComponent(ComponentTypes type)
 {
     Component *component = ComponentFactory::CreateComponent(this,type);
     components.push_back( component );
+
+    if (type == ComponentTypes::TRANSFORM){
+        transformComponent = (ComponentTransform*) component;
+    }
+
     return component;
 }
 
@@ -43,8 +48,6 @@ void GameObject::Update()
         
         Draw();
         ( (GameObject *) *it)->Update();
-
-
 	}
 
 }
@@ -52,12 +55,18 @@ void GameObject::Update()
 void GameObject::Draw() 
 {
     float4x4 identityModel = float4x4::identity;
-	float3 transformVector(10.0f,2.0f,2.0f); 
-	Quat rotationQuat(0.0f,0.0f,0.0f,0.0f);
-	float3 scaleVector(2.0f,2.0f,2.0f);
-	float4x4 calculatedModel = float4x4::FromTRS(transformVector, rotationQuat , scaleVector);
+    float4x4 calculatedModel = float4x4::identity;
 
-	modelMatrix = identityModel * calculatedModel;
+    if (transformComponent){
+        // calculatedModel = float4x4::FromTRS(transformComponent->GetTransform(), rotationQuat , transformComponent->GetScale());
+        //Quat rotationQuat(0.0f, 0.0f, 0.0f, 0.0f);
+        //float3 scaleVector(2.0f, 2.0f, 2.0f);
+        //Quat rotationQuat(transformComponent->GetRotationQuat(),0.0f);
+        calculatedModel = float4x4::FromTRS(transformComponent->GetTransform(), transformComponent->GetRotationQuat() , transformComponent->GetScale());
+    }
+
+    //modelMatrix = identityModel * calculatedModel;
+    modelMatrix = calculatedModel;
 
     if (parent){
         modelMatrix = parent->modelMatrix * modelMatrix;
