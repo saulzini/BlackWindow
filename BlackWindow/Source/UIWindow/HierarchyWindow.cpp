@@ -28,7 +28,6 @@ void HierarchyWindow::Update()
                 return;
             }
 
-            selected = App->scene->GetSelected();
             ImGui::PushID(root->GetId());
 
             if (ImGui::IsItemClicked())
@@ -36,13 +35,14 @@ void HierarchyWindow::Update()
                 App->editor->consoleWindow->AddLog("Clicked %s", root->GetName().c_str());
                 App->scene->SetSelected(root);
             }
+            selected = App->scene->GetSelected();
 
             if (ImGui::BeginDragDropTarget())
             {
                 if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("HierarchyNodeZone"))
                 {
                     IM_ASSERT(payload->DataSize == sizeof(GameObject*));
-                    GameObject* sourceId = (GameObject*)payload->Data;
+                    // GameObject* sourceId = (GameObject*)payload->Data;
                     App->editor->consoleWindow->AddLog("From %s to %s ", selected->GetName().c_str(), root->GetName().c_str());
                     selected->SetParent(root);
                 }
@@ -104,9 +104,8 @@ void HierarchyWindow::TreeChildren(bool isOpen, GameObject *currentNode)
             if (const ImGuiPayload *payload = ImGui::AcceptDragDropPayload("HierarchyNodeZone"))
             {
                 IM_ASSERT(payload->DataSize == sizeof(GameObject *));
-                // GameObject *sourceId = (GameObject *)payload->Data;
-
                 App->editor->consoleWindow->AddLog("From %s to %s ",  selected->GetName().c_str(), currentNode->GetName().c_str());
+                selected->SetParent(currentNode);
             }
             ImGui::EndDragDropTarget();
         }

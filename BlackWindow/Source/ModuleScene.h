@@ -34,6 +34,9 @@ public:
 	}
 
 	GameObject* GetSelected() const {
+		if (selected == root){
+			return nullptr;
+		}
 		return selected;
 	}
 

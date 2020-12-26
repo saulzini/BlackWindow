@@ -19,7 +19,6 @@ enum class Strategy
 class TextureLoader
 {
 public:
-	// TODO::Check if is the best option to left static the method
 	TextureLoader(){};
 
 	/// <summary>
@@ -97,13 +96,6 @@ public:
 			{
 				success = ilLoadL(IL_TYPE_UNKNOWN, fileTexture.GetFile(), fileTexture.GetSize());
 
-				// ilSetInteger(IL_DXTC_FORMAT, IL_DXT5);
-				// success = ilLoadL(IL_DDS,fileTexture.GetFile(),fileTexture.GetSize());
-				// if (success){
-					
-				
-				// }
-
 				// check to see if everything went OK
 				if (!success)
 				{
@@ -121,19 +113,6 @@ public:
 				App->editor->consoleWindow->AddLog(buf.c_str());
 			}
 
-			// // load  the image
-			// success = ilLoad(IL_TYPE_UNKNOWN,(ILstring) resultPath.c_str());
-			// // check to see if everything went OK
-			// if (!success)
-			// {
-			// 	//Check for error
-			// 	ILenum Error;
-			// 	while ((Error = ilGetError()) != IL_NO_ERROR)
-			// 	{
-			// 		buf = "Error Loading texture: ";
-			// 		App->editor->consoleWindow->AddLog(buf.append(iluErrorString(Error)).c_str());
-			// 	}
-			// }
 		}
 
 		if (!success)

@@ -5,6 +5,7 @@
 #include "Math/float4x4.h"
 #include "Core/GameObject/GameObject.h"
 #include "Application.h"
+#include "Core/Components/ComponentTransform.h"
 class Component;
 class GameObject
 {
@@ -18,15 +19,19 @@ protected:
     float4x4 modelMatrix;
     std::vector<GameObject*> children;
     std::vector<Component*> components;
+    ComponentTransform *transformComponent;
 public:
     GameObject(GameObject* parent = nullptr, const char* name = "",unsigned int program=0){
         this->parent = parent;
         this->name = name;
         this->program = program;
+        
         this->id = App->GetLcg()->Int();
         projectionMatrix = float4x4::identity;
         viewMatrix = float4x4::identity;
         modelMatrix = float4x4::identity;
+
+        this->transformComponent = nullptr;
     }
     ~GameObject(){}
     virtual void Update();
@@ -55,8 +60,6 @@ public:
         children.erase(std::remove(children.begin(), children.end(), child), children.end());
     }
 
-
-
     void SetParent(GameObject *parent){
         // delete from parent
         if (this->parent != nullptr){
@@ -67,5 +70,12 @@ public:
         this->parent->AddChildren(this);
     }
 
+    void SetName(const char* name){
+        this->name = name;
+    }
+
+    ComponentTransform* GetTransformComponent() const{
+        return transformComponent;
+    }
     
 };

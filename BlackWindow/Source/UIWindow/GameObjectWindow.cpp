@@ -2,13 +2,13 @@
 #include "Math/float3.h"
 #include "Application.h"
 #include "ModuleScene.h"
+#include "Core/GameObject/GameObject.h"
+#include "Core/Components/ComponentTransform.h"
 // #include "Core/Model.h"
 void GameObjectWindow::Update()
 {
     if (show)
     {
-        // model = App->scene->GetModel();
-        
         ImGui::SetWindowPos(ImVec2(20, 30), true);
         if (!begin())
         {
@@ -17,14 +17,14 @@ void GameObjectWindow::Update()
             return;
         }
 
-        // if (model ==nullptr){
-        //     ImGui::Text("No Model");
-        // }
-        // else {
-        //     DrawTransformation();
-        //     DrawGeometry();
-        //     DrawTexture();
-        // }
+        const GameObject* gameObject = App->scene->GetSelected();
+        if (!gameObject){
+            end();
+            return;
+        }
+
+        gameObject->GetTransformComponent()->OnEditor();
+
         end();
     }
 }

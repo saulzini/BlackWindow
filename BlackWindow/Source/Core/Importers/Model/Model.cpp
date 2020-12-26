@@ -62,6 +62,11 @@ GameObject* ModelImporter::Model::LoadModel()
 	}
 	directory = path.substr(0, path.find_last_of('\\'));
 	root =ProcessNode(nullptr,scene->mRootNode, scene);
+	
+	//Assigning name to the load gameobject given the file name
+	std::string name = path.substr(path.find_last_of('\\') + 1, path.length());
+	name = name.substr(0, name.find_last_of('.'));
+	root->SetName(name.c_str());
 
 	buf = "End loading model:";
 	App->editor->consoleWindow->AddLog(buf.append(path.c_str()).c_str());
@@ -104,7 +109,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	GameObject* root = new GameObject(parent,name.c_str(),program);
 	float3 translation;
 	Quat rotation;
-	float3 scale;
+	float3 scale(1.0f,1.0f,1.0f);
 	aiMatrix4x4ToMathGeo(&node->mTransformation).Decompose(translation,rotation,scale);
 	float3 rotationRadians = rotation.ToEulerXYZ().Abs();
 
