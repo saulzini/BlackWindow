@@ -12,7 +12,7 @@ public:
         VBO = 0;
         EBO = 0;
     }
-    Mesh(std::vector<Vertex>& mVertices, std::vector<unsigned int>& mIndices, std::vector<Texture>& mTextures);
+    Mesh(const std::vector<Vertex>& mVertices,const std::vector<unsigned int>& mIndices,const std::vector<Texture>& mTextures);
 
 public:
     // mesh data

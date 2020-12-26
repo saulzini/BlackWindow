@@ -5,9 +5,9 @@
 
 using namespace std;
 Mesh::Mesh(
-    std::vector<Vertex> &mVertices, 
-    std::vector<unsigned int> &mIndices, 
-    std::vector<Texture> &mTextures)
+    const std::vector<Vertex> &mVertices, 
+    const std::vector<unsigned int> &mIndices, 
+    const std::vector<Texture> &mTextures)
 {
     VAO = 0;
     VBO = 0;

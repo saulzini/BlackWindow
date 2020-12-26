@@ -26,7 +26,7 @@ inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
     return to;
 }
 
-ModelImporter::Model::Model(std::string path="",unsigned int program=0)
+ModelImporter::Model::Model(const std::string &path="",unsigned int program=0)
 {
 	animationsCount = 0;
 	meshesCount = 0;
@@ -211,7 +211,7 @@ std::vector<Texture> ModelImporter::Model::LoadMaterialTextures(aiMaterial *mat,
 		// not found in hash
 		if (found == texturesLoaded.end()){
 			Texture texture;
-			texture.id = TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
+			texture.id = TextureImporter::TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
 			texture.type = typeName;
 			texture.path = str.C_Str();
 			textures.push_back(texture);
