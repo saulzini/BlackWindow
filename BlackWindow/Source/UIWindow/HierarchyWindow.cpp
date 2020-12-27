@@ -105,7 +105,10 @@ void HierarchyWindow::TreeChildren(bool isOpen, GameObject *currentNode)
             {
                 IM_ASSERT(payload->DataSize == sizeof(GameObject *));
                 App->editor->consoleWindow->AddLog("From %s to %s ",  selected->GetName().c_str(), currentNode->GetName().c_str());
-                selected->SetParent(currentNode);
+                // checking if is child
+                if ( !selected->isChild(currentNode)){
+                    selected->SetParent(currentNode);
+                }
             }
             ImGui::EndDragDropTarget();
         }

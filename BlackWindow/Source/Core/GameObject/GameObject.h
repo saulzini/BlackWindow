@@ -6,6 +6,7 @@
 #include "Application.h"
 #include "Core/Components/ComponentTransform.h"
 #include "Core/Components/Component.h"
+#include <queue>          // std::queue
 // class Component;
 class GameObject
 {
@@ -71,7 +72,7 @@ public:
         this->parent->AddChildren(this);
     }
 
-    void SetName(const char* name){
+    void SetName(const std::string name){
         this->name = name;
     }
 
@@ -80,4 +81,34 @@ public:
     }
 
     void CalculateModelMatrix();
+
+    bool isChild(GameObject *lookingChild){
+
+        if (children.size()<= 0){
+            return false;
+        }
+
+        std::queue<GameObject *> searchQueue;
+        searchQueue.push(this);
+        GameObject *current;
+        while( !searchQueue.empty() ){
+            current = searchQueue.front();
+            searchQueue.pop();
+            if (current == lookingChild){
+                return true;
+            }
+
+            std::vector<GameObject *> currentChildren = current->GetChildren();
+
+            if (currentChildren.size()> 0){
+                for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+                {
+                    searchQueue.push( (GameObject *)*it );
+                }
+            }
+        }
+
+        return false;
+       
+    }
 };
