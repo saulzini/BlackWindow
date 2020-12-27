@@ -1,4 +1,3 @@
-#pragma once
 #include "GameObject.h"
 #include "Core/Components/ComponentFactory.h"
 #include "Core/GameObject/GameObjectTypes.h"
@@ -6,7 +5,7 @@
 #include "Math/Quat.h"
 Component* GameObject::AddComponent(ComponentTypes type)
 {
-    Component *component = ComponentFactory::CreateComponent(this,type);
+    Component *component = ComponentFactory::CreateComponent( this,type);
     components.push_back( component );
 
     if (type == ComponentTypes::TRANSFORM){
@@ -31,9 +30,22 @@ void GameObject::SetViewMatrix(const float4x4& view)
     viewMatrix = view;
 }
 
+void GameObject::CalculateModelMatrix() 
+{
+    modelMatrix = float4x4::identity;
+    if (transformComponent){
+        modelMatrix = float4x4::FromTRS(
+            transformComponent->GetPosition(), 
+            transformComponent->GetRotationQuat() , 
+            transformComponent->GetScale()
+        );
+    }
+}
+
 
 void GameObject::Update() 
 {
+    //  Draw();
     
     for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); ++it){
         
@@ -45,16 +57,17 @@ void GameObject::Update()
     for (std::vector<GameObject *>::iterator it = children.begin() ; it != children.end(); ++it){
         ( (GameObject *) *it )->SetProjectionMatrix(projectionMatrix);
         ( (GameObject *) *it )->SetViewMatrix(viewMatrix);
-        
         Draw();
+
         ( (GameObject *) *it)->Update();
 	}
 
 }
 
+
 void GameObject::Draw() 
 {
-    float4x4 identityModel = float4x4::identity;
+    // float4x4 identityModel = float4x4::identity;
     float4x4 calculatedModel = float4x4::identity;
 
     if (transformComponent){
@@ -62,12 +75,12 @@ void GameObject::Draw()
         //Quat rotationQuat(0.0f, 0.0f, 0.0f, 0.0f);
         //float3 scaleVector(2.0f, 2.0f, 2.0f);
         //Quat rotationQuat(transformComponent->GetRotationQuat(),0.0f);
-        calculatedModel = float4x4::FromTRS(transformComponent->GetTransform(), transformComponent->GetRotationQuat() , transformComponent->GetScale());
+        calculatedModel = float4x4::FromTRS(transformComponent->GetPosition(), transformComponent->GetRotationQuat() , transformComponent->GetScale());
     }
 
-    //modelMatrix = identityModel * calculatedModel;
+    // modelMatrix = identityModel * calculatedModel;
     modelMatrix = calculatedModel;
-
+    // CalculateModelMatrix();
     if (parent){
         modelMatrix = parent->modelMatrix * modelMatrix;
     }

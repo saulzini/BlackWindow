@@ -38,7 +38,7 @@ namespace ModelImporter
 		int texturesCount;
 		unsigned int program;
 	public:
-		Model(std::string path,unsigned int program);
+		Model(const std::string &path,unsigned int program);
 
 		GameObject* LoadModel();
 		GameObject* ProcessNode(GameObject *parent,aiNode *node, const aiScene *scene);

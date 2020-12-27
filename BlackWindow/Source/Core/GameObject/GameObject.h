@@ -3,10 +3,10 @@
 #include <vector>
 #include "Core/Components/ComponentTypes.h"
 #include "Math/float4x4.h"
-#include "Core/GameObject/GameObject.h"
 #include "Application.h"
 #include "Core/Components/ComponentTransform.h"
-class Component;
+#include "Core/Components/Component.h"
+// class Component;
 class GameObject
 {
 protected:
@@ -45,6 +45,7 @@ public:
     void AddChildren(GameObject* gameObject);
     void SetProjectionMatrix(const float4x4 &projection);
     void SetViewMatrix(const float4x4 &projection);
+    
     std::string GetName() const{
         return name;
     }
@@ -77,5 +78,6 @@ public:
     ComponentTransform* GetTransformComponent() const{
         return transformComponent;
     }
-    
+
+    void CalculateModelMatrix();
 };

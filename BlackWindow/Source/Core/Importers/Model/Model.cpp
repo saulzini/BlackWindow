@@ -26,7 +26,7 @@ inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
     return to;
 }
 
-ModelImporter::Model::Model(std::string path="",unsigned int program=0)
+ModelImporter::Model::Model(const std::string &path="",unsigned int program=0)
 {
 	animationsCount = 0;
 	meshesCount = 0;
@@ -115,7 +115,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 
 	// It always needs a transform component
 	ComponentTransform* componentTransform = (ComponentTransform*)root->AddComponent(ComponentTypes::TRANSFORM);
-	componentTransform->SetTransform(translation);
+	componentTransform->SetPosition(translation);
 	componentTransform->SetRotation(rotationRadians);
 	componentTransform->SetScale(scale);
 	
@@ -177,6 +177,8 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 	for (GLuint i = 0; i < mesh->mNumFaces; i++)
 	{
 		aiFace face = mesh->mFaces[i];
+		assert(face.mNumIndices == 3);
+		
 		for (GLuint j = 0; j < face.mNumIndices; j++)
 		{
 			indices.push_back(face.mIndices[j]);
@@ -211,7 +213,7 @@ std::vector<Texture> ModelImporter::Model::LoadMaterialTextures(aiMaterial *mat,
 		// not found in hash
 		if (found == texturesLoaded.end()){
 			Texture texture;
-			texture.id = TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
+			texture.id = TextureImporter::TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
 			texture.type = typeName;
 			texture.path = str.C_Str();
 			textures.push_back(texture);

@@ -47,14 +47,6 @@ update_status ModuleCamera::PreUpdate(float deltaTime)
 update_status ModuleCamera::Update(float deltaTime)
 {
 
-	if ( //Updating given ui
-		lastCameraPosition.x != cameraPosition.x ||
-		lastCameraPosition.y != cameraPosition.y ||
-		lastCameraPosition.z == cameraPosition.z)
-	{
-		frustum.SetPos(cameraPosition);
-	}
-
 	// Check for reset camera position
 	CheckForResetCameraPosition();
 	
@@ -383,4 +375,5 @@ void ModuleCamera::ResetToDefaultSpeeds()
 void ModuleCamera::SetCameraPosition(const float3& mCameraPosition)
 {
 	cameraPosition = mCameraPosition;
+	frustum.SetPos(cameraPosition);
 }

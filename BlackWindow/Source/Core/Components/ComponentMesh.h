@@ -9,7 +9,7 @@ public:
     Mesh mesh;
     unsigned int shader;
 public:
-    ComponentMesh(GameObject *owner,ComponentTypes type = ComponentTypes::MESH, unsigned int shader = 0) : Component(owner,type)
+    ComponentMesh(GameObject *owner = nullptr,ComponentTypes type = ComponentTypes::MESH, unsigned int shader = 0) : Component(owner,type)
     {
         this->shader = shader;
     }

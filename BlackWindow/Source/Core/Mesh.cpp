@@ -5,9 +5,9 @@
 
 using namespace std;
 Mesh::Mesh(
-    std::vector<Vertex> &mVertices, 
-    std::vector<unsigned int> &mIndices, 
-    std::vector<Texture> &mTextures)
+    const std::vector<Vertex> &mVertices, 
+    const std::vector<unsigned int> &mIndices, 
+    const std::vector<Texture> &mTextures)
 {
     VAO = 0;
     VBO = 0;
@@ -35,7 +35,8 @@ void Mesh::Draw(const unsigned int shader)
         //else if (name == "texture_specular")
         //number = std::to_string(specularNr++);
 
-        //shader.setFloat(("material." + name + number).c_str(), i);
+        // shader.setFloat(("material." + name + number).c_str(), i);
+        //  glUniform1f(glGetUniformLocation(ID, name.c_str()), value); 
         glBindTexture(GL_TEXTURE_2D, textures[i].id);
     }
     glActiveTexture(GL_TEXTURE0);
