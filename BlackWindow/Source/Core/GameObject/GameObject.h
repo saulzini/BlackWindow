@@ -6,6 +6,7 @@
 #include "Application.h"
 #include "Core/Components/ComponentTransform.h"
 #include "Core/Components/Component.h"
+#include <queue>          // std::queue
 // class Component;
 class GameObject
 {
@@ -61,17 +62,17 @@ public:
         children.erase(std::remove(children.begin(), children.end(), child), children.end());
     }
 
-    void SetParent(GameObject *parent){
+    void SetParent(GameObject *newParent){
         // delete from parent
-        if (this->parent != nullptr){
-            this->parent->RemoveChild(this);
+        if (parent != nullptr){
+            parent->RemoveChild(this);
         }
         // asssigning new parent
-        this->parent = parent;
-        this->parent->AddChildren(this);
+        parent = newParent;
+        parent->AddChildren(this);
     }
 
-    void SetName(const char* name){
+    void SetName(const std::string name){
         this->name = name;
     }
 
@@ -80,4 +81,34 @@ public:
     }
 
     void CalculateModelMatrix();
+
+    bool isChild(GameObject *lookingChild){
+
+        if (children.size()<= 0){
+            return false;
+        }
+
+        std::queue<GameObject *> searchQueue;
+        searchQueue.push(this);
+        GameObject *current;
+        while( !searchQueue.empty() ){
+            current = searchQueue.front();
+            searchQueue.pop();
+            if (current == lookingChild){
+                return true;
+            }
+
+            std::vector<GameObject *> currentChildren = current->GetChildren();
+
+            if (currentChildren.size()> 0){
+                for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+                {
+                    searchQueue.push( (GameObject *)*it );
+                }
+            }
+        }
+
+        return false;
+       
+    }
 };

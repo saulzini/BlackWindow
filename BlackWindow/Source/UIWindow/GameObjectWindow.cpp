@@ -17,11 +17,16 @@ void GameObjectWindow::Update()
             return;
         }
 
-        const GameObject* gameObject = App->scene->GetSelected();
+        GameObject* gameObject = App->scene->GetSelected();
         if (!gameObject){
             end();
             return;
         }
+
+        // Name
+        //std::string name = gameObject->GetName();
+        //ImGui::InputText("Name", &name[0], name.size()); //always pass chars and size
+        //gameObject->SetName(name);
 
         gameObject->GetTransformComponent()->OnEditor();
 
@@ -29,25 +34,6 @@ void GameObjectWindow::Update()
     }
 }
 
-// void GameObjectWindow::DrawTransformation()
-// {
-//     if (ImGui::CollapsingHeader("Transformation"))
-//     {
-//         // Position
-//         float3 position(0,0,0);
-//         ImGui::InputFloat3("Front", &position[0]);
-//         // App->camera->SetFrontVector(frontVector);
-
-//         // Rotation
-//         float3 rotation(0,0,0);
-//         ImGui::InputFloat3("Up", &rotation[0]);
-//         // App->camera->SetUpVector(upVector);
-
-//         // Scale
-//         float3 scale(0,0,0);
-//         ImGui::InputFloat3("Position", &scale[0]);
-//     }
-// }
 
 // void GameObjectWindow::DrawGeometry() 
 // {
