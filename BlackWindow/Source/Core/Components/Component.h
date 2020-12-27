@@ -27,6 +27,8 @@ public:
     virtual void Update(){}
     virtual void Disable(){}
     virtual void OnEditor(){}
+    virtual void OnSave(){}
+    virtual void OnLoad(){}
 
 };
 

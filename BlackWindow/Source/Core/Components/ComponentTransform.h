@@ -76,6 +76,11 @@ public:
 
     }
 
+    void OnSave()
+    {
+        
+    }
+
 protected:
     float3 position;
     float3 scale;
