@@ -18,6 +18,7 @@ Component* GameObject::AddComponent(ComponentTypes type)
 void GameObject::AddChildren(GameObject* gameObject) 
 {
     children.push_back(gameObject);
+    gameObject->parent = this;
 }
 
 void GameObject::SetProjectionMatrix(const float4x4& projection) 

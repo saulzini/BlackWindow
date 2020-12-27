@@ -62,14 +62,14 @@ public:
         children.erase(std::remove(children.begin(), children.end(), child), children.end());
     }
 
-    void SetParent(GameObject *parent){
+    void SetParent(GameObject *newParent){
         // delete from parent
-        if (this->parent != nullptr){
-            this->parent->RemoveChild(this);
+        if (parent != nullptr){
+            parent->RemoveChild(this);
         }
         // asssigning new parent
-        this->parent = parent;
-        this->parent->AddChildren(this);
+        parent = newParent;
+        parent->AddChildren(this);
     }
 
     void SetName(const std::string name){
