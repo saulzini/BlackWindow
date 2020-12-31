@@ -48,6 +48,8 @@ bool ModuleScene::Init()
 	GameObject *house = model->LoadModel();
 
 	root->AddChildren(house);
+
+	root->Save();
 	return true;
 }
 
@@ -141,4 +143,9 @@ void ModuleScene::SwapModel(const char *modelPath)
 GameObject* ModuleScene::CreateGameObject(GameObjectTypes type) 
 {
 	return GameObjectFactory::CreateGameObject(type);
+}
+
+
+void ModuleScene::SaveScene(){
+	root->Save();
 }

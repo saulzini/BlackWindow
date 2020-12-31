@@ -3,6 +3,14 @@
 #include "Core/GameObject/GameObjectTypes.h"
 #include "GL/glew.h"
 #include "Math/Quat.h"
+#include <queue>          // std::queue
+#include <stack>          // std::stack
+
+#include "Application.h"
+#include "ModuleEditor.h"
+#include "UIWindow/ConsoleWindow.h"
+
+
 Component* GameObject::AddComponent(ComponentTypes type)
 {
     Component *component = ComponentFactory::CreateComponent( this,type);
@@ -43,10 +51,79 @@ void GameObject::CalculateModelMatrix()
     }
 }
 
+bool GameObject::isChild(GameObject *lookingChild) 
+{
+        if (children.size()<= 0){
+            return false;
+        }
+
+        std::queue<GameObject *> searchQueue;
+        searchQueue.push(this);
+        GameObject *current;
+        while( !searchQueue.empty() ){
+            current = searchQueue.front();
+            searchQueue.pop();
+            if (current == lookingChild){
+                return true;
+            }
+
+            std::vector<GameObject *> currentChildren = current->GetChildren();
+
+            if (currentChildren.size()> 0){
+                for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+                {
+                    searchQueue.push( (GameObject *)*it );
+                }
+            }
+        }
+
+        return false;
+       
+}
+
+
+
+
+
+
+
+void GameObject::Save() 
+{
+    // if (children.size() <= 0){
+        // return;
+    // }
+
+    std::stack<GameObject *> searchStack;
+    GameObject *current;
+    do {
+        std::vector<GameObject *> currentChildren = current->GetChildren();
+
+        if (currentChildren.size()> 0){
+            for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+            {
+                searchStack.push( (GameObject *)*it );
+            }
+        }
+
+        searchStack.push(this);
+        current = searchStack.top();
+        searchStack.pop();
+        App->editor->consoleWindow->AddLog( "%s", current->GetName().c_str() );
+
+
+    } while( !searchStack.empty() );
+
+}
+
+void GameObject::Export() 
+{
+    
+}
+
 
 void GameObject::Update() 
 {
-    //  Draw();
+     //Draw();
     
     for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); ++it){
         
@@ -90,3 +167,5 @@ void GameObject::Draw()
 	glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &viewMatrix[0][0]);
 	glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &projectionMatrix[0][0]);
 }
+
+

@@ -46,6 +46,8 @@ public:
 		}
 	}
 
+	void SaveScene();
+
 
 	// For testing
 	Skybox* sky;

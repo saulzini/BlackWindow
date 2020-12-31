@@ -198,6 +198,8 @@ void ModuleEditor::DrawMenu()
         // Menu for view windows
         if (ImGui::BeginMenu("View"))
         {
+            if (ImGui::MenuItem("Save"))
+                App->scene->SaveScene();
             if (ImGui::MenuItem("Console window"))
                 consoleWindow->toggleWindow();
             if (ImGui::MenuItem("Hierarchy window"))
