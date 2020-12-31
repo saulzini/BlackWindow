@@ -9,7 +9,7 @@
 #include "Application.h"
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
-
+#include "json/json.h"
 
 Component* GameObject::AddComponent(ComponentTypes type)
 {
@@ -92,26 +92,30 @@ void GameObject::Save()
     // if (children.size() <= 0){
         // return;
     // }
+    Json::Value val;
+    val["jojo"] = "aa";
 
     std::stack<GameObject *> searchStack;
-    GameObject *current;
-    do {
-        std::vector<GameObject *> currentChildren = current->GetChildren();
+    searchStack.push(this);
+    GameObject *current = nullptr;
+    // do {
+    //     current = searchStack.top();
 
-        if (currentChildren.size()> 0){
-            for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
-            {
-                searchStack.push( (GameObject *)*it );
-            }
-        }
+    //     std::vector<GameObject *> currentChildren = current->GetChildren();
 
-        searchStack.push(this);
-        current = searchStack.top();
-        searchStack.pop();
-        App->editor->consoleWindow->AddLog( "%s", current->GetName().c_str() );
+    //     if (currentChildren.size()> 0){
+    //         for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+    //         {
+    //             searchStack.push( (GameObject *)*it );
+    //         }
+    //     }
 
+    //     searchStack.pop();
+    //     App->editor->consoleWindow->AddLog( "%s", current->GetName().c_str() );
 
-    } while( !searchStack.empty() );
+        
+     
+    // } while( !searchStack.empty() );
 
 }
 

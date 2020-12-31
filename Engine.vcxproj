@@ -89,12 +89,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;;%(AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;$(ProjectDir)/BlackWindow/Resources/jsoncpp-master/include;;%(AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/jsoncpp-master/src/lib_json;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -107,12 +107,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;glew-2.1.0\include;%(AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;$(ProjectDir)/BlackWindow/Resources/jsoncpp-master/include;glew-2.1.0\include;%(AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/jsoncpp-master/src/lib_json;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -127,14 +127,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;$(ProjectDir)/BlackWindow/Source/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;$(ProjectDir)/BlackWindow/Resources/jsoncpp-master/include;$(ProjectDir)/BlackWindow/Source/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/jsoncpp-master/src/lib_json;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -149,14 +149,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>false</SDLCheck>
       <ExceptionHandling>Sync</ExceptionHandling>
-      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;glew-2.1.0\include;%(AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/include;$(ProjectDir)/BlackWindow/Resources/Devil/include;$(ProjectDir)/BlackWindow/Resources/Assimp/include;$(ProjectDir)/BlackWindow/Resources/SDL/include;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui;$(ProjectDir)/BlackWindow/Resources/MathGeoLib-master/src;$(ProjectDir)/BlackWindow/Source;$(ProjectDir)/BlackWindow/Resources/jsoncpp-master/include;glew-2.1.0\include;%(AdditionalIncludeDirectories);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)/BlackWindow/Resources/glew-2.1.0/lib/Release/Win32;$(ProjectDir)/BlackWindow/Resources/jsoncpp-master/src/lib_json;$(ProjectDir)/BlackWindow/Resources/Devil/lib/x86/Release;$(ProjectDir)/BlackWindow/Resources/gpudetect;$(ProjectDir)/BlackWindow/Resources/ImGui</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32.lib;opengl32.lib;DevIl.lib;ILU.lib;ILUT.lib;$(ProjectDir)/BlackWindow/Resources/Assimp/lib/assimp-vc141-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <ProjectReference>
@@ -252,6 +252,17 @@
     <ClInclude Include="BlackWindow\Resources\ImGui\imstb_rectpack.h" />
     <ClInclude Include="BlackWindow\Resources\ImGui\imstb_textedit.h" />
     <ClInclude Include="BlackWindow\Resources\ImGui\imstb_truetype.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\allocator.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\assertions.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\config.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\forwards.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\json.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\json_features.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\reader.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\value.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\version.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\writer.h" />
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\src\lib_json\json_tool.h" />
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK.h" />
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK2D.h" />
     <ClInclude Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\Random\LCG.h" />
@@ -466,6 +477,9 @@
     <ClCompile Include="BlackWindow\Resources\ImGui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="BlackWindow\Resources\ImGui\imgui_impl_sdl.cpp" />
     <ClCompile Include="BlackWindow\Resources\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="BlackWindow\Resources\jsoncpp-master\src\lib_json\json_reader.cpp" />
+    <ClCompile Include="BlackWindow\Resources\jsoncpp-master\src\lib_json\json_value.cpp" />
+    <ClCompile Include="BlackWindow\Resources\jsoncpp-master\src\lib_json\json_writer.cpp" />
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK.cpp" />
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\GJK2D.cpp" />
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Algorithm\Random\LCG.cpp" />
