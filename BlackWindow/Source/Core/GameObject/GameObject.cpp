@@ -92,31 +92,34 @@ void GameObject::Save()
     // if (children.size() <= 0){
         // return;
     // }
-    Json::Value val;
-    val["jojo"] = "aa";
+    // Json::Value val;
+    // val["jojo"] = "aa";
 
-    std::stack<GameObject *> searchStack;
-    searchStack.push(this);
+    std::stack<GameObject *> stack1,stack2;
+    stack1.push(this);
     GameObject *current = nullptr;
-    // do {
-    //     current = searchStack.top();
+    // Run while first stack is not empty 
+    while (!stack1.empty()) {
+        current = stack1.top();
+        stack1.pop();
+        stack2.push(current);
 
-    //     std::vector<GameObject *> currentChildren = current->GetChildren();
+        std::vector<GameObject*> currentChildren = current->GetChildren();
 
-    //     if (currentChildren.size()> 0){
-    //         for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
-    //         {
-    //             searchStack.push( (GameObject *)*it );
-    //         }
-    //     }
+        if (currentChildren.size() > 0) {
+            for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+            {
+                stack1.push((GameObject*)*it);
+            }
+        }
+       
+    }
 
-    //     searchStack.pop();
-    //     App->editor->consoleWindow->AddLog( "%s", current->GetName().c_str() );
-
-        
-     
-    // } while( !searchStack.empty() );
-
+    while (!stack2.empty()) {
+        current = stack2.top();
+        stack2.pop();
+        App->editor->consoleWindow->AddLog("%s",current->GetName().c_str());
+    }
 }
 
 void GameObject::Export() 
