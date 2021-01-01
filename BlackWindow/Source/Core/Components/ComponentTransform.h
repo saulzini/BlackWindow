@@ -76,7 +76,7 @@ public:
 
     }
 
-    void OnSave() override
+    void OnSave(Json::Value& parent) override
     {
         
     }

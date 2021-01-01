@@ -37,5 +37,12 @@ public:
         //     meshes[i].Draw(shader);
         // }
     }
+
+    void OnSave(Json::Value& parent) override
+    {
+        Json::Value meshJson;
+        mesh.Save(meshJson);
+        parent["mesh"].append(meshJson);
+    }
 };
 

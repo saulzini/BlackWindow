@@ -9,8 +9,7 @@
 #include "Application.h"
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
-#include "json/json.h"
-
+#include "Core/SceneFileManager/SceneFileManager.h"
 Component* GameObject::AddComponent(ComponentTypes type)
 {
     Component *component = ComponentFactory::CreateComponent( this,type);
@@ -53,78 +52,76 @@ void GameObject::CalculateModelMatrix()
 
 bool GameObject::isChild(GameObject *lookingChild) 
 {
-        if (children.size()<= 0){
-            return false;
-        }
-
-        std::queue<GameObject *> searchQueue;
-        searchQueue.push(this);
-        GameObject *current;
-        while( !searchQueue.empty() ){
-            current = searchQueue.front();
-            searchQueue.pop();
-            if (current == lookingChild){
-                return true;
-            }
-
-            std::vector<GameObject *> currentChildren = current->GetChildren();
-
-            if (currentChildren.size()> 0){
-                for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
-                {
-                    searchQueue.push( (GameObject *)*it );
-                }
-            }
-        }
-
+    if (children.size()<= 0){
         return false;
+    }
+
+    std::queue<GameObject *> searchQueue;
+    searchQueue.push(this);
+    GameObject *current;
+    while( !searchQueue.empty() ){
+        current = searchQueue.front();
+        searchQueue.pop();
+        if (current == lookingChild){
+            return true;
+        }
+
+        std::vector<GameObject *> currentChildren = current->GetChildren();
+
+        if (currentChildren.size()> 0){
+            for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+            {
+                searchQueue.push( (GameObject *)*it );
+            }
+        }
+    }
+
+    return false;
        
 }
-
-
-
-
-
-
 
 void GameObject::Save() 
 {
-    // if (children.size() <= 0){
-        // return;
-    // }
-    // Json::Value val;
-    // val["jojo"] = "aa";
+    SceneFileManager scenefileManager;
+    
+    Json::Value jsonRoot;
+    jsonRoot["name"] = this->GetName();
+    jsonRoot["children"] = Json::arrayValue;
+    std::vector<GameObject *> currentChildren = this->GetChildren();
 
-    std::stack<GameObject *> stack1,stack2;
-    stack1.push(this);
-    GameObject *current = nullptr;
-    // Run while first stack is not empty 
-    while (!stack1.empty()) {
-        current = stack1.top();
-        stack1.pop();
-        stack2.push(current);
-
-        std::vector<GameObject*> currentChildren = current->GetChildren();
-
-        if (currentChildren.size() > 0) {
-            for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
-            {
-                stack1.push((GameObject*)*it);
-            }
-        }
-       
+    for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+    {
+        ( (GameObject *)*it )->Export(jsonRoot);
     }
 
-    while (!stack2.empty()) {
-        current = stack2.top();
-        stack2.pop();
-        App->editor->consoleWindow->AddLog("%s",current->GetName().c_str());
-    }
+
+    scenefileManager.ExportFile("scene.txt", jsonRoot);
 }
 
-void GameObject::Export() 
+void GameObject::Export(Json::Value& parent) 
 {
-    
+    Json::Value currentJson;
+    currentJson["name"] = this->GetName();
+    currentJson["id"] = this->GetId();
+
+    // components
+    currentJson["components"] = Json::arrayValue;
+    std::vector<Component *> currentComponents = this->GetComponents();
+    for (std::vector<Component *>::iterator it = currentComponents.begin(); it != currentComponents.end(); ++it)
+    {
+        ( (Component *)*it )->OnSave(currentJson);
+    }
+
+    // children
+    currentJson["children"] = Json::arrayValue;
+    std::vector<GameObject *> currentChildren = this->GetChildren();
+
+    for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+    {
+        ( (GameObject *)*it )->Export(currentJson);
+    }
+
+    parent["children"].append(currentJson);
 }
 
 

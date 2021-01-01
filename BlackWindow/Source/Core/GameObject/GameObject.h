@@ -6,7 +6,8 @@
 #include "Application.h"
 #include "Core/Components/ComponentTransform.h"
 #include "Core/Components/Component.h"
-// class Component;
+#include "json/json.h"
+
 class GameObject
 {
 protected:
@@ -46,6 +47,10 @@ public:
     void SetProjectionMatrix(const float4x4 &projection);
     void SetViewMatrix(const float4x4 &projection);
     
+    std::vector<Component*> GetComponents(){
+        return components;
+    }
+    
     std::string GetName() const{
         return name;
     }
@@ -84,5 +89,5 @@ public:
     bool isChild(GameObject *lookingChild);
 
     void Save();
-    void Export();
+    void Export(Json::Value& parent);
 };
