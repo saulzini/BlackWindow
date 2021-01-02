@@ -128,8 +128,6 @@ void GameObject::Export(Json::Value& parent)
 
 void GameObject::Update() 
 {
-     //Draw();
-    
     for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); ++it){
         
 		if ( ( (Component *) *it)->GetType() == ComponentTypes::MESH){
@@ -137,16 +135,16 @@ void GameObject::Update()
         }
 	}
 
+    Draw();
+
     for (std::vector<GameObject *>::iterator it = children.begin() ; it != children.end(); ++it){
         ( (GameObject *) *it )->SetProjectionMatrix(projectionMatrix);
         ( (GameObject *) *it )->SetViewMatrix(viewMatrix);
-        Draw();
+        // Draw();
 
         ( (GameObject *) *it)->Update();
 	}
-
 }
-
 
 void GameObject::Draw() 
 {
@@ -165,7 +163,7 @@ void GameObject::Draw()
     modelMatrix = calculatedModel;
     // CalculateModelMatrix();
     if (parent){
-        modelMatrix = parent->modelMatrix * modelMatrix;
+        modelMatrix = parent->GetModelMatrix() * modelMatrix;
     }
 
 	glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &modelMatrix[0][0]); //GL_TRUE transpose the matrix

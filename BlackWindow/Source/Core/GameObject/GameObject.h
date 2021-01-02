@@ -90,4 +90,8 @@ public:
 
     void Save();
     void Export(Json::Value& parent);
+
+    float4x4 GetModelMatrix() const{
+        return modelMatrix;
+    }
 };
