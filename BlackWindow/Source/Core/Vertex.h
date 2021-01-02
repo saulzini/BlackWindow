@@ -11,20 +11,28 @@ public:
     float2 TexCoords;
 
     void Save(Json::Value& parent){
-        parent["position"] = Json::arrayValue;
-        parent["normal"] = Json::arrayValue;
-        parent["texcoords"] = Json::arrayValue;
+        Json::Value vertex;
+        Json::Value positionJson = Json::arrayValue;
+        Json::Value normalJson = Json::arrayValue;
+        Json::Value texcoordsJson = Json::arrayValue;
 
-        parent["position"].append( Position.x );
-        parent["position"].append( Position.y );
-        parent["position"].append( Position.z );
+        positionJson.append( Position.x );
+        positionJson.append( Position.y );
+        positionJson.append( Position.z );
 
-        parent["normal"].append( Normal.x );
-        parent["normal"].append( Normal.y );
-        parent["normal"].append( Normal.z );
+        normalJson.append( Normal.x );
+        normalJson.append( Normal.y );
+        normalJson.append( Normal.z );
 
-        parent["texcoords"].append( TexCoords.x );
-        parent["texcoords"].append( TexCoords.y );
+        texcoordsJson.append( TexCoords.x );
+        texcoordsJson.append( TexCoords.y );
+
+        vertex["position"] = positionJson;
+        vertex["normal"] = normalJson;
+        vertex["texcoords"] = texcoordsJson;
+
+        parent["vertices"].append(vertex);
+
     }
 };
 

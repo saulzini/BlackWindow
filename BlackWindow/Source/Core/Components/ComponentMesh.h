@@ -41,8 +41,9 @@ public:
     void OnSave(Json::Value& parent) override
     {
         Json::Value meshJson;
+        meshJson["type"] = static_cast<int>(ComponentTypes::MESH);
         mesh.Save(meshJson);
-        parent["mesh"].append(meshJson);
+        parent["components"].append(meshJson);
     }
 };
 

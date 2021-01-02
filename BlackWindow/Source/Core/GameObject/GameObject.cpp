@@ -95,7 +95,7 @@ void GameObject::Save()
     }
 
 
-    scenefileManager.ExportFile("scene.txt", jsonRoot);
+    scenefileManager.ExportFile("scene.blackwindow", jsonRoot);
 }
 
 void GameObject::Export(Json::Value& parent) 
@@ -107,6 +107,7 @@ void GameObject::Export(Json::Value& parent)
     // components
     currentJson["components"] = Json::arrayValue;
     std::vector<Component *> currentComponents = this->GetComponents();
+
     for (std::vector<Component *>::iterator it = currentComponents.begin(); it != currentComponents.end(); ++it)
     {
         ( (Component *)*it )->OnSave(currentJson);

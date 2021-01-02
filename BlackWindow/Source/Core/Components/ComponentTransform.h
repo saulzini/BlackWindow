@@ -78,7 +78,30 @@ public:
 
     void OnSave(Json::Value& parent) override
     {
-        
+        Json::Value transformJson;
+        transformJson["type"] = static_cast<int>(ComponentTypes::TRANSFORM);
+
+        Json::Value positionJson = Json::arrayValue;
+        Json::Value scaleJson = Json::arrayValue;
+        Json::Value rotationJson = Json::arrayValue;
+
+        positionJson.append( position.x );
+        positionJson.append( position.y );
+        positionJson.append( position.z );
+
+        scaleJson.append( scale.x );
+        scaleJson.append( scale.y );
+        scaleJson.append( scale.z );
+
+        rotationJson.append( rotation.x );
+        rotationJson.append( rotation.y );
+        rotationJson.append( rotation.z );
+
+        transformJson["position"] = positionJson;
+        transformJson["scale"] = scaleJson;
+        transformJson["rotation"] = rotationJson;
+
+        parent["components"].append(transformJson);
     }
 
 protected:

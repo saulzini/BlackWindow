@@ -23,21 +23,19 @@ public:
     void ChangeTextures(const std::vector<Texture>& textures);
 
     void Save(Json::Value& parent){
-        Json::Value currentJson;
-        currentJson["vertices"] = Json::arrayValue;
+        parent["vertices"] = Json::arrayValue;
 
         for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); ++it)
         {
-            (*it).Save(currentJson);
+            (*it).Save(parent);
         }
         
-        currentJson["indices"] = Json::arrayValue;
+        parent["indices"] = Json::arrayValue;
         for (unsigned int i = 0; i != indices.size(); ++i){
             Json::UInt index = indices[i];
-            currentJson["indices"].append( index );
+            parent["indices"].append( index );
         }
 
-        parent.append(currentJson);
     }
 
 private:
