@@ -67,13 +67,43 @@ public:
     }
 
     void SetParent(GameObject *newParent){
+        // parent position
+        float4x4 oldParentMatrix = float4x4::identity;
+        float4x4 newParentMatrix = newParent->GetModelMatrix();
+
         // delete from parent
         if (parent != nullptr){
+            oldParentMatrix = parent->GetModelMatrix();
             parent->RemoveChild(this);
         }
         // asssigning new parent
         parent = newParent;
         parent->AddChildren(this);
+
+        float3 translateOld(0.0f);
+        Quat rotationOld(0.0f,0.0f,0.0f,0.0f);
+        float3 scaleOld(0.0f);
+
+        float3 translateNew (0.0f);
+        Quat rotationNew(0.0f,0.0f,0.0f,0.0f);
+        float3 scaleNew (0.0f);
+
+        oldParentMatrix.Decompose(translateOld,rotationOld,scaleOld);
+        newParentMatrix.Decompose(translateNew,rotationNew,scaleNew);
+        
+        Quat rotationCurrent = transformComponent->GetRotationQuat();
+
+        float3 newRotation = float3( rotationOld.x + rotationCurrent.x - rotationNew.x,
+        rotationOld.y + rotationCurrent.y - rotationNew.y,
+        rotationOld.z + rotationCurrent.z - rotationNew.z
+        );
+        
+        if (transformComponent){
+            transformComponent->SetPosition( (translateOld + transformComponent->GetPosition() ) - translateNew  );
+            transformComponent->SetScale( (scaleOld + transformComponent->GetScale() ) - scaleNew  );
+            transformComponent->SetRotation( newRotation );
+        }
+        CalculateModelMatrix();
     }
 
     void SetName(const std::string name){

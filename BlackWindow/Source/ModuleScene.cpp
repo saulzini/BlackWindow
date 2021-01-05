@@ -17,6 +17,7 @@
 #include "Core/Components/ComponentMesh.h"
 #include "MathGeoLibFwd.h"
 #include "Math/Quat.h"
+#include <queue>
 ModuleScene::ModuleScene()
 {
 	program = 0;
@@ -49,7 +50,8 @@ bool ModuleScene::Init()
 
 	root->AddChildren(house);
 
-	root->Save();
+	// root->Save();
+
 	return true;
 }
 
@@ -148,4 +150,37 @@ GameObject* ModuleScene::CreateGameObject(GameObjectTypes type)
 
 void ModuleScene::SaveScene(){
 	root->Save();
+}
+
+void ModuleScene::Load(const Json::Value& root)
+{
+	// delete from scene 
+    DeleteGameObjects();
+
+
+	// load new gameobjects
+}
+
+void ModuleScene::DeleteGameObjects() 
+{
+	// if (root != nullptr){
+	// 	return;
+	// }
+
+	// std::queue<GameObject *> gameObjectsQueu;
+	// gameObjectsQueu.push(root);
+    // GameObject *current;
+    // while( !gameObjectsQueu.empty() ){
+    //     current = gameObjectsQueu.front();
+    //     gameObjectsQueu.pop();
+      
+    //     std::vector<GameObject *> currentChildren = current->GetChildren();
+
+    //     if (currentChildren.size()> 0){
+    //         for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+    //         {
+    //             gameObjectsQueu.push( (GameObject *)*it );
+    //         }
+    //     }
+    // }
 }

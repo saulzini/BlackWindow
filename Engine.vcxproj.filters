@@ -225,9 +225,6 @@
     <ClCompile Include="BlackWindow\Resources\jsoncpp-master\src\lib_json\json_writer.cpp">
       <Filter>Resources\json</Filter>
     </ClCompile>
-    <ClCompile Include="BlackWindow\Source\Core\SceneFileManager\SceneFileManager.cpp">
-      <Filter>Core\SceneFileManager</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />

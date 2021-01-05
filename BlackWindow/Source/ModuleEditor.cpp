@@ -13,6 +13,7 @@
 #include "UIWindow/AboutWindow.h"
 #include "UIWindow/ToolbarWindow.h"
 #include "Leaks.h"
+#include "Core/SceneFileManager/SceneFileManager.h"
 ModuleEditor::ModuleEditor()
 {
     showDemoWindow = false;
@@ -198,6 +199,8 @@ void ModuleEditor::DrawMenu()
         // Menu for view windows
         if (ImGui::BeginMenu("View"))
         {
+             if (ImGui::MenuItem("Load"))
+                SceneFileManager::LoadFromFile("scene.blackwindow");
             if (ImGui::MenuItem("Save"))
                 App->scene->SaveScene();
             if (ImGui::MenuItem("Console window"))

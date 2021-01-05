@@ -80,7 +80,7 @@ void HierarchyWindow::TreeChildren(bool isOpen, GameObject *currentNode)
 {
     if (isOpen)
     {
-        // ImGui::PushID(currentNode->GetId());
+        ImGui::PushID(currentNode->GetId());
 
         if (ImGui::IsItemClicked())
         {
@@ -132,7 +132,7 @@ void HierarchyWindow::TreeChildren(bool isOpen, GameObject *currentNode)
                 TreeChildren(open, gameObject);
             }
         }
-        // ImGui::PopID();
+        ImGui::PopID();
         ImGui::TreePop();
 
     }

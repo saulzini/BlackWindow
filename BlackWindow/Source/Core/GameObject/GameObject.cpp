@@ -82,8 +82,6 @@ bool GameObject::isChild(GameObject *lookingChild)
 
 void GameObject::Save() 
 {
-    SceneFileManager scenefileManager;
-    
     Json::Value jsonRoot;
     jsonRoot["name"] = this->GetName();
     jsonRoot["children"] = Json::arrayValue;
@@ -95,7 +93,7 @@ void GameObject::Save()
     }
 
 
-    scenefileManager.ExportFile("scene.blackwindow", jsonRoot);
+    SceneFileManager::ExportFile("scene.blackwindow", jsonRoot);
 }
 
 void GameObject::Export(Json::Value& parent) 
@@ -128,6 +126,8 @@ void GameObject::Export(Json::Value& parent)
 
 void GameObject::Update() 
 {
+    Draw();
+
     for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); ++it){
         
 		if ( ( (Component *) *it)->GetType() == ComponentTypes::MESH){
@@ -135,13 +135,10 @@ void GameObject::Update()
         }
 	}
 
-    Draw();
 
     for (std::vector<GameObject *>::iterator it = children.begin() ; it != children.end(); ++it){
         ( (GameObject *) *it )->SetProjectionMatrix(projectionMatrix);
         ( (GameObject *) *it )->SetViewMatrix(viewMatrix);
-        // Draw();
-
         ( (GameObject *) *it)->Update();
 	}
 }

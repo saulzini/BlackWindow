@@ -47,7 +47,9 @@ public:
 	}
 
 	void SaveScene();
-
+	
+	void Load(const Json::Value& parent);
+	void DeleteGameObjects();
 
 	// For testing
 	Skybox* sky;
