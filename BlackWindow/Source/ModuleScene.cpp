@@ -18,6 +18,9 @@
 #include "MathGeoLibFwd.h"
 #include "Math/Quat.h"
 #include <queue>
+
+#include "ModuleEditor.h"
+#include "UIWindow/ConsoleWindow.h"
 ModuleScene::ModuleScene()
 {
 	program = 0;
@@ -157,30 +160,34 @@ void ModuleScene::Load(const Json::Value& root)
 	// delete from scene 
     DeleteGameObjects();
 
-
 	// load new gameobjects
+	
 }
 
 void ModuleScene::DeleteGameObjects() 
 {
-	// if (root != nullptr){
-	// 	return;
-	// }
+	if (root == nullptr){
+		return;
+	}
 
-	// std::queue<GameObject *> gameObjectsQueu;
-	// gameObjectsQueu.push(root);
-    // GameObject *current;
-    // while( !gameObjectsQueu.empty() ){
-    //     current = gameObjectsQueu.front();
-    //     gameObjectsQueu.pop();
+	std::queue<GameObject *> gameObjectsQueu;
+	gameObjectsQueu.push(root);
+    GameObject *current;
+    while( !gameObjectsQueu.empty() ){
+        current = gameObjectsQueu.front();
+        gameObjectsQueu.pop();
       
-    //     std::vector<GameObject *> currentChildren = current->GetChildren();
+        std::vector<GameObject *> currentChildren = current->GetChildren();
 
-    //     if (currentChildren.size()> 0){
-    //         for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
-    //         {
-    //             gameObjectsQueu.push( (GameObject *)*it );
-    //         }
-    //     }
-    // }
+        if (currentChildren.size()> 0){
+            for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+            {
+                gameObjectsQueu.push( (GameObject *)*it );
+            }
+        }
+
+		current->RemoveParent();
+		current->Clear();
+		App->editor->consoleWindow->AddLog("Clear %s",current->GetName().c_str());
+    }
 }

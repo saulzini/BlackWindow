@@ -38,6 +38,20 @@ public:
 
     }
 
+    std::vector<Vertex> GetVertices() const {
+        return vertices;
+    }
+
+    std::vector<unsigned int> GetIndices() const {
+        return indices;
+    }
+
+    void Clear(){
+       vertices.clear();      
+       indices.clear();      
+       textures.clear();      
+    }
+
 private:
     //  render data
     unsigned int VAO, VBO, EBO;

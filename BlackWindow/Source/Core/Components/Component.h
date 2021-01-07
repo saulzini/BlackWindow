@@ -31,6 +31,7 @@ public:
     virtual void OnEditor(){}
     virtual void OnSave(Json::Value& parent){}
     virtual void OnLoad(){}
+    virtual void Clear(){}
 
 };
 

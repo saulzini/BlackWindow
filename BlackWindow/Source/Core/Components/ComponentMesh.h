@@ -45,5 +45,11 @@ public:
         mesh.Save(meshJson);
         parent["components"].append(meshJson);
     }
+
+    void Clear() override
+    {   
+        mesh.Clear();
+    }
+
 };
 
