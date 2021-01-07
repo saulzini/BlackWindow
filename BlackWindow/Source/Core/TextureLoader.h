@@ -170,6 +170,20 @@ public:
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); //linear interpolation for magnification filter
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); //linear interpolation for minifiying filter
 
+		unsigned int fbo;
+		glGenFramebuffers(1, &fbo);
+		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, imageID, 0);
+		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) 
+		{
+			buf = "Error reading texture file";
+			App->editor->consoleWindow->AddLog(buf.c_str());
+		}
+		else {
+
+			glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		}
 		ilDeleteImage(imageID); //release from il since we have it in opengl
 
 		return imageID;
