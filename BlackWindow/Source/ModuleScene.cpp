@@ -155,14 +155,24 @@ void ModuleScene::SaveScene(){
 	root->Save();
 }
 
-void ModuleScene::Load(const Json::Value& root)
+void ModuleScene::Load(const Json::Value& jRoot)
 {
 	// delete from scene 
     DeleteGameObjects();
 
 	// load new gameobjects
-	
+	LoadFromJson(jRoot);
 }
+
+void ModuleScene::LoadFromJson(const Json::Value& jRoot) 
+{
+	for (Json::Value::ArrayIndex i = 0; i != jRoot["children"].size(); i++){
+		App->editor->consoleWindow->AddLog("%s",jRoot["children"][i]["name"].asCString() );
+		GameObject *child = GameObjectFactory::CreateGameObjectFromJson(jRoot["children"][i],root,program);
+		root->AddChildren(child);
+	}
+}
+
 
 void ModuleScene::DeleteGameObjects() 
 {
@@ -172,7 +182,7 @@ void ModuleScene::DeleteGameObjects()
 
 	std::queue<GameObject *> gameObjectsQueu;
 	gameObjectsQueu.push(root);
-    GameObject *current;
+    GameObject *current = nullptr;
     while( !gameObjectsQueu.empty() ){
         current = gameObjectsQueu.front();
         gameObjectsQueu.pop();

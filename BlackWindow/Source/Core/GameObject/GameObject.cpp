@@ -58,7 +58,7 @@ bool GameObject::isChild(GameObject *lookingChild)
 
     std::queue<GameObject *> searchQueue;
     searchQueue.push(this);
-    GameObject *current;
+    GameObject *current = nullptr;
     while( !searchQueue.empty() ){
         current = searchQueue.front();
         searchQueue.pop();

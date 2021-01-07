@@ -61,5 +61,6 @@ public:
 	}
 
 	GameObject* CreateGameObject(GameObjectTypes type);
-};
 
+	void LoadFromJson(const Json::Value& jRoot);
+};

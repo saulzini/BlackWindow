@@ -160,13 +160,5 @@ public:
             }
             components.clear();
         }
-
-        // // Clear children
-        // if (!children.empty())
-        // {
-        //     for (std::vector<GameObject *>::iterator it = children.begin(); it != children.end(); ++it){
-        //         ( (GameObject *) *it )->RemoveFromParent();
-        //     }
-        // }
     }
 };
