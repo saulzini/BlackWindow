@@ -6,8 +6,8 @@
 #include "Application.h"
 #include "Core/Components/ComponentTransform.h"
 #include "Core/Components/Component.h"
-#include <queue>          // std::queue
-// class Component;
+#include "json/json.h"
+
 class GameObject
 {
 protected:
@@ -18,15 +18,17 @@ protected:
     float4x4 projectionMatrix;
     float4x4 viewMatrix;
     float4x4 modelMatrix;
-    std::vector<GameObject*> children;
-    std::vector<Component*> components;
+    std::vector<GameObject *> children;
+    std::vector<Component *> components;
     ComponentTransform *transformComponent;
+
 public:
-    GameObject(GameObject* parent = nullptr, const char* name = "",unsigned int program=0){
+    GameObject(GameObject *parent = nullptr, const char *name = "", unsigned int program = 0)
+    {
         this->parent = parent;
         this->name = name;
         this->program = program;
-        
+
         this->id = App->GetLcg()->Int();
         projectionMatrix = float4x4::identity;
         viewMatrix = float4x4::identity;
@@ -34,81 +36,129 @@ public:
 
         this->transformComponent = nullptr;
     }
-    ~GameObject(){}
+    ~GameObject() {}
     virtual void Update();
     virtual void Draw();
 
-    std::vector<GameObject*> GetChildren() {
+    std::vector<GameObject *> GetChildren()
+    {
         return children;
     }
 
-    Component* AddComponent(ComponentTypes type);
-    void AddChildren(GameObject* gameObject);
+    Component *AddComponent(ComponentTypes type);
+    void AddChildren(GameObject *gameObject);
     void SetProjectionMatrix(const float4x4 &projection);
     void SetViewMatrix(const float4x4 &projection);
-    
-    std::string GetName() const{
+
+    std::vector<Component *> GetComponents()
+    {
+        return components;
+    }
+
+    std::string GetName() const
+    {
         return name;
     }
 
-    int GetId() const{
+    int GetId() const
+    {
         return id;
     }
 
-    void RemoveChild(const GameObject* child){
-        if (children.size() <= 0){
+    void RemoveChild(const GameObject *child)
+    {
+        if (children.size() <= 0)
+        {
             return;
         }
         children.erase(std::remove(children.begin(), children.end(), child), children.end());
     }
 
-    void SetParent(GameObject *newParent){
+    void SetParent(GameObject *newParent)
+    {
+        // parent position
+        float4x4 oldParentMatrix = float4x4::identity;
+        float4x4 newParentMatrix = newParent->GetModelMatrix();
+
         // delete from parent
-        if (parent != nullptr){
+        if (parent != nullptr)
+        {
+            oldParentMatrix = parent->GetModelMatrix();
             parent->RemoveChild(this);
         }
         // asssigning new parent
         parent = newParent;
         parent->AddChildren(this);
+
+        float3 translateOld(0.0f);
+        Quat rotationOld(0.0f, 0.0f, 0.0f, 0.0f);
+        float3 scaleOld(0.0f);
+
+        float3 translateNew(0.0f);
+        Quat rotationNew(0.0f, 0.0f, 0.0f, 0.0f);
+        float3 scaleNew(0.0f);
+
+        oldParentMatrix.Decompose(translateOld, rotationOld, scaleOld);
+        newParentMatrix.Decompose(translateNew, rotationNew, scaleNew);
+
+        Quat rotationCurrent = transformComponent->GetRotationQuat();
+
+        float3 newRotation = float3(rotationOld.x + rotationCurrent.x - rotationNew.x,
+                                    rotationOld.y + rotationCurrent.y - rotationNew.y,
+                                    rotationOld.z + rotationCurrent.z - rotationNew.z);
+
+        if (transformComponent)
+        {
+            transformComponent->SetPosition((translateOld + transformComponent->GetPosition()) - translateNew);
+            transformComponent->SetScale((scaleOld + transformComponent->GetScale()) - scaleNew);
+            transformComponent->SetRotation(newRotation);
+        }
+        CalculateModelMatrix();
     }
 
-    void SetName(const std::string name){
+    void SetName(const std::string name)
+    {
         this->name = name;
     }
 
-    ComponentTransform* GetTransformComponent() const{
+    ComponentTransform *GetTransformComponent() const
+    {
         return transformComponent;
     }
 
     void CalculateModelMatrix();
 
-    bool isChild(GameObject *lookingChild){
+    bool isChild(GameObject *lookingChild);
 
-        if (children.size()<= 0){
-            return false;
+    void Save();
+    void Export(Json::Value &parent);
+
+    float4x4 GetModelMatrix() const
+    {
+        return modelMatrix;
+    }
+
+    void RemoveParent(){
+        if (parent == nullptr){
+            return;
         }
-
-        std::queue<GameObject *> searchQueue;
-        searchQueue.push(this);
-        GameObject *current;
-        while( !searchQueue.empty() ){
-            current = searchQueue.front();
-            searchQueue.pop();
-            if (current == lookingChild){
-                return true;
-            }
-
-            std::vector<GameObject *> currentChildren = current->GetChildren();
-
-            if (currentChildren.size()> 0){
-                for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
-                {
-                    searchQueue.push( (GameObject *)*it );
-                }
-            }
+        // removing from parent
+        if (parent != nullptr){
+            parent->RemoveChild(this);
         }
+        // removing relation
+        parent = nullptr;
+    }
 
-        return false;
-       
+    void Clear()
+    {
+        // Clear components
+        if (!components.empty())
+        {
+            for (std::vector<Component *>::iterator it = components.begin(); it != components.end(); ++it){
+                ( (Component *) *it )->Clear();
+            }
+            components.clear();
+        }
     }
 };

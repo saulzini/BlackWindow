@@ -46,6 +46,10 @@ public:
 		}
 	}
 
+	void SaveScene();
+	
+	void Load(const Json::Value& parent);
+	void DeleteGameObjects();
 
 	// For testing
 	Skybox* sky;
@@ -57,5 +61,6 @@ public:
 	}
 
 	GameObject* CreateGameObject(GameObjectTypes type);
-};
 
+	void LoadFromJson(const Json::Value& jRoot);
+};

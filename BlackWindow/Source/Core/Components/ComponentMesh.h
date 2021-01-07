@@ -37,5 +37,19 @@ public:
         //     meshes[i].Draw(shader);
         // }
     }
+
+    void OnSave(Json::Value& parent) override
+    {
+        Json::Value meshJson;
+        meshJson["type"] = static_cast<int>(ComponentTypes::MESH);
+        mesh.Save(meshJson);
+        parent["components"].append(meshJson);
+    }
+
+    void Clear() override
+    {   
+        mesh.Clear();
+    }
+
 };
 

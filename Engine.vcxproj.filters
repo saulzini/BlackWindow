@@ -216,6 +216,15 @@
     <ClCompile Include="BlackWindow\Source\Core\Importers\Model\Model.cpp">
       <Filter>Core\Importers\Model</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\jsoncpp-master\src\lib_json\json_reader.cpp">
+      <Filter>Resources\json</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\jsoncpp-master\src\lib_json\json_value.cpp">
+      <Filter>Resources\json</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Resources\jsoncpp-master\src\lib_json\json_writer.cpp">
+      <Filter>Resources\json</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
@@ -1067,6 +1076,42 @@
     <ClInclude Include="BlackWindow\Source\Core\Components\ComponentTransform.h">
       <Filter>Core\Components</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\src\lib_json\json_tool.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\allocator.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\assertions.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\config.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\forwards.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\json.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\json_features.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\reader.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\value.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\version.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Resources\jsoncpp-master\include\json\writer.h">
+      <Filter>Resources\json</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\SceneFileManager\SceneFileManager.h">
+      <Filter>Core\SceneFileManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -1146,6 +1191,12 @@
     </Filter>
     <Filter Include="Core\Importers\Model">
       <UniqueIdentifier>{931f86fa-ffd4-422c-b469-ac3a0fe36fca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\json">
+      <UniqueIdentifier>{5d252fd9-5678-4420-872d-ba63e7be57a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\SceneFileManager">
+      <UniqueIdentifier>{43bd2a3e-3f83-4f8f-aed3-c13682bc8155}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

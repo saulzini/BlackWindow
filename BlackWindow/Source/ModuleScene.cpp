@@ -17,6 +17,10 @@
 #include "Core/Components/ComponentMesh.h"
 #include "MathGeoLibFwd.h"
 #include "Math/Quat.h"
+#include <queue>
+
+#include "ModuleEditor.h"
+#include "UIWindow/ConsoleWindow.h"
 ModuleScene::ModuleScene()
 {
 	program = 0;
@@ -48,6 +52,9 @@ bool ModuleScene::Init()
 	GameObject *house = model->LoadModel();
 
 	root->AddChildren(house);
+
+	// root->Save();
+
 	return true;
 }
 
@@ -141,4 +148,56 @@ void ModuleScene::SwapModel(const char *modelPath)
 GameObject* ModuleScene::CreateGameObject(GameObjectTypes type) 
 {
 	return GameObjectFactory::CreateGameObject(type);
+}
+
+
+void ModuleScene::SaveScene(){
+	root->Save();
+}
+
+void ModuleScene::Load(const Json::Value& jRoot)
+{
+	// delete from scene 
+    DeleteGameObjects();
+
+	// load new gameobjects
+	LoadFromJson(jRoot);
+}
+
+void ModuleScene::LoadFromJson(const Json::Value& jRoot) 
+{
+	for (Json::Value::ArrayIndex i = 0; i != jRoot["children"].size(); i++){
+		App->editor->consoleWindow->AddLog("%s",jRoot["children"][i]["name"].asCString() );
+		GameObject *child = GameObjectFactory::CreateGameObjectFromJson(jRoot["children"][i],root,program);
+		root->AddChildren(child);
+	}
+}
+
+
+void ModuleScene::DeleteGameObjects() 
+{
+	if (root == nullptr){
+		return;
+	}
+
+	std::queue<GameObject *> gameObjectsQueu;
+	gameObjectsQueu.push(root);
+    GameObject *current = nullptr;
+    while( !gameObjectsQueu.empty() ){
+        current = gameObjectsQueu.front();
+        gameObjectsQueu.pop();
+      
+        std::vector<GameObject *> currentChildren = current->GetChildren();
+
+        if (currentChildren.size()> 0){
+            for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+            {
+                gameObjectsQueu.push( (GameObject *)*it );
+            }
+        }
+
+		current->RemoveParent();
+		current->Clear();
+		App->editor->consoleWindow->AddLog("Clear %s",current->GetName().c_str());
+    }
 }

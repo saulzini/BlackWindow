@@ -7,13 +7,13 @@
 #include "UIWindow/ConsoleWindow.h"
 #include "Globals.h"
 #include "Core/Vertex.h"
-#include "Assimp/vector3.h"
-#include "Assimp/vector2.h"
 #include "Core/Importers/Texture/TextureLoader.h"
 #include "BoundingBox.h"
 #include "Core/Components/ComponentMesh.h"
 #include "Core/Components/ComponentTransform.h"
 #include "Math/Quat.h"
+#include "Math/float2.h"
+#include "Math/float3.h"
 inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
 {
     float4x4 to;
@@ -146,7 +146,7 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
 		Vertex vertex;
-		aiVector3t<float> vector;
+		float3 vector;
 		vector.x = mesh->mVertices[i].x;
 		vector.y = mesh->mVertices[i].y;
 		vector.z = mesh->mVertices[i].z;
@@ -161,7 +161,7 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 
 		if (mesh->mTextureCoords[0])
 		{
-			aiVector2t<float> vec;
+			float2 vec;
 			vec.x = mesh->mTextureCoords[0][i].x;
 			vec.y = mesh->mTextureCoords[0][i].y;
 
@@ -169,7 +169,7 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 		}
 		else
 		{
-			vertex.TexCoords = aiVector2t<float>(0, 0);
+			vertex.TexCoords = float2(0,0);
 		}
 		vertices.push_back(vertex);
 	}

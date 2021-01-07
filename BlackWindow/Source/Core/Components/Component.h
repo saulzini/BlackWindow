@@ -2,6 +2,8 @@
 #include "ComponentTypes.h"
 //#include "Core/GameObject/GameObject.h"
 //#include "Core/GameObject/GameObject.h"
+#include "json/json.h"
+
 class GameObject;
 class Component
 {
@@ -27,8 +29,9 @@ public:
     virtual void Update(){}
     virtual void Disable(){}
     virtual void OnEditor(){}
-    virtual void OnSave(){}
+    virtual void OnSave(Json::Value& parent){}
     virtual void OnLoad(){}
+    virtual void Clear(){}
 
 };
 
