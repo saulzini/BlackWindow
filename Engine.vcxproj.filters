@@ -1206,12 +1206,6 @@
     <None Include="BlackWindow\Source\Shaders\Grid.vert">
       <Filter>Shaders\Grid</Filter>
     </None>
-    <None Include="BlackWindow\Source\Shaders\Default.vert">
-      <Filter>Shaders\Texture</Filter>
-    </None>
-    <None Include="BlackWindow\Source\Shaders\Default.frag">
-      <Filter>Shaders\Texture</Filter>
-    </None>
     <None Include="BlackWindow\Resources\MathGeoLib-master\src\Math\float2.inl">
       <Filter>MathGeoLib</Filter>
     </None>
@@ -1273,6 +1267,12 @@
       <Filter>Shaders\Texture</Filter>
     </None>
     <None Include="BlackWindow\Game\DefaultBox.vert">
+      <Filter>Shaders\Texture</Filter>
+    </None>
+    <None Include="BlackWindow\Game\Default.frag">
+      <Filter>Shaders\Texture</Filter>
+    </None>
+    <None Include="BlackWindow\Game\Default.vert">
       <Filter>Shaders\Texture</Filter>
     </None>
   </ItemGroup>

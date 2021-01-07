@@ -555,6 +555,8 @@
     <ClCompile Include="BlackWindow\Source\UIWindow\ToolbarWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BlackWindow\Game\Default.frag" />
+    <None Include="BlackWindow\Game\Default.vert" />
     <None Include="BlackWindow\Game\DefaultBox.frag" />
     <None Include="BlackWindow\Game\DefaultBox.vert" />
     <None Include="BlackWindow\Resources\Assimp\include\assimp\color4.inl" />
@@ -576,8 +578,6 @@
     <None Include="BlackWindow\Resources\SDL\include\SDL_config.h.cmake" />
     <None Include="BlackWindow\Resources\SDL\include\SDL_config.h.in" />
     <None Include="BlackWindow\Resources\SDL\include\SDL_config_macosx.h.orig" />
-    <None Include="BlackWindow\Source\Shaders\Default.frag" />
-    <None Include="BlackWindow\Source\Shaders\Default.vert" />
     <None Include="BlackWindow\Source\Shaders\Grid.frag" />
     <None Include="BlackWindow\Source\Shaders\Grid.vert" />
   </ItemGroup>
