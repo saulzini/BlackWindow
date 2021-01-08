@@ -101,7 +101,7 @@ update_status ModuleScene::Update(float deltaTime)
 
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 	
-	///App->scene->sky->Draw();
+	// App->scene->sky->Draw();
 	worldTimer->RegulateFPS();
 
 	return UPDATE_CONTINUE;
@@ -164,8 +164,8 @@ void ModuleScene::Load(const Json::Value& jRoot)
 
 void ModuleScene::LoadFromJson(const Json::Value& jRoot) 
 {
+	// ignoring the first level because it is the scene
 	for (Json::Value::ArrayIndex i = 0; i != jRoot["children"].size(); i++){
-		App->editor->consoleWindow->AddLog("%s",jRoot["children"][i]["name"].asCString() );
 		GameObject *child = GameObjectFactory::CreateGameObjectFromJson(jRoot["children"][i],root,program);
 		root->AddChildren(child);
 	}

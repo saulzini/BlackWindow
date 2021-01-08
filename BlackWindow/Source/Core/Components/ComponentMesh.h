@@ -32,10 +32,6 @@ public:
         }
 
         mesh.Draw(shader);
-        // for (unsigned int i = 0; i < meshes.size(); i++)
-        // {
-        //     meshes[i].Draw(shader);
-        // }
     }
 
     void OnSave(Json::Value& owner) override
@@ -53,7 +49,7 @@ public:
 
     void OnLoad(const Json::Value& jRoot) override
     {
-        
+        //float3(jRoot["position"][0].asFloat()
     }
 
 };

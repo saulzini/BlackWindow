@@ -46,6 +46,7 @@ public:
     }
 
     Component* AddComponent(ComponentTypes type);
+    void AddComponent(Component * component);
 
     void AddChildren(GameObject *gameObject);
     void SetProjectionMatrix(const float4x4 &projection);

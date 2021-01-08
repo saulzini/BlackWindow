@@ -21,6 +21,15 @@ Component* GameObject::AddComponent(ComponentTypes type)
     return component;
 }
 
+void GameObject::AddComponent(Component * component) 
+{
+    if (component->GetType() == ComponentTypes::TRANSFORM){
+        transformComponent = (ComponentTransform*) component;
+    }
+
+    components.push_back( component );
+}
+
 void GameObject::AddChildren(GameObject* gameObject) 
 {
     children.push_back(gameObject);

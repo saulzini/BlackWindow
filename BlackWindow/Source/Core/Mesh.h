@@ -10,9 +10,9 @@ class Mesh
 public:
     Mesh()
     {
-        VAO = 0;
-        VBO = 0;
-        EBO = 0;
+        vao = 0;
+        vbo = 0;
+        ebo = 0;
     }
     Mesh(const std::vector<Vertex> &mVertices, const std::vector<unsigned int> &mIndices, unsigned int textureId);
 
@@ -61,7 +61,7 @@ public:
 
 private:
     //  render data
-    unsigned int VAO, VBO, EBO;
+    unsigned int vao, vbo, ebo;
 
     void SetupMesh();
 };
