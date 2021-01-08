@@ -45,7 +45,8 @@ public:
         return children;
     }
 
-    Component *AddComponent(ComponentTypes type);
+    Component* AddComponent(ComponentTypes type);
+
     void AddChildren(GameObject *gameObject);
     void SetProjectionMatrix(const float4x4 &projection);
     void SetViewMatrix(const float4x4 &projection);
@@ -161,4 +162,5 @@ public:
             components.clear();
         }
     }
+
 };

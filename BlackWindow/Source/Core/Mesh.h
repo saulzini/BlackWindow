@@ -11,6 +11,7 @@ public:
         VAO = 0;
         VBO = 0;
         EBO = 0;
+        
     }
     Mesh(const std::vector<Vertex>& mVertices,const std::vector<unsigned int>& mIndices,const std::vector<Texture>& mTextures);
 

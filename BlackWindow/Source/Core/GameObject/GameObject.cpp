@@ -5,7 +5,6 @@
 #include "Math/Quat.h"
 #include <queue>          // std::queue
 #include <stack>          // std::stack
-
 #include "Application.h"
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"

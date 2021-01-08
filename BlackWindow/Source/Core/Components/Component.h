@@ -29,8 +29,8 @@ public:
     virtual void Update(){}
     virtual void Disable(){}
     virtual void OnEditor(){}
-    virtual void OnSave(Json::Value& parent){}
-    virtual void OnLoad(){}
+    virtual void OnSave(Json::Value& owner){}
+    virtual void OnLoad(const Json::Value& jRoot){}
     virtual void Clear(){}
 
 };

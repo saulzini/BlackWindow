@@ -8,17 +8,15 @@
 #include "Math/float4x4.h"
 #include <string>
 #include "Leaks.h"
-// #include "../glm/glm.hpp"
 #include "Core/Time/WorldTimer.h"
 #include "Core/GameObject/GameObjectFactory.h"
-#include <Core/Importers/Texture/TextureLoader.h>
+#include "Core/Importers/Texture/TextureLoader.h"
 #include "Core/Importers/Model/Model.h"
 #include "Core/Components/ComponentTypes.h"
 #include "Core/Components/ComponentMesh.h"
 #include "MathGeoLibFwd.h"
 #include "Math/Quat.h"
 #include <queue>
-
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
 ModuleScene::ModuleScene()

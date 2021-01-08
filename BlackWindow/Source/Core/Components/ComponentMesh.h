@@ -38,17 +38,22 @@ public:
         // }
     }
 
-    void OnSave(Json::Value& parent) override
+    void OnSave(Json::Value& owner) override
     {
         Json::Value meshJson;
         meshJson["type"] = static_cast<int>(ComponentTypes::MESH);
         mesh.Save(meshJson);
-        parent["components"].append(meshJson);
+        owner["components"].append(meshJson);
     }
 
     void Clear() override
     {   
         mesh.Clear();
+    }
+
+    void OnLoad(const Json::Value& jRoot) override
+    {
+        
     }
 
 };

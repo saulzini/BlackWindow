@@ -3,37 +3,45 @@
 #include "Core/GameObject/GameObjectTypes.h"
 #include "Core/Components/ComponentTypes.h"
 #include "json/json.h"
+#include "Core/Components/ComponentFactory.h"
 
 namespace GameObjectFactory
 {
-    
-    static GameObject* CreateGameObject(GameObjectTypes type){
-        GameObject* gameObject = new GameObject();
+
+    static GameObject *CreateGameObject(GameObjectTypes type)
+    {
+        GameObject *gameObject = new GameObject();
         switch (type)
         {
-            case GameObjectTypes::SCRIPT:
-                gameObject->AddComponent(ComponentTypes::SCRIPT);
-                break;
-            case GameObjectTypes::DEFAULT:
-                gameObject->AddComponent(ComponentTypes::TRANSFORM);
-                break;
-            default:
-                gameObject->AddComponent(ComponentTypes::NONE);
-                break;
-        }   
+        case GameObjectTypes::SCRIPT:
+            gameObject->AddComponent(ComponentTypes::SCRIPT);
+            break;
+        case GameObjectTypes::DEFAULT:
+            gameObject->AddComponent(ComponentTypes::TRANSFORM);
+            break;
+        default:
+            gameObject->AddComponent(ComponentTypes::NONE);
+            break;
+        }
         return gameObject;
     }
 
-    static GameObject* CreateGameObjectFromJson(const Json::Value& jRoot, GameObject *parent,unsigned int program){
-        GameObject *root =new GameObject(parent,jRoot["name"].asCString(),program);
+    static GameObject *CreateGameObjectFromJson(const Json::Value &jRoot, GameObject *parent, unsigned int program)
+    {
+        GameObject *root = new GameObject(parent, jRoot["name"].asCString(), program);
         // load components
+        for (unsigned int index = 0; index < jRoot["components"].size(); index++)
+        {
+            ComponentFactory::CreateComponentFromJson(jRoot["components"][index],root);
+        }
         // create medot in components factory
 
         return root;
     }
 
-    static GameObject* CreateGameObjectsFromJson(const Json::Value& jRoot, GameObject *parent,unsigned int program){
-        GameObject *root =  CreateGameObjectFromJson(jRoot,parent,program);
+    static GameObject *CreateGameObjectsFromJson(const Json::Value &jRoot, GameObject *parent, unsigned int program)
+    {
+        GameObject *root = CreateGameObjectFromJson(jRoot, parent, program);
 
         // std::queue<Json::Value *> gameObjectsQueu;
         // gameObjectsQueu.push(root);
@@ -41,7 +49,7 @@ namespace GameObjectFactory
         // while( !gameObjectsQueu.empty() ){
         //     current = gameObjectsQueu.front();
         //     gameObjectsQueu.pop();
-        
+
         //     std::vector<GameObject *> currentChildren = current->GetChildren();
 
         //     if (currentChildren.size()> 0){
@@ -56,9 +64,7 @@ namespace GameObjectFactory
         //     App->editor->consoleWindow->AddLog("Clear %s",current->GetName().c_str());
         // }
 
-
         return root;
     }
 
-
-}
+} // namespace GameObjectFactory

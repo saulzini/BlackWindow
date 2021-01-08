@@ -104,6 +104,14 @@ public:
         parent["components"].append(transformJson);
     }
 
+    /*void OnLoad(const Json::Value& jRoot) override
+    {
+        SetPosition( float3( jRoot["position"][0].asFloat() , jRoot["position"][1].asFloat() , jRoot["position"][2].asFloat() ) );
+        SetScale( float3( jRoot["scale"][0].asFloat() , jRoot["scale"][1].asFloat() , jRoot["scale"][2].asFloat() ) );
+        SetRotation( float3( jRoot["rotation"][0].asFloat() , jRoot["rotation"][1].asFloat() , jRoot["rotation"][2].asFloat() ) );
+    }*/
+    
+
 protected:
     float3 position;
     float3 scale;
