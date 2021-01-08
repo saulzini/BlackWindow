@@ -142,7 +142,7 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	unsigned int textureId;
-	std::vector<Texture> textures;
+	// std::vector<Texture> textures;
 
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
@@ -189,17 +189,15 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
-		std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-
-		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
+		textureId = LoadMaterialTexture(material, aiTextureType_DIFFUSE, "texture_diffuse");
 	}
 
-	return Mesh(vertices, indices, textures);
+	return Mesh(vertices, indices, textureId);
 }
 
-std::vector<Texture> ModelImporter::Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType type,const std::string& typeName)
+unsigned int ModelImporter::Model::LoadMaterialTexture(aiMaterial *mat, aiTextureType type,const std::string& typeName)
 {
-	std::vector<Texture> textures;
+	unsigned int textureId = 0;
 
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
 	{
@@ -213,14 +211,14 @@ std::vector<Texture> ModelImporter::Model::LoadMaterialTextures(aiMaterial *mat,
 			texture.id = TextureImporter::TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
 			texture.type = typeName;
 			texture.path = str.C_Str();
-			textures.push_back(texture);
 			texturesLoaded.insert( std::make_pair(str.C_Str(), texture ) ); 
+			textureId = texture.id;
 		}
 		else{
-			textures.push_back(found->second);
+			textureId = found->second.id;
 		}
 	}
-	return textures;
+	return textureId;
 }
 
 

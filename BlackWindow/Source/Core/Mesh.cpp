@@ -7,38 +7,21 @@ using namespace std;
 Mesh::Mesh(
     const std::vector<Vertex> &mVertices, 
     const std::vector<unsigned int> &mIndices, 
-    const std::vector<Texture> &mTextures)
+    unsigned int textureId )
 {
     VAO = 0;
     VBO = 0;
     EBO = 0;
     this->vertices = mVertices;
     this->indices = mIndices;
-    this->textures = mTextures;
-    
+    this->textureId = textureId;
 
     SetupMesh();
 }
 
 void Mesh::Draw(const unsigned int shader)
 {
-    unsigned int diffuseNr = 1;
-    // unsigned int specularNr = 1;
-    for (unsigned int i = 0; i < textures.size(); i++)
-    {
-        glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
-        // retrieve texture number (the N in diffuse_textureN)
-        string number;
-        string name = textures[i].type;
-        if (name == "texture_diffuse")
-            number = std::to_string(diffuseNr++);
-        //else if (name == "texture_specular")
-        //number = std::to_string(specularNr++);
-
-        // shader.setFloat(("material." + name + number).c_str(), i);
-        //  glUniform1f(glGetUniformLocation(ID, name.c_str()), value); 
-        glBindTexture(GL_TEXTURE_2D, textures[i].id);
-    }
+    glBindTexture(GL_TEXTURE_2D, textureId);
     glActiveTexture(GL_TEXTURE0);
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
@@ -75,8 +58,8 @@ void Mesh::SetupMesh()
     glBindVertexArray(0);
 }
 
-void Mesh::ChangeTextures(const std::vector<Texture> &textures)
+void Mesh::ChangeTextures(unsigned int textureId)
 {
-    this->textures = textures;
+    this->textureId = textureId;
     SetupMesh();
 }
