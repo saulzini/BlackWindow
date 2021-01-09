@@ -5,6 +5,8 @@
 #include "Texture.h"
 #include "Vertex.h"
 #include "json/json.h"
+#include "ResourcesManager/ResourcesManager.h"
+#include "Application.h"
 class Mesh
 {
 public:
@@ -26,22 +28,8 @@ public:
 
     void ChangeTextures(unsigned int textureId);
 
-    void Save(Json::Value &parent)
-    {
-        parent["vertices"] = Json::arrayValue;
-
-        for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); ++it)
-        {
-            (*it).Save(parent);
-        }
-
-        parent["indices"] = Json::arrayValue;
-        for (unsigned int i = 0; i != indices.size(); ++i)
-        {
-            Json::UInt index = indices[i];
-            parent["indices"].append(index);
-        }
-    }
+    void Save(Json::Value &parent);
+    
 
     std::vector<Vertex> GetVertices() const
     {
@@ -53,11 +41,10 @@ public:
         return indices;
     }
 
-    void Clear()
-    {
-        vertices.clear();
-        indices.clear();
-    }
+    void Clear();
+
+    void Mesh::Load(Json::Value &root);
+
 
 private:
     //  render data

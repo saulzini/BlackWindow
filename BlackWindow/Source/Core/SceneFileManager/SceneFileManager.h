@@ -19,11 +19,7 @@ public:
         Json::Value root;
         std::ifstream file(name);
         file >> root;
-        // Json::StyledStreamWriter writer;
-        // std::ofstream outputFile(name);
-        // writer.write(outputFile, jsonNode);
         App->scene->Load(root);
-       
     }
 
 };

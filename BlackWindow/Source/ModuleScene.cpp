@@ -48,11 +48,11 @@ bool ModuleScene::Init()
 	// Setting gameobject
 	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx",program); 
 	GameObject *house = model->LoadModel();
+	delete model;
 
 	root->AddChildren(house);
 
 	// root->Save();
-
 	return true;
 }
 

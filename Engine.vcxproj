@@ -439,6 +439,7 @@
     <ClInclude Include="BlackWindow\Source\Core\Importers\Texture\TextureLoader.h" />
     <ClInclude Include="BlackWindow\Source\Core\Mesh.h" />
     <ClInclude Include="BlackWindow\Source\Core\Program\Program.h" />
+    <ClInclude Include="BlackWindow\Source\Core\ResourcesManager\ResourcesManager.h" />
     <ClInclude Include="BlackWindow\Source\Core\SceneFileManager\SceneFileManager.h" />
     <ClInclude Include="BlackWindow\Source\Core\Skybox.h" />
     <ClInclude Include="BlackWindow\Source\Core\Texture.h" />

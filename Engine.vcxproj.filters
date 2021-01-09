@@ -1112,6 +1112,9 @@
     <ClInclude Include="BlackWindow\Source\Core\SceneFileManager\SceneFileManager.h">
       <Filter>Core\SceneFileManager</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\ResourcesManager\ResourcesManager.h">
+      <Filter>Core\ResourcesManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -1197,6 +1200,9 @@
     </Filter>
     <Filter Include="Core\SceneFileManager">
       <UniqueIdentifier>{43bd2a3e-3f83-4f8f-aed3-c13682bc8155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\ResourcesManager">
+      <UniqueIdentifier>{5a5055d7-e353-46b7-89de-6bb2f376076b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

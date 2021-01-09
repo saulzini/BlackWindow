@@ -14,6 +14,7 @@
 #include "Math/Quat.h"
 #include "Math/float2.h"
 #include "Math/float3.h"
+#include "Core/ResourcesManager/ResourcesManager.h"
 inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
 {
     float4x4 to;
@@ -35,6 +36,9 @@ ModelImporter::Model::Model(const std::string &path="",unsigned int program=0)
 	lightsCount = 0;
 	texturesCount = 0;
 	this->program = program;
+	
+	// std::unordered_map<std::string, Texture> ResourcesManager::texturesLoaded;
+	
 	if (path == "")
 	{
 		return;
@@ -203,15 +207,17 @@ unsigned int ModelImporter::Model::LoadMaterialTexture(aiMaterial *mat, aiTextur
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
-
-		std::unordered_map<std::string,Texture>::const_iterator found = texturesLoaded.find(str.C_Str());
+		
+		ResourcesManager resourceManager = App->GetResourcesManager();
+		std::unordered_map<std::string,Texture>::const_iterator found = resourceManager.texturesLoaded.find(str.C_Str());
 		// not found in hash
-		if (found == texturesLoaded.end()){
+		if (found == resourceManager.texturesLoaded.end()){
 			Texture texture;
 			texture.id = TextureImporter::TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
 			texture.type = typeName;
 			texture.path = str.C_Str();
-			texturesLoaded.insert( std::make_pair(str.C_Str(), texture ) ); 
+			resourceManager.texturesLoaded.insert( std::make_pair(str.C_Str(), texture ) ); 
+			resourceManager.texturesLoadedInt.insert( std::make_pair( texture.id, texture)  ); 
 			textureId = texture.id;
 		}
 		else{
