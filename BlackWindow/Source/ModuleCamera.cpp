@@ -13,7 +13,7 @@
 ModuleCamera::ModuleCamera()
 {
 	//initializing
-	initialCameraPosition = cameraPosition = lastCameraPosition = float3(1, 3, 10);
+	cameraPosition = initialCameraPosition  = lastCameraPosition = float3(1, 3, 10);
 	orbitPosition = float3(1, 1, 1);
 	initialTurnSpeed = turnSpeed = 0.0009f;
 	radiansOrbit = initialRadiansOrbit = 0.009f;

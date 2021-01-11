@@ -120,7 +120,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	float3 rotationRadians = rotation.ToEulerXYZ().Abs();
 
 	// It always needs a transform component
-	ComponentTransform* componentTransform = (ComponentTransform*)root->AddComponent(ComponentTypes::TRANSFORM);
+	ComponentTransform* componentTransform = static_cast<ComponentTransform *>(root->AddComponent(ComponentTypes::TRANSFORM));
 	componentTransform->SetPosition(translation);
 	componentTransform->SetRotation(rotationRadians);
 	componentTransform->SetScale(scale);
@@ -130,7 +130,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	{
 		// Adding default components when loading
 		aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
-		ComponentMesh *componentMesh = (ComponentMesh*) root->AddComponent(ComponentTypes::MESH);
+		ComponentMesh* componentMesh = static_cast<ComponentMesh *>(root->AddComponent(ComponentTypes::MESH));
 		componentMesh->SetShader(program);
 		componentMesh->SetMesh( ProcessMesh(mesh, scene) );
 	}

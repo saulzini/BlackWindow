@@ -104,7 +104,7 @@ namespace TextureImporter
 						ILenum Error;
 						while ((Error = ilGetError()) != IL_NO_ERROR)
 						{
-							std::string buf = "Error Loading texture: ";
+							buf = "Error Loading texture: ";
 							App->editor->consoleWindow->AddLog(buf.append(iluErrorString(Error)).c_str());
 						}
 					}
@@ -175,10 +175,10 @@ namespace TextureImporter
 			// not found in hash
 			if (found == ResourcesManager::texturesLoaded.end()){
 				Texture texture;
-				texture.id = LoadTexture2D(path.c_str(),directory.c_str());
-				texture.path = path.c_str();
+				texture.id = LoadTexture2D(path,directory);
+				texture.path = path;
 
-				ResourcesManager::texturesLoaded.insert( std::make_pair(path.c_str(), texture ) ); 
+				ResourcesManager::texturesLoaded.insert( std::make_pair(path, texture ) ); 
 				ResourcesManager::texturesLoadedInt.insert( std::make_pair( texture.id, texture ) ); 
 				textureId = texture.id;
 			}
