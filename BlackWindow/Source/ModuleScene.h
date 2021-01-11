@@ -14,6 +14,7 @@ private:
 	WorldTimer* worldTimer;
 	GameObject* root;
 	GameObject* selected;
+	GameObject* Light;
 
 public:
 	ModuleScene();

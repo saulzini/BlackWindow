@@ -13,6 +13,8 @@ namespace ComponentFactory
             return new ComponentMesh(owner, type);
         case ComponentTypes::TRANSFORM:
             return new ComponentTransform(owner, type);
+        case ComponentTypes::MATERIAL:
+            return new ComponentTransform(owner, type);
         default:
             return new Component(owner, type);
         }

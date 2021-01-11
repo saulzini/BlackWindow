@@ -470,6 +470,8 @@
     <ClInclude Include="BlackWindow\Source\UIWindow\HierarchyWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\PreviewWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\ToolbarWindow.h" />
+    <ClInclude Include="ComponentLight.h" />
+    <ClInclude Include="ComponentMaterial.h" />
     <ClInclude Include="Leaks.h" />
   </ItemGroup>
   <ItemGroup>

@@ -11,8 +11,10 @@
 #include "Core/Time/WorldTimer.h"
 #include "Core/GameObject/GameObjectFactory.h"
 #include "Core/Importers/Texture/TextureLoader.h"
+#include "Core/Components/ComponentFactory.h"
 #include "Core/Importers/Model/Model.h"
 #include "Core/Components/ComponentTypes.h"
+#include "Core/Components/ComponentLight.h";
 #include "Core/Components/ComponentMesh.h"
 #include "MathGeoLibFwd.h"
 #include "Math/Quat.h"
@@ -53,9 +55,11 @@ bool ModuleScene::Init()
 	// root->AddChildren(house);
 
 	// root->Save();
+
 	SceneFileManager::LoadFromFile("scene.blackwindow");
-
-
+	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program);
+	root->AddChildren(Light);
+	Light->GetTransformComponent()->SetPosition(float3 (0.0f, 1.0f,0.0f));
 	return true;
 }
 
@@ -66,7 +70,7 @@ update_status ModuleScene::PreUpdate(float deltaTime)
 
 update_status ModuleScene::Update(float deltaTime)
 {
-	// App->scene->sky->Draw();
+	 App->scene->sky->Draw();
 
 	worldTimer->Update();
 
@@ -92,11 +96,13 @@ update_status ModuleScene::Update(float deltaTime)
 	glUniform1f(N, 32);
 
 	float3 lightpos = { 1.0f, 0.0f, 0.0f };
+	lightpos = Light->GetTransformComponent()->GetPosition();
 	float3 lightcolor = { 1.0f, 1.0f, 1.0f };
 	float3 view_Pos = App->camera->cameraPosition;
 	float3 color_Ambient = { 1.0f, 1.0f, 1.0f };
 
 	glUniform1i(glGetUniformLocation(program, "texture_diffuse"), 0);
+
 	glUniform3f(light_pos,		   lightpos[0],		 lightpos[1],		lightpos[2]);
 	glUniform3f(light_color,	 lightcolor[0],    lightcolor[1],	  lightcolor[2]);
 	glUniform3f(viewPos,		   view_Pos[0],		 view_Pos[1],		view_Pos[2]);

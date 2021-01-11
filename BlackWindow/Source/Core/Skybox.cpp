@@ -107,16 +107,15 @@ unsigned int Skybox::loadCubemap(std::vector<std::string> files)
 void Skybox::Draw() {
 
 
-    glDepthMask(GL_TRUE);
-  //  glDepthMask(GL_FALSE); // superfluous
-   // glDepthFunc(GL_LEQUAL);
-    glDisable(GL_DEPTH_TEST);
+
+    glDepthMask(GL_FALSE); // superfluous
+    glDepthFunc(GL_LEQUAL);
     glUseProgram(App->scene->programSky);
     float4x4 proj = App->camera->GetProjection();
     float4x4 view = App->camera->GetView();
-   // view = glm::mat4(glm::mat3(App->camera->GetView())); // remove translation from the view matrix
-    //float4x4 identityModel = float4x4::identity;
-   // glDepthFunc(GL_LEQUAL);
+    // view = glm::mat4(glm::mat3(App->camera->GetView())); // remove translation from the view matrix
+     //float4x4 identityModel = float4x4::identity;
+    // glDepthFunc(GL_LEQUAL);
 
     glUniform1i(glGetUniformLocation(App->scene->programSky, "Skybox"), 0);
     //glUniformMatrix4fv(glGetUniformLocation(programSky, "model"), 1, GL_TRUE, &identityModel[0][0]); //GL_TRUE transpose the matrix
@@ -131,12 +130,11 @@ void Skybox::Draw() {
     glDrawArrays(GL_TRIANGLES, 0, 36);
 
     glBindVertexArray(0);
-   // glDepthFunc(GL_LESS); // set depth function back to default
-    //glDepthMask(GL_TRUE); // superfluous
-    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS); // set depth function back to default
+    glDepthMask(GL_TRUE); // superfluous
     //glDeleteVertexArrays(1, &skyboxVAO);
    // glDeleteBuffers(1, &skyboxVAO);
-   /// glDeleteProgram(App->scene->programSky);
+   /// glDeleteProgram(App->world->programSky);
 }
 
 
