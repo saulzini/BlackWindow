@@ -66,7 +66,7 @@ update_status ModuleScene::PreUpdate(float deltaTime)
 
 update_status ModuleScene::Update(float deltaTime)
 {
-	// App->scene->sky->Draw();
+	App->scene->sky->Draw();
 
 	worldTimer->Update();
 
