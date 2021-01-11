@@ -23,12 +23,17 @@ public:
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     unsigned int textureId;
-    // std::vector<Texture>      textures;
     void Draw(const unsigned int shader);
 
     void ChangeTextures(unsigned int textureId);
 
     void Save(Json::Value &parent);
+    
+    void SetIndices(const std::vector<unsigned int> &indices){
+        this->indices = indices; 
+    }
+
+    void LoadFromJson(const Json::Value &component);
     
 
     std::vector<Vertex> GetVertices() const

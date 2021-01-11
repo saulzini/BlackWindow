@@ -1,7 +1,5 @@
 #pragma once
 #include "ComponentTypes.h"
-//#include "Core/GameObject/GameObject.h"
-//#include "Core/GameObject/GameObject.h"
 #include "json/json.h"
 
 class GameObject;
@@ -30,7 +28,7 @@ public:
     virtual void Disable(){}
     virtual void OnEditor(){}
     virtual void OnSave(Json::Value& owner){}
-    virtual void OnLoad(const Json::Value& jRoot){}
+    virtual void OnLoad(const Json::Value& componentJson){}
     virtual void Clear(){}
 
 };

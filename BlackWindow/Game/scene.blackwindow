@@ -9,12 +9,13 @@
 					"components" : 
 					[
 						{
-							"position" : [ 0.0, 0.0, 0.0 ],
-							"rotation" : [ 1.5707964897155762, 0.0, -0.0 ],
-							"scale" : [ 100.0, 100.0, 100.0 ],
+							"position" : [ 2.0, 2.0, 2.0 ],
+							"rotation" : [ 0.0, 0.0, -0.0 ],
+							"scale" : [ 2.0, 1.0, 1.0 ],
 							"type" : 1
 						},
 						{
+							"directoryPath" : ".\\Assets\\BakerHouse",
 							"indices" : 
 							[
 								0,
@@ -342,6 +343,7 @@
 								159,
 								156
 							],
+							"texturePath" : "Baker_house.png",
 							"type" : 2,
 							"vertices" : 
 							[
@@ -1148,7 +1150,7 @@
 							]
 						}
 					],
-					"id" : 1562488029,
+					"id" : 764615417,
 					"name" : "Chimney"
 				},
 				{
@@ -1156,12 +1158,13 @@
 					"components" : 
 					[
 						{
-							"position" : [ 0.0, 0.0, 0.0 ],
-							"rotation" : [ 1.5707964897155762, 0.0, -0.0 ],
-							"scale" : [ 100.0, 100.0, 100.0 ],
+							"position" : [ 3.0, 3.0, 5.0 ],
+							"rotation" : [ 0.0, 0.0, -0.0 ],
+							"scale" : [ 1.0, 1.0, 1.0 ],
 							"type" : 1
 						},
 						{
+							"directoryPath" : ".\\Assets\\BakerHouse",
 							"indices" : 
 							[
 								0,
@@ -3916,6 +3919,7 @@
 								1637,
 								1634
 							],
+							"texturePath" : "Baker_house.png",
 							"type" : 2,
 							"vertices" : 
 							[
@@ -12132,20 +12136,20 @@
 							]
 						}
 					],
-					"id" : 1194928224,
+					"id" : 1465305121,
 					"name" : "Baker_house"
 				}
 			],
 			"components" : 
 			[
 				{
-					"position" : [ 3.0, 3.0, 3.0 ],
+					"position" : [ 0.0, 0.0, 0.0 ],
 					"rotation" : [ -0.0, 0.0, -0.0 ],
 					"scale" : [ 1.0, 1.0, 1.0 ],
 					"type" : 1
 				}
 			],
-			"id" : 1471530391,
+			"id" : 822316990,
 			"name" : "BakerHouse"
 		}
 	],

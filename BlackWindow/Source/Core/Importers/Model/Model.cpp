@@ -15,6 +15,10 @@
 #include "Math/float2.h"
 #include "Math/float3.h"
 #include "Core/ResourcesManager/ResourcesManager.h"
+
+// statci variables
+std::unordered_map<std::string, Texture> ResourcesManager::texturesLoaded;
+std::unordered_map<unsigned int, Texture> ResourcesManager::texturesLoadedInt;
 inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
 {
     float4x4 to;
@@ -193,13 +197,13 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
-		textureId = LoadMaterialTexture(material, aiTextureType_DIFFUSE, "texture_diffuse");
+		textureId = LoadMaterialTexture(material, aiTextureType_DIFFUSE);
 	}
 
 	return Mesh(vertices, indices, textureId);
 }
 
-unsigned int ModelImporter::Model::LoadMaterialTexture(aiMaterial *mat, aiTextureType type,const std::string& typeName)
+unsigned int ModelImporter::Model::LoadMaterialTexture(aiMaterial *mat, aiTextureType type)
 {
 	unsigned int textureId = 0;
 
@@ -208,16 +212,16 @@ unsigned int ModelImporter::Model::LoadMaterialTexture(aiMaterial *mat, aiTextur
 		aiString str;
 		mat->GetTexture(type, i, &str);
 		
-		ResourcesManager resourceManager = App->GetResourcesManager();
-		std::unordered_map<std::string,Texture>::const_iterator found = resourceManager.texturesLoaded.find(str.C_Str());
+		std::unordered_map<std::string,Texture>::const_iterator found = ResourcesManager::texturesLoaded.find(str.C_Str());
 		// not found in hash
-		if (found == resourceManager.texturesLoaded.end()){
+		if (found == ResourcesManager::texturesLoaded.end()){
 			Texture texture;
 			texture.id = TextureImporter::TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
-			texture.type = typeName;
 			texture.path = str.C_Str();
-			resourceManager.texturesLoaded.insert( std::make_pair(str.C_Str(), texture ) ); 
-			resourceManager.texturesLoadedInt.insert( std::make_pair( texture.id, texture)  ); 
+			texture.directoryPath = directory.c_str();
+
+			ResourcesManager::texturesLoaded.insert( std::make_pair(str.C_Str(), texture ) ); 
+			ResourcesManager::texturesLoadedInt.insert( std::make_pair( texture.id, texture ) ); 
 			textureId = texture.id;
 		}
 		else{

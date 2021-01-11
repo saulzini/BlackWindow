@@ -9,6 +9,6 @@ public:
 		id = 0;
 	};
 	unsigned int id;
-	std::string type;
 	std::string path;
+	std::string directoryPath;
 };

@@ -2,12 +2,12 @@
 #include "GL/glew.h"
 #include "Vertex.h"
 #include "Texture.h"
-
+#include "Core/Importers/Texture/TextureLoader.h"
 using namespace std;
 Mesh::Mesh(
     const std::vector<Vertex> &mVertices,
     const std::vector<unsigned int> &mIndices,
-    unsigned int textureId)
+    const unsigned int textureId)
 {
     vao = 0;
     vbo = 0;
@@ -80,33 +80,45 @@ void Mesh::Save(Json::Value &parent)
         parent["indices"].append(index);
     }
 
-    parent["texture"] = Json::stringValue;
+    parent["texturePath"] = Json::stringValue;
+    parent["directoryPath"] = Json::stringValue;
 
     ResourcesManager resourceManager = App->GetResourcesManager();
     std::unordered_map<unsigned int, Texture>::const_iterator found = resourceManager.texturesLoadedInt.find(textureId);
     // found in hash
     if (found != resourceManager.texturesLoadedInt.end())
     {
-        parent["texture"] = found->second.path;
+        parent["texturePath"] = found->second.path;
+        parent["directoryPath"] = found->second.directoryPath;
     }
 }
 
+void Mesh::LoadFromJson(const Json::Value &component)
+{
+    Clear();
 
+    // loading vertices
+    for (unsigned int i = 0; i < component["vertices"].size(); i++)
+    {
+        Vertex vertex;
+        vertex.LoadFromJson(component["vertices"][i]);
+        vertices.push_back(vertex);
+    }
+
+    // loading indices
+    for (unsigned int i = 0; i < component["indices"].size(); i++)
+    {
+        indices.push_back(component["indices"][i].asUInt());
+    }
+
+    // loading texture
+    textureId = TextureImporter::TextureLoader::GetTextureIdByPath(component["texturePath"].asCString(), component["directoryPath"].asCString());
+
+    SetupMesh();
+}
 
 // void Mesh::Load(Json::Value &root)
 // {
-
-//     for (unsigned int i=0; i< root["vertices"].size(); i++)
-//     {
-
-//     }
-
-//     for (unsigned int i=0; i< root["indices"].size(); i++)
-//     {
-//         root["indices"].append( root["indices"][i] );
-//     }
-
-
 
 //     root["texture"] = Json::stringValue;
 
@@ -123,4 +135,5 @@ void Mesh::Clear()
 {
     vertices.clear();
     indices.clear();
+    textureId = 0;
 }

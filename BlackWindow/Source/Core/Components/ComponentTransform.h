@@ -104,11 +104,11 @@ public:
         parent["components"].append(transformJson);
     }
 
-    void OnLoad(const Json::Value& jRoot) override
+    void OnLoad(const Json::Value& componentJson) override
     {
-        SetPosition( float3( jRoot["position"][0].asFloat() , jRoot["position"][1].asFloat() , jRoot["position"][2].asFloat() ) );
-        SetScale( float3( jRoot["scale"][0].asFloat() , jRoot["scale"][1].asFloat() , jRoot["scale"][2].asFloat() ) );
-        SetRotation( float3( jRoot["rotation"][0].asFloat() , jRoot["rotation"][1].asFloat() , jRoot["rotation"][2].asFloat() ) );
+        SetPosition( float3( componentJson["position"][0].asFloat() , componentJson["position"][1].asFloat() , componentJson["position"][2].asFloat() ) );
+        SetScale( float3( componentJson["scale"][0].asFloat() , componentJson["scale"][1].asFloat() , componentJson["scale"][2].asFloat() ) );
+        SetRotation( float3( componentJson["rotation"][0].asFloat() , componentJson["rotation"][1].asFloat() , componentJson["rotation"][2].asFloat() ) );
     }
     
 

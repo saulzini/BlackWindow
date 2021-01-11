@@ -18,11 +18,11 @@ namespace ComponentFactory
         }
     }
 
-    static Component *CreateComponentFromJson(const Json::Value &jRoot, GameObject *owner)
+    static Component *CreateComponentFromJson(const Json::Value &componentJson, GameObject *owner)
     {
-        ComponentTypes componentType = static_cast<ComponentTypes>(jRoot["type"].asInt());
+        ComponentTypes componentType = static_cast<ComponentTypes>(componentJson["type"].asInt());
         Component *component = ComponentFactory::CreateComponent(owner, componentType);
-        component->OnLoad(jRoot);
+        component->OnLoad(componentJson);
         return component;
     }
 } // namespace ComponentFactory

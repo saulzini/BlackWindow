@@ -44,7 +44,7 @@ namespace ModelImporter
 
 		Mesh ProcessMesh(aiMesh *mesh, const aiScene *scene);
 
-		unsigned int LoadMaterialTexture(aiMaterial *mat, aiTextureType type, const std::string &typeName);
+		unsigned int LoadMaterialTexture(aiMaterial *mat, aiTextureType type);
 
 		std::vector<Mesh> GetMeshes(){
 			return meshes;

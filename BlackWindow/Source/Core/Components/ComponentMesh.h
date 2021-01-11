@@ -47,9 +47,9 @@ public:
         mesh.Clear();
     }
 
-    void OnLoad(const Json::Value& jRoot) override
+    void OnLoad(const Json::Value& componentJson) override
     {
-        //float3(jRoot["position"][0].asFloat()
+        mesh.LoadFromJson(componentJson);
     }
 
 };

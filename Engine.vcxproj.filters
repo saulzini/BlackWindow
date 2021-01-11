@@ -112,9 +112,6 @@
     <ClCompile Include="BlackWindow\Source\Core\Mesh.cpp">
       <Filter>Core\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="BlackWindow\Source\Core\Texture.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Frustum.cpp">
       <Filter>MathGeoLib</Filter>
     </ClCompile>
@@ -1114,6 +1111,9 @@
     </ClInclude>
     <ClInclude Include="BlackWindow\Source\Core\ResourcesManager\ResourcesManager.h">
       <Filter>Core\ResourcesManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\InitModules.h">
+      <Filter>Core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
