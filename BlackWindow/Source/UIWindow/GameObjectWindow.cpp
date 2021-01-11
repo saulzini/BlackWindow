@@ -4,7 +4,6 @@
 #include "ModuleScene.h"
 #include "Core/GameObject/GameObject.h"
 #include "Core/Components/ComponentTransform.h"
-// #include "Core/Model.h"
 void GameObjectWindow::Update()
 {
     if (show)

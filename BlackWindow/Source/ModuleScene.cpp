@@ -8,19 +8,18 @@
 #include "Math/float4x4.h"
 #include <string>
 #include "Leaks.h"
-// #include "../glm/glm.hpp"
 #include "Core/Time/WorldTimer.h"
 #include "Core/GameObject/GameObjectFactory.h"
-#include <Core/Importers/Texture/TextureLoader.h>
+#include "Core/Importers/Texture/TextureLoader.h"
 #include "Core/Importers/Model/Model.h"
 #include "Core/Components/ComponentTypes.h"
 #include "Core/Components/ComponentMesh.h"
 #include "MathGeoLibFwd.h"
 #include "Math/Quat.h"
 #include <queue>
-
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
+#include "Core/SceneFileManager/SceneFileManager.h"
 ModuleScene::ModuleScene()
 {
 	program = 0;
@@ -48,12 +47,14 @@ bool ModuleScene::Init()
 	root = new GameObject(nullptr,"Scene",program);
 	sky = new Skybox();
 	// Setting gameobject
-	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx",program); 
-	GameObject *house = model->LoadModel();
-
-	root->AddChildren(house);
+	// ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx",program); 
+	// GameObject *house = model->LoadModel();
+	// delete model;
+	// root->AddChildren(house);
 
 	// root->Save();
+	SceneFileManager::LoadFromFile("scene.blackwindow");
+
 
 	return true;
 }
@@ -65,7 +66,7 @@ update_status ModuleScene::PreUpdate(float deltaTime)
 
 update_status ModuleScene::Update(float deltaTime)
 {
-	//App->scene->sky->Draw();
+	// App->scene->sky->Draw();
 
 	worldTimer->Update();
 
@@ -103,7 +104,7 @@ update_status ModuleScene::Update(float deltaTime)
 
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 	
-	///App->scene->sky->Draw();
+	// App->scene->sky->Draw();
 	worldTimer->RegulateFPS();
 
 	return UPDATE_CONTINUE;
@@ -166,8 +167,8 @@ void ModuleScene::Load(const Json::Value& jRoot)
 
 void ModuleScene::LoadFromJson(const Json::Value& jRoot) 
 {
+	// ignoring the first level because it is the scene
 	for (Json::Value::ArrayIndex i = 0; i != jRoot["children"].size(); i++){
-		App->editor->consoleWindow->AddLog("%s",jRoot["children"][i]["name"].asCString() );
 		GameObject *child = GameObjectFactory::CreateGameObjectFromJson(jRoot["children"][i],root,program);
 		root->AddChildren(child);
 	}

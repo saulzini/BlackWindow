@@ -437,8 +437,10 @@
     <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObjectTypes.h" />
     <ClInclude Include="BlackWindow\Source\Core\Importers\Model\Model.h" />
     <ClInclude Include="BlackWindow\Source\Core\Importers\Texture\TextureLoader.h" />
+    <ClInclude Include="BlackWindow\Source\Core\InitModules.h" />
     <ClInclude Include="BlackWindow\Source\Core\Mesh.h" />
     <ClInclude Include="BlackWindow\Source\Core\Program\Program.h" />
+    <ClInclude Include="BlackWindow\Source\Core\ResourcesManager\ResourcesManager.h" />
     <ClInclude Include="BlackWindow\Source\Core\SceneFileManager\SceneFileManager.h" />
     <ClInclude Include="BlackWindow\Source\Core\Skybox.h" />
     <ClInclude Include="BlackWindow\Source\Core\Texture.h" />
@@ -532,7 +534,6 @@
     <ClCompile Include="BlackWindow\Source\Core\Mesh.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\Program\Program.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\Skybox.cpp" />
-    <ClCompile Include="BlackWindow\Source\Core\Texture.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\Time\Timer.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\Time\WorldTimer.cpp" />
     <ClCompile Include="BlackWindow\Source\GeometryLoader.cpp" />
@@ -555,6 +556,8 @@
     <ClCompile Include="BlackWindow\Source\UIWindow\ToolbarWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BlackWindow\Game\Default.frag" />
+    <None Include="BlackWindow\Game\Default.vert" />
     <None Include="BlackWindow\Game\DefaultBox.frag" />
     <None Include="BlackWindow\Game\DefaultBox.vert" />
     <None Include="BlackWindow\Resources\Assimp\include\assimp\color4.inl" />
@@ -576,8 +579,6 @@
     <None Include="BlackWindow\Resources\SDL\include\SDL_config.h.cmake" />
     <None Include="BlackWindow\Resources\SDL\include\SDL_config.h.in" />
     <None Include="BlackWindow\Resources\SDL\include\SDL_config_macosx.h.orig" />
-    <None Include="BlackWindow\Source\Shaders\Default.frag" />
-    <None Include="BlackWindow\Source\Shaders\Default.vert" />
     <None Include="BlackWindow\Source\Shaders\Grid.frag" />
     <None Include="BlackWindow\Source\Shaders\Grid.vert" />
   </ItemGroup>

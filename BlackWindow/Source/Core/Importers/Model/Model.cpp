@@ -14,6 +14,11 @@
 #include "Math/Quat.h"
 #include "Math/float2.h"
 #include "Math/float3.h"
+#include "Core/ResourcesManager/ResourcesManager.h"
+
+// statci variables
+std::unordered_map<std::string, Texture> ResourcesManager::texturesLoaded;
+std::unordered_map<unsigned int, Texture> ResourcesManager::texturesLoadedInt;
 inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
 {
     float4x4 to;
@@ -35,6 +40,9 @@ ModelImporter::Model::Model(const std::string &path="",unsigned int program=0)
 	lightsCount = 0;
 	texturesCount = 0;
 	this->program = program;
+	
+	// std::unordered_map<std::string, Texture> ResourcesManager::texturesLoaded;
+	
 	if (path == "")
 	{
 		return;
@@ -141,7 +149,8 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 {
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<Texture> textures;
+	unsigned int textureId;
+	// std::vector<Texture> textures;
 
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
@@ -188,42 +197,38 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 	if (mesh->mMaterialIndex >= 0)
 	{
 		aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
-		std::vector<Texture> diffuseMaps = LoadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-
-		textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-
-		//		std::vector<Texture> specularMaps = LoadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
-
-		//	textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+		textureId = LoadMaterialTexture(material, aiTextureType_DIFFUSE);
 	}
 
-	return Mesh(vertices, indices, textures);
+	return Mesh(vertices, indices, textureId);
 }
 
-std::vector<Texture> ModelImporter::Model::LoadMaterialTextures(aiMaterial *mat, aiTextureType type,const std::string& typeName)
+unsigned int ModelImporter::Model::LoadMaterialTexture(aiMaterial *mat, aiTextureType type)
 {
-	std::vector<Texture> textures;
+	unsigned int textureId = 0;
 
 	for (GLuint i = 0; i < mat->GetTextureCount(type); i++)
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
-
-		std::unordered_map<std::string,Texture>::const_iterator found = texturesLoaded.find(str.C_Str());
+		
+		std::unordered_map<std::string,Texture>::const_iterator found = ResourcesManager::texturesLoaded.find(str.C_Str());
 		// not found in hash
-		if (found == texturesLoaded.end()){
+		if (found == ResourcesManager::texturesLoaded.end()){
 			Texture texture;
 			texture.id = TextureImporter::TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
-			texture.type = typeName;
 			texture.path = str.C_Str();
-			textures.push_back(texture);
-			texturesLoaded.insert( std::make_pair(str.C_Str(), texture ) ); 
+			texture.directoryPath = directory.c_str();
+
+			ResourcesManager::texturesLoaded.insert( std::make_pair(str.C_Str(), texture ) ); 
+			ResourcesManager::texturesLoadedInt.insert( std::make_pair( texture.id, texture ) ); 
+			textureId = texture.id;
 		}
 		else{
-			textures.push_back(found->second);
+			textureId = found->second.id;
 		}
 	}
-	return textures;
+	return textureId;
 }
 
 

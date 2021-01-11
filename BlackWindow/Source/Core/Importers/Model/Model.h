@@ -21,8 +21,7 @@ namespace ModelImporter
 		std::vector<Mesh> meshes;
 		std::string directory;
 		std::string path;
-		// float4x4 globalInversed;
-		std::unordered_map<std::string, Texture> texturesLoaded; 
+		// std::unordered_map<std::string, Texture> texturesLoaded; 
 
 		aiVector3D boundBoxMin;
 		aiVector3D boundBoxMax;
@@ -45,7 +44,7 @@ namespace ModelImporter
 
 		Mesh ProcessMesh(aiMesh *mesh, const aiScene *scene);
 
-		std::vector<Texture> LoadMaterialTextures(aiMaterial *mat, aiTextureType type, const std::string &typeName);
+		unsigned int LoadMaterialTexture(aiMaterial *mat, aiTextureType type);
 
 		std::vector<Mesh> GetMeshes(){
 			return meshes;

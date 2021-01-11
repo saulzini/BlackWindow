@@ -5,15 +5,24 @@
 #include "Core/Components/ComponentTransform.h"
 namespace ComponentFactory
 {
-    static Component* CreateComponent(GameObject *owner ,ComponentTypes type){
+    static Component *CreateComponent(GameObject *owner, ComponentTypes type)
+    {
         switch (type)
         {
-            case ComponentTypes::MESH:
-                return new ComponentMesh(owner,type);
-            case ComponentTypes::TRANSFORM:
-                return new ComponentTransform(owner, type);
-            default:
-                return new Component(owner,type);
+        case ComponentTypes::MESH:
+            return new ComponentMesh(owner, type);
+        case ComponentTypes::TRANSFORM:
+            return new ComponentTransform(owner, type);
+        default:
+            return new Component(owner, type);
         }
     }
-}
+
+    static Component *CreateComponentFromJson(const Json::Value &componentJson, GameObject *owner)
+    {
+        ComponentTypes componentType = static_cast<ComponentTypes>(componentJson["type"].asInt());
+        Component *component = ComponentFactory::CreateComponent(owner, componentType);
+        component->OnLoad(componentJson);
+        return component;
+    }
+} // namespace ComponentFactory

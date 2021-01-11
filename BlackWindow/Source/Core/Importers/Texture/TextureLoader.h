@@ -1,5 +1,4 @@
 ﻿#pragma once
-
 #include <string>
 #include <GL/glew.h>
 #include <IL/il.h>
@@ -167,6 +166,26 @@ namespace TextureImporter
 			ilDeleteImage(imageId); //release from il since we have it in opengl
 
 			return imageId;
+		}
+
+		static unsigned int GetTextureIdByPath(const std::string &path,const std::string &directory)
+		{
+			unsigned int textureId;
+			std::unordered_map<std::string,Texture>::const_iterator found = ResourcesManager::texturesLoaded.find(path.c_str());
+			// not found in hash
+			if (found == ResourcesManager::texturesLoaded.end()){
+				Texture texture;
+				texture.id = LoadTexture2D(path.c_str(),directory.c_str());
+				texture.path = path.c_str();
+
+				ResourcesManager::texturesLoaded.insert( std::make_pair(path.c_str(), texture ) ); 
+				ResourcesManager::texturesLoadedInt.insert( std::make_pair( texture.id, texture ) ); 
+				textureId = texture.id;
+			}
+			else{
+				textureId = found->second.id;
+			}
+			return textureId;
 		}
 	};
 } // namespace TextureImporter

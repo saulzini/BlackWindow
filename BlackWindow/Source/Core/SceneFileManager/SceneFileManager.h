@@ -3,6 +3,8 @@
 #include <fstream>
 #include "Application.h"
 #include "ModuleScene.h"
+#include "ModuleEditor.h"
+#include "UIWindow/ConsoleWindow.h"
 class SceneFileManager
 {
 public:
@@ -18,12 +20,12 @@ public:
 	static void LoadFromFile(const char *name){
         Json::Value root;
         std::ifstream file(name);
+        if(file.fail()){
+            App->editor->consoleWindow->AddLog("Scene file not exists");
+            return;
+        }
         file >> root;
-        // Json::StyledStreamWriter writer;
-        // std::ofstream outputFile(name);
-        // writer.write(outputFile, jsonNode);
         App->scene->Load(root);
-       
     }
 
 };

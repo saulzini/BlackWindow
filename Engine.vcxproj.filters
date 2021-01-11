@@ -112,9 +112,6 @@
     <ClCompile Include="BlackWindow\Source\Core\Mesh.cpp">
       <Filter>Core\Mesh</Filter>
     </ClCompile>
-    <ClCompile Include="BlackWindow\Source\Core\Texture.cpp">
-      <Filter>Core</Filter>
-    </ClCompile>
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Frustum.cpp">
       <Filter>MathGeoLib</Filter>
     </ClCompile>
@@ -1112,6 +1109,12 @@
     <ClInclude Include="BlackWindow\Source\Core\SceneFileManager\SceneFileManager.h">
       <Filter>Core\SceneFileManager</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\ResourcesManager\ResourcesManager.h">
+      <Filter>Core\ResourcesManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\InitModules.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">
@@ -1198,6 +1201,9 @@
     <Filter Include="Core\SceneFileManager">
       <UniqueIdentifier>{43bd2a3e-3f83-4f8f-aed3-c13682bc8155}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\ResourcesManager">
+      <UniqueIdentifier>{5a5055d7-e353-46b7-89de-6bb2f376076b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="BlackWindow\Source\Shaders\Grid.frag">
@@ -1205,12 +1211,6 @@
     </None>
     <None Include="BlackWindow\Source\Shaders\Grid.vert">
       <Filter>Shaders\Grid</Filter>
-    </None>
-    <None Include="BlackWindow\Source\Shaders\Default.vert">
-      <Filter>Shaders\Texture</Filter>
-    </None>
-    <None Include="BlackWindow\Source\Shaders\Default.frag">
-      <Filter>Shaders\Texture</Filter>
     </None>
     <None Include="BlackWindow\Resources\MathGeoLib-master\src\Math\float2.inl">
       <Filter>MathGeoLib</Filter>
@@ -1273,6 +1273,12 @@
       <Filter>Shaders\Texture</Filter>
     </None>
     <None Include="BlackWindow\Game\DefaultBox.vert">
+      <Filter>Shaders\Texture</Filter>
+    </None>
+    <None Include="BlackWindow\Game\Default.frag">
+      <Filter>Shaders\Texture</Filter>
+    </None>
+    <None Include="BlackWindow\Game\Default.vert">
       <Filter>Shaders\Texture</Filter>
     </None>
   </ItemGroup>

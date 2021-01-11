@@ -5,7 +5,6 @@
 #include "Math/Quat.h"
 #include <queue>          // std::queue
 #include <stack>          // std::stack
-
 #include "Application.h"
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
@@ -20,6 +19,15 @@ Component* GameObject::AddComponent(ComponentTypes type)
     }
 
     return component;
+}
+
+void GameObject::AddComponent(Component * component) 
+{
+    if (component->GetType() == ComponentTypes::TRANSFORM){
+        transformComponent = (ComponentTransform*) component;
+    }
+
+    components.push_back( component );
 }
 
 void GameObject::AddChildren(GameObject* gameObject) 

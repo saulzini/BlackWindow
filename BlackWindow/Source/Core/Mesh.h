@@ -5,57 +5,55 @@
 #include "Texture.h"
 #include "Vertex.h"
 #include "json/json.h"
-class Mesh {
+#include "ResourcesManager/ResourcesManager.h"
+#include "Application.h"
+class Mesh
+{
 public:
-    Mesh() {
-        VAO = 0;
-        VBO = 0;
-        EBO = 0;
+    Mesh()
+    {
+        vao = 0;
+        vbo = 0;
+        ebo = 0;
     }
-    Mesh(const std::vector<Vertex>& mVertices,const std::vector<unsigned int>& mIndices,const std::vector<Texture>& mTextures);
+    Mesh(const std::vector<Vertex> &mVertices, const std::vector<unsigned int> &mIndices, unsigned int textureId);
 
 public:
     // mesh data
-    std::vector<Vertex>       vertices;
+    std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
-    std::vector<Texture>      textures;
+    unsigned int textureId;
     void Draw(const unsigned int shader);
-    void ChangeTextures(const std::vector<Texture>& textures);
 
-    void Save(Json::Value& parent){
-        parent["vertices"] = Json::arrayValue;
+    void ChangeTextures(unsigned int textureId);
 
-        for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); ++it)
-        {
-            (*it).Save(parent);
-        }
-        
-        parent["indices"] = Json::arrayValue;
-        for (unsigned int i = 0; i != indices.size(); ++i){
-            Json::UInt index = indices[i];
-            parent["indices"].append( index );
-        }
-
+    void Save(Json::Value &parent);
+    
+    void SetIndices(const std::vector<unsigned int> &indices){
+        this->indices = indices; 
     }
 
-    std::vector<Vertex> GetVertices() const {
+    void LoadFromJson(const Json::Value &component);
+    
+
+    std::vector<Vertex> GetVertices() const
+    {
         return vertices;
     }
 
-    std::vector<unsigned int> GetIndices() const {
+    std::vector<unsigned int> GetIndices() const
+    {
         return indices;
     }
 
-    void Clear(){
-       vertices.clear();      
-       indices.clear();      
-       textures.clear();      
-    }
+    void Clear();
+
+    void Mesh::Load(Json::Value &root);
+
 
 private:
     //  render data
-    unsigned int VAO, VBO, EBO;
+    unsigned int vao, vbo, ebo;
 
     void SetupMesh();
-
 };

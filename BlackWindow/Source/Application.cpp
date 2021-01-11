@@ -9,16 +9,14 @@
 #include "ModuleDebugDraw.h"
 #include "SDL.h"
 #include "Leaks.h"
-#include <IL/ilut.h>
 #include "UIWindow/ConsoleWindow.h" 
+#include "Core/InitModules.h"
 using namespace std;
 
 Application::Application()
 {
-	// init DevIL. This needs to be done only once per application
-	//TODO::IMPROVE THIS
-	ilInit();
-	iluInit();
+	InitModules::init();
+	
 	lcg = new LCG();
 
 	// Order matters: they will Init/start/update in this order
