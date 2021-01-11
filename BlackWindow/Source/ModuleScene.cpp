@@ -19,6 +19,7 @@
 #include <queue>
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
+#include "Core/SceneFileManager/SceneFileManager.h"
 ModuleScene::ModuleScene()
 {
 	program = 0;
@@ -52,6 +53,9 @@ bool ModuleScene::Init()
 	// root->AddChildren(house);
 
 	// root->Save();
+	SceneFileManager::LoadFromFile("scene.blackwindow");
+
+
 	return true;
 }
 
