@@ -32,7 +32,9 @@ void GameObject::AddComponent(Component * component)
 
 void GameObject::AddChildren(GameObject* gameObject) 
 {
+    // adding children
     children.push_back(gameObject);
+    // adding parent of child
     gameObject->parent = this;
 }
 

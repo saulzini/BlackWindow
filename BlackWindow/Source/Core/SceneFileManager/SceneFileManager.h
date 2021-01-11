@@ -15,6 +15,7 @@ public:
         Json::StyledStreamWriter writer;
         std::ofstream outputFile(name);
         writer.write(outputFile, jsonNode);
+        App->editor->consoleWindow->AddLog("Scene saved");
     }
 
 	static void LoadFromFile(const char *name){
@@ -26,6 +27,7 @@ public:
         }
         file >> root;
         App->scene->Load(root);
+        App->editor->consoleWindow->AddLog("Scene loaded");
     }
 
 };

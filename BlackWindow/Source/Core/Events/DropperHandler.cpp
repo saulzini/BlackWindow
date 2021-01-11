@@ -12,15 +12,9 @@ void DropperHandler::DropFileIntoWindow(char *filePath)
     if (found == NULL){ // force to check if image
         App->scene->SwapTexture(filePath);
         // TODO::Validate through a list of extensions
-        // SDL_ShowSimpleMessageBox(
-        //     SDL_MESSAGEBOX_INFORMATION,
-        //     "File extension not accepted for the moment",
-        //     filePath,
-        //     App->window->window
-        // );
         SDL_free(filePath);    // Free dropped_filedir memory
         return;
     }
 
-    App->scene->SwapModel(filePath);
+    App->scene->AddModel(filePath);
 }

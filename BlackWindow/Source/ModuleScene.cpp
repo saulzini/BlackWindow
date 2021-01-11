@@ -136,14 +136,13 @@ void ModuleScene::SwapTexture(const char *texturePath)
 	
 }
 
-void ModuleScene::SwapModel(const char *modelPath)
+void ModuleScene::AddModel(const char *modelPath)
 {
-	// // Free space of previous model
-	// delete (model);
-	// model = nullptr;
-	// model = new Model(modelPath);
-
-	// App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
+	ModelImporter::Model *model =new ModelImporter::Model(modelPath,program); 
+	GameObject *house = model->LoadModel();
+	App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
+	delete model;
+	root->AddChildren(house);
 }
 
 GameObject* ModuleScene::CreateGameObject(GameObjectTypes type) 
