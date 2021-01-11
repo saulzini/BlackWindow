@@ -15,7 +15,7 @@ Component* GameObject::AddComponent(ComponentTypes type)
     components.push_back( component );
 
     if (type == ComponentTypes::TRANSFORM){
-        transformComponent = (ComponentTransform*) component;
+        transformComponent = static_cast<ComponentTransform *>(component);
     }
 
     return component;
@@ -24,7 +24,7 @@ Component* GameObject::AddComponent(ComponentTypes type)
 void GameObject::AddComponent(Component * component) 
 {
     if (component->GetType() == ComponentTypes::TRANSFORM){
-        transformComponent = (ComponentTransform*) component;
+        transformComponent = static_cast<ComponentTransform *>(component);
     }
 
     components.push_back( component );

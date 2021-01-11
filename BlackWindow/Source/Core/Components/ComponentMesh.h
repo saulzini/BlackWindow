@@ -20,7 +20,7 @@ public:
         this->shader = shader;
     }
 
-    void SetMesh(Mesh &mesh)
+    void SetMesh(const Mesh &mesh)
     {
         this->mesh = mesh;
     }

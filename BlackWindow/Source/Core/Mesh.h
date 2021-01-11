@@ -15,6 +15,7 @@ public:
         vao = 0;
         vbo = 0;
         ebo = 0;
+        textureId=0;
     }
     Mesh(const std::vector<Vertex> &mVertices, const std::vector<unsigned int> &mIndices, unsigned int textureId);
 
