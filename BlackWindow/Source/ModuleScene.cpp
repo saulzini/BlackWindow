@@ -60,6 +60,7 @@ bool ModuleScene::Init()
 	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program);
 	root->AddChildren(Light);
 	Light->GetTransformComponent()->SetPosition(float3 (0.0f, 1.0f,0.0f));
+	
 	return true;
 }
 
@@ -84,29 +85,35 @@ update_status ModuleScene::Update(float deltaTime)
 
 	GLint ks = glGetUniformLocation(program, "ks");
 	GLint kd = glGetUniformLocation(program, "kd");
-	GLint N = glGetUniformLocation(program, "N");
+	GLint N = glGetUniformLocation(program, "material.shininess");
 
 	GLint light_pos = glGetUniformLocation(program, "light_pos");
-	GLint light_color = glGetUniformLocation(program, "light_color");
+	GLint light_ambient = glGetUniformLocation(program, "light.ambient");
+	GLint light_diffuse = glGetUniformLocation(program, "light.diffuse");
+	GLint light_specular = glGetUniformLocation(program, "light.specular");
 	GLint viewPos = glGetUniformLocation(program, "viewPos");
 	GLint colorAmbient = glGetUniformLocation(program, "colorAmbient");
 
 	glUniform1f(ks, 0.8f);
 	glUniform1f(kd, 0.6f);
-	glUniform1f(N, 32);
+	glUniform1f(N, 255);
 
-	float3 lightpos = { 1.0f, 0.0f, 0.0f };
-	lightpos = Light->GetTransformComponent()->GetPosition();
-	float3 lightcolor = { 1.0f, 1.0f, 1.0f };
+	//float3 lightpos = { 1.0f, 0.0f, 0.0f };
+	float3 lightpos = Light->GetTransformComponent()->GetPosition();
+	float3 lightambient = { 0.2f, 0.2f, 0.2f };
+	float3 lightdiffuse = { 0.5f, 0.5f, 0.5f };
+	float3 lightspecular = { 1.0f, 1.0f, 1.0f };
 	float3 view_Pos = App->camera->cameraPosition;
 	float3 color_Ambient = { 1.0f, 1.0f, 1.0f };
 
-	glUniform1i(glGetUniformLocation(program, "texture_diffuse"), 0);
+	glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
 
-	glUniform3f(light_pos,		   lightpos[0],		 lightpos[1],		lightpos[2]);
-	glUniform3f(light_color,	 lightcolor[0],    lightcolor[1],	  lightcolor[2]);
-	glUniform3f(viewPos,		   view_Pos[0],		 view_Pos[1],		view_Pos[2]);
-	glUniform3f(colorAmbient, color_Ambient[0], color_Ambient[1],  color_Ambient[2]);
+	glUniform3f(light_pos,			 lightpos[0],			 lightpos[1],				lightpos[2]);
+	glUniform3f(light_ambient,   lightambient[0],		 lightambient[1],			lightambient[2]);
+	glUniform3f(light_diffuse,	 lightdiffuse[0],		 lightdiffuse[1],			lightdiffuse[2]);
+	glUniform3f(light_specular, lightspecular[0],		lightspecular[1],		   lightspecular[2]);
+	glUniform3f(viewPos,			 view_Pos[0],			 view_Pos[1],				view_Pos[2]);
+	glUniform3f(colorAmbient,	color_Ambient[0],		color_Ambient[1],		   color_Ambient[2]);
 
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 	
