@@ -1119,6 +1119,9 @@
     <ClInclude Include="BlackWindow\Source\Core\Components\ComponentLight.h">
       <Filter>Core\Components</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentCamera.h">
+      <Filter>Core\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">

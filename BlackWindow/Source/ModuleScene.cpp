@@ -62,6 +62,10 @@ bool ModuleScene::Init()
 	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program);
 	root->AddChildren(Light);
 	Light->GetTransformComponent()->SetPosition(float3 (0.0f, 1.0f,0.0f));
+
+	Camera = GameObjectFactory::CreateGameObject(GameObjectTypes::CAMERA, root, "Camera", program);
+	root->AddChildren(Camera);
+	Camera->GetTransformComponent()->SetPosition(float3(0.0f, 1.0f, 0.0f));
 	//Light->Update();
 	return true;
 }

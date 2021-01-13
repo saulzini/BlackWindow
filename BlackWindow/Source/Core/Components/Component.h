@@ -23,6 +23,7 @@ public:
     ComponentTypes GetType() const{
         return type;
     }
+    virtual void Init() {}
     virtual void Enable(){}
     virtual void Update(){}
     virtual void Disable(){}

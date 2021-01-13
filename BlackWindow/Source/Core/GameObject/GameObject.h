@@ -128,6 +128,8 @@ public:
         return transformComponent;
     }
 
+   
+
     void CalculateModelMatrix();
 
     bool isChild(GameObject *lookingChild);

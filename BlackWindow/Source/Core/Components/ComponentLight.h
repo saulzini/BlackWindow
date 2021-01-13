@@ -123,6 +123,7 @@ public:
         {
             offset = float3(radius * sin(angle), 0.0f, radius * cos(angle));
             //dd::arrow(arrowFrom + offset, arrowTo + offset, float3(1.0f, 1.0f, 1.0f), 1.0f);
+           
         }
     }
 

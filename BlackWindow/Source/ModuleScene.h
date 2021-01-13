@@ -15,6 +15,7 @@ private:
 	GameObject* root;
 	GameObject* selected;
 	GameObject* Light;
+	GameObject* Camera;
 
 public:
 	ModuleScene();
