@@ -51,14 +51,14 @@ bool ModuleScene::Init()
 	root = new GameObject(nullptr,"Scene",program);
 	sky = new Skybox();
 	// Setting gameobject
-	// ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx",program); 
-	// GameObject *house = model->LoadModel();
-	// delete model;
-	// root->AddChildren(house);
+	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.fbx",program); 
+	GameObject *house = model->LoadModel();
+	delete model;
+	root->AddChildren(house);
 
 	// root->Save();
 
-	SceneFileManager::LoadFromFile("scene.blackwindow");
+	// SceneFileManager::LoadFromFile("scene.blackwindow");
 	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program);
 	root->AddChildren(Light);
 	Light->GetTransformComponent()->SetPosition(float3 (0.0f, 1.0f,0.0f));
@@ -66,6 +66,9 @@ bool ModuleScene::Init()
 	Camera = GameObjectFactory::CreateGameObject(GameObjectTypes::CAMERA, root, "Camera", program);
 	root->AddChildren(Camera);
 	Camera->GetTransformComponent()->SetPosition(float3(0.0f, 1.0f, 0.0f));
+
+	// SceneFileManager::LoadFromFile("scene.blackwindow");
+
 	//Light->Update();
 	return true;
 }
