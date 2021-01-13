@@ -9,7 +9,11 @@
 class ComponentTransform : public Component
 {
 public:
-    ComponentTransform(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::TRANSFORM) : Component(owner,type){};
+    ComponentTransform(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::TRANSFORM) : Component(owner,type){
+        position = float3(0.0f,0.0f,0.0f);
+        scale = float3(1.0f,1.0f,1.0f);
+        SetRotation(float3(0.0f,0.0f,0.0f));
+    };
     
     void SetPosition(float3 newPosition)
     {
@@ -31,7 +35,6 @@ public:
             return;
         }
         scale = newScale;
-        // owner->CalculateModelMatrix();
     }
 
     float3 GetScale() const
@@ -46,7 +49,6 @@ public:
         }
         rotation = newRotation;
         rotationQuat = Quat::FromEulerXYX(newRotation.x,newRotation.y,newRotation.z);
-        // owner->CalculateModelMatrix();
     }
 
     float3 GetRotation() const
