@@ -16,14 +16,16 @@ public:
         vbo = 0;
         ebo = 0;
         textureId=0;
+        specularId=0;
     }
-    Mesh(const std::vector<Vertex> &mVertices, const std::vector<unsigned int> &mIndices, unsigned int textureId);
+    Mesh(const std::vector<Vertex> &mVertices, const std::vector<unsigned int> &mIndices, unsigned int textureId,unsigned int specularId);
 
 public:
     // mesh data
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
     unsigned int textureId;
+    unsigned int specularId;
     void Draw(const unsigned int shader);
 
     void ChangeTextures(unsigned int textureId);

@@ -7,7 +7,9 @@ using namespace std;
 Mesh::Mesh(
     const std::vector<Vertex> &mVertices,
     const std::vector<unsigned int> &mIndices,
-    const unsigned int textureId)
+    const unsigned int textureId,
+    const unsigned int specularId
+    )
 {
     vao = 0;
     vbo = 0;
@@ -15,6 +17,7 @@ Mesh::Mesh(
     this->vertices = mVertices;
     this->indices = mIndices;
     this->textureId = textureId;
+    this->specularId = specularId;
 
     SetupMesh();
 }
@@ -80,16 +83,29 @@ void Mesh::Save(Json::Value &parent)
         parent["indices"].append(index);
     }
 
-    parent["texturePath"] = Json::stringValue;
-    parent["directoryPath"] = Json::stringValue;
+    parent["diffuseTexturePath"] = Json::stringValue;
+    parent["diffuseDirectoryPath"] = Json::stringValue;
+    parent["specularTexturePath"] = Json::stringValue;
+    parent["specularDirectoryPath"] = Json::stringValue;
 
     ResourcesManager resourceManager = App->GetResourcesManager();
+    
+    // diffuse material
     std::unordered_map<unsigned int, Texture>::const_iterator found = resourceManager.texturesLoadedInt.find(textureId);
     // found in hash
     if (found != resourceManager.texturesLoadedInt.end())
     {
-        parent["texturePath"] = found->second.path;
-        parent["directoryPath"] = found->second.directoryPath;
+        parent["diffuseTexturePath"] = found->second.path;
+        parent["diffuseDirectoryPath"] = found->second.directoryPath;
+    }
+
+    // specular material
+    found = resourceManager.texturesLoadedInt.find(specularId);
+    // found in hash
+    if (found != resourceManager.texturesLoadedInt.end())
+    {
+        parent["specularTexturePath"] = found->second.path;
+        parent["specularDirectoryPath"] = found->second.directoryPath;
     }
 }
 
@@ -112,7 +128,8 @@ void Mesh::LoadFromJson(const Json::Value &component)
     }
 
     // loading texture
-    textureId = TextureImporter::TextureLoader::GetTextureIdByPath(component["texturePath"].asCString(), component["directoryPath"].asCString());
+    textureId = TextureImporter::TextureLoader::GetTextureIdByPath(component["diffuseTexturePath"].asCString(), component["diffuseDirectoryPath"].asCString());
+    specularId = TextureImporter::TextureLoader::GetTextureIdByPath(component["specularTexturePath"].asCString(), component["specularDirectoryPath"].asCString());
 
     SetupMesh();
 }
