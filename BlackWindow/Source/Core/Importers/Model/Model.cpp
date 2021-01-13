@@ -41,8 +41,6 @@ ModelImporter::Model::Model(const std::string &path="",unsigned int program=0)
 	texturesCount = 0;
 	this->program = program;
 	
-	// std::unordered_map<std::string, Texture> ResourcesManager::texturesLoaded;
-	
 	if (path == "")
 	{
 		return;
@@ -122,7 +120,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	float3 rotationRadians = rotation.ToEulerXYZ().Abs();
 
 	// It always needs a transform component
-	ComponentTransform* componentTransform = (ComponentTransform*)root->AddComponent(ComponentTypes::TRANSFORM);
+	ComponentTransform* componentTransform = static_cast<ComponentTransform *>(root->AddComponent(ComponentTypes::TRANSFORM));
 	componentTransform->SetPosition(translation);
 	componentTransform->SetRotation(rotationRadians);
 	componentTransform->SetScale(scale);
@@ -132,7 +130,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	{
 		// Adding default components when loading
 		aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
-		ComponentMesh *componentMesh = (ComponentMesh*) root->AddComponent(ComponentTypes::MESH);
+		ComponentMesh* componentMesh = static_cast<ComponentMesh *>(root->AddComponent(ComponentTypes::MESH));
 		componentMesh->SetShader(program);
 		componentMesh->SetMesh( ProcessMesh(mesh, scene) );
 	}
@@ -211,22 +209,8 @@ unsigned int ModelImporter::Model::LoadMaterialTexture(aiMaterial *mat, aiTextur
 	{
 		aiString str;
 		mat->GetTexture(type, i, &str);
-		
-		std::unordered_map<std::string,Texture>::const_iterator found = ResourcesManager::texturesLoaded.find(str.C_Str());
-		// not found in hash
-		if (found == ResourcesManager::texturesLoaded.end()){
-			Texture texture;
-			texture.id = TextureImporter::TextureLoader::LoadTexture2D(str.C_Str(),directory.c_str());
-			texture.path = str.C_Str();
-			texture.directoryPath = directory.c_str();
 
-			ResourcesManager::texturesLoaded.insert( std::make_pair(str.C_Str(), texture ) ); 
-			ResourcesManager::texturesLoadedInt.insert( std::make_pair( texture.id, texture ) ); 
-			textureId = texture.id;
-		}
-		else{
-			textureId = found->second.id;
-		}
+    	textureId = TextureImporter::TextureLoader::GetTextureIdByPath(str.C_Str(), directory.c_str() );
 	}
 	return textureId;
 }

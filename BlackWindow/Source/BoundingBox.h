@@ -6,6 +6,7 @@
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include "Math/float3.h"
 
 
 #define aisgl_min(x,y) (x<y?x:y)
@@ -25,8 +26,8 @@ public:
     }
 
     void GetBoundingBoxForNode(const aiNode *nd,
-                                   aiVector3D *min,
-                                   aiVector3D *max,
+                                   float3 *min,
+                                   float3 *max,
                                    aiMatrix4x4 *trafo)
     {
         aiMatrix4x4 prev;
@@ -41,8 +42,8 @@ public:
             for (t = 0; t < mesh->mNumVertices; ++t)
             {
 
-                aiVector3D tmp = mesh->mVertices[t];
-                aiTransformVecByMatrix4(&tmp, trafo);
+                float3 tmp = float3(mesh->mVertices[t].x,mesh->mVertices[t].y,mesh->mVertices[t].z);
+                aiTransformVecByMatrix4(&mesh->mVertices[t], trafo);
 
                 min->x = aisgl_min(min->x, tmp.x);
                 min->y = aisgl_min(min->y, tmp.y);
@@ -62,7 +63,7 @@ public:
     }
 
 
-    void GetBoundingBox(aiVector3D *min, aiVector3D *max)
+    void GetBoundingBox(float3 *min, float3 *max)
     {
         aiMatrix4x4 trafo;
         aiIdentityMatrix4(&trafo);

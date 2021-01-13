@@ -43,7 +43,6 @@ namespace GameObjectFactory
         // load components
         for (unsigned int index = 0; index < jRoot["components"].size(); index++)
         {
-            App->editor->consoleWindow->AddLog("Loading Component of %d ", jRoot["components"][index]["type"].asInt());
             root->AddComponent(ComponentFactory::CreateComponentFromJson(jRoot["components"][index],root));
         }
         //Load children

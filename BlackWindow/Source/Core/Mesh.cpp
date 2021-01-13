@@ -117,19 +117,6 @@ void Mesh::LoadFromJson(const Json::Value &component)
     SetupMesh();
 }
 
-// void Mesh::Load(Json::Value &root)
-// {
-
-//     root["texture"] = Json::stringValue;
-
-//     ResourcesManager resourceManager = App->GetResourcesManager();
-//     std::unordered_map<unsigned int, Texture>::const_iterator found = resourceManager.texturesLoadedInt.find(textureId);
-//     // found in hash
-//     if (found != resourceManager.texturesLoadedInt.end())
-//     {
-//         root["texture"] = found->second.path;
-//     }
-// }
 
 void Mesh::Clear()
 {

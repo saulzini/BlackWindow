@@ -56,7 +56,7 @@ public:
 	// For testing
 	Skybox* sky;
 	void SwapTexture(const char *texturePath);
-	void SwapModel(const char *modelPath);
+	void AddModel(const char *modelPath);
 
 	WorldTimer* GetWorldTimer() const{
 		return worldTimer;

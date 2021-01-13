@@ -61,7 +61,7 @@ public:
         return rotationQuat;
     }
 
-    void OnEditor()
+    void OnEditor() override
     {
         float3 auxPosition = GetPosition();
         float3 auxScale = GetScale();

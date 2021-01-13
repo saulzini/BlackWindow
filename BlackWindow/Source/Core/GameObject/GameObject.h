@@ -69,7 +69,7 @@ public:
 
     void RemoveChild(const GameObject *child)
     {
-        if (children.size() <= 0)
+        if (children.empty() )
         {
             return;
         }
@@ -118,7 +118,7 @@ public:
         CalculateModelMatrix();
     }
 
-    void SetName(const std::string name)
+    void SetName(const std::string &name)
     {
         this->name = name;
     }

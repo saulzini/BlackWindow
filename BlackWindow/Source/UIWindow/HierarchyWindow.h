@@ -10,6 +10,7 @@ public:
 		ImGuiWindowFlags _window_flags
 	) : DefaultImGuiWindow(_title, _window_flags) {
 		originalNodeFlags = ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick;
+		selected = nullptr;
 	};
 	void Update() override;
 	void TreeChildren(bool isOpen,GameObject *currentNode);

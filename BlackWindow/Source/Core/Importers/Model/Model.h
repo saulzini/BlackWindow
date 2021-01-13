@@ -23,11 +23,11 @@ namespace ModelImporter
 		std::string path;
 		// std::unordered_map<std::string, Texture> texturesLoaded; 
 
-		aiVector3D boundBoxMin;
-		aiVector3D boundBoxMax;
+		float3 boundBoxMin;
+		float3 boundBoxMax;
 
 		// storing dimensions in the 3 axis
-		aiVector3D dimensions;
+		float3 dimensions;
 
 		int animationsCount;
 		int meshesCount;
@@ -48,6 +48,10 @@ namespace ModelImporter
 
 		std::vector<Mesh> GetMeshes(){
 			return meshes;
+		}
+
+		float3 GetDimensions(){
+			return dimensions;
 		}
 		
 	private:
