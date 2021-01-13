@@ -148,6 +148,7 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	unsigned int textureId;
+	unsigned int specularId;
 	// std::vector<Texture> textures;
 
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
@@ -196,9 +197,10 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 	{
 		aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
 		textureId = LoadMaterialTexture(material, aiTextureType_DIFFUSE);
+		specularId = LoadMaterialTexture(material, aiTextureType_SPECULAR);
 	}
 
-	return Mesh(vertices, indices, textureId);
+	return Mesh(vertices, indices, textureId,specularId);
 }
 
 unsigned int ModelImporter::Model::LoadMaterialTexture(aiMaterial *mat, aiTextureType type)

@@ -9,13 +9,14 @@
 					"components" : 
 					[
 						{
-							"position" : [ 2.0, 2.0, 2.0 ],
+							"position" : [ 0.0, 0.0, 0.0 ],
 							"rotation" : [ 0.0, 0.0, -0.0 ],
-							"scale" : [ 2.0, 1.0, 1.0 ],
+							"scale" : [ 1.0, 1.0, 1.0 ],
 							"type" : 1
 						},
 						{
-							"directoryPath" : ".\\Assets\\BakerHouse",
+							"diffuseDirectoryPath" : "",
+							"diffuseTexturePath" : "Baker_house.png",
 							"indices" : 
 							[
 								0,
@@ -343,7 +344,8 @@
 								159,
 								156
 							],
-							"texturePath" : "Baker_house.png",
+							"specularDirectoryPath" : "",
+							"specularTexturePath" : "",
 							"type" : 2,
 							"vertices" : 
 							[
@@ -1150,7 +1152,7 @@
 							]
 						}
 					],
-					"id" : 764615417,
+					"id" : 1331066820,
 					"name" : "Chimney"
 				},
 				{
@@ -1158,13 +1160,14 @@
 					"components" : 
 					[
 						{
-							"position" : [ 3.0, 3.0, 5.0 ],
+							"position" : [ 0.0, 0.0, 0.0 ],
 							"rotation" : [ 0.0, 0.0, -0.0 ],
 							"scale" : [ 1.0, 1.0, 1.0 ],
 							"type" : 1
 						},
 						{
-							"directoryPath" : ".\\Assets\\BakerHouse",
+							"diffuseDirectoryPath" : "",
+							"diffuseTexturePath" : "Baker_house.png",
 							"indices" : 
 							[
 								0,
@@ -3919,7 +3922,8 @@
 								1637,
 								1634
 							],
-							"texturePath" : "Baker_house.png",
+							"specularDirectoryPath" : "",
+							"specularTexturePath" : "",
 							"type" : 2,
 							"vertices" : 
 							[
@@ -12136,7 +12140,7 @@
 							]
 						}
 					],
-					"id" : 1465305121,
+					"id" : 1988739876,
 					"name" : "Baker_house"
 				}
 			],
@@ -12144,13 +12148,47 @@
 			[
 				{
 					"position" : [ 0.0, 0.0, 0.0 ],
-					"rotation" : [ -0.0, 0.0, -0.0 ],
+					"rotation" : [ 0.0, 0.0, 0.0 ],
 					"scale" : [ 1.0, 1.0, 1.0 ],
 					"type" : 1
 				}
 			],
-			"id" : 822316990,
+			"id" : 1286177399,
 			"name" : "BakerHouse"
+		},
+		{
+			"children" : [],
+			"components" : 
+			[
+				{
+					"position" : [ -431602080.0, -431602080.0, -431602080.0 ],
+					"rotation" : [ -431602080.0, -431602080.0, -431602080.0 ],
+					"scale" : [ -431602080.0, -431602080.0, -431602080.0 ],
+					"type" : 1
+				},
+				{
+					"position" : [ 0.0, 1.0, 0.0 ],
+					"rotation" : [ 0.0, 0.0, 0.0 ],
+					"scale" : [ 1.0, 1.0, 1.0 ],
+					"type" : 1
+				}
+			],
+			"id" : 1198250318,
+			"name" : "Light"
+		},
+		{
+			"children" : [],
+			"components" : 
+			[
+				{
+					"position" : [ 0.0, 1.0, 0.0 ],
+					"rotation" : [ 0.0, 0.0, 0.0 ],
+					"scale" : [ 1.0, 1.0, 1.0 ],
+					"type" : 1
+				}
+			],
+			"id" : 88154469,
+			"name" : "Camera"
 		}
 	],
 	"name" : "Scene"
