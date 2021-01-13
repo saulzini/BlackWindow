@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
 #include "ModuleDebugDraw.h"
+#include "debugdraw.h"
 #include "SDL.h"
 #include "GL/glew.h"
 #include "ModuleCamera.h"
@@ -106,9 +107,7 @@ update_status ModuleRender::Update(float deltaTime)
 	glClearColor(0.439f, 0.439f, 0.439f, 1.0f);
 	glClearDepth(1.0);
 	glClear( GL_DEPTH_BUFFER_BIT);
-	App->draw->Update();
-	App->draw->Draw(view, proj, w, h);
-
+	
 	return UPDATE_CONTINUE;
 }
 

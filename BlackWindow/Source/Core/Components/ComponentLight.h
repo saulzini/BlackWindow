@@ -3,6 +3,8 @@
 #include "Core/Components/ComponentTypes.h"
 #include <Math/float3.h>
 #include "imgui.h"
+#include "debugdraw.h"
+#include "Application.h"
 #include "Math/Quat.h"
 //#include "Core/GameObject/GameObject.h"
 
@@ -110,12 +112,25 @@ public:
         SetScale(float3(componentJson["scale"][0].asFloat(), componentJson["scale"][1].asFloat(), componentJson["scale"][2].asFloat()));
         SetRotation(float3(componentJson["rotation"][0].asFloat(), componentJson["rotation"][1].asFloat(), componentJson["rotation"][2].asFloat()));
     }
-
+    void Update() override {
+        float3 arrowFrom = float3(1.0f,1.0f,1.0f);
+        direction = float3(1.0f, 0.0f, 0.0f);
+        float3 arrowTo = arrowFrom + direction;
+        float radius = 0.5f;
+        float3 offset;
+        dd::arrow(arrowFrom, arrowTo, float3(1.0f, 1.0f, 1.0f), 1.0f);
+        for (float angle = 0; angle <= 360; angle += 45)
+        {
+            offset = float3(radius * sin(angle), 0.0f, radius * cos(angle));
+            //dd::arrow(arrowFrom + offset, arrowTo + offset, float3(1.0f, 1.0f, 1.0f), 1.0f);
+        }
+    }
 
 protected:
     float3 position;
     float3 scale;
     float3 rotation;
+    float3 direction;
     Quat rotationQuat;
 };
 

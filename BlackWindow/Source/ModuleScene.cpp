@@ -4,6 +4,8 @@
 #include "Core/Program/Program.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
+#include "ModuleDebugDraw.h"
+#include "Application.h"
 #include "Core/Mesh.h"
 #include "Math/float4x4.h"
 #include <string>
@@ -60,7 +62,7 @@ bool ModuleScene::Init()
 	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program);
 	root->AddChildren(Light);
 	Light->GetTransformComponent()->SetPosition(float3 (0.0f, 1.0f,0.0f));
-	
+	//Light->Update();
 	return true;
 }
 
@@ -118,6 +120,12 @@ update_status ModuleScene::Update(float deltaTime)
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 	
 	// App->scene->sky->Draw();
+
+	int w = 0;
+	int h = 0;
+	App->draw->Draw(App->camera, w, h);
+	dd::xzSquareGrid(-200, 200, 0.0f, 1.0f, dd::colors::Gray);
+	dd::axisTriad(float4x4::identity, 0.5f, 5.1f);
 	worldTimer->RegulateFPS();
 
 	return UPDATE_CONTINUE;

@@ -6,6 +6,7 @@ struct ImGuiIO;
 class ConsoleWindow;
 class ConfigurationWindow;
 class PreviewWindow;
+class Dockspace;
 class HierarchyWindow;
 class GameObjectWindow;
 class AboutWindow;
@@ -25,6 +26,7 @@ public:
 
 	void AddWindow(DefaultImGuiWindow *window); //method for adding multiple windows
 
+	Dockspace* dockspace;
 	ConsoleWindow *consoleWindow;
 	ConfigurationWindow *configurationWindow;
 	PreviewWindow *previewWindow;
