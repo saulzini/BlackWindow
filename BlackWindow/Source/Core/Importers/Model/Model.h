@@ -21,7 +21,6 @@ namespace ModelImporter
 		std::vector<Mesh> meshes;
 		std::string directory;
 		std::string path;
-		// std::unordered_map<std::string, Texture> texturesLoaded; 
 
 		float3 boundBoxMin;
 		float3 boundBoxMax;

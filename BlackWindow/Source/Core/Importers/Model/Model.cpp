@@ -16,7 +16,7 @@
 #include "Math/float3.h"
 #include "Core/ResourcesManager/ResourcesManager.h"
 
-// statci variables
+// static variables
 std::unordered_map<std::string, Texture> ResourcesManager::texturesLoaded;
 std::unordered_map<unsigned int, Texture> ResourcesManager::texturesLoadedInt;
 inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
