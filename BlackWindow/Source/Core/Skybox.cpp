@@ -17,6 +17,13 @@
 #include <Core/FileManager.h>
 Skybox::Skybox()
 {
+
+    skyboxVAO = 0;
+    skyboxVBO = 0;
+    vbo = 0;
+    vao = 0;
+    ebo = 0;
+    programSky = 0;
     glGenVertexArrays(1, &skyboxVAO);
     glGenBuffers(1, &skyboxVBO);
     glBindVertexArray(skyboxVAO);
@@ -121,6 +128,6 @@ void Skybox::Draw()
     glDepthFunc(GL_LESS); // set depth function back to default
     glDepthMask(GL_TRUE); // superfluous
     //glDeleteVertexArrays(1, &skyboxVAO);
-    // glDeleteBuffers(1, &skyboxVAO);
-    /// glDeleteProgram(App->world->programSky);
+   // glDeleteBuffers(1, &skyboxVAO);
+   /// glDeleteProgram(App->world->programSky);
 }

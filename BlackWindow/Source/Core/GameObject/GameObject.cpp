@@ -141,7 +141,14 @@ void GameObject::Update()
     for (std::vector<Component *>::iterator it = components.begin() ; it != components.end(); ++it){
         
 		if ( ( (Component *) *it)->GetType() == ComponentTypes::MESH){
-		    ( (Component *) *it)->Update();
+		   ( (Component *) *it)->Update();
+        }
+
+        if (((Component*)*it)->GetType() == ComponentTypes::LIGHT) {
+            ((Component*)*it)->Update();
+        }
+        if (((Component*)*it)->GetType() == ComponentTypes::CAMERA) {
+            ((Component*)*it)->Update();
         }
 	}
 

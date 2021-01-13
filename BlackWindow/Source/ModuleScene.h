@@ -14,6 +14,8 @@ private:
 	WorldTimer* worldTimer;
 	GameObject* root;
 	GameObject* selected;
+	GameObject* Light;
+	GameObject* Camera;
 
 public:
 	ModuleScene();

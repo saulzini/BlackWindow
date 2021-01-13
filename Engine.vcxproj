@@ -426,7 +426,10 @@
     <ClInclude Include="BlackWindow\Source\Application.h" />
     <ClInclude Include="BlackWindow\Source\BoundingBox.h" />
     <ClInclude Include="BlackWindow\Source\Core\Components\Component.h" />
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentCamera.h" />
     <ClInclude Include="BlackWindow\Source\Core\Components\ComponentFactory.h" />
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentLight.h" />
+    <ClInclude Include="BlackWindow\Source\Core\Components\ComponentMaterial.h" />
     <ClInclude Include="BlackWindow\Source\Core\Components\ComponentMesh.h" />
     <ClInclude Include="BlackWindow\Source\Core\Components\ComponentTransform.h" />
     <ClInclude Include="BlackWindow\Source\Core\Components\ComponentTypes.h" />

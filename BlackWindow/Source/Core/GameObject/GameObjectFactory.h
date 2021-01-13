@@ -10,13 +10,21 @@
 namespace GameObjectFactory
 {
 
-    static GameObject *CreateGameObject(GameObjectTypes type)
+    static GameObject *CreateGameObject(GameObjectTypes type, GameObject* parent = nullptr, const char* name = "", unsigned int program = 0)
     {
-        GameObject *gameObject = new GameObject();
+        GameObject *gameObject = new GameObject(parent, name, program);
         switch (type)
         {
-        case GameObjectTypes::SCRIPT:
-            gameObject->AddComponent(ComponentTypes::SCRIPT);
+      //  case GameObjectTypes::SCRIPT:
+      //      gameObject->AddComponent(ComponentTypes::SCRIPT);
+      //      break;
+        case GameObjectTypes::CAMERA:
+            gameObject->AddComponent(ComponentTypes::CAMERA);
+            gameObject->AddComponent(ComponentTypes::TRANSFORM);
+            break;
+        case GameObjectTypes::LIGHT:
+            gameObject->AddComponent(ComponentTypes::LIGHT);
+            gameObject->AddComponent(ComponentTypes::TRANSFORM);
             break;
         case GameObjectTypes::DEFAULT:
             gameObject->AddComponent(ComponentTypes::TRANSFORM);

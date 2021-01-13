@@ -3,5 +3,7 @@
 enum class GameObjectTypes { 
     NONE,
     DEFAULT,
+    CAMERA,
+    LIGHT,
     SCRIPT
 };

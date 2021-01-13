@@ -23,7 +23,8 @@ ModuleEditor::ModuleEditor()
     //Creating windows
     AddWindow(consoleWindow = new ConsoleWindow("Console window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     AddWindow(configurationWindow = new ConfigurationWindow("Configuration window", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
-    AddWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar ));
+    AddWindow(previewWindow = new PreviewWindow("Preview", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
+
     AddWindow(hierarchyWindow = new HierarchyWindow("Hierarchy", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     AddWindow(gameObjectWindow = new GameObjectWindow("GameObject", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
     AddWindow(aboutWindow = new AboutWindow("About", ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoBackground));
