@@ -167,10 +167,10 @@ void ModuleScene::SwapTexture(const char *texturePath)
 void ModuleScene::AddModel(const char *modelPath)
 {
 	ModelImporter::Model *model =new ModelImporter::Model(modelPath,program); 
-	GameObject *house = model->LoadModel();
+	GameObject *gameObject = model->LoadModel();
 	App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
 	delete model;
-	root->AddChildren(house);
+	root->AddChildren(gameObject);
 }
 
 GameObject* ModuleScene::CreateGameObject(GameObjectTypes type) 
