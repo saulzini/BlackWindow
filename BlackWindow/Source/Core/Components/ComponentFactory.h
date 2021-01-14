@@ -5,6 +5,8 @@
 #include "Core/Components/ComponentTransform.h"
 #include "Core/Components/ComponentLight.h"
 #include "Core/Components/ComponentCamera.h"
+#include "Core/Components/ComponentMaterial.h"
+#include "Core/Components/ComponentMeshRenderer.h"
 namespace ComponentFactory
 {
     static Component *CreateComponent(GameObject *owner, ComponentTypes type)
@@ -16,11 +18,13 @@ namespace ComponentFactory
         case ComponentTypes::TRANSFORM:
             return new ComponentTransform(owner, type);
         case ComponentTypes::MATERIAL:
-            return new ComponentTransform(owner, type);
+            return new ComponentMaterial(owner, type);
         case ComponentTypes::LIGHT:
             return new ComponentLight(owner, type);
         case ComponentTypes::CAMERA:
             return new ComponentCamera(owner, type);
+        case ComponentTypes::MESHRENDERER:
+            return new ComponentMeshRenderer(owner, type);
         default:
             return new Component(owner, type);
         }

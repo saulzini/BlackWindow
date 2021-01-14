@@ -1,56 +1,54 @@
 #pragma once
 #include "Core/Components/Component.h"
 #include "Core/Components/ComponentTypes.h"
-#include "Core/Mesh.h"
+#include "Core/Vertex.h"
+#include <vector>
 class ComponentMesh : public Component
-{ 
+{
 
 public:
-    Mesh mesh;
-    unsigned int shader;
-public:
-    ComponentMesh(GameObject *owner = nullptr,ComponentTypes type = ComponentTypes::MESH, unsigned int shader = 0) : Component(owner,type)
+    ComponentMesh(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::MESH) : Component(owner, type) {}
+
+    void SetVertices(const std::vector<Vertex> &vertices)
     {
-        this->shader = shader;
+        this->vertices = vertices;
     }
 
-
-    void SetShader(unsigned int shader)
+    void OnSave(Json::Value &owner) override
     {
-        this->shader = shader;
-    }
-
-    void SetMesh(const Mesh &mesh)
-    {
-        this->mesh = mesh;
-    }
-    
-    void Update() override
-    {
-        if ( active == false) {
-            return;
-        }
-
-        mesh.Draw(shader);
-    }
-
-    void OnSave(Json::Value& owner) override
-    {
-        Json::Value meshJson;
-        meshJson["type"] = static_cast<int>(ComponentTypes::MESH);
-        mesh.Save(meshJson);
-        owner["components"].append(meshJson);
+        // Json::Value meshJson;
+        // meshJson["type"] = static_cast<int>(ComponentTypes::MESH);
+        // mesh.Save(meshJson);
+        // owner["components"].append(meshJson);
     }
 
     void Clear() override
-    {   
-        mesh.Clear();
+    {
+        vertices.clear();
     }
 
-    void OnLoad(const Json::Value& componentJson) override
+    void OnLoad(const Json::Value &componentJson) override
     {
-        mesh.LoadFromJson(componentJson);
+        // mesh.LoadFromJson(componentJson);
     }
+
+    std::vector<Vertex> GetVertices() const
+    {
+        return vertices;
+    }
+
+    void SetIndices(const std::vector<unsigned int> &indices)
+    {
+        this->indices =indices;
+    }
+
+    std::vector<unsigned int> GetIndices() const
+    {
+        return indices;
+    }
+
+private:
+    std::vector<Vertex> vertices;
+    std::vector<unsigned int> indices;
 
 };
-

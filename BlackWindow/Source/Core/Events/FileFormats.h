@@ -6,7 +6,7 @@ public:
     static  std::vector<std::string> imageFormats;
 };
 
- std::vector<std::string> FileFormats::imageFormats = {
+std::vector<std::string> FileFormats::imageFormats = {
     "ase",
     "art",
     "bmp",
