@@ -9,4 +9,5 @@ enum class ComponentTypes {
     MATERIAL,
     TEXTURE2D,
     SCRIPT,
+    MESHRENDERER,
 };

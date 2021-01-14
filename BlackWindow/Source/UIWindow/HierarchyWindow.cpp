@@ -62,13 +62,8 @@ void HierarchyWindow::Update()
                     nodeFlags = ImGuiTreeNodeFlags_Leaf;
                 }
                 selected = App->scene->GetSelected();
-                if (selected){
-                    App->editor->consoleWindow->AddLog("Selected %s current %s ", selected->GetName().c_str(), gameObject->GetName().c_str());
-
-                }
+                
                 if (selected  && gameObject == selected){
-                    App->editor->consoleWindow->AddLog("Selected %s same %s ", selected->GetName().c_str(), gameObject->GetName().c_str());
-
                     nodeFlags |= ImGuiTreeNodeFlags_Selected;
                 }
                 bool open = ImGui::TreeNodeEx((void *)gameObject->GetId(), nodeFlags, gameObject->GetName().c_str());

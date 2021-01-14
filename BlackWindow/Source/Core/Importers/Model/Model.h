@@ -12,6 +12,7 @@
 #include "Core/GameObject/GameObject.h"
 #include <unordered_map> 
 #include "Math/float4x4.h"
+#include "Core/Importers/Model/ProcessedMesh.h"
 namespace ModelImporter
 {
 
@@ -41,7 +42,7 @@ namespace ModelImporter
 		GameObject* LoadModel();
 		GameObject* ProcessNode(GameObject *parent,aiNode *node, const aiScene *scene);
 
-		Mesh ProcessMesh(aiMesh *mesh, const aiScene *scene);
+		ProcessedMesh ProcessMesh(aiMesh *mesh, const aiScene *scene);
 
 		unsigned int LoadMaterialTexture(aiMaterial *mat, aiTextureType type);
 
