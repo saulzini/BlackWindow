@@ -44,7 +44,7 @@ public:
 
         if (ImGui::CollapsingHeader("FOV"))
         {
-            ImGui::InputFloat("FOV", &fov);
+            ImGui::DragFloat("FOV", &fov,0.2f,50.0f,120.0f);
             
         }
 
@@ -58,8 +58,9 @@ public:
        
         float4x4 view = frustum.ViewMatrix();
         float4x4 proj = frustum.ProjectionMatrix();
+        view = float4x4::identity;
        // view.Transpose();
-        float4x4 clipMatrix = proj * view * owner->GetModelMatrix() ;
+        float4x4 clipMatrix = proj * -view * owner->GetModelMatrix();
         dd::frustum(clipMatrix.Inverted(), float3(1.0f, 1.0f, 1.0f), 1.0f);
 
     }

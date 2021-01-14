@@ -26,8 +26,11 @@ void GameObjectWindow::Update()
         //std::string name = gameObject->GetName();
         //ImGui::InputText("Name", &name[0], name.size()); //always pass chars and size
         //gameObject->SetName(name);
-
-        gameObject->GetTransformComponent()->OnEditor();
+        std::vector<Component*> Components = gameObject->GetComponents();
+        for (std::vector<Component*>::iterator it = Components.begin(); it != Components.end(); ++it) {
+            (*it)->OnEditor();
+        }
+ 
 
         end();
     }

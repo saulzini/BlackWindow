@@ -162,6 +162,9 @@ void GameObject::Update()
 
 void GameObject::Draw() 
 {
+
+    dd::aabb(globalBoundingBox->minPoint, globalBoundingBox->maxPoint, float3(0, 1, 0));
+    
     // float4x4 identityModel = float4x4::identity;
     float4x4 calculatedModel = float4x4::identity;
 

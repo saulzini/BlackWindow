@@ -4,6 +4,7 @@
 #include "Core/Components/ComponentTypes.h"
 #include "Math/float4x4.h"
 #include "Application.h"
+#include"Geometry/AABB.h"
 #include "Core/Components/ComponentTransform.h"
 #include "Core/Components/Component.h"
 #include "json/json.h"
@@ -21,6 +22,8 @@ protected:
     std::vector<GameObject *> children;
     std::vector<Component *> components;
     ComponentTransform *transformComponent;
+    AABB* boundingBox = nullptr;
+    AABB* globalBoundingBox = nullptr;
 
 public:
     GameObject(GameObject *parent = nullptr, const char *name = "", unsigned int program = 0)
@@ -35,6 +38,10 @@ public:
         modelMatrix = float4x4::identity;
 
         this->transformComponent = nullptr;
+        boundingBox = new AABB(GetTransformComponent()->GetPosition() - float3(1.0f, 1.0f, 1.0f),
+                               GetTransformComponent()->GetPosition() + float3(1.0f, 1.0f, 1.0f));
+        globalBoundingBox = new AABB(*boundingBox);
+
     }
     ~GameObject() {}
     virtual void Update();
