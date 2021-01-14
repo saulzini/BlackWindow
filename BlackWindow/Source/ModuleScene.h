@@ -9,7 +9,6 @@ class ModuleScene : public Module
 {
 
 private:
-	//unsigned int programSky;
 	unsigned int program;
 	WorldTimer* worldTimer;
 	GameObject* root;
@@ -55,7 +54,7 @@ public:
 
 	// For testing
 	Skybox* sky;
-	void SwapTexture(const char *texturePath);
+	void AddTexture(const char *texturePath);
 	void AddModel(const char *modelPath);
 
 	WorldTimer* GetWorldTimer() const{

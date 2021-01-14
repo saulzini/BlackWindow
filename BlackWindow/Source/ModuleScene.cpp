@@ -16,7 +16,7 @@
 #include "Core/Components/ComponentFactory.h"
 #include "Core/Importers/Model/Model.h"
 #include "Core/Components/ComponentTypes.h"
-#include "Core/Components/ComponentLight.h";
+#include "Core/Components/ComponentLight.h"
 #include "Core/Components/ComponentMesh.h"
 #include "MathGeoLibFwd.h"
 #include "Math/Quat.h"
@@ -151,17 +151,23 @@ bool ModuleScene::CleanUp()
 	return true;
 }
 
-void ModuleScene::SwapTexture(const char *texturePath) 
+void ModuleScene::AddTexture(const char *texturePath) 
 {
-	// std::string textPath(texturePath);
-	// std::string directory = textPath.substr(0, textPath.find_last_of('\\'));
-	// unsigned int id = TextureLoader::LoadTexture2D(textPath.c_str(),directory.c_str());
-	// if (id == 0){
-	// 	App->editor->consoleWindow->AddLog("Error in swapping texture");
-	// 	return;
-	// }
-	// model->ApplyTextureToModel(id,textPath.c_str() );
+	GameObject *selected = GetSelected();
+
+	if (selected == nullptr){
+		return;
+	}
 	
+	std::string textPath(texturePath);
+	std::string directory = textPath.substr(0, textPath.find_last_of('\\'));
+	unsigned int id = TextureImporter::TextureLoader::GetTextureIdByPath(textPath.c_str(),directory.c_str());
+	if (id == 0){
+		App->editor->consoleWindow->AddLog("Error in adding texture");
+		return;
+	}
+
+	selected->ApplyTextureToModel(id);
 }
 
 void ModuleScene::AddModel(const char *modelPath)

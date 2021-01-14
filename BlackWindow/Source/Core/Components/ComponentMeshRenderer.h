@@ -58,22 +58,18 @@ public:
 
     void Update() override
     {
-        std::vector<ComponentMaterial *> componentMaterials = owner->GetMaterialComponents();
-        if (componentMaterials.empty())
+        ComponentMaterial* componentMaterial = owner->GetMaterialComponent();
+        if (componentMaterial == nullptr)
         {
             return;
         }
 
-        for (std::vector<ComponentMaterial *>::iterator it = componentMaterials.begin(); it != componentMaterials.end(); ++it)
-        {
-            glBindTexture(GL_TEXTURE_2D, (*it)->GetTextureId() );
-            glActiveTexture(GL_TEXTURE0);
-            glBindVertexArray(vao);
-            glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
-            glBindTexture(GL_TEXTURE_2D, 0);
-            glBindVertexArray(0);
-        }
-
+        glBindTexture(GL_TEXTURE_2D, componentMaterial->GetTextureId() );
+        glActiveTexture(GL_TEXTURE0);
+        glBindVertexArray(vao);
+        glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
+        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindVertexArray(0);
         
     }
 

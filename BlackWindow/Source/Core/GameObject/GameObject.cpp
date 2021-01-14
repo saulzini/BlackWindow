@@ -28,6 +28,7 @@ void GameObject::AddChildren(GameObject *gameObject)
 {
     // adding children
     children.push_back(gameObject);
+
     // adding parent of child
     gameObject->parent = this;
 }
@@ -217,7 +218,7 @@ void GameObject::CheckDefaultsComponents(Component *component)
 
     if (component->GetType() == ComponentTypes::MATERIAL)
     {
-        materialComponents.push_back(static_cast<ComponentMaterial *>(component));
+        materialComponent = static_cast<ComponentMaterial *>(component);
     }
 
     if (component->GetType() == ComponentTypes::MESH)

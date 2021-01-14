@@ -21,7 +21,7 @@ protected:
     float4x4 modelMatrix;
     std::vector<GameObject *> children;
     std::vector<Component *> components;
-    std::vector<ComponentMaterial *> materialComponents;
+    ComponentMaterial * materialComponent;
     ComponentMesh *meshComponent;
     ComponentTransform *transformComponent;
 
@@ -118,8 +118,15 @@ public:
 
     void CheckDefaultsComponents(Component *component);
 
-    std::vector<ComponentMaterial *> GetMaterialComponents() const
+    ComponentMaterial * GetMaterialComponent() const
     {
-        return materialComponents;
+        return materialComponent;
+    }
+
+    void ApplyTextureToModel(unsigned int textureId)
+    {
+        if(materialComponent){
+            materialComponent->SetTexture(textureId);
+        }
     }
 };

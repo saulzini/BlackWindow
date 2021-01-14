@@ -5,7 +5,9 @@
 #include "imgui.h"
 #include "Math/Quat.h"
 #include <vector>
-
+#include "Application.h"
+#include "ModuleEditor.h"
+#include "UIWindow/ConsoleWindow.h"
 class ComponentMaterial : public Component
 {
 public:
@@ -67,6 +69,18 @@ public:
     void SetSpecularId(const unsigned int specularId)
     {
         this->specularId = specularId;
+    }
+
+    void SetTexture(const unsigned int texture){
+        if (textureId == 0){
+            textureId = texture;
+        }
+        else if (specularId == 0) {
+            specularId = texture;
+        }
+        else {
+            App->editor->consoleWindow->AddLog("No available spaces on this material");
+        }
     }
 
     unsigned int GetTextureId()
