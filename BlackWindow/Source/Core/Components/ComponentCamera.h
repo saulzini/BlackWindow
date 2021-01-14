@@ -37,6 +37,22 @@ public:
         
     };
 
+
+    void OnEditor() override
+    {
+        float fov = frustum.HorizontalFov();
+
+        if (ImGui::CollapsingHeader("FOV"))
+        {
+            ImGui::InputFloat("FOV", &fov);
+            
+        }
+
+        frustum.SetHorizontalFovAndAspectRatio(fov, 1.3f);
+
+
+    }
+
     void Update() override {
         frustum.SetFrame(owner->GetTransformComponent()->GetPosition(), -float3::unitZ, float3::unitY);
        
