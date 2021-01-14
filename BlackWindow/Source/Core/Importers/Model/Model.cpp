@@ -101,7 +101,7 @@ GameObject* ModelImporter::Model::LoadModel()
 	buf += "Scale:"+std::to_string( result);
 	App->editor->consoleWindow->AddLog(buf.c_str());
 
-	
+	root->CalculateBox();
 	return root;
 }
 

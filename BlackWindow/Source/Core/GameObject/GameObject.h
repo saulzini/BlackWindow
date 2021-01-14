@@ -23,9 +23,10 @@ protected:
     std::vector<GameObject *> children;
     std::vector<Component *> components;
     std::vector<ComponentMaterial *> materialComponents;
-    ComponentMesh *meshComponent;
+    ComponentMesh * componentMesh;
     ComponentTransform *transformComponent;
     AABB* boundingBox = nullptr;
+    AABB* globalBox = nullptr;
 
 public:
     GameObject(GameObject *parent = nullptr, const char *name = "", unsigned int program = 0)
@@ -91,7 +92,7 @@ public:
 
     ComponentMesh *GetMeshComponent() const
     {
-        return meshComponent;
+        return componentMesh;
     }
 
     float4x4 GetProjectionMatrix()

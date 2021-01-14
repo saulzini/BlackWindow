@@ -5,6 +5,7 @@
 #include "Math/Quat.h"
 #include <queue> // std::queue
 #include <stack> // std::stack
+#include "Core/Vertex.h"
 #include "Application.h"
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
@@ -144,8 +145,11 @@ void GameObject::CalculateBox()
     float3 min = float3(-1, -1, -1);
     float3 max = float3(1, 1, 1);
 
-    std::vector<Vertex> componentMesh = meshComponent->GetVertices();
-    for (std::vector<Vertex>::iterator it = componentMesh.begin(); it != componentMesh.end(); ++it)
+    if (componentMesh == nullptr) {
+        return;
+    }
+    std::vector<Vertex> componentVertex = componentMesh->GetVertices();
+    for (std::vector<Vertex>::iterator it = componentVertex.begin(); it != componentVertex.end(); ++it)
     {
         //Min vertex
         if ((it)->Position.x < min.x)
@@ -164,6 +168,52 @@ void GameObject::CalculateBox()
     }
 
     boundingBox = new AABB(min, max);
+    if (children.size() <= 0)
+    {
+        return;
+    }
+
+    std::queue<GameObject*> searchQueue;
+    searchQueue.push(this);
+    GameObject* current = nullptr;
+    while (!searchQueue.empty())
+    {
+        current = searchQueue.front();
+        searchQueue.pop();
+       
+
+        std::vector<GameObject*> currentChildren = current->GetChildren();
+
+        if (currentChildren.size() > 0)
+        {
+            for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+            {
+                searchQueue.push((GameObject*)*it);
+            }
+        }
+
+        std::vector<Vertex> componentMesh = current->GetMeshComponent()->GetVertices();
+        for (std::vector<Vertex>::iterator it = componentMesh.begin(); it != componentMesh.end(); ++it)
+        {
+            //Min vertex
+            if ((it)->Position.x < min.x)
+                min.x = (it)->Position.x;
+            if ((it)->Position.y < min.y)
+                min.y = (it)->Position.y;
+            if ((it)->Position.z < min.z)
+                min.z = (it)->Position.z;
+            //Max vertex
+            if ((it)->Position.x > max.x)
+                max.x = (it)->Position.x;
+            if ((it)->Position.y > max.y)
+                max.y = (it)->Position.y;
+            if ((it)->Position.z > max.z)
+                max.z = (it)->Position.z;
+        }
+
+    }
+
+    globalBox = new AABB(min, max);
     // dd::aabb(boundingBox->minPoint, boundingBox->maxPoint, float3(0, 1, 0));
 }
 
@@ -251,7 +301,7 @@ void GameObject::CheckDefaultsComponents(Component *component)
 
     if (component->GetType() == ComponentTypes::MESH)
     {
-        meshComponent = static_cast<ComponentMesh *>(component);
+        componentMesh = static_cast<ComponentMesh *>(component);
     }
 }
 
