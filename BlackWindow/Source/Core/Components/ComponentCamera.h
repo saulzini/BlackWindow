@@ -34,16 +34,16 @@ public:
         frustum.SetViewPlaneDistances(0.1f, 10.0f);
         frustum.SetHorizontalFovAndAspectRatio(50.0f, 1.3f);
         frustum.SetFrame(position, -float3::unitZ, float3::unitY);
-    
+        
     };
 
     void Update() override {
         frustum.SetFrame(owner->GetTransformComponent()->GetPosition(), -float3::unitZ, float3::unitY);
-  
-        float4x4 view = frustum.ViewMatrix(); //<-- Important to transpose!
-   
+       
+        float4x4 view = frustum.ViewMatrix();
         float4x4 proj = frustum.ProjectionMatrix();
-        float4x4 clipMatrix = proj * view ;
+       // view.Transpose();
+        float4x4 clipMatrix = proj * view * owner->GetModelMatrix() ;
         dd::frustum(clipMatrix.Inverted(), float3(1.0f, 1.0f, 1.0f), 1.0f);
 
     }
@@ -51,13 +51,6 @@ public:
 protected:
 
     float3 position;
-    float3 scale;
-    float3 rotation;
-    float3 direction;
-    Quat rotationQuat;
-
-    float3 initialCameraPosition;
-    float3 lastCameraPosition;
 
     Frustum frustum;
     float turnSpeed;
