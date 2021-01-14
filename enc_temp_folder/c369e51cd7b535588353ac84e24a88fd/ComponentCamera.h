@@ -52,6 +52,10 @@ protected:
 
     float3 position;
 
+
+    float3 initialCameraPosition;
+    float3 lastCameraPosition;
+
     Frustum frustum;
     float turnSpeed;
     float zoomSpeed;
