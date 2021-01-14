@@ -1124,6 +1124,9 @@
     <ClInclude Include="BlackWindow\Source\Core\Components\ComponentMaterial.h">
       <Filter>Core\Components</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\Core\Importers\Model\ProcessedMesh.h">
+      <Filter>Core\Importers\Model</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">

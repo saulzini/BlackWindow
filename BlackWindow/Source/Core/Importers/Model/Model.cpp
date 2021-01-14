@@ -10,6 +10,8 @@
 #include "Core/Importers/Texture/TextureLoader.h"
 #include "BoundingBox.h"
 #include "Core/Components/ComponentMesh.h"
+#include "Core/Components/ComponentMaterial.h"
+#include "Core/Components/ComponentMeshRenderer.h"
 #include "Core/Components/ComponentTransform.h"
 #include "Math/Quat.h"
 #include "Math/float2.h"
@@ -19,6 +21,7 @@
 // static variables
 std::unordered_map<std::string, Texture> ResourcesManager::texturesLoaded;
 std::unordered_map<unsigned int, Texture> ResourcesManager::texturesLoadedInt;
+
 inline float4x4 aiMatrix4x4ToMathGeo(const aiMatrix4x4* from)
 {
     float4x4 to;
@@ -124,15 +127,29 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	componentTransform->SetPosition(translation);
 	componentTransform->SetRotation(rotationRadians);
 	componentTransform->SetScale(scale);
-	
+
+	ComponentMeshRenderer* componentMeshRenderer = nullptr;
+	if (node->mNumMeshes > 0){
+		componentMeshRenderer = static_cast<ComponentMeshRenderer *>(root->AddComponent(ComponentTypes::MESHRENDERER));
+	}
 
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		// Adding default components when loading
 		aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
 		ComponentMesh* componentMesh = static_cast<ComponentMesh *>(root->AddComponent(ComponentTypes::MESH));
-		componentMesh->SetShader(program);
-		componentMesh->SetMesh( ProcessMesh(mesh, scene) );
+		ComponentMaterial* componentMaterial = static_cast<ComponentMaterial *>(root->AddComponent(ComponentTypes::MATERIAL));
+
+		ProcessedMesh processedMesh = ProcessMesh(mesh, scene);
+		componentMesh->SetVertices(processedMesh.vertices);
+		componentMesh->SetIndices(processedMesh.indices);
+		if (componentMeshRenderer){
+			componentMeshRenderer ->Setup();
+		}
+
+		componentMaterial->SetSpecularId(processedMesh.specularId);
+		componentMaterial->setTextureId(processedMesh.textureId);
+
 	}
 	// process all the node's meshes (if any)
 	for (GLuint i = 0; i < node->mNumChildren; i++)
@@ -143,7 +160,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	return root;
 }
 
-Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
+ProcessedMesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 {
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
@@ -200,7 +217,7 @@ Mesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *scene)
 		specularId = LoadMaterialTexture(material, aiTextureType_SPECULAR);
 	}
 
-	return Mesh(vertices, indices, textureId,specularId);
+	return ProcessedMesh(vertices, indices, textureId,specularId);
 }
 
 unsigned int ModelImporter::Model::LoadMaterialTexture(aiMaterial *mat, aiTextureType type)

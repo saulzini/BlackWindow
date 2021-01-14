@@ -439,6 +439,7 @@
     <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObjectFactory.h" />
     <ClInclude Include="BlackWindow\Source\Core\GameObject\GameObjectTypes.h" />
     <ClInclude Include="BlackWindow\Source\Core\Importers\Model\Model.h" />
+    <ClInclude Include="BlackWindow\Source\Core\Importers\Model\ProcessedMesh.h" />
     <ClInclude Include="BlackWindow\Source\Core\Importers\Texture\TextureLoader.h" />
     <ClInclude Include="BlackWindow\Source\Core\InitModules.h" />
     <ClInclude Include="BlackWindow\Source\Core\Mesh.h" />

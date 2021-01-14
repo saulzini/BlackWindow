@@ -10,10 +10,13 @@
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
 #include "Leaks.h"
+#include "ModuleScene.h"
+#include "Core/GameObject/GameObject.h"
+#include "Core/Components/ComponentTransform.h"
 ModuleCamera::ModuleCamera()
 {
 	//initializing
-	cameraPosition = initialCameraPosition  = lastCameraPosition = float3(1, 3, 10);
+	cameraPosition = initialCameraPosition = lastCameraPosition = float3(1, 3, 10);
 	orbitPosition = float3(1, 1, 1);
 	initialTurnSpeed = turnSpeed = 0.0009f;
 	radiansOrbit = initialRadiansOrbit = 0.009f;
@@ -49,7 +52,7 @@ update_status ModuleCamera::Update(float deltaTime)
 
 	// Check for reset camera position
 	CheckForResetCameraPosition();
-	
+
 	//Keyboard movements
 	MoveForward(deltaTime);
 	MoveRight(deltaTime);
@@ -179,11 +182,31 @@ void ModuleCamera::CheckForResetCameraPosition()
 	if (App->input->GetKey(SDL_SCANCODE_F))
 	{
 		// LOG("F");
-		ResetCameraPosition();
+		GameObject *gameObject = App->scene->GetSelected();
+		if (gameObject)
+		{
+			ComponentTransform *transformComponent = gameObject->GetTransformComponent();
+			if (transformComponent)
+			{
+				
+				LookAt(transformComponent->GetPosition()  ); //in this case the object is in the origin so it could be just dimensions
+				
+				float3 newPosition = float3(
+					transformComponent->GetPosition().x * transformComponent->GetScale().x,
+					transformComponent->GetPosition().y * transformComponent->GetScale().y,
+					transformComponent->GetPosition().z * transformComponent->GetScale().z
+				);
+				frustum.SetPos( newPosition );
+
+			}
+		}
+		else {
+			ResetCameraPosition();
+		}
 	}
 }
 
-void ModuleCamera::Rotate(const float3x3& rotationMatrix)
+void ModuleCamera::Rotate(const float3x3 &rotationMatrix)
 {
 	float3 oldFront = frustum.Front().Normalized();
 	frustum.SetFront(rotationMatrix.MulDir(oldFront));
@@ -265,7 +288,7 @@ void ModuleCamera::SetAspectRatio(float aspectRatio)
 	frustum.SetVerticalFovAndAspectRatio(frustum.VerticalFov(), aspectRatio);
 }
 
-void ModuleCamera::MoveAccordingNewModelInScene(const float3& dimensions)
+void ModuleCamera::MoveAccordingNewModelInScene(const float3 &dimensions)
 {
 	LookAt(float3::zero + dimensions); //in this case the object is in the origin so it could be just dimensions
 	frustum.Translate(-dimensions);
@@ -372,7 +395,7 @@ void ModuleCamera::ResetToDefaultSpeeds()
 	zoomSpeed = initialZoomSpeed;
 }
 
-void ModuleCamera::SetCameraPosition(const float3& mCameraPosition)
+void ModuleCamera::SetCameraPosition(const float3 &mCameraPosition)
 {
 	cameraPosition = mCameraPosition;
 	frustum.SetPos(cameraPosition);
