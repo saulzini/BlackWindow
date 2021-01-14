@@ -40,10 +40,10 @@ public:
     void Update() override {
         frustum.SetFrame(owner->GetTransformComponent()->GetPosition(), -float3::unitZ, float3::unitY);
        
-        float4x4 view = owner->GetViewMatrix();
-   
-        float4x4 proj = owner->GetProjectionMatrix();
-        float4x4 clipMatrix = proj * view ;
+        float4x4 view = frustum.ViewMatrix();
+        float4x4 proj = frustum.ProjectionMatrix();
+       // view.Transpose();
+        float4x4 clipMatrix = proj * view * owner->GetModelMatrix() ;
         dd::frustum(clipMatrix.Inverted(), float3(1.0f, 1.0f, 1.0f), 1.0f);
 
     }
