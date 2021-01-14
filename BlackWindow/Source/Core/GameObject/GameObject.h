@@ -67,6 +67,7 @@ public:
         return id;
     }
 
+    
     void RemoveChild(const GameObject *child)
     {
         if (children.empty() )
@@ -128,6 +129,13 @@ public:
         return transformComponent;
     }
 
+    float4x4 GetProjectionMatrix() {
+        return projectionMatrix;
+    }
+
+    float4x4 GetViewMatrix() {
+        return viewMatrix;
+    }
    
 
     void CalculateModelMatrix();

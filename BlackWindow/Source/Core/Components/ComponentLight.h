@@ -11,7 +11,14 @@
 class ComponentLight : public Component
 {
 public:
-    ComponentLight(GameObject* owner = nullptr, ComponentTypes type = ComponentTypes::LIGHT) : Component(owner, type) {};
+    ComponentLight(GameObject* owner = nullptr, ComponentTypes type = ComponentTypes::LIGHT) : Component(owner, type) {
+        owner->GetTransformComponent();
+        if (owner->GetTransformComponent()) {
+            owner->GetTransformComponent();
+          
+        }
+       
+    };
 
     void SetPosition(float3 newPosition)
     {
@@ -113,25 +120,27 @@ public:
         SetRotation(float3(componentJson["rotation"][0].asFloat(), componentJson["rotation"][1].asFloat(), componentJson["rotation"][2].asFloat()));
     }
     void Update() override {
-        float3 arrowFrom = float3(1.0f,1.0f,1.0f);
-        direction = float3(1.0f, 0.0f, 0.0f);
+
+        
+        float3 arrowFrom = owner->GetTransformComponent()->GetPosition();
+        direction = float3(1.0f, 1.0f, 0.0f);
         float3 arrowTo = arrowFrom + direction;
         float radius = 0.5f;
         float3 offset;
-        dd::arrow(arrowFrom, arrowTo, float3(1.0f, 1.0f, 1.0f), 1.0f);
-        for (float angle = 0; angle <= 360; angle += 45)
-        {
-            offset = float3(radius * sin(angle), 0.0f, radius * cos(angle));
-            //dd::arrow(arrowFrom + offset, arrowTo + offset, float3(1.0f, 1.0f, 1.0f), 1.0f);
-           
-        }
+        dd::sphere(arrowFrom, dd::colors::Yellow, 1.f, 1.0f);
+       
     }
 
+    
+
 protected:
+
+    float azimuth = 0.0f;
+    float polar = 0.0f;
+    float3 direction;
     float3 position;
     float3 scale;
     float3 rotation;
-    float3 direction;
     Quat rotationQuat;
 };
 
