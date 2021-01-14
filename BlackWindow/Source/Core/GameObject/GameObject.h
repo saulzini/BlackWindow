@@ -25,8 +25,7 @@ protected:
     std::vector<ComponentMaterial *> materialComponents;
     ComponentMesh *meshComponent;
     ComponentTransform *transformComponent;
-    AABB* boundingBox = nullptr;
-    AABB* globalBoundingBox = nullptr;
+
 
 public:
     GameObject(GameObject *parent = nullptr, const char *name = "", unsigned int program = 0)
@@ -41,9 +40,7 @@ public:
         modelMatrix = float4x4::identity;
 
         this->transformComponent = nullptr;
-        boundingBox = new AABB(GetTransformComponent()->GetPosition() - float3(1.0f, 1.0f, 1.0f),
-                               GetTransformComponent()->GetPosition() + float3(1.0f, 1.0f, 1.0f));
-        globalBoundingBox = new AABB(*boundingBox);
+      
 
     }
     ~GameObject() {}
