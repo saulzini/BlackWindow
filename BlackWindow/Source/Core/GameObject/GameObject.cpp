@@ -5,6 +5,7 @@
 #include "Math/Quat.h"
 #include <queue> // std::queue
 #include <stack> // std::stack
+#include "debugdraw.h"
 #include "Core/Vertex.h"
 #include "Application.h"
 #include "ModuleEditor.h"
@@ -145,34 +146,6 @@ void GameObject::CalculateBox()
     float3 min = float3(-1, -1, -1);
     float3 max = float3(1, 1, 1);
 
-    if (componentMesh == nullptr) {
-        return;
-    }
-    std::vector<Vertex> componentVertex = componentMesh->GetVertices();
-    for (std::vector<Vertex>::iterator it = componentVertex.begin(); it != componentVertex.end(); ++it)
-    {
-        //Min vertex
-        if ((it)->Position.x < min.x)
-            min.x = (it)->Position.x;
-        if ((it)->Position.y < min.y)
-            min.y = (it)->Position.y;
-        if ((it)->Position.z < min.z)
-            min.z = (it)->Position.z;
-        //Max vertex
-        if ((it)->Position.x > max.x)
-            max.x = (it)->Position.x;
-        if ((it)->Position.y > max.y)
-            max.y = (it)->Position.y;
-        if ((it)->Position.z > max.z)
-            max.z = (it)->Position.z;
-    }
-
-    boundingBox = new AABB(min, max);
-    if (children.size() <= 0)
-    {
-        return;
-    }
-
     std::queue<GameObject*> searchQueue;
     searchQueue.push(this);
     GameObject* current = nullptr;
@@ -180,7 +153,7 @@ void GameObject::CalculateBox()
     {
         current = searchQueue.front();
         searchQueue.pop();
-       
+
 
         std::vector<GameObject*> currentChildren = current->GetChildren();
 
@@ -192,29 +165,36 @@ void GameObject::CalculateBox()
             }
         }
 
-        std::vector<Vertex> componentMesh = current->GetMeshComponent()->GetVertices();
-        for (std::vector<Vertex>::iterator it = componentMesh.begin(); it != componentMesh.end(); ++it)
-        {
-            //Min vertex
-            if ((it)->Position.x < min.x)
-                min.x = (it)->Position.x;
-            if ((it)->Position.y < min.y)
-                min.y = (it)->Position.y;
-            if ((it)->Position.z < min.z)
-                min.z = (it)->Position.z;
-            //Max vertex
-            if ((it)->Position.x > max.x)
-                max.x = (it)->Position.x;
-            if ((it)->Position.y > max.y)
-                max.y = (it)->Position.y;
-            if ((it)->Position.z > max.z)
-                max.z = (it)->Position.z;
+        if (current->GetMeshComponent() != nullptr) {
+
+
+            std::vector<Vertex> componentMesh = current->GetMeshComponent()->GetVertices();
+
+            for (std::vector<Vertex>::iterator it = componentMesh.begin(); it != componentMesh.end(); ++it)
+            {
+                //Min vertex
+                if ((it)->Position.x < min.x)
+                    min.x = (it)->Position.x;
+                if ((it)->Position.y < min.y)
+                    min.y = (it)->Position.y;
+                if ((it)->Position.z < min.z)
+                    min.z = (it)->Position.z;
+                //Max vertex
+                if ((it)->Position.x > max.x)
+                    max.x = (it)->Position.x;
+                if ((it)->Position.y > max.y)
+                    max.y = (it)->Position.y;
+                if ((it)->Position.z > max.z)
+                    max.z = (it)->Position.z;
+            }
+
         }
+        globalBox = new AABB(min, max);
 
+        if (globalBox != nullptr) {
+            dd::aabb(globalBox->minPoint, globalBox->maxPoint, dd::colors::Red);
+        }
     }
-
-    globalBox = new AABB(min, max);
-    // dd::aabb(boundingBox->minPoint, boundingBox->maxPoint, float3(0, 1, 0));
 }
 
 void GameObject::Save()

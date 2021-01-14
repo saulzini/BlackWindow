@@ -23,7 +23,7 @@ protected:
     std::vector<GameObject *> children;
     std::vector<Component *> components;
     std::vector<ComponentMaterial *> materialComponents;
-    ComponentMesh * componentMesh;
+    ComponentMesh* componentMesh;
     ComponentTransform *transformComponent;
     AABB* boundingBox = nullptr;
     AABB* globalBox = nullptr;
@@ -41,7 +41,7 @@ public:
         modelMatrix = float4x4::identity;
 
         this->transformComponent = nullptr;
-      
+        this->componentMesh = nullptr;
 
     }
     ~GameObject() {}

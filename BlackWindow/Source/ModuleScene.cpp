@@ -51,7 +51,7 @@ bool ModuleScene::Init()
 	root = new GameObject(nullptr,"Scene",program);
 	sky = new Skybox();
 	// Setting gameobject
-	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\Robot\\Robot.FBX",program); 
+	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\BakerHouse\\BakerHouse.FBX",program); 
 	GameObject *house = model->LoadModel();
 	delete model;
 	root->AddChildren(house);
@@ -90,6 +90,7 @@ update_status ModuleScene::Update(float deltaTime)
 
 	root->SetProjectionMatrix(proj);
 	root->SetViewMatrix(view);
+	root->CalculateBox();
 	root->Update();
 
 	GLint ks = glGetUniformLocation(program, "ks");
