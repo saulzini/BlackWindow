@@ -25,7 +25,7 @@ protected:
     std::vector<ComponentMaterial *> materialComponents;
     ComponentMesh *meshComponent;
     ComponentTransform *transformComponent;
-
+    AABB* boundingBox = nullptr;
 
 public:
     GameObject(GameObject *parent = nullptr, const char *name = "", unsigned int program = 0)
@@ -54,7 +54,7 @@ public:
 
     Component *AddComponent(ComponentTypes type);
     void AddComponent(Component *component);
-
+    void CalculateBox();
     void AddChildren(GameObject *gameObject);
     void SetProjectionMatrix(const float4x4 &projection);
     void SetViewMatrix(const float4x4 &projection);
