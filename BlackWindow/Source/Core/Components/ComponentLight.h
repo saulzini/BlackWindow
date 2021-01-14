@@ -15,7 +15,9 @@ public:
         owner->GetTransformComponent();
         if (owner->GetTransformComponent()) {
             owner->GetTransformComponent();
+          
         }
+       
     };
 
     void SetPosition(float3 newPosition)
