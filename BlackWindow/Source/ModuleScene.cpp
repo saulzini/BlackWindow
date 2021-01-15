@@ -6,7 +6,6 @@
 #include "ModuleWindow.h"
 #include "ModuleDebugDraw.h"
 #include "Application.h"
-#include "Core/Mesh.h"
 #include "Math/float4x4.h"
 #include <string>
 #include "Leaks.h"
@@ -67,8 +66,6 @@ bool ModuleScene::Init()
 	root->AddChildren(Camera);
 	Camera->GetTransformComponent()->SetPosition(float3(0.0f, 1.0f, 0.0f));
 
-	//house->GetTransformComponent()->SetScale(float3(0.01f, 0.01f, 0.01f));
-
 	Light->GetTransformComponent()->SetPosition(float3(0.0f, 5.0f, 0.0f));
 
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
@@ -94,7 +91,7 @@ update_status ModuleScene::Update(float deltaTime)
 
 	root->SetProjectionMatrix(proj);
 	root->SetViewMatrix(view);
-	root->CalculateBox();
+	//root->CalculateBox();
 	root->Update();
 
 	GLint ks = glGetUniformLocation(program, "ks");
@@ -111,7 +108,6 @@ update_status ModuleScene::Update(float deltaTime)
 
 	glUniform1f(N, 32);
 
-	//float3 lightpos = { 1.0f, 0.0f, 0.0f };
 	float3 lightpos = Light->GetTransformComponent()->GetPosition();
 	float3 lightambient = { 0.2f, 0.2f, 0.2f };
 	float3 lightdiffuse = { 0.5f, 0.5f, 0.5f };

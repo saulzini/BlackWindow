@@ -4,7 +4,6 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include "GL/glew.h"
-#include "Core/Mesh.h"
 #include "Core/Importers/Texture/TextureLoader.h"
 #include <string>
 #include "Math/float3.h"
@@ -19,7 +18,6 @@ namespace ModelImporter
 	class Model
 	{
 	private:
-		std::vector<Mesh> meshes;
 		std::string directory;
 		std::string path;
 
@@ -46,9 +44,6 @@ namespace ModelImporter
 
 		unsigned int LoadMaterialTexture(aiMaterial *mat, aiTextureType type);
 
-		std::vector<Mesh> GetMeshes(){
-			return meshes;
-		}
 
 		float3 GetDimensions(){
 			return dimensions;

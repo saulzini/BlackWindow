@@ -9,41 +9,35 @@
 #include "GL/glew.h"
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
+#include "Core/Importers/Texture/TextureLoader.h"
 
 class ComponentMaterial : public Component
 {
 public:
-    ComponentMaterial(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::MATERIAL) : Component(owner, type){
-
-    };
+    ComponentMaterial(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::MATERIAL) : Component(owner, type){};
 
     void OnEditor() override
     {
         if (ImGui::CollapsingHeader("Texture"))
         {
-            
+
             ImGui::Text("Diffuse");
             ImVec2 uvMin = ImVec2(0.0f, 0.0f);                 // Top-left
             ImVec2 uvMax = ImVec2(1.0f, 1.0f);                 // Lower-right
             ImVec4 tintCol = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);   // No tint
             ImVec4 borderCol = ImVec4(1.0f, 1.0f, 1.0f, 0.5f); // 50% opaque white
             ImVec2 sizeImageDisplay = ImVec2(100.0f, 100.0f);
-            ImGui::Image( (ImTextureID) textureId, sizeImageDisplay, uvMin, uvMax, tintCol, borderCol);
-            
+            ImGui::Image((ImTextureID)textureId, sizeImageDisplay, uvMin, uvMax, tintCol, borderCol);
+
             ImGui::Text("Specular");
-            ImGui::Image( (ImTextureID) specularId, sizeImageDisplay, uvMin, uvMax, tintCol, borderCol);
+            ImGui::Image((ImTextureID)specularId, sizeImageDisplay, uvMin, uvMax, tintCol, borderCol);
         }
 
         if (ImGui::CollapsingHeader("OPTIONS"))
         {
             ImGui::DragFloat("Shininess", &shininess, 1.0f, 0.0f, 255.0f);
         }
-
-       
     }
-
-   
-
 
     void OnSave(Json::Value &parent) override
     {
@@ -53,7 +47,7 @@ public:
         parent["specularDirectoryPath"] = Json::stringValue;
 
         ResourcesManager resourceManager = App->GetResourcesManager();
-        
+
         // diffuse material
         std::unordered_map<unsigned int, Texture>::const_iterator found = resourceManager.texturesLoadedInt.find(textureId);
         // found in hash
@@ -75,7 +69,13 @@ public:
 
     void OnLoad(const Json::Value &componentJson) override
     {
-        
+        textureId = TextureImporter::TextureLoader::GetTextureIdByPath(
+            componentJson["diffuseTexturePath"].asString(),
+            componentJson["diffuseDirectoryPath"].asString());
+
+        specularId = TextureImporter::TextureLoader::GetTextureIdByPath(
+            componentJson["specularTexturePath"].asString(),
+            componentJson["specularDirectoryPath"].asString());
     }
 
     void setTextureId(const unsigned int textureId)
@@ -90,13 +90,16 @@ public:
 
     void SetTexture(const unsigned int texture)
     {
-        if (textureId == 0){
+        if (textureId == 0)
+        {
             textureId = texture;
         }
-        else if (specularId == 0) {
+        else if (specularId == 0)
+        {
             specularId = texture;
         }
-        else {
+        else
+        {
             App->editor->consoleWindow->AddLog("No available spaces on this material");
         }
     }
@@ -110,7 +113,7 @@ public:
     {
         return specularId;
     }
-    float GetShininess() 
+    float GetShininess()
     {
         return shininess;
     }
