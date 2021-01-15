@@ -16,36 +16,27 @@
 						},
 						{
 							"diffuseDirectoryPath" : "",
-							"diffuseTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga",
+							"diffuseTexturePath" : "M:\\Master-UPC\\2 Assigment\\BlackWindow\\Game\\Assets\\Robot\\RobotDiffuse.png",
 							"specularDirectoryPath" : "",
-							"specularTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga",
+							"specularTexturePath" : "M:\\Master-UPC\\2 Assigment\\BlackWindow\\Game\\Assets\\Robot\\RobotSpecular.png",
 							"type" : 5
 						}
 					],
-					"diffuseDirectoryPath" : "",
-					"diffuseTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga",
-					"id" : 492973890,
-					"name" : "Hearse",
-					"specularDirectoryPath" : "",
-					"specularTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga"
+					"id" : 172857530,
+					"name" : "Robot"
 				}
 			],
-			"id" : 943312101,
-			"name" : "Light"
-		},
-		{
-			"children" : [],
 			"components" : 
 			[
 				{
-					"position" : [ 0.0, 1.0, 0.0 ],
+					"position" : [ 0.0, 0.0, 0.0 ],
 					"rotation" : [ 0.0, 0.0, 0.0 ],
 					"scale" : [ 0.0099999997764825821, 0.0099999997764825821, 0.0099999997764825821 ],
 					"type" : 1
 				}
 			],
-			"id" : 198311793,
-			"name" : "Hearse"
+			"id" : 1649488062,
+			"name" : "Robot"
 		},
 		{
 			"children" : [],
@@ -56,9 +47,22 @@
 					"rotation" : [ 0.0, 0.0, 0.0 ],
 					"scale" : [ 1.0, 1.0, 1.0 ],
 					"type" : 1
+				},
+				{
+					"azimuth" : 0.0,
+					"drsdaMatrix" : 
+					[
+						[ 1.0, 1.0, 0.0 ],
+						[ -431602080.0, -431602080.0, -431602080.0 ],
+						[ -431602080.0, -431602080.0, -431602080.0 ],
+						[ -431602080.0, -431602080.0, -431602080.0 ],
+						[ -431602080.0, -431602080.0, -431602080.0 ]
+					],
+					"polar" : 0.0,
+					"type" : 3
 				}
 			],
-			"id" : 251549336,
+			"id" : 15738342,
 			"name" : "Light"
 		},
 		{
@@ -81,8 +85,45 @@
 					"verticalFov" : -0.20470736920833588
 				}
 			],
-			"id" : 387180371,
+			"id" : 502448412,
 			"name" : "Camera"
+		},
+		{
+			"children" : 
+			[
+				{
+					"children" : [],
+					"components" : 
+					[
+						{
+							"position" : [ 5.0, 0.0, 0.0 ],
+							"rotation" : [ 0.0, 0.0, 0.0 ],
+							"scale" : [ 0.0099999997764825821, 0.0099999997764825821, 0.0099999997764825821 ],
+							"type" : 1
+						},
+						{
+							"diffuseDirectoryPath" : "",
+							"diffuseTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga",
+							"specularDirectoryPath" : "",
+							"specularTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga",
+							"type" : 5
+						}
+					],
+					"id" : 627533381,
+					"name" : "Hearse"
+				}
+			],
+			"components" : 
+			[
+				{
+					"position" : [ 0.0, 0.0, 0.0 ],
+					"rotation" : [ 0.0, 0.0, 0.0 ],
+					"scale" : [ 1.0, 1.0, 1.0 ],
+					"type" : 1
+				}
+			],
+			"id" : 599765869,
+			"name" : "Hearse"
 		}
 	],
 	"name" : "Scene"

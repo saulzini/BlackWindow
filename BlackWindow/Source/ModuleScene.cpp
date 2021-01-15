@@ -117,8 +117,8 @@ update_status ModuleScene::Update(float deltaTime)
 	float3 view_Pos = App->camera->cameraPosition;
 	float3 color_Ambient = { 1.0f, 1.0f, 1.0f };
 
-	glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
-	glUniform1i(glGetUniformLocation(program, "material.specular"), 1);
+	/*glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
+	glUniform1i(glGetUniformLocation(program, "material.specular"), 1);*/
 
 	glUniform3f(light_pos,			 lightpos[0],			 lightpos[1],				lightpos[2]);
 	glUniform3f(light_ambient,   lightambient[0],		 lightambient[1],			lightambient[2]);
