@@ -51,10 +51,10 @@ bool ModuleScene::Init()
 	root = new GameObject(nullptr,"Scene",program);
 	sky = new Skybox();
 	// Setting gameobject
-	//ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\Robot\\Robot.FBX",program); 
-	//house = model->LoadModel();
-	//delete model;
-	//root->AddChildren(house);
+	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\Hearse\\Hearse.FBX",program); 
+	house = model->LoadModel();
+	delete model;
+	root->AddChildren(house);
 
 	// root->Save();
 
@@ -67,9 +67,9 @@ bool ModuleScene::Init()
 	root->AddChildren(Camera);
 	Camera->GetTransformComponent()->SetPosition(float3(0.0f, 1.0f, 0.0f));
 
-	//house->GetTransformComponent()->SetScale(float3(0.01f, 0.01f, 0.01f));
+	house->GetTransformComponent()->SetScale(float3(0.01f, 0.01f, 0.01f));
 
-	Light->GetTransformComponent()->SetPosition(float3(0.0f, 5.0f, 0.0f));
+	Light->GetTransformComponent()->SetPosition(float3(0.0f, 5.0f, 3.0f));
 
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
 
@@ -109,7 +109,7 @@ update_status ModuleScene::Update(float deltaTime)
 	GLint colorAmbient = glGetUniformLocation(program, "colorAmbient");
 	
 
-	glUniform1f(N, 32);
+	//glUniform1f(N, 32);
 
 	//float3 lightpos = { 1.0f, 0.0f, 0.0f };
 	float3 lightpos = Light->GetTransformComponent()->GetPosition();
@@ -120,7 +120,7 @@ update_status ModuleScene::Update(float deltaTime)
 	float3 color_Ambient = { 1.0f, 1.0f, 1.0f };
 
 	glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
-	glUniform1i(glGetUniformLocation(program, "material.specular"), 0);
+	glUniform1i(glGetUniformLocation(program, "material.specular"), 1);
 
 	glUniform3f(light_pos,			 lightpos[0],			 lightpos[1],				lightpos[2]);
 	glUniform3f(light_ambient,   lightambient[0],		 lightambient[1],			lightambient[2]);
