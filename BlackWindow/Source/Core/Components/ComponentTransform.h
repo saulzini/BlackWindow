@@ -63,18 +63,20 @@ public:
 
     void OnEditor() override
     {
-        float3 auxPosition = GetPosition();
-        float3 auxScale = GetScale();
-        float3 auxRotation = GetRotation();
+        
         if (ImGui::CollapsingHeader("Transformation"))
         {
+            float3 auxPosition = GetPosition();
+            float3 auxScale = GetScale();
+            float3 auxRotation = GetRotation();
             ImGui::InputFloat3("Position", &auxPosition[0]);
             ImGui::InputFloat3("Scale", &auxScale[0]);
             ImGui::InputFloat3("Rotation", &auxRotation[0]);
+            SetPosition(auxPosition);
+            SetScale(auxScale);
+            SetRotation(auxRotation);
         }
-        SetPosition(auxPosition);
-        SetScale(auxScale);
-        SetRotation(auxRotation);
+       
 
     }
 

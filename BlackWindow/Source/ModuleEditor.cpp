@@ -203,7 +203,7 @@ void ModuleEditor::DrawMenu()
              if (ImGui::MenuItem("Load"))
                 SceneFileManager::LoadFromFile("scene.blackwindow");
             if (ImGui::MenuItem("Save"))
-                App->scene->SaveScene();
+                SceneFileManager::Save();
             if (ImGui::MenuItem("Console window"))
                 consoleWindow->toggleWindow();
             if (ImGui::MenuItem("Hierarchy window"))
