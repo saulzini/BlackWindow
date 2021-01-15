@@ -6,12 +6,16 @@
 #include "Math/Quat.h"
 #include <vector>
 #include "Application.h"
+#include "GL/glew.h"
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
+
 class ComponentMaterial : public Component
 {
 public:
-    ComponentMaterial(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::MATERIAL) : Component(owner, type){};
+    ComponentMaterial(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::MATERIAL) : Component(owner, type){
+
+    };
 
     void OnEditor() override
     {
@@ -29,7 +33,17 @@ public:
             ImGui::Text("Specular");
             ImGui::Image( (ImTextureID) specularId, sizeImageDisplay, uvMin, uvMax, tintCol, borderCol);
         }
+
+        if (ImGui::CollapsingHeader("OPTIONS"))
+        {
+            ImGui::DragFloat("Shininess", &shininess, 1.0f, 0.0f, 255.0f);
+        }
+
+       
     }
+
+   
+
 
     void OnSave(Json::Value &parent) override
     {
@@ -61,6 +75,7 @@ public:
 
     void OnLoad(const Json::Value &componentJson) override
     {
+        
     }
 
     void setTextureId(const unsigned int textureId)
@@ -73,7 +88,8 @@ public:
         this->specularId = specularId;
     }
 
-    void SetTexture(const unsigned int texture){
+    void SetTexture(const unsigned int texture)
+    {
         if (textureId == 0){
             textureId = texture;
         }
@@ -94,8 +110,13 @@ public:
     {
         return specularId;
     }
+    float GetShininess() 
+    {
+        return shininess;
+    }
 
 private:
     unsigned int textureId;
     unsigned int specularId;
+    float shininess = 0;
 };

@@ -19,12 +19,12 @@ namespace GameObjectFactory
       //      gameObject->AddComponent(ComponentTypes::SCRIPT);
       //      break;
         case GameObjectTypes::CAMERA:
-            gameObject->AddComponent(ComponentTypes::CAMERA);
             gameObject->AddComponent(ComponentTypes::TRANSFORM);
+            gameObject->AddComponent(ComponentTypes::CAMERA);
             break;
         case GameObjectTypes::LIGHT:
-            gameObject->AddComponent(ComponentTypes::LIGHT);
             gameObject->AddComponent(ComponentTypes::TRANSFORM);
+            gameObject->AddComponent(ComponentTypes::LIGHT);
             break;
         case GameObjectTypes::DEFAULT:
             gameObject->AddComponent(ComponentTypes::TRANSFORM);

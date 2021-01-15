@@ -15,7 +15,7 @@ private:
 	GameObject* selected;
 	GameObject* Light;
 	GameObject* Camera;
-
+	GameObject* house; // we must deleted!!!!!!!!
 public:
 	ModuleScene();
 	~ModuleScene();
