@@ -6,17 +6,20 @@
 #include "SDL.h"
 #include "FileFormats.h"
 #include <algorithm>
- 
+
 void DropperHandler::DropFileIntoWindow(char *filePath)
 {
-    // found
-    if ( 
-        std::find(FileFormats::imageFormats.begin(), FileFormats::imageFormats.end(), filePath) != FileFormats::imageFormats.end()
-    ) 
+    // Looking through vector of extensions
+    for (std::vector<std::string>::iterator it = FileFormats::imageFormats.begin(); it != FileFormats::imageFormats.end(); ++it)
     {
-        App->scene->SwapTexture(filePath);
-        SDL_free(filePath); // Free dropped_filedir memory
-        return;
+        std::string filePathString = filePath;
+        if (std::size_t index = filePathString.find((*it)))
+        {
+            // found
+            App->scene->AddTexture(filePath);
+            SDL_free(filePath); // Free dropped_filedir memory
+            return;
+        }
     }
 
     App->scene->AddModel(filePath);

@@ -5,26 +5,30 @@
 #include "imgui.h"
 #include "Math/Quat.h"
 #include <vector>
-
+#include "Application.h"
+#include "ModuleEditor.h"
+#include "UIWindow/ConsoleWindow.h"
 class ComponentMaterial : public Component
 {
 public:
     ComponentMaterial(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::MATERIAL) : Component(owner, type){};
 
-    void OnEditor()
+    void OnEditor() override
     {
-        // float3 auxPosition = GetPosition();
-        // float3 auxScale = GetScale();
-        // float3 auxRotation = GetRotation();
-        // if (ImGui::CollapsingHeader("Transformation"))
-        // {
-        //     ImGui::InputFloat3("Position", &auxPosition[0]);
-        //     ImGui::InputFloat3("Scale", &auxScale[0]);
-        //     ImGui::InputFloat3("Rotation", &auxRotation[0]);
-        // }
-        // SetPosition(auxPosition);
-        // SetScale(auxScale);
-        // SetRotation(auxRotation);
+        if (ImGui::CollapsingHeader("Texture"))
+        {
+            
+            ImGui::Text("Diffuse");
+            ImVec2 uvMin = ImVec2(0.0f, 0.0f);                 // Top-left
+            ImVec2 uvMax = ImVec2(1.0f, 1.0f);                 // Lower-right
+            ImVec4 tintCol = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);   // No tint
+            ImVec4 borderCol = ImVec4(1.0f, 1.0f, 1.0f, 0.5f); // 50% opaque white
+            ImVec2 sizeImageDisplay = ImVec2(100.0f, 100.0f);
+            ImGui::Image( (ImTextureID) textureId, sizeImageDisplay, uvMin, uvMax, tintCol, borderCol);
+            
+            ImGui::Text("Specular");
+            ImGui::Image( (ImTextureID) specularId, sizeImageDisplay, uvMin, uvMax, tintCol, borderCol);
+        }
     }
 
     void OnSave(Json::Value &parent) override
@@ -67,6 +71,18 @@ public:
     void SetSpecularId(const unsigned int specularId)
     {
         this->specularId = specularId;
+    }
+
+    void SetTexture(const unsigned int texture){
+        if (textureId == 0){
+            textureId = texture;
+        }
+        else if (specularId == 0) {
+            specularId = texture;
+        }
+        else {
+            App->editor->consoleWindow->AddLog("No available spaces on this material");
+        }
     }
 
     unsigned int GetTextureId()

@@ -16,15 +16,38 @@ public:
 
     void OnSave(Json::Value &owner) override
     {
-        // Json::Value meshJson;
-        // meshJson["type"] = static_cast<int>(ComponentTypes::MESH);
-        // mesh.Save(meshJson);
-        // owner["components"].append(meshJson);
+        Json::Value componentJson;
+        componentJson["type"] = static_cast<int>(ComponentTypes::MESH);
+
+        for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); ++it)
+        {
+            (*it).Save(componentJson);
+        }
+
+        componentJson["indices"] = Json::arrayValue;
+        for (std::vector<unsigned int >::iterator it = indices.begin(); it != indices.end(); ++it)
+        {
+            for (unsigned int i = 0; i != indices.size(); ++i)
+            {
+                Json::UInt index = indices[i];
+                componentJson["indices"].append(index);
+            }
+        }
+    }
+
+    void OnEditor() override
+    {
+        if (ImGui::CollapsingHeader("Mesh"))
+        {
+            ImGui::Text("Mesh vertices %d",vertices.size());
+            ImGui::Text("Mesh indices %d",indices.size());
+        }
     }
 
     void Clear() override
     {
         vertices.clear();
+        indices.clear();
     }
 
     void OnLoad(const Json::Value &componentJson) override

@@ -30,6 +30,7 @@ void GameObject::AddChildren(GameObject *gameObject)
 {
     // adding children
     children.push_back(gameObject);
+
     // adding parent of child
     gameObject->parent = this;
 }
@@ -276,7 +277,7 @@ void GameObject::CheckDefaultsComponents(Component *component)
 
     if (component->GetType() == ComponentTypes::MATERIAL)
     {
-        materialComponents.push_back(static_cast<ComponentMaterial *>(component));
+        materialComponent = static_cast<ComponentMaterial *>(component);
     }
 
     if (component->GetType() == ComponentTypes::MESH)
@@ -304,18 +305,7 @@ void GameObject::Update()
 
 void GameObject::Draw()
 {
-
-    
-
-    float4x4 calculatedModel = float4x4::identity;
-
-    if (transformComponent)
-    {
-        calculatedModel = float4x4::FromTRS(transformComponent->GetPosition(), transformComponent->GetRotationQuat(), transformComponent->GetScale());
-    }
-
-    modelMatrix = calculatedModel;
-    // CalculateModelMatrix();
+    CalculateModelMatrix();
     if (parent)
     {
         modelMatrix = parent->GetModelMatrix() * modelMatrix;
