@@ -80,7 +80,7 @@ public:
 
     }
 
-    void OnSave(Json::Value& parent) override
+    void OnSave(Json::Value& owner) override
     {
         Json::Value transformJson;
         transformJson["type"] = static_cast<int>(ComponentTypes::TRANSFORM);
@@ -105,7 +105,7 @@ public:
         transformJson["scale"] = scaleJson;
         transformJson["rotation"] = rotationJson;
 
-        parent["components"].append(transformJson);
+        owner["components"].append(transformJson);
     }
 
     void OnLoad(const Json::Value& componentJson) override

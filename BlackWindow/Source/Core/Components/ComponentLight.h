@@ -6,6 +6,7 @@
 #include "debugdraw.h"
 #include "Application.h"
 #include "Math/Quat.h"
+#include "Core/Components/ComponentTransform.h"
 //#include "Core/GameObject/GameObject.h"
 
 class ComponentLight : public Component
@@ -16,9 +17,32 @@ public:
       
     };
 
-    void OnSave(Json::Value& parent) override
+    void OnSave(Json::Value& owner) override
     {
-        
+        Json::Value lightJson;
+        lightJson["type"] = static_cast<int>(ComponentTypes::LIGHT);
+
+        std::vector<float3> savingVector{
+            direction,
+            rotation,
+            specular,
+            diffuse,
+            ambient
+        };
+
+        // saving in order
+        lightJson["drsdaMatrix"] = Json::arrayValue;
+        for(std::vector<float3>::iterator it = savingVector.begin(); it != savingVector.end(); it++ ){
+            Json::Value valueJson = Json::arrayValue;
+            valueJson.append( (*it).x );
+            valueJson.append( (*it).y );
+            valueJson.append( (*it).z );
+            lightJson["drsdaMatrix"].append(valueJson);
+        }
+        lightJson["azimuth"] = azimuth;
+        lightJson["polar"] = polar;
+
+        owner["components"].append(lightJson);
     }
 
     void OnLoad(const Json::Value& componentJson) override
