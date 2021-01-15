@@ -56,19 +56,37 @@ public:
         glBindVertexArray(0);
     }
 
+
+
+
     void Update() override
     {
+       
+
         ComponentMaterial* componentMaterial = owner->GetMaterialComponent();
         if (componentMaterial == nullptr)
         {
             return;
         }
 
+        unsigned int f = 9;
+        glUseProgram(f);
+        owner->GetProgram();
+        GLint N = glGetUniformLocation(f, "material.shininess");
+        glUniform1f(N, componentMaterial->GetShininess());
+
         glBindTexture(GL_TEXTURE_2D, componentMaterial->GetTextureId() );
         glActiveTexture(GL_TEXTURE0);
         glBindVertexArray(vao);
         glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
         glBindTexture(GL_TEXTURE_2D, 0);
+        glBindVertexArray(0);
+
+        glBindTexture(GL_TEXTURE_2D, componentMaterial->GetSpecularId());
+        glActiveTexture(GL_TEXTURE1);
+        glBindVertexArray(vao);
+        glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
+        glBindTexture(GL_TEXTURE_2D, 1);
         glBindVertexArray(0);
         
     }

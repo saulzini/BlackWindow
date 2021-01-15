@@ -12,61 +12,9 @@ class ComponentLight : public Component
 {
 public:
     ComponentLight(GameObject* owner = nullptr, ComponentTypes type = ComponentTypes::LIGHT) : Component(owner, type) {
-        owner->GetTransformComponent();
-        if (owner->GetTransformComponent()) {
-            owner->GetTransformComponent();
-        }
+        componentTransform = owner->GetTransformComponent();
+      
     };
-
-    void SetPosition(float3 newPosition)
-    {
-        if (position.Equals(newPosition)) {
-            return;
-        }
-        position = newPosition;
-        // this->owner->CalculateModelMatrix();
-    }
-
-    float3 GetPosition() const
-    {
-        return position;
-    }
-
-    void SetScale(float3 newScale)
-    {
-        if (scale.Equals(newScale)) {
-            return;
-        }
-        scale = newScale;
-        // owner->CalculateModelMatrix();
-    }
-
-    float3 GetScale() const
-    {
-        return scale;
-    }
-
-    void SetRotation(float3 newRotation)
-    {
-        if (rotation.Equals(newRotation)) {
-            return;
-        }
-        rotation = newRotation;
-        rotationQuat = Quat::FromEulerXYX(newRotation.x, newRotation.y, newRotation.z);
-        // owner->CalculateModelMatrix();
-    }
-
-    float3 GetRotation() const
-    {
-        return rotation;
-    }
-
-    Quat GetRotationQuat() const
-    {
-        return rotationQuat;
-    }
-
-
 
     void OnSave(Json::Value& parent) override
     {
@@ -104,8 +52,10 @@ public:
     }
     void Update() override {
 
-        
-        float3 arrowFrom = owner->GetTransformComponent()->GetPosition();
+        if (componentTransform == nullptr) {
+            return;
+        }      
+        float3 arrowFrom = componentTransform->GetPosition();
         direction = float3(1.0f, 1.0f, 0.0f);
         float3 arrowTo = arrowFrom + direction;
         float radius = 0.5f;
@@ -118,13 +68,14 @@ public:
 
 protected:
 
+    ComponentTransform* componentTransform;
     float azimuth = 0.0f;
     float polar = 0.0f;
     float3 direction;
-    float3 position;
-    float3 scale;
     float3 rotation;
-    Quat rotationQuat;
+    float3 specular;
+    float3 diffuse;
+    float3 ambient;
 };
 
 #pragma once

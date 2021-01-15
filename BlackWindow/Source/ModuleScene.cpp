@@ -67,6 +67,10 @@ bool ModuleScene::Init()
 	root->AddChildren(Camera);
 	Camera->GetTransformComponent()->SetPosition(float3(0.0f, 1.0f, 0.0f));
 
+	//house->GetTransformComponent()->SetScale(float3(0.01f, 0.01f, 0.01f));
+
+	Light->GetTransformComponent()->SetPosition(float3(0.0f, 5.0f, 0.0f));
+
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
 
 	//Light->Update();
@@ -103,10 +107,9 @@ update_status ModuleScene::Update(float deltaTime)
 	GLint light_specular = glGetUniformLocation(program, "light.specular");
 	GLint viewPos = glGetUniformLocation(program, "viewPos");
 	GLint colorAmbient = glGetUniformLocation(program, "colorAmbient");
+	
 
-	glUniform1f(ks, 0.8f);
-	glUniform1f(kd, 0.6f);
-	glUniform1f(N, 255);
+	glUniform1f(N, 32);
 
 	//float3 lightpos = { 1.0f, 0.0f, 0.0f };
 	float3 lightpos = Light->GetTransformComponent()->GetPosition();
@@ -117,6 +120,7 @@ update_status ModuleScene::Update(float deltaTime)
 	float3 color_Ambient = { 1.0f, 1.0f, 1.0f };
 
 	glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
+	glUniform1i(glGetUniformLocation(program, "material.specular"), 0);
 
 	glUniform3f(light_pos,			 lightpos[0],			 lightpos[1],				lightpos[2]);
 	glUniform3f(light_ambient,   lightambient[0],		 lightambient[1],			lightambient[2]);
