@@ -50,7 +50,7 @@ bool ModuleScene::Init()
 	root = new GameObject(nullptr,"Scene",program);
 	sky = new Skybox();
 	// Setting gameobject
-	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\Hearse\\Hearse.FBX",program); 
+	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\Robot\\Robot.FBX",program); 
 	house = model->LoadModel();
 	delete model;
 	root->AddChildren(house);

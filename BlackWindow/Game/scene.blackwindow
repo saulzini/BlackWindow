@@ -10,35 +10,17 @@
 					[
 						{
 							"position" : [ 0.0, 0.0, 0.0 ],
-							"rotation" : [ 0.0, 0.0, -0.0 ],
+							"rotation" : [ 0.0, 0.0, 0.0 ],
 							"scale" : [ 1.0, 1.0, 1.0 ],
 							"type" : 1
 						}
 					],
 					"diffuseDirectoryPath" : "",
-					"diffuseTexturePath" : "Baker_house.png",
-					"id" : 130166026,
-					"name" : "Chimney",
+					"diffuseTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga",
+					"id" : 492973890,
+					"name" : "Hearse",
 					"specularDirectoryPath" : "",
-					"specularTexturePath" : ""
-				},
-				{
-					"children" : [],
-					"components" : 
-					[
-						{
-							"position" : [ 0.0, 0.0, 0.0 ],
-							"rotation" : [ 0.0, 0.0, -0.0 ],
-							"scale" : [ 1.0, 1.0, 1.0 ],
-							"type" : 1
-						}
-					],
-					"diffuseDirectoryPath" : "",
-					"diffuseTexturePath" : "Baker_house.png",
-					"id" : 2055389453,
-					"name" : "Baker_house",
-					"specularDirectoryPath" : "",
-					"specularTexturePath" : ""
+					"specularTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga"
 				}
 			],
 			"components" : 
@@ -46,12 +28,40 @@
 				{
 					"position" : [ 0.0, 0.0, 0.0 ],
 					"rotation" : [ 0.0, 0.0, 0.0 ],
+					"scale" : [ 0.0099999997764825821, 0.0099999997764825821, 0.0099999997764825821 ],
+					"type" : 1
+				}
+			],
+			"id" : 198311793,
+			"name" : "Hearse"
+		},
+		{
+			"children" : [],
+			"components" : 
+			[
+				{
+					"position" : [ 0.0, 5.0, 3.0 ],
+					"rotation" : [ 0.0, 0.0, 0.0 ],
 					"scale" : [ 1.0, 1.0, 1.0 ],
 					"type" : 1
 				}
 			],
-			"id" : 1853005024,
-			"name" : "BakerHouse"
+			"id" : 251549336,
+			"name" : "Light"
+		},
+		{
+			"children" : [],
+			"components" : 
+			[
+				{
+					"position" : [ 0.0, 1.0, 0.0 ],
+					"rotation" : [ 0.0, 0.0, 0.0 ],
+					"scale" : [ 1.0, 1.0, 1.0 ],
+					"type" : 1
+				}
+			],
+			"id" : 387180371,
+			"name" : "Camera"
 		}
 	],
 	"name" : "Scene"
