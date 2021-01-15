@@ -39,12 +39,14 @@ public:
         }
     }
 
-    void OnSave(Json::Value &parent) override
+    void OnSave(Json::Value &owner) override
     {
-        parent["diffuseTexturePath"] = Json::stringValue;
-        parent["diffuseDirectoryPath"] = Json::stringValue;
-        parent["specularTexturePath"] = Json::stringValue;
-        parent["specularDirectoryPath"] = Json::stringValue;
+        Json::Value materialJson;
+        materialJson["type"] = static_cast<int>(ComponentTypes::MATERIAL);
+        materialJson["diffuseTexturePath"] = Json::stringValue;
+        materialJson["diffuseDirectoryPath"] = Json::stringValue;
+        materialJson["specularTexturePath"] = Json::stringValue;
+        materialJson["specularDirectoryPath"] = Json::stringValue;
 
         ResourcesManager resourceManager = App->GetResourcesManager();
 
@@ -53,8 +55,8 @@ public:
         // found in hash
         if (found != resourceManager.texturesLoadedInt.end())
         {
-            parent["diffuseTexturePath"] = found->second.path;
-            parent["diffuseDirectoryPath"] = found->second.directoryPath;
+            materialJson["diffuseTexturePath"] = found->second.path;
+            materialJson["diffuseDirectoryPath"] = found->second.directoryPath;
         }
 
         // specular material
@@ -62,9 +64,11 @@ public:
         // found in hash
         if (found != resourceManager.texturesLoadedInt.end())
         {
-            parent["specularTexturePath"] = found->second.path;
-            parent["specularDirectoryPath"] = found->second.directoryPath;
+            materialJson["specularTexturePath"] = found->second.path;
+            materialJson["specularDirectoryPath"] = found->second.directoryPath;
         }
+        
+        owner["components"].append(materialJson);
     }
 
     void OnLoad(const Json::Value &componentJson) override

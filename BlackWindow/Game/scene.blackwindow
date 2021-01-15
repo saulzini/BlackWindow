@@ -13,6 +13,13 @@
 							"rotation" : [ 0.0, 0.0, 0.0 ],
 							"scale" : [ 1.0, 1.0, 1.0 ],
 							"type" : 1
+						},
+						{
+							"diffuseDirectoryPath" : "",
+							"diffuseTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga",
+							"specularDirectoryPath" : "",
+							"specularTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga",
+							"type" : 5
 						}
 					],
 					"diffuseDirectoryPath" : "",
@@ -23,10 +30,15 @@
 					"specularTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga"
 				}
 			],
+			"id" : 943312101,
+			"name" : "Light"
+		},
+		{
+			"children" : [],
 			"components" : 
 			[
 				{
-					"position" : [ 0.0, 0.0, 0.0 ],
+					"position" : [ 0.0, 1.0, 0.0 ],
 					"rotation" : [ 0.0, 0.0, 0.0 ],
 					"scale" : [ 0.0099999997764825821, 0.0099999997764825821, 0.0099999997764825821 ],
 					"type" : 1
@@ -58,6 +70,15 @@
 					"rotation" : [ 0.0, 0.0, 0.0 ],
 					"scale" : [ 1.0, 1.0, 1.0 ],
 					"type" : 1
+				},
+				{
+					"farPlaneDistance" : 10.0,
+					"front" : [ -0.0, -0.0, -1.0 ],
+					"horizontalFov" : 50.0,
+					"nearPlaneDistance" : 0.10000000149011612,
+					"type" : 4,
+					"up" : [ 0.0, 1.0, 0.0 ],
+					"verticalFov" : -0.20470736920833588
 				}
 			],
 			"id" : 387180371,
