@@ -190,7 +190,7 @@ GameObject* ModuleScene::CreateGameObject(GameObjectTypes type)
 }
 
 
-void ModuleScene::SaveScene(){
+ void ModuleScene::SaveScene(){
 	root->Save();
 }
 

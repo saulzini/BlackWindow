@@ -142,14 +142,30 @@ bool GameObject::isChild(GameObject *lookingChild)
 }
 
 
-void GameObject::CalculateBox()
+void GameObject::CalculateBox(GameObject* current)
 {
     float3 min = float3(-1, -1, -1);
     float3 max = float3(1, 1, 1);
 
     std::queue<GameObject*> searchQueue;
     searchQueue.push(this);
-    GameObject* current = nullptr;
+   // GameObject* current = nullptr;
+
+    if (current->GetChildren() != nullptr) {
+
+    }
+    std::vector<GameObject*> currentChildren = current->GetChildren();
+
+
+   
+
+    if (current->GetMeshComponent() != nullptr) {
+
+    }
+
+
+
+
     while (!searchQueue.empty())
     {
         current = searchQueue.front();

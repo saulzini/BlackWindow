@@ -7,23 +7,32 @@
 #include "UIWindow/ConsoleWindow.h"
 #include <future>         // std::async, std::future
 #include <thread>
+
 class SceneFileManager
 {
 public:
     SceneFileManager(){}
     ~SceneFileManager(){}
 
+    static void hola() {
+        App->editor->consoleWindow->AddLog("Saving scene ....");
+        App->scene->SaveScene();
+        App->editor->consoleWindow->AddLog("Scene saved");
+    }
 
     static void Save(){
-        // std::async(std::launch::async, [] { 
+       // std::future<void> fileResult = std::async(std::launch::async, [] {
         //     App->editor->consoleWindow->AddLog("Saving scene ....");
-            App->scene->SaveScene(); 
-        //     App->editor->consoleWindow->AddLog("Scene saved");
+         //    App->scene->SaveScene(); 
+          //   App->editor->consoleWindow->AddLog("Scene saved");
         // });
-        // App->editor->consoleWindow->AddLog("Saving scene ....");
-        // std::future<void> fileResult = std::async(std::launch::async,App->scene->SaveScene());
-        // App->editor->consoleWindow->AddLog("Scene saved");
-       
+
+         //App->editor->consoleWindow->AddLog("Saving scene ....");
+       // std::future<void> fileResult = std::async(std::launch::async, [] { hola(); });
+       //  f.get();
+        //App->editor->consoleWindow->AddLog("Scene saved");
+        std::thread(hola).detach();
+ 
     }
 
     static void ExportFile(const char *name, const Json::Value &jsonNode){
