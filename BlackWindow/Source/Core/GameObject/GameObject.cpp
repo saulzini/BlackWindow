@@ -246,15 +246,7 @@ void GameObject::Update()
 
 void GameObject::Draw()
 {
-    float4x4 calculatedModel = float4x4::identity;
-
-    if (transformComponent)
-    {
-        calculatedModel = float4x4::FromTRS(transformComponent->GetPosition(), transformComponent->GetRotationQuat(), transformComponent->GetScale());
-    }
-
-    modelMatrix = calculatedModel;
-    // CalculateModelMatrix();
+    CalculateModelMatrix();
     if (parent)
     {
         modelMatrix = parent->GetModelMatrix() * modelMatrix;

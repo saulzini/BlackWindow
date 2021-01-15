@@ -38,6 +38,8 @@ public:
         modelMatrix = float4x4::identity;
 
         this->transformComponent = nullptr;
+        
+        this->materialComponent = nullptr;
     }
     ~GameObject() {}
     virtual void Update();
