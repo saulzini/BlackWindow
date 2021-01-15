@@ -48,7 +48,7 @@ public:
 		}
 	}
 
-	void SaveScene();
+	 void SaveScene();
 	
 	void Load(const Json::Value& parent);
 	void DeleteGameObjects();

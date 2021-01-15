@@ -37,15 +37,15 @@ void main(){
 	vec3 ambient = light.ambient * vec3(texture( material.diffuse, uv));
 	//-----------------------------------
 
-	vec3 lightDir = normalize( light_pos - FragPos);
-	float nDtoL = max(dot(normal ,   lightDir),0.0);
+	vec3 lightDir = normalize( -light_pos - FragPos);
+	float nDtoL = max(dot(normal ,   -lightDir),0.0);
 	vec3 diff = nDtoL  * light.diffuse * vec3(texture(material.diffuse, uv));
 	//------------------------------------
 
-	vec3 reflectDir = reflect( -lightDir, normal);
+	vec3 reflectDir = reflect( lightDir, normal);
 	vec3 V = normalize(viewPos - FragPos);
 	float spec = pow(max(dot(V ,  reflectDir), 0.0),material.shininess);
-	vec3 specular =  spec * light.specular *  vec3(texture(material.specular,  uv));
+	vec3 specular =  spec * light.specular *   vec3(texture(material.specular,  uv));
 
 	//-----------------------------------
 
