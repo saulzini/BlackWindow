@@ -90,6 +90,7 @@ update_status ModuleScene::Update(float deltaTime)
 
 	root->SetProjectionMatrix(proj);
 	root->SetViewMatrix(view);
+	root->CalculateBox();
 	root->Update();
 
 	GLint ks = glGetUniformLocation(program, "ks");

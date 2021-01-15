@@ -37,13 +37,30 @@ public:
         
     };
 
+
+    void OnEditor() override
+    {
+        float fov = frustum.HorizontalFov();
+
+        if (ImGui::CollapsingHeader("FOV"))
+        {
+            ImGui::DragFloat("FOV", &fov,0.2f,50.0f,120.0f);
+            
+        }
+
+        frustum.SetHorizontalFovAndAspectRatio(fov, 1.3f);
+
+
+    }
+
     void Update() override {
         frustum.SetFrame(owner->GetTransformComponent()->GetPosition(), -float3::unitZ, float3::unitY);
        
         float4x4 view = frustum.ViewMatrix();
         float4x4 proj = frustum.ProjectionMatrix();
+        view = float4x4::identity;
        // view.Transpose();
-        float4x4 clipMatrix = proj * view * owner->GetModelMatrix() ;
+        float4x4 clipMatrix = proj * -view * owner->GetModelMatrix();
         dd::frustum(clipMatrix.Inverted(), float3(1.0f, 1.0f, 1.0f), 1.0f);
 
     }

@@ -4,6 +4,7 @@
 #include "Core/Components/ComponentTypes.h"
 #include "Math/float4x4.h"
 #include "Application.h"
+#include"Geometry/AABB.h"
 #include "Core/Components/ComponentTransform.h"
 #include "Core/Components/ComponentMaterial.h"
 #include "Core/Components/ComponentMesh.h"
@@ -21,9 +22,13 @@ protected:
     float4x4 modelMatrix;
     std::vector<GameObject *> children;
     std::vector<Component *> components;
+  
+    ComponentMesh* componentMesh;
     ComponentMaterial * materialComponent;
     ComponentMesh *meshComponent;
     ComponentTransform *transformComponent;
+    AABB* boundingBox = nullptr;
+    AABB* globalBox = nullptr;
 
 public:
     GameObject(GameObject *parent = nullptr, const char *name = "", unsigned int program = 0)
@@ -38,6 +43,8 @@ public:
         modelMatrix = float4x4::identity;
 
         this->transformComponent = nullptr;
+        this->componentMesh = nullptr;
+
         
         this->materialComponent = nullptr;
     }
@@ -52,7 +59,7 @@ public:
 
     Component *AddComponent(ComponentTypes type);
     void AddComponent(Component *component);
-
+    void CalculateBox();
     void AddChildren(GameObject *gameObject);
     void SetProjectionMatrix(const float4x4 &projection);
     void SetViewMatrix(const float4x4 &projection);
@@ -89,7 +96,7 @@ public:
 
     ComponentMesh *GetMeshComponent() const
     {
-        return meshComponent;
+        return componentMesh;
     }
 
     float4x4 GetProjectionMatrix()
