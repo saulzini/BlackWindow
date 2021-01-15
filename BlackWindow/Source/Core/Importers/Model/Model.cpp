@@ -101,7 +101,6 @@ GameObject* ModelImporter::Model::LoadModel()
 	buf += "Scale:"+std::to_string( result);
 	App->editor->consoleWindow->AddLog(buf.c_str());
 
-	root->CalculateBox();
 	return root;
 }
 
@@ -163,7 +162,6 @@ ProcessedMesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *sce
 	std::vector<unsigned int> indices;
 	unsigned int textureId;
 	unsigned int specularId;
-	// std::vector<Texture> textures;
 
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	{
@@ -231,20 +229,6 @@ unsigned int ModelImporter::Model::LoadMaterialTexture(aiMaterial *mat, aiTextur
 	return textureId;
 }
 
-
-// void ModelImporter::Model::ApplyTextureToModel(unsigned int id, const char *path) 
-// {
-// 	for (GLuint i = 0; i < texturesLoaded.size(); i++)
-// 	{	
-// 		texturesLoaded[i].id = id;
-// 		texturesLoaded[i].path == path;
-// 	}
-
-// 	for (GLuint i = 0; i < meshes.size(); i++)
-// 	{	
-// 		meshes[i].ChangeTextures(texturesLoaded);
-// 	}
-// }
 
 void ModelImporter::Model::CalculateBoxDimensions() 
 {

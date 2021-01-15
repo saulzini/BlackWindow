@@ -10,14 +10,14 @@
 					[
 						{
 							"position" : [ 0.0, 0.0, 0.0 ],
-							"rotation" : [ 1.5707964897155762, 0.0, -0.0 ],
-							"scale" : [ 100.0, 100.0, 100.0 ],
+							"rotation" : [ 0.0, 0.0, -0.0 ],
+							"scale" : [ 1.0, 1.0, 1.0 ],
 							"type" : 1
 						}
 					],
 					"diffuseDirectoryPath" : "",
 					"diffuseTexturePath" : "Baker_house.png",
-					"id" : 897548156,
+					"id" : 130166026,
 					"name" : "Chimney",
 					"specularDirectoryPath" : "",
 					"specularTexturePath" : ""
@@ -28,14 +28,14 @@
 					[
 						{
 							"position" : [ 0.0, 0.0, 0.0 ],
-							"rotation" : [ 1.5707964897155762, 0.0, -0.0 ],
-							"scale" : [ 100.0, 100.0, 100.0 ],
+							"rotation" : [ 0.0, 0.0, -0.0 ],
+							"scale" : [ 1.0, 1.0, 1.0 ],
 							"type" : 1
 						}
 					],
 					"diffuseDirectoryPath" : "",
 					"diffuseTexturePath" : "Baker_house.png",
-					"id" : 721008470,
+					"id" : 2055389453,
 					"name" : "Baker_house",
 					"specularDirectoryPath" : "",
 					"specularTexturePath" : ""
@@ -50,36 +50,8 @@
 					"type" : 1
 				}
 			],
-			"id" : 2041666166,
+			"id" : 1853005024,
 			"name" : "BakerHouse"
-		},
-		{
-			"children" : [],
-			"components" : 
-			[
-				{
-					"position" : [ 0.0, 5.0, 0.0 ],
-					"rotation" : [ 0.0, 0.0, 0.0 ],
-					"scale" : [ 1.0, 1.0, 1.0 ],
-					"type" : 1
-				}
-			],
-			"id" : 2047924892,
-			"name" : "Light"
-		},
-		{
-			"children" : [],
-			"components" : 
-			[
-				{
-					"position" : [ 0.0, 1.0, 0.0 ],
-					"rotation" : [ 0.0, 0.0, 0.0 ],
-					"scale" : [ 1.0, 1.0, 1.0 ],
-					"type" : 1
-				}
-			],
-			"id" : 697130661,
-			"name" : "Camera"
 		}
 	],
 	"name" : "Scene"

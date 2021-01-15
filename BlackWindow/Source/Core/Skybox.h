@@ -7,7 +7,6 @@
 #include <filesystem>
 
 #include "Texture.h"
-#include "Mesh.h"
 #include <string>
 #include "Math/float3.h"
 class Skybox
