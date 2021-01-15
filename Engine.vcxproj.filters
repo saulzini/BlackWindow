@@ -109,9 +109,6 @@
     <ClCompile Include="BlackWindow\Source\Core\FileManager.cpp">
       <Filter>Core\FileManager</Filter>
     </ClCompile>
-    <ClCompile Include="BlackWindow\Source\Core\Mesh.cpp">
-      <Filter>Core\Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Geometry\Frustum.cpp">
       <Filter>MathGeoLib</Filter>
     </ClCompile>
@@ -638,9 +635,6 @@
     <ClInclude Include="BlackWindow\Source\Core\FileManager.h">
       <Filter>Core\FileManager</Filter>
     </ClInclude>
-    <ClInclude Include="BlackWindow\Source\Core\Mesh.h">
-      <Filter>Core\Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="BlackWindow\Source\Core\Texture.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -1140,9 +1134,6 @@
     </Filter>
     <Filter Include="Core">
       <UniqueIdentifier>{ebb6cf58-a825-4957-9447-ace7c8bf1e2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Mesh">
-      <UniqueIdentifier>{7a347214-cc5c-48de-bc20-d7cb9e6052e3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Shaders\Grid">
       <UniqueIdentifier>{affccc95-e640-44fd-9a37-1bf44802bc42}</UniqueIdentifier>

@@ -3,6 +3,7 @@
 #include "Core/Time/WorldTimer.h"
 #include "Core/Skybox.h"
 #include "Core/GameObject/GameObjectTypes.h"
+#include "json/json.h"
 class GameObject;
 
 class ModuleScene : public Module

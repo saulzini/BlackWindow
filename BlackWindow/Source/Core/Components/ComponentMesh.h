@@ -27,11 +27,8 @@ public:
         componentJson["indices"] = Json::arrayValue;
         for (std::vector<unsigned int >::iterator it = indices.begin(); it != indices.end(); ++it)
         {
-            for (unsigned int i = 0; i != indices.size(); ++i)
-            {
-                Json::UInt index = indices[i];
-                componentJson["indices"].append(index);
-            }
+            Json::UInt index = (*it);
+            componentJson["indices"].append(index);
         }
     }
 
@@ -52,7 +49,17 @@ public:
 
     void OnLoad(const Json::Value &componentJson) override
     {
-        // mesh.LoadFromJson(componentJson);
+        // Clear();
+
+        for(unsigned int i=0; i< componentJson["vertices"].size(); i++ ){
+            Vertex vertex;
+            vertex.LoadFromJson(componentJson["vertices"][i]);
+            vertices.push_back(vertex);
+        }
+        for(unsigned int i=0; i< componentJson["indices"].size(); i++ ){
+            indices.push_back( componentJson["indices"][i].asUInt() );
+        }
+
     }
 
     std::vector<Vertex> GetVertices() const
