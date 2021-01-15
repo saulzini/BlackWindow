@@ -13,7 +13,8 @@ void DropperHandler::DropFileIntoWindow(char *filePath)
     for (std::vector<std::string>::iterator it = FileFormats::imageFormats.begin(); it != FileFormats::imageFormats.end(); ++it)
     {
         std::string filePathString = filePath;
-        if (std::size_t index = filePathString.find((*it)))
+        std::size_t index = filePathString.find((*it));
+        if (index !=std::string::npos )
         {
             // found
             App->scene->AddTexture(filePath);
