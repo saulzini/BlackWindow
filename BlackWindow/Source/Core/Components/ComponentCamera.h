@@ -13,9 +13,11 @@
 class ComponentCamera : public Component
 {
 public:
-    ComponentCamera(GameObject* owner = nullptr, ComponentTypes type = ComponentTypes::CAMERA) : Component(owner, type) {
+    ComponentCamera(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::CAMERA) : Component(owner, type)
+    {
         transformComponent = owner->GetTransformComponent();
-        if (transformComponent == nullptr) {
+        if (transformComponent == nullptr)
+        {
             return;
         }
 
@@ -26,40 +28,62 @@ public:
         frustum.SetFrame(transformComponent->GetPosition(), -float3::unitZ, float3::unitY);
     };
 
-
     void OnEditor() override
     {
-        float fov = frustum.HorizontalFov();
 
         if (ImGui::CollapsingHeader("FOV"))
         {
-            ImGui::DragFloat("FOV", &fov,0.2f,50.0f,120.0f);
-            
+            float fov = frustum.HorizontalFov();
+            ImGui::DragFloat("FOV", &fov, 0.2f, 50.0f, 120.0f);
+            frustum.SetHorizontalFovAndAspectRatio(fov, 1.3f);
         }
-
-        frustum.SetHorizontalFovAndAspectRatio(fov, 1.3f);
-
-
     }
 
-    void Update() override {
-        if (transformComponent == nullptr) {
+    void Update() override
+    {
+        if (transformComponent == nullptr)
+        {
             return;
         }
         frustum.SetFrame(transformComponent->GetPosition(), -float3::unitZ, float3::unitY);
-       
+
         float4x4 view = frustum.ViewMatrix();
         float4x4 proj = frustum.ProjectionMatrix();
         view = float4x4::identity;
-       // view.Transpose();
+        // view.Transpose();
         float4x4 clipMatrix = proj * -view * owner->GetModelMatrix();
         dd::frustum(clipMatrix.Inverted(), float3(1.0f, 1.0f, 1.0f), 1.0f);
+    }
 
+    void OnSave(Json::Value &owner) override
+    {
+        Json::Value cameraJson;
+        cameraJson["type"] = static_cast<int>(ComponentTypes::CAMERA);
+
+        Json::Value frontJson = Json::arrayValue;
+        frontJson.append(frustum.Front().x);
+        frontJson.append(frustum.Front().y);
+        frontJson.append(frustum.Front().z);
+
+        Json::Value upJson = Json::arrayValue;
+        upJson.append(frustum.Up().x);
+        upJson.append(frustum.Up().y);
+        upJson.append(frustum.Up().z);
+
+        cameraJson["front"] = frontJson;
+        cameraJson["up"] = upJson;
+        cameraJson["nearPlaneDistance"] = frustum.NearPlaneDistance();
+        cameraJson["farPlaneDistance"] = frustum.FarPlaneDistance();
+
+        cameraJson["horizontalFov"] = frustum.HorizontalFov();
+        cameraJson["verticalFov"] = frustum.VerticalFov();
+
+        owner["components"].append(cameraJson);
     }
 
 protected:
     Frustum frustum;
-    ComponentTransform* transformComponent;
+    ComponentTransform *transformComponent;
 };
 
 #pragma once
