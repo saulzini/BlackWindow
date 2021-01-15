@@ -6,6 +6,7 @@
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
 #include <future>         // std::async, std::future
+#include <thread>
 class SceneFileManager
 {
 public:
@@ -14,11 +15,14 @@ public:
 
 
     static void Save(){
-        App->editor->consoleWindow->AddLog("Saving scene ....");
-        std::async(std::launch::async, [] { 
+        // std::async(std::launch::async, [] { 
+        //     App->editor->consoleWindow->AddLog("Saving scene ....");
             App->scene->SaveScene(); 
-            App->editor->consoleWindow->AddLog("Scene saved");
-        });
+        //     App->editor->consoleWindow->AddLog("Scene saved");
+        // });
+        // App->editor->consoleWindow->AddLog("Saving scene ....");
+        // std::future<void> fileResult = std::async(std::launch::async,App->scene->SaveScene());
+        // App->editor->consoleWindow->AddLog("Scene saved");
        
     }
 
@@ -29,15 +33,17 @@ public:
     }
 
 	static void LoadFromFile(const char *name){
-        App->editor->consoleWindow->AddLog("Loading scene...");
-        Json::Value root;
-        std::ifstream file(name);
-        if(file.fail()){
-            App->editor->consoleWindow->AddLog("Scene file not exists");
-            return;
-        }
-        file >> root;
-        std::async(std::launch::async, [ root ] { 
+        
+        std::async(std::launch::async, [ name ] { 
+            App->editor->consoleWindow->AddLog("Loading scene...");
+
+            Json::Value root;
+            std::ifstream file(name);
+            if(file.fail()){
+                App->editor->consoleWindow->AddLog("Scene file not exists");
+                return;
+            }
+            file >> root;
             App->scene->Load(root);
             App->editor->consoleWindow->AddLog("Scene loaded");
         });

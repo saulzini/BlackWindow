@@ -19,18 +19,11 @@ public:
             return;
         }
 
-      
-        
-       
-        //initialRadiansAngle = radiansAngle = DEGTORAD(0.05);
-  
-
         //Setting frustum
         frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
         frustum.SetViewPlaneDistances(0.1f, 10.0f);
         frustum.SetHorizontalFovAndAspectRatio(50.0f, 1.3f);
         frustum.SetFrame(transformComponent->GetPosition(), -float3::unitZ, float3::unitY);
-        
     };
 
 

@@ -17,7 +17,7 @@
 					],
 					"diffuseDirectoryPath" : "",
 					"diffuseTexturePath" : "Baker_house.png",
-					"id" : 1719948346,
+					"id" : 897548156,
 					"name" : "Chimney",
 					"specularDirectoryPath" : "",
 					"specularTexturePath" : ""
@@ -35,7 +35,7 @@
 					],
 					"diffuseDirectoryPath" : "",
 					"diffuseTexturePath" : "Baker_house.png",
-					"id" : 835640146,
+					"id" : 721008470,
 					"name" : "Baker_house",
 					"specularDirectoryPath" : "",
 					"specularTexturePath" : ""
@@ -50,7 +50,7 @@
 					"type" : 1
 				}
 			],
-			"id" : 185065919,
+			"id" : 2041666166,
 			"name" : "BakerHouse"
 		},
 		{
@@ -58,13 +58,13 @@
 			"components" : 
 			[
 				{
-					"position" : [ 0.0, 1.0, 0.0 ],
+					"position" : [ 0.0, 5.0, 0.0 ],
 					"rotation" : [ 0.0, 0.0, 0.0 ],
 					"scale" : [ 1.0, 1.0, 1.0 ],
 					"type" : 1
 				}
 			],
-			"id" : 623123789,
+			"id" : 2047924892,
 			"name" : "Light"
 		},
 		{
@@ -78,7 +78,7 @@
 					"type" : 1
 				}
 			],
-			"id" : 1184160922,
+			"id" : 697130661,
 			"name" : "Camera"
 		}
 	],
