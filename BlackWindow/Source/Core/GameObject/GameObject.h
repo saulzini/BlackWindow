@@ -64,6 +64,9 @@ public:
     void SetProjectionMatrix(const float4x4 &projection);
     void SetViewMatrix(const float4x4 &projection);
 
+    unsigned int  GetProgram() {
+        return program;
+    }
     std::vector<Component *> GetComponents()
     {
         return components;
