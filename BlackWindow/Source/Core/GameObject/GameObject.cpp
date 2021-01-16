@@ -143,44 +143,32 @@ bool GameObject::isChild(GameObject *lookingChild)
     return false;
 }
 
-void GameObject::CalculateMeshBoundingBox() {
-
-
-    std::vector<GameObject*> currentChildren = this->GetChildren();
-
-    for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
-    {
-        (*it)->CalculateMeshBoundingBox();
-
-    }
-
+void GameObject::CalculateMeshBoundingBox()
+{
     selfBoundingBox.SetNegativeInfinity();
 
-    if (componentMesh) {
-        componentMesh->GetVerticesPosition().size();
-        selfBoundingBox.Enclose(&componentMesh->GetVerticesPosition()[0], static_cast<int>(componentMesh->GetVerticesPosition().size()));
-       
+    if (componentMesh)
+    {
+        std::vector<float3> verticesPosition = componentMesh->GetVerticesPosition();
+        selfBoundingBox.Enclose(&verticesPosition[0], static_cast<int>(verticesPosition.size()));
     }
-
 }
- void GameObject::CalculateBox( )
+void GameObject::CalculateBox()
 {
-    std::vector<GameObject*> currentChildren = this->GetChildren();
+    std::vector<GameObject *> currentChildren = this->GetChildren();
 
-    for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+    for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
     {
         (*it)->CalculateBox();
-
     }
     globalBoundingBox.SetNegativeInfinity();
-        if (this->GetMeshComponent() != nullptr) {
-            
-            selfObb = selfBoundingBox.Transform(modelMatrix);
-            globalBoundingBox.Enclose(selfObb);
-            dd::aabb(globalBoundingBox.minPoint, globalBoundingBox.maxPoint, dd::colors::Red);
-        } 
+    if (componentMesh != nullptr)
+    {
+        selfObb = selfBoundingBox.Transform(modelMatrix);
+        globalBoundingBox.Enclose(selfObb);
+        dd::aabb(globalBoundingBox.minPoint, globalBoundingBox.maxPoint, dd::colors::Red);
     }
-
+}
 
 void GameObject::Save()
 {
@@ -257,24 +245,22 @@ void GameObject::CheckDefaultsComponents(Component *component)
 
     switch (component->GetType())
     {
-        case ComponentTypes::TRANSFORM:
-            transformComponent = static_cast<ComponentTransform*>(component);
+    case ComponentTypes::TRANSFORM:
+        transformComponent = static_cast<ComponentTransform *>(component);
         break;
 
-        case ComponentTypes::MATERIAL:
-            materialComponent = static_cast<ComponentMaterial*>(component);
-            break;
+    case ComponentTypes::MATERIAL:
+        materialComponent = static_cast<ComponentMaterial *>(component);
+        break;
 
-        case ComponentTypes::MESH:
-            componentMesh = static_cast<ComponentMesh*>(component);
-            break;
+    case ComponentTypes::MESH:
+        componentMesh = static_cast<ComponentMesh *>(component);
+        break;
 
-        case ComponentTypes::MESHRENDERER:
-            meshRendererComponent = static_cast<ComponentMeshRenderer*>(component);
-            break;
+    case ComponentTypes::MESHRENDERER:
+        meshRendererComponent = static_cast<ComponentMeshRenderer *>(component);
+        break;
     }
-
-
 }
 
 void GameObject::Update()
@@ -306,4 +292,3 @@ void GameObject::Draw()
     glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &viewMatrix[0][0]);
     glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &projectionMatrix[0][0]);
 }
-

@@ -48,4 +48,6 @@ void ComponentMesh::OnLoad(const Json::Value &componentJson)
     {
         indices.push_back(componentJson["indices"][i].asUInt());
     }
+    SetVerticesPosition();
+
 }

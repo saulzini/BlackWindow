@@ -32,7 +32,7 @@ public:
     {
         for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); ++it)
         {
-            positions.push_back((*it).Position);
+            positions.push_back((*it).GetPosition());
         }
 
     }
@@ -47,7 +47,7 @@ public:
         return indices;
     }
 
-    std::vector<float3> GetVerticesPosition() {
+    std::vector<float3> GetVerticesPosition() const{
         return positions;
     }
 private:
