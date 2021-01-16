@@ -6,13 +6,13 @@ class GameObject;
 class Component
 {
 protected:
-	ComponentTypes type; 
+    ComponentTypes type;
     bool active;
     GameObject *owner;
 
 public:
-    
-    Component(GameObject *owner = nullptr,ComponentTypes type = ComponentTypes::NONE){
+    Component(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::NONE)
+    {
         this->owner = owner;
         this->type = type;
         active = true;
@@ -20,17 +20,16 @@ public:
 
     ~Component() {}
 
-    ComponentTypes GetType() const{
+    ComponentTypes GetType() const
+    {
         return type;
     }
     virtual void Init() {}
-    virtual void Enable(){}
-    virtual void Update(){}
-    virtual void Disable(){}
-    virtual void OnEditor(){}
-    virtual void OnSave(Json::Value& owner){}
-    virtual void OnLoad(const Json::Value& componentJson){}
-    virtual void Clear(){}
-
+    virtual void Enable() {}
+    virtual void Update() {}
+    virtual void Disable() {}
+    virtual void OnEditor() {}
+    virtual void OnSave(Json::Value &owner) {}
+    virtual void OnLoad(const Json::Value &componentJson) {}
+    virtual void Clear() {}
 };
-
