@@ -531,7 +531,12 @@
     <ClCompile Include="BlackWindow\Resources\MathGeoLib-master\src\Time\Clock.cpp" />
     <ClCompile Include="BlackWindow\Source\Application.cpp" />
     <ClCompile Include="BlackWindow\Source\BoundingBox.cpp" />
+    <ClCompile Include="BlackWindow\Source\Core\Components\ComponentCamera.cpp" />
+    <ClCompile Include="BlackWindow\Source\Core\Components\ComponentLight.cpp" />
+    <ClCompile Include="BlackWindow\Source\Core\Components\ComponentMaterial.cpp" />
+    <ClCompile Include="BlackWindow\Source\Core\Components\ComponentMesh.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\Components\ComponentMeshRenderer.cpp" />
+    <ClCompile Include="BlackWindow\Source\Core\Components\ComponentTransform.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\Events\DropperHandler.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\FileManager.cpp" />
     <ClCompile Include="BlackWindow\Source\Core\GameObject\GameObject.cpp" />
