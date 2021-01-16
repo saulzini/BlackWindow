@@ -21,16 +21,18 @@ public:
         {
             return;
         }
-
+        
         //Setting frustum
+        frustum.SetPos(float3::zero);
+        frustum.SetFront(float3::unitZ);
+        frustum.SetUp(float3::unitY);
         frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
         frustum.SetViewPlaneDistances(0.1f, 10.0f);
         frustum.SetHorizontalFovAndAspectRatio(50.0f, 1.3f);
-        frustum.SetFrame(transformComponent->GetPosition(), -float3::unitZ, float3::unitY);
+
     };
 
     void OnEditor() override;
-
     void Update() override;
 
     void OnSave(Json::Value &owner) override;
