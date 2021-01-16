@@ -1,7 +1,9 @@
 #include "GameObject.h"
 #include "Core/Components/ComponentFactory.h"
 #include "Core/GameObject/GameObjectTypes.h"
+#include "Math/float3x3.h"
 #include "GL/glew.h"
+#include "Geometry/AABB.h"
 #include "Math/Quat.h"
 #include <queue> // std::queue
 #include <stack> // std::stack
@@ -141,61 +143,32 @@ bool GameObject::isChild(GameObject *lookingChild)
     return false;
 }
 
-
- void GameObject::CalculateBox( )
+void GameObject::CalculateMeshBoundingBox()
 {
-    float3 min = float3(-1, -1, -1);
-    float3 max = float3(1, 1, 1);
+    selfBoundingBox.SetNegativeInfinity();
 
+    if (componentMesh)
+    {
+        std::vector<float3> verticesPosition = componentMesh->GetVerticesPosition();
+        selfBoundingBox.Enclose(&verticesPosition[0], static_cast<int>(verticesPosition.size()));
+    }
+}
+void GameObject::CalculateBox()
+{
+    std::vector<GameObject *> currentChildren = this->GetChildren();
 
-  //  GameObject* current = nullptr;
-
-    std::vector<GameObject*> currentChildren = this->GetChildren();
-
-    for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+    for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
     {
         (*it)->CalculateBox();
-
     }
-
-
-        if (this->GetMeshComponent() != nullptr) {
-
-
-            std::vector<Vertex> componentMesh = this->GetMeshComponent()->GetVertices();
-
-            for (std::vector<Vertex>::iterator it = componentMesh.begin(); it != componentMesh.end(); ++it)
-            {
-                //Min vertex
-                if ((it)->Position.x < min.x)
-                    min.x = (it)->Position.x;
-                if ((it)->Position.y < min.y)
-                    min.y = (it)->Position.y;
-                if ((it)->Position.z < min.z)
-                    min.z = (it)->Position.z;
-                //Max vertex
-                if ((it)->Position.x > max.x)
-                    max.x = (it)->Position.x;
-                if ((it)->Position.y > max.y)
-                    max.y = (it)->Position.y;
-                if ((it)->Position.z > max.z)
-                    max.z = (it)->Position.z;
-            }
-
-        }
-        
-        if (this->GetTransformComponent() != nullptr) {
-            globalBox = new AABB(min.Mul(this->GetTransformComponent()->GetScale()) + this->GetTransformComponent()->GetPosition() ,
-                                max.Mul(this->GetTransformComponent()->GetScale()) + this->GetTransformComponent()->GetPosition());
-
-           
-        }
-
-        if (globalBox != nullptr) {
-            dd::aabb(globalBox->minPoint, globalBox->maxPoint, dd::colors::Red);
-        }
+    globalBoundingBox.SetNegativeInfinity();
+    if (componentMesh != nullptr)
+    {
+        selfObb = selfBoundingBox.Transform(modelMatrix);
+        globalBoundingBox.Enclose(selfObb);
+        dd::aabb(globalBoundingBox.minPoint, globalBoundingBox.maxPoint, dd::colors::Red);
     }
-
+}
 
 void GameObject::Save()
 {
@@ -272,24 +245,22 @@ void GameObject::CheckDefaultsComponents(Component *component)
 
     switch (component->GetType())
     {
-        case ComponentTypes::TRANSFORM:
-            transformComponent = static_cast<ComponentTransform*>(component);
+    case ComponentTypes::TRANSFORM:
+        transformComponent = static_cast<ComponentTransform *>(component);
         break;
 
-        case ComponentTypes::MATERIAL:
-            materialComponent = static_cast<ComponentMaterial*>(component);
-            break;
+    case ComponentTypes::MATERIAL:
+        materialComponent = static_cast<ComponentMaterial *>(component);
+        break;
 
-        case ComponentTypes::MESH:
-            componentMesh = static_cast<ComponentMesh*>(component);
-            break;
+    case ComponentTypes::MESH:
+        componentMesh = static_cast<ComponentMesh *>(component);
+        break;
 
-        case ComponentTypes::MESHRENDERER:
-            meshRendererComponent = static_cast<ComponentMeshRenderer*>(component);
-            break;
+    case ComponentTypes::MESHRENDERER:
+        meshRendererComponent = static_cast<ComponentMeshRenderer *>(component);
+        break;
     }
-
-
 }
 
 void GameObject::Update()
@@ -321,4 +292,3 @@ void GameObject::Draw()
     glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &viewMatrix[0][0]);
     glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &projectionMatrix[0][0]);
 }
-
