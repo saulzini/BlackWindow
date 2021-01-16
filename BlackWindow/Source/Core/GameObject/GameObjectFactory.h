@@ -7,6 +7,8 @@
 #include "Application.h"
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
+#include "Core/Components/ComponentMeshRenderer.h"
+
 namespace GameObjectFactory
 {
 
@@ -43,7 +45,9 @@ namespace GameObjectFactory
         // load components
         for (unsigned int index = 0; index < jRoot["components"].size(); index++)
         {
-            root->AddComponent(ComponentFactory::CreateComponentFromJson(jRoot["components"][index],root));
+            Component *component = ComponentFactory::CreateComponentFromJson(jRoot["components"][index],root);
+            root->AddComponent(component);
+
         }
         //Load children
         for (unsigned int index = 0; index < jRoot["children"].size(); index++)

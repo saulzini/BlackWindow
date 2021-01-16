@@ -55,8 +55,6 @@ bool ModuleScene::Init()
 	delete model;
 	root->AddChildren(house);
 
-	// root->Save();
-
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
 	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program);
 	root->AddChildren(Light);
