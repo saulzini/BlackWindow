@@ -68,13 +68,12 @@ void ComponentMeshRenderer::Update()
     glBindVertexArray(1);
 }
 
-void ComponentMeshRenderer::OnSave(Json::Value& owner) 
+void ComponentMeshRenderer::OnSave(Json::Value &owner)
 {
     Json::Value componentJson;
     componentJson["type"] = static_cast<int>(ComponentTypes::MESHRENDERER);
     owner["components"].append(componentJson);
 }
-
 
 void ComponentMeshRenderer::OnEditor()
 {
@@ -82,6 +81,5 @@ void ComponentMeshRenderer::OnEditor()
     if (ImGui::CollapsingHeader("Mesh renderer"))
     {
         ImGui::Text("Mesh indices sizes to render %d", indicesSize);
-
     }
 }

@@ -228,6 +228,15 @@
     <ClCompile Include="BlackWindow\Source\Core\Components\ComponentMesh.cpp">
       <Filter>Core\Components</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Components\ComponentLight.cpp">
+      <Filter>Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Components\ComponentMaterial.cpp">
+      <Filter>Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Components\ComponentCamera.cpp">
+      <Filter>Core\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />

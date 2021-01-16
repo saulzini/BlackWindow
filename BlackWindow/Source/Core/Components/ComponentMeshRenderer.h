@@ -12,7 +12,8 @@
 class ComponentMeshRenderer : public Component
 {
 public:
-    ComponentMeshRenderer(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::MESHRENDERER) : Component(owner, type){
+    ComponentMeshRenderer(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::MESHRENDERER) : Component(owner, type)
+    {
         Setup();
     };
 
@@ -20,11 +21,11 @@ public:
     void Update() override;
     void OnEditor() override;
 
-    void OnSave(Json::Value& owner) override;
-    
+    void OnSave(Json::Value &owner) override;
+
 private:
     unsigned int vao = 0;
     unsigned int vbo = 0;
     unsigned int ebo = 0;
-    size_t indicesSize =0;
+    size_t indicesSize = 0;
 };

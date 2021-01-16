@@ -29,7 +29,7 @@ public:
 
     void SetIndices(const std::vector<unsigned int> &indices)
     {
-        this->indices =indices;
+        this->indices = indices;
     }
 
     std::vector<unsigned int> GetIndices() const
@@ -40,5 +40,4 @@ public:
 private:
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
-
 };
