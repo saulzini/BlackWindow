@@ -2,6 +2,7 @@
 #include "Core/Components/ComponentFactory.h"
 #include "Core/GameObject/GameObjectTypes.h"
 #include "GL/glew.h"
+#include "Geometry/AABB.h"
 #include "Math/Quat.h"
 #include <queue> // std::queue
 #include <stack> // std::stack
@@ -184,16 +185,15 @@ bool GameObject::isChild(GameObject *lookingChild)
 
         }
         
-        if (this->GetTransformComponent() != nullptr) {
-            globalBox = new AABB(min.Mul(this->GetTransformComponent()->GetScale()) + this->GetTransformComponent()->GetPosition() ,
-                                max.Mul(this->GetTransformComponent()->GetScale()) + this->GetTransformComponent()->GetPosition());
-
+        globalBox.SetNegativeInfinity();
+        if (this->GetMeshComponent() != nullptr) {
            
+            globalBox.Enclose(this->GetMeshComponent()->GetVerticesPosition() , this->GetMeshComponent()->GetVertices().size());
         }
 
-        if (globalBox != nullptr) {
-            dd::aabb(globalBox->minPoint, globalBox->maxPoint, dd::colors::Red);
-        }
+
+            dd::aabb(globalBox.minPoint, globalBox.maxPoint, dd::colors::Red);
+
     }
 
 

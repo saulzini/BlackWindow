@@ -12,6 +12,7 @@ public:
     void SetVertices(const std::vector<Vertex> &vertices)
     {
         this->vertices = vertices;
+        SetVerticesPosition();
     }
 
     void OnSave(Json::Value &owner) override
@@ -70,6 +71,15 @@ public:
         return vertices;
     }
 
+    void SetVerticesPosition()
+    {
+        for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); ++it)
+        {
+            positions.push_back((*it).Position);
+        }
+
+    }
+
     void SetIndices(const std::vector<unsigned int> &indices)
     {
         this->indices =indices;
@@ -80,8 +90,12 @@ public:
         return indices;
     }
 
+    std::vector<float3>* GetVerticesPosition() {
+        return positions;
+    }
+
 private:
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
-
+    std::vector<float3>* positions;
 };

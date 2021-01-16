@@ -30,7 +30,7 @@ protected:
     ComponentTransform *transformComponent;
     ComponentMeshRenderer *meshRendererComponent;
     AABB* boundingBox = nullptr;
-    AABB* globalBox = nullptr;
+    AABB globalBox;
 
 public:
     GameObject(GameObject *parent = nullptr, const char *name = "", unsigned int program = 0)
