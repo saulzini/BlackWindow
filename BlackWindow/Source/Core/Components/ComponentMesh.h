@@ -14,56 +14,13 @@ public:
         this->vertices = vertices;
     }
 
-    void OnSave(Json::Value &owner) override
-    {
-        Json::Value componentJson;
-        componentJson["type"] = static_cast<int>(ComponentTypes::MESH);
+    void OnSave(Json::Value &owner) override;
 
-        for (std::vector<Vertex>::iterator it = vertices.begin(); it != vertices.end(); ++it)
-        {
-            (*it).Save(componentJson);
-        }
+    void OnEditor() override;
 
-        componentJson["indices"] = Json::arrayValue;
-        for (std::vector<unsigned int >::iterator it = indices.begin(); it != indices.end(); ++it)
-        {
-            Json::UInt index = (*it);
-            componentJson["indices"].append(index);
-        }
+    void Clear() override;
 
-        owner["components"].append(componentJson);
-
-    }
-
-    void OnEditor() override
-    {
-        if (ImGui::CollapsingHeader("Mesh"))
-        {
-            ImGui::Text("Mesh vertices %d",vertices.size());
-            ImGui::Text("Mesh indices %d",indices.size());
-        }
-    }
-
-    void Clear() override
-    {
-        vertices.clear();
-        indices.clear();
-    }
-
-    void OnLoad(const Json::Value &componentJson) override
-    {
-        // Clear();
-
-        for(unsigned int i=0; i< componentJson["vertices"].size(); i++ ){
-            Vertex vertex;
-            vertex.LoadFromJson(componentJson["vertices"][i]);
-            vertices.push_back(vertex);
-        }
-        for(unsigned int i=0; i< componentJson["indices"].size(); i++ ){
-            indices.push_back( componentJson["indices"][i].asUInt() );
-        }
-
-    }
+    void OnLoad(const Json::Value &componentJson) override;
 
     std::vector<Vertex> GetVertices() const
     {

@@ -222,6 +222,12 @@
     <ClCompile Include="BlackWindow\Source\Core\Components\ComponentMeshRenderer.cpp">
       <Filter>Core\Components</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Components\ComponentTransform.cpp">
+      <Filter>Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="BlackWindow\Source\Core\Components\ComponentMesh.cpp">
+      <Filter>Core\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
