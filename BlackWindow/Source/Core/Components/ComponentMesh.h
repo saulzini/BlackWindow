@@ -90,12 +90,11 @@ public:
         return indices;
     }
 
-    std::vector<float3>* GetVerticesPosition() {
+    std::vector<float3> GetVerticesPosition() {
         return positions;
     }
-
 private:
     std::vector<Vertex> vertices;
     std::vector<unsigned int> indices;
-    std::vector<float3>* positions;
+    std::vector<float3> positions;
 };

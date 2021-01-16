@@ -55,6 +55,7 @@ namespace GameObjectFactory
             root->AddChildren( CreateGameObjectFromJson(jRoot["children"][index],root,program) );
         }
 
+        root->CalculateMeshBoundingBox();
         return root;
     }
 

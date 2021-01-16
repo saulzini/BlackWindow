@@ -5,6 +5,7 @@
 #include "Math/float4x4.h"
 #include "Application.h"
 #include"Geometry/AABB.h"
+#include"Geometry/OBB.h"
 #include "Core/Components/ComponentTransform.h"
 #include "Core/Components/ComponentMaterial.h"
 #include "Core/Components/ComponentMesh.h"
@@ -29,9 +30,9 @@ protected:
     ComponentMesh *meshComponent;
     ComponentTransform *transformComponent;
     ComponentMeshRenderer *meshRendererComponent;
-    AABB* boundingBox = nullptr;
-    AABB globalBox;
-
+    AABB globalBoundingBox ;
+    AABB selfBoundingBox;
+    OBB  selfObb;
 public:
     GameObject(GameObject *parent = nullptr, const char *name = "", unsigned int program = 0)
     {
@@ -65,7 +66,7 @@ public:
     void AddChildren(GameObject *gameObject);
     void SetProjectionMatrix(const float4x4 &projection);
     void SetViewMatrix(const float4x4 &projection);
-
+    void CalculateMeshBoundingBox();
     unsigned int  GetProgram() {
         return program;
     }

@@ -141,6 +141,7 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 		root->AddComponent(ComponentTypes::MESHRENDERER);
 
 	}
+	root->CalculateMeshBoundingBox();
 	// process all the node's meshes (if any)
 	for (GLuint i = 0; i < node->mNumChildren; i++)
 	{

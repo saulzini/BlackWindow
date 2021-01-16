@@ -156,9 +156,9 @@ void GameObject::CalculateMeshBoundingBox() {
 
     selfBoundingBox.SetNegativeInfinity();
 
-    if (meshComponent != nullptr) {
+    if (this->GetMeshComponent() != nullptr) {
 
-        selfBoundingBox.Enclose(&meshComponent->GetVerticesPosition()[0], this->GetMeshComponent()->GetVertices().size());
+        selfBoundingBox.Enclose(&this->GetMeshComponent()->GetVerticesPosition()[0], this->GetMeshComponent()->GetVertices().size());
        
     }
 
