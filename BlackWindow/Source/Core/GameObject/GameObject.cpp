@@ -270,20 +270,27 @@ void GameObject::Clear()
 
 void GameObject::CheckDefaultsComponents(Component *component)
 {
-    if (component->GetType() == ComponentTypes::TRANSFORM)
+
+    switch (component->GetType())
     {
-        transformComponent = static_cast<ComponentTransform *>(component);
+        case ComponentTypes::TRANSFORM:
+            transformComponent = static_cast<ComponentTransform*>(component);
+        break;
+
+        case ComponentTypes::MATERIAL:
+            materialComponent = static_cast<ComponentMaterial*>(component);
+            break;
+
+        case ComponentTypes::MESH:
+            componentMesh = static_cast<ComponentMesh*>(component);
+            break;
+
+        case ComponentTypes::MESHRENDERER:
+            meshRendererComponent = static_cast<ComponentMeshRenderer*>(component);
+            break;
     }
 
-    if (component->GetType() == ComponentTypes::MATERIAL)
-    {
-        materialComponent = static_cast<ComponentMaterial *>(component);
-    }
 
-    if (component->GetType() == ComponentTypes::MESH)
-    {
-        componentMesh = static_cast<ComponentMesh *>(component);
-    }
 }
 
 void GameObject::Update()

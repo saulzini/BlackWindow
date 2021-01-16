@@ -8,6 +8,7 @@
 #include "Core/Components/ComponentTransform.h"
 #include "Core/Components/ComponentMaterial.h"
 #include "Core/Components/ComponentMesh.h"
+#include "Core/Components/ComponentMeshRenderer.h"
 #include "json/json.h"
 
 class GameObject
@@ -27,6 +28,7 @@ protected:
     ComponentMaterial * materialComponent;
     ComponentMesh *meshComponent;
     ComponentTransform *transformComponent;
+    ComponentMeshRenderer *meshRendererComponent;
     AABB* boundingBox = nullptr;
     AABB* globalBox = nullptr;
 
@@ -140,5 +142,9 @@ public:
         if(materialComponent){
             materialComponent->SetTexture(textureId);
         }
+    }
+
+    ComponentMeshRenderer *GetMeshRendererComponent() const{
+        return meshRendererComponent;
     }
 };

@@ -81,6 +81,24 @@ public:
         owner["components"].append(cameraJson);
     }
 
+    void OnLoad(const Json::Value& componentJson) override
+    {
+        frustum.SetFront( float3(
+            componentJson["front"][0].asFloat(),
+            componentJson["front"][1].asFloat(),
+            componentJson["front"][2].asFloat()
+            ));
+        
+        frustum.SetUp( float3(
+            componentJson["up"][0].asFloat(),
+            componentJson["up"][1].asFloat(),
+            componentJson["up"][2].asFloat()
+            ));
+
+        frustum.SetHorizontalFovAndAspectRatio(componentJson["horizontalFov"].asFloat(),1.3f);
+        frustum.SetViewPlaneDistances(componentJson["nearPlaneDistance"].asFloat(),componentJson["farPlaneDistance"].asFloat());
+    }
+
 protected:
     Frustum frustum;
     ComponentTransform *transformComponent;

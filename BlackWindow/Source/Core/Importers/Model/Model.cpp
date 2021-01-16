@@ -124,11 +124,6 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 	componentTransform->SetRotation(rotationRadians);
 	componentTransform->SetScale(scale);
 
-	ComponentMeshRenderer* componentMeshRenderer = nullptr;
-	if (node->mNumMeshes > 0){
-		componentMeshRenderer = static_cast<ComponentMeshRenderer *>(root->AddComponent(ComponentTypes::MESHRENDERER));
-	}
-
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
 	{
 		// Adding default components when loading
@@ -139,12 +134,11 @@ GameObject* ModelImporter::Model::ProcessNode(GameObject *parent,aiNode *node, c
 		ProcessedMesh processedMesh = ProcessMesh(mesh, scene);
 		componentMesh->SetVertices(processedMesh.vertices);
 		componentMesh->SetIndices(processedMesh.indices);
-		if (componentMeshRenderer){
-			componentMeshRenderer ->Setup();
-		}
 
 		componentMaterial->SetSpecularId(processedMesh.specularId);
 		componentMaterial->setTextureId(processedMesh.textureId);
+
+		root->AddComponent(ComponentTypes::MESHRENDERER);
 
 	}
 	// process all the node's meshes (if any)
