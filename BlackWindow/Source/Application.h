@@ -7,6 +7,7 @@
 #include "Algorithm/Random/LCG.h"
 #include "Core/ResourcesManager/ResourcesManager.h"
 
+class ModuleRenderScene;
 class ModuleRender;
 class ModuleWindow;
 class ModuleInput;
@@ -35,6 +36,8 @@ public:
 	ModuleCamera *camera = nullptr;
 	ModuleDebugDraw *draw = nullptr;
 	ModuleEditor *editor = nullptr;
+	ModuleRenderScene* renderscene = nullptr;
+
 	DeltaTime deltaTime;
 
 	ModuleScene *scene = nullptr;

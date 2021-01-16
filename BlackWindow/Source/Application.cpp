@@ -7,6 +7,7 @@
 #include "ModuleScene.h"
 #include "ModuleEditor.h"
 #include "ModuleDebugDraw.h"
+#include "ModuleRenderScene.h"
 #include "SDL.h"
 #include "Leaks.h"
 #include "UIWindow/ConsoleWindow.h" 
@@ -26,6 +27,7 @@ Application::Application()
 	modules.push_back(camera = new ModuleCamera());
 	modules.push_back(draw = new ModuleDebugDraw());
 	modules.push_back(scene = new ModuleScene());
+	modules.push_back(renderscene = new ModuleRenderScene());
 	modules.push_back(editor = new ModuleEditor());
 }
 
