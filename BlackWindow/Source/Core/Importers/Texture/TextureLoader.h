@@ -79,12 +79,12 @@ namespace TextureImporter
 					break;
 				case Strategy::Textures:
 					buf.append(std::string("textures strategy: ").c_str());
-					resultPath = "..\\Assets\\Textures\\";
+					resultPath = ".\\Assets\\Textures\\";
 					resultPath.append(path.c_str());
 					break;
 				default:
 					buf.append(std::string("white strategy: ").c_str());
-					resultPath = "..\\Assets\\Textures\\White.png";
+					resultPath = ".\\Assets\\Textures\\White.png";
 					break;
 				}
 

@@ -14,25 +14,14 @@ public:
     SceneFileManager(){}
     ~SceneFileManager(){}
 
-    static void hola() {
+    static void SaveScene() {
         App->editor->consoleWindow->AddLog("Saving scene ....");
         App->scene->SaveScene();
         App->editor->consoleWindow->AddLog("Scene saved");
     }
 
     static void Save(){
-       // std::future<void> fileResult = std::async(std::launch::async, [] {
-        //     App->editor->consoleWindow->AddLog("Saving scene ....");
-         //    App->scene->SaveScene(); 
-          //   App->editor->consoleWindow->AddLog("Scene saved");
-        // });
-
-         //App->editor->consoleWindow->AddLog("Saving scene ....");
-       // std::future<void> fileResult = std::async(std::launch::async, [] { hola(); });
-       //  f.get();
-        //App->editor->consoleWindow->AddLog("Scene saved");
-        std::thread(hola).detach();
- 
+        std::thread(SaveScene).detach();
     }
 
     static void ExportFile(const char *name, const Json::Value &jsonNode){
@@ -43,22 +32,18 @@ public:
 
 	static void LoadFromFile(const char *name){
         
-        std::async(std::launch::async, [ name ] { 
-            App->editor->consoleWindow->AddLog("Loading scene...");
+        App->editor->consoleWindow->AddLog("Loading scene...");
 
-            Json::Value root;
-            std::ifstream file(name);
-            if(file.fail()){
-                App->editor->consoleWindow->AddLog("Scene file not exists");
-                return;
-            }
-            file >> root;
-            App->scene->Load(root);
-            App->editor->consoleWindow->AddLog("Scene loaded");
-        });
+        Json::Value root;
+        std::ifstream file(name);
+        if(file.fail()){
+            App->editor->consoleWindow->AddLog("Scene file not exists");
+            return;
+        }
+        file >> root;
+        App->scene->Load(root);
+        App->editor->consoleWindow->AddLog("Scene loaded");
 
-        // result.get();
-        // App->scene->Load(root);
     }
 
 };
