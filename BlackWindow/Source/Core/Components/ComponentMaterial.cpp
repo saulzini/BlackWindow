@@ -67,14 +67,21 @@ void ComponentMaterial::OnSave(Json::Value &owner)
 
 void ComponentMaterial::OnLoad(const Json::Value &componentJson)
 {
-    textureId = TextureImporter::TextureLoader::GetTextureIdByPath(
-        componentJson["diffuseTexturePath"].asString(),
-        componentJson["diffuseDirectoryPath"].asString());
+    std::string texturePath = componentJson["diffuseTexturePath"].asString();
+    if (texturePath != "")
+    {
+        textureId = TextureImporter::TextureLoader::GetTextureIdByPath(
+            texturePath,
+            componentJson["diffuseDirectoryPath"].asString());
+    }
 
-    specularId = TextureImporter::TextureLoader::GetTextureIdByPath(
-        componentJson["specularTexturePath"].asString(),
-        componentJson["specularDirectoryPath"].asString());
-
+    texturePath = componentJson["specularTexturePath"].asString();
+    if (texturePath != "")
+    {
+        specularId = TextureImporter::TextureLoader::GetTextureIdByPath(
+            texturePath,
+            componentJson["specularDirectoryPath"].asString());
+    }
     diffuseTurn = componentJson["diffuseTurn"].asBool();
     shininess = componentJson["shininess"].asFloat();
 }

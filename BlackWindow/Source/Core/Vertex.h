@@ -10,6 +10,10 @@ public:
     float3 Normal;
     float2 TexCoords;
 
+    float3 GetPosition() const {
+        return Position;
+    }
+
     void Save(Json::Value &component)
     {
         Json::Value vertex;
