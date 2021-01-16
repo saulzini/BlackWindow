@@ -58,7 +58,7 @@ public:
         }      
         float3 arrowFrom = componentTransform->GetPosition();
         direction = float3(1.0f, 1.0f, 0.0f);
-        float3 arrowTo = arrowFrom + direction;
+        float3 arrowTo = arrowFrom + float3(1.0f, 1.0f, 0.0f);;
         float radius = 0.5f;
         float3 offset;
         dd::sphere(arrowFrom, dd::colors::Yellow, 1.f, 1.0f);

@@ -142,34 +142,27 @@ bool GameObject::isChild(GameObject *lookingChild)
 }
 
 
-void GameObject::CalculateBox()
+ void GameObject::CalculateBox( )
 {
     float3 min = float3(-1, -1, -1);
     float3 max = float3(1, 1, 1);
 
-    std::queue<GameObject*> searchQueue;
-    searchQueue.push(this);
-    GameObject* current = nullptr;
-    while (!searchQueue.empty())
+
+  //  GameObject* current = nullptr;
+
+    std::vector<GameObject*> currentChildren = this->GetChildren();
+
+    for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
     {
-        current = searchQueue.front();
-        searchQueue.pop();
+        (*it)->CalculateBox();
+
+    }
 
 
-        std::vector<GameObject*> currentChildren = current->GetChildren();
-
-        if (currentChildren.size() > 0)
-        {
-            for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
-            {
-                searchQueue.push((GameObject*)*it);
-            }
-        }
-
-        if (current->GetMeshComponent() != nullptr) {
+        if (this->GetMeshComponent() != nullptr) {
 
 
-            std::vector<Vertex> componentMesh = current->GetMeshComponent()->GetVertices();
+            std::vector<Vertex> componentMesh = this->GetMeshComponent()->GetVertices();
 
             for (std::vector<Vertex>::iterator it = componentMesh.begin(); it != componentMesh.end(); ++it)
             {
@@ -190,13 +183,19 @@ void GameObject::CalculateBox()
             }
 
         }
-        globalBox = new AABB(min, max);
+        
+        if (this->GetTransformComponent() != nullptr) {
+            globalBox = new AABB(min.Mul(this->GetTransformComponent()->GetScale()) + this->GetTransformComponent()->GetPosition() ,
+                                max.Mul(this->GetTransformComponent()->GetScale()) + this->GetTransformComponent()->GetPosition());
+
+           
+        }
 
         if (globalBox != nullptr) {
             dd::aabb(globalBox->minPoint, globalBox->maxPoint, dd::colors::Red);
         }
     }
-}
+
 
 void GameObject::Save()
 {
