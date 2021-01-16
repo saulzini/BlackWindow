@@ -14,7 +14,12 @@
 class ComponentMaterial : public Component
 {
 public:
-    ComponentMaterial(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::MATERIAL) : Component(owner, type){};
+    ComponentMaterial(GameObject *owner = nullptr, ComponentTypes type = ComponentTypes::MATERIAL) : Component(owner, type){
+        textureId = 0;
+        specularId = 0;
+        diffuseTurn = true;
+        shininess = 0.0f;
+    };
 
     void OnEditor() override
     {
@@ -22,6 +27,10 @@ public:
         {
 
             ImGui::Text("Diffuse");
+            if (diffuseTurn){
+                ImGui::Text("Selected");
+            }
+            
             ImVec2 uvMin = ImVec2(0.0f, 0.0f);                 // Top-left
             ImVec2 uvMax = ImVec2(1.0f, 1.0f);                 // Lower-right
             ImVec4 tintCol = ImVec4(1.0f, 1.0f, 1.0f, 1.0f);   // No tint
@@ -30,10 +39,13 @@ public:
             ImGui::Image((ImTextureID)textureId, sizeImageDisplay, uvMin, uvMax, tintCol, borderCol);
 
             ImGui::Text("Specular");
+            if (!diffuseTurn){
+                ImGui::Text("Selected");
+            }
             ImGui::Image((ImTextureID)specularId, sizeImageDisplay, uvMin, uvMax, tintCol, borderCol);
         }
 
-        if (ImGui::CollapsingHeader("OPTIONS"))
+        if (ImGui::CollapsingHeader("Options"))
         {
             ImGui::DragFloat("Shininess", &shininess, 1.0f, 0.0f, 255.0f);
         }
@@ -47,6 +59,8 @@ public:
         materialJson["diffuseDirectoryPath"] = Json::stringValue;
         materialJson["specularTexturePath"] = Json::stringValue;
         materialJson["specularDirectoryPath"] = Json::stringValue;
+        materialJson["diffuseTurn"] = diffuseTurn;
+        materialJson["shininess"] = shininess;
 
         ResourcesManager resourceManager = App->GetResourcesManager();
 
@@ -80,6 +94,10 @@ public:
         specularId = TextureImporter::TextureLoader::GetTextureIdByPath(
             componentJson["specularTexturePath"].asString(),
             componentJson["specularDirectoryPath"].asString());
+        
+        diffuseTurn =  componentJson["diffuseTurn"].asBool();
+        shininess = componentJson["shininess"].asFloat();
+
     }
 
     void setTextureId(const unsigned int textureId)
@@ -94,18 +112,14 @@ public:
 
     void SetTexture(const unsigned int texture)
     {
-        if (textureId == 0)
+        if (diffuseTurn)
         {
             textureId = texture;
+            diffuseTurn = false;
+            return;
         }
-        else if (specularId == 0)
-        {
-            specularId = texture;
-        }
-        else
-        {
-            App->editor->consoleWindow->AddLog("No available spaces on this material");
-        }
+        specularId = texture;
+        diffuseTurn = true;
     }
 
     unsigned int GetTextureId()
@@ -125,5 +139,6 @@ public:
 private:
     unsigned int textureId;
     unsigned int specularId;
-    float shininess = 0;
+    bool diffuseTurn;
+    float shininess;
 };

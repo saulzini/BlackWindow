@@ -30,6 +30,9 @@ public:
             Json::UInt index = (*it);
             componentJson["indices"].append(index);
         }
+
+        owner["components"].append(componentJson);
+
     }
 
     void OnEditor() override

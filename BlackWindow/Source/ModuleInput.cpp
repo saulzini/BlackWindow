@@ -120,7 +120,6 @@ update_status ModuleInput::PreUpdate(float deltaTime)
 			case SDL_DROPFILE:       // In case if dropped file
 				filePath = event.drop.file;
 				DropperHandler::DropFileIntoWindow(filePath);
-				
 			break;
 
 		case SDL_MOUSEBUTTONDOWN:
