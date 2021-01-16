@@ -27,7 +27,6 @@ protected:
   
     ComponentMesh* componentMesh;
     ComponentMaterial * materialComponent;
-    ComponentMesh *meshComponent;
     ComponentTransform *transformComponent;
     ComponentMeshRenderer *meshRendererComponent;
     AABB globalBoundingBox ;
