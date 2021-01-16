@@ -4,6 +4,7 @@
 #include "Core/Program/Program.h"
 #include "ModuleCamera.h"
 #include "ModuleWindow.h"
+#include "ModuleInput.h"
 #include "ModuleDebugDraw.h"
 #include "Application.h"
 #include "Math/float4x4.h"
@@ -62,11 +63,11 @@ bool ModuleScene::Init()
 
 	Camera = GameObjectFactory::CreateGameObject(GameObjectTypes::CAMERA, root, "Camera", program);
 	root->AddChildren(Camera);
-	Camera->GetTransformComponent()->SetPosition(float3(0.0f, 1.0f, 0.0f));
+	//Camera->GetTransformComponent()->SetPosition(float3(0.0f, 1.0f, 0.0f));
 
-	house->GetTransformComponent()->SetScale(float3(0.01f, 0.01f, 0.01f));
+	//house->GetTransformComponent()->SetScale(float3(0.01f, 0.01f, 0.01f));
 
-	Light->GetTransformComponent()->SetPosition(float3(0.0f, 5.0f, 3.0f));
+	//Light->GetTransformComponent()->SetPosition(float3(0.0f, 5.0f, 3.0f));
 
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
 
@@ -91,7 +92,7 @@ update_status ModuleScene::Update(float deltaTime)
 
 	root->SetProjectionMatrix(proj);
 	root->SetViewMatrix(view);
-	//root->CalculateBox();
+	root->CalculateBox();
 	root->Update();
 
 	GLint ks = glGetUniformLocation(program, "ks");
@@ -115,8 +116,8 @@ update_status ModuleScene::Update(float deltaTime)
 	float3 view_Pos = App->camera->cameraPosition;
 	float3 color_Ambient = { 1.0f, 1.0f, 1.0f };
 
-	glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
-	glUniform1i(glGetUniformLocation(program, "material.specular"), 1);
+	/*glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
+	glUniform1i(glGetUniformLocation(program, "material.specular"), 1);*/
 
 	glUniform3f(light_pos,			 lightpos[0],			 lightpos[1],				lightpos[2]);
 	glUniform3f(light_ambient,   lightambient[0],		 lightambient[1],			lightambient[2]);

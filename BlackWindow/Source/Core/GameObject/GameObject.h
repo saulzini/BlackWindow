@@ -61,7 +61,7 @@ public:
 
     Component *AddComponent(ComponentTypes type);
     void AddComponent(Component *component);
-    void CalculateBox();
+    void CalculateBox( );
     void AddChildren(GameObject *gameObject);
     void SetProjectionMatrix(const float4x4 &projection);
     void SetViewMatrix(const float4x4 &projection);

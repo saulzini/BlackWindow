@@ -20,12 +20,15 @@ public:
         {
             return;
         }
-
+        
         //Setting frustum
+        frustum.SetPos(float3::zero);
+        frustum.SetFront(float3::unitZ);
+        frustum.SetUp(float3::unitY);
         frustum.SetKind(FrustumSpaceGL, FrustumRightHanded);
         frustum.SetViewPlaneDistances(0.1f, 10.0f);
         frustum.SetHorizontalFovAndAspectRatio(50.0f, 1.3f);
-        frustum.SetFrame(transformComponent->GetPosition(), -float3::unitZ, float3::unitY);
+
     };
 
     void OnEditor() override
@@ -45,14 +48,15 @@ public:
         {
             return;
         }
-        frustum.SetFrame(transformComponent->GetPosition(), -float3::unitZ, float3::unitY);
 
+        frustum.SetPos(transformComponent->GetPosition());
         float4x4 view = frustum.ViewMatrix();
         float4x4 proj = frustum.ProjectionMatrix();
-        view = float4x4::identity;
-        // view.Transpose();
-        float4x4 clipMatrix = proj * -view * owner->GetModelMatrix();
-        dd::frustum(clipMatrix.Inverted(), float3(1.0f, 1.0f, 1.0f), 1.0f);
+        view.Transpose();
+        proj.Transpose();
+        float4x4 clipMatrix = proj * view * owner->GetModelMatrix();
+        clipMatrix.Inverse();
+        dd::frustum(clipMatrix, float3(1.0f, 1.0f, 1.0f), 0.5f);
     }
 
     void OnSave(Json::Value &owner) override

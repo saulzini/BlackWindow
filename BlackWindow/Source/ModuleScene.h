@@ -49,7 +49,7 @@ public:
 	}
 
 	 void SaveScene();
-	
+	 void PickObject();
 	void Load(const Json::Value& parent);
 	void DeleteGameObjects();
 

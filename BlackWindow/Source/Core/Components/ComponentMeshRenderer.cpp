@@ -66,6 +66,9 @@ void ComponentMeshRenderer::Update()
     glBindVertexArray(vao);
     glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
     glBindVertexArray(1);
+
+    glUniform1i(glGetUniformLocation(owner->GetProgram(), "material.diffuse"), 0);
+    glUniform1i(glGetUniformLocation(owner->GetProgram(), "material.specular"), 1);
 }
 
 void ComponentMeshRenderer::OnSave(Json::Value& owner) 
