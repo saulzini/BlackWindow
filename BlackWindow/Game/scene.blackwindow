@@ -9,20 +9,22 @@
 					"components" : 
 					[
 						{
-							"position" : [ 0.0, 0.0, 0.0 ],
-							"rotation" : [ 0.0, 0.0, 0.0 ],
-							"scale" : [ 1.0, 1.0, 1.0 ],
+							"position" : [ 1.0, 2.0, 3.0 ],
+							"rotation" : [ 7.0, 8.0, 9.0 ],
+							"scale" : [ 4.0, 5.0, 6.0 ],
 							"type" : 1
 						},
 						{
 							"diffuseDirectoryPath" : "",
 							"diffuseTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga",
+							"diffuseTurn" : true,
+							"shininess" : 66.0,
 							"specularDirectoryPath" : "",
-							"specularTexturePath" : "W:\\2014_04 - MiniShooter\\export\\Bakes\\Hearse_AO.tga",
+							"specularTexturePath" : "",
 							"type" : 5
 						}
 					],
-					"id" : 916953070,
+					"id" : 1974558771,
 					"name" : "Hearse"
 				}
 			],
@@ -35,7 +37,7 @@
 					"type" : 1
 				}
 			],
-			"id" : 471823542,
+			"id" : 1419716133,
 			"name" : "Hearse"
 		},
 		{
@@ -52,17 +54,17 @@
 					"azimuth" : 0.0,
 					"drsdaMatrix" : 
 					[
-						[ 1.0, 1.0, 0.0 ],
-						[ -431602080.0, -431602080.0, -431602080.0 ],
-						[ -431602080.0, -431602080.0, -431602080.0 ],
-						[ -431602080.0, -431602080.0, -431602080.0 ],
-						[ -431602080.0, -431602080.0, -431602080.0 ]
+						[ 0.0, 0.0, 0.0 ],
+						[ 0.0, 0.0, 0.0 ],
+						[ 0.0, 0.0, 0.0 ],
+						[ 0.0, 0.0, 0.0 ],
+						[ 0.0, 0.0, 0.0 ]
 					],
 					"polar" : 0.0,
 					"type" : 3
 				}
 			],
-			"id" : 943312101,
+			"id" : 1738016733,
 			"name" : "Light"
 		},
 		{
@@ -85,7 +87,7 @@
 					"verticalFov" : -0.20470736920833588
 				}
 			],
-			"id" : 2134374814,
+			"id" : 349394331,
 			"name" : "Camera"
 		}
 	],

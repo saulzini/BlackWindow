@@ -4,7 +4,6 @@
 #include <Math/float3.h>
 #include "imgui.h"
 #include "Math/Quat.h"
-//#include "Core/GameObject/GameObject.h"
 
 class ComponentTransform : public Component
 {
@@ -21,7 +20,6 @@ public:
             return;
         }
         position = newPosition;
-       // this->owner->CalculateModelMatrix();
     }
 
     float3 GetPosition() const 
