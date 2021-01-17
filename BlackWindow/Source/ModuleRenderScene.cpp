@@ -1,6 +1,10 @@
 #include "ModuleRenderScene.h"
-#include "Application.h"
+#include "ModuleScene.h"
+#include "Geometry/Plane.h"
+#include "ModuleWindow.h"
 #include "Geometry/Frustum.h"
+#include "Application.h"
+#include "Core/GameObject/GameObject.h"
 #include "ModuleInput.h"
 #include <Dummy.h>
 #include "Geometry/LineSegment.h"
@@ -17,7 +21,7 @@ ModuleRenderScene::~ModuleRenderScene()
 
 bool ModuleRenderScene::Init()
 {
-	//frustum = App->camera->GetFrustum();
+	frustum = App->camera->GetFrustum();
 	return true;
 }
 
@@ -28,15 +32,25 @@ update_status ModuleRenderScene::PreUpdate(float deltaTime)
 
 update_status ModuleRenderScene::Update(float deltaTime)
 {
-	if(App->input->GetMouseButtonDown(SDL_BUTTON_LEFT)) {
-		iPoint newMousePosition = App->input->GetMouseMotion();
-		Frustum frustum = App->camera->GetFrustum();
+	if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
+		GameObject* root = App->scene->GetRoot();
+		if (root == nullptr) {
+			return UPDATE_CONTINUE;
+		}
+
+		iPoint newMousePosition = App->input->GetMousePosition();
 		Triangle* my_ray;
-		LineSegment picking = frustum.UnProjectLineSegment(newMousePosition.x, newMousePosition.y);
-		//bool hit = my_ray.Intersects()
+		float width = (float) App->window->GetWidth();
+		float height = (float) App->window->GetHeight();
+		float normalized_x = -(1.0f - (float(newMousePosition.x) * 2.0f) / width);
+		float normalized_y = 1.0f - (float(newMousePosition.y) * 2.0f) / height;
+		LineSegment picking = App->camera->GetFrustum().UnProjectLineSegment(normalized_x, normalized_y);
+		root->CheckForRayCast(picking);
+
 	}
 	return UPDATE_CONTINUE;
 }
+
 
 update_status ModuleRenderScene::PostUpdate(float deltaTime)
 {

@@ -463,6 +463,7 @@
     <ClInclude Include="BlackWindow\Source\ModuleEditor.h" />
     <ClInclude Include="BlackWindow\Source\ModuleInput.h" />
     <ClInclude Include="BlackWindow\Source\ModuleRender.h" />
+    <ClInclude Include="BlackWindow\Source\ModuleRenderScene.h" />
     <ClInclude Include="BlackWindow\Source\ModuleScene.h" />
     <ClInclude Include="BlackWindow\Source\ModuleWindow.h" />
     <ClInclude Include="BlackWindow\Source\stb_image.h" />
@@ -475,7 +476,6 @@
     <ClInclude Include="BlackWindow\Source\UIWindow\PreviewWindow.h" />
     <ClInclude Include="BlackWindow\Source\UIWindow\ToolbarWindow.h" />
     <ClInclude Include="Leaks.h" />
-    <ClInclude Include="ModuleRenderScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BlackWindow\Resources\gpudetect\DeviceId.cpp" />

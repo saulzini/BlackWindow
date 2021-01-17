@@ -1,10 +1,12 @@
 #include "GameObject.h"
+#include "Geometry/Triangle.h"
 #include "Core/Components/ComponentFactory.h"
 #include "Core/GameObject/GameObjectTypes.h"
 #include "Math/float3x3.h"
 #include "GL/glew.h"
 #include "Geometry/AABB.h"
 #include "Math/Quat.h"
+#include "Geometry/LineSegment.h"
 #include <queue> // std::queue
 #include <stack> // std::stack
 #include "debugdraw.h"
@@ -145,31 +147,63 @@ bool GameObject::isChild(GameObject *lookingChild)
 
 void GameObject::CalculateMeshBoundingBox()
 {
-    selfBoundingBox.SetNegativeInfinity();
+   
 
     if (componentMesh)
     {
+        selfBoundingBox.SetNegativeInfinity();
         std::vector<float3> verticesPosition = componentMesh->GetVerticesPosition();
         selfBoundingBox.Enclose(&verticesPosition[0], static_cast<int>(verticesPosition.size()));
     }
 }
+
 void GameObject::CalculateBox()
 {
     std::vector<GameObject *> currentChildren = this->GetChildren();
-
     for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
     {
         (*it)->CalculateBox();
     }
-    globalBoundingBox.SetNegativeInfinity();
+
     if (componentMesh != nullptr)
     {
+        globalBoundingBox.SetNegativeInfinity();
         selfObb = selfBoundingBox.Transform(modelMatrix);
         globalBoundingBox.Enclose(selfObb);
         dd::aabb(globalBoundingBox.minPoint, globalBoundingBox.maxPoint, dd::colors::Red);
     }
+    else {
+
+    }
 }
 
+
+void GameObject::CheckForRayCast(LineSegment ray) {
+
+    std::vector<GameObject*> currentChildren = this->GetChildren();
+
+   
+    for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+    {
+        GameObject* aux = ((GameObject*)*it);
+        ((GameObject*)*it)->CheckForRayCast(ray);
+    }
+       if ( (this)->CheckRayCast(ray)) {
+            int i = 0;
+        }
+            
+    
+}
+
+
+bool GameObject::CheckRayCast( LineSegment ray) {
+    Triangle tri;
+
+    if (ray.Intersects(this->GlobalBoundingBox())) {
+        return true;
+    }
+
+}
 void GameObject::Save()
 {
     Json::Value jsonRoot;
