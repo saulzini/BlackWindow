@@ -15,7 +15,7 @@
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
 #include "Core/SceneFileManager/SceneFileManager.h"
-#include <string> 
+#include <string>
 
 Component *GameObject::AddComponent(ComponentTypes type)
 {
@@ -139,7 +139,7 @@ bool GameObject::isChild(GameObject *lookingChild)
         {
             for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
             {
-                searchQueue.push((GameObject *)*it);
+                searchQueue.push(*it);
             }
         }
     }
@@ -149,8 +149,6 @@ bool GameObject::isChild(GameObject *lookingChild)
 
 void GameObject::CalculateMeshBoundingBox()
 {
-   
-
     if (componentMesh)
     {
         selfBoundingBox.SetNegativeInfinity();
@@ -177,8 +175,17 @@ void GameObject::CalculateBox()
 }
 
 
-void GameObject::CheckForRayCast(LineSegment ray) {
+void GameObject::InitializeCheckForRayCast(LineSegment ray) 
+{
+    for (std::vector<GameObject*>::iterator it = children.begin(); it != children.end(); ++it)
+    {
+        (*it)->CheckForRayCast(ray);
+    }
+}
 
+void GameObject::CheckForRayCast(LineSegment ray)
+{
+    std::vector<GameObject *> results;
 
     std::queue<GameObject *> searchQueue;
     searchQueue.push(this);
@@ -187,45 +194,73 @@ void GameObject::CheckForRayCast(LineSegment ray) {
     {
         current = searchQueue.front();
         searchQueue.pop();
-       
+
         std::vector<GameObject *> currentChildren = current->GetChildren();
 
         if (currentChildren.size() > 0)
         {
             for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
             {
-                searchQueue.push((GameObject *)*it);
+                searchQueue.push(*it);
             }
+        }
 
-            if ( (this)->CheckRayCast(ray)) {
-                int i = 0;
+        if (current-> GetMeshComponent() ){
+
+            bool hit = current->HitByRayCast(ray);
+            if (hit)
+            {
+                results.push_back(current);
+                App->editor->consoleWindow->AddLog("Listed : %s", current->GetName().c_str());
             }
         }
     }
+
+
+    //results;
 }
 
-
-bool GameObject::CheckRayCast( LineSegment ray) {
-
-
-    if (ray.Intersects(this->GlobalBoundingBox())) {
-       return( this->CheckMeshRayCast(ray));
-    }
-
-}
-
-bool GameObject::CheckMeshRayCast(LineSegment ray) {
-    Triangle tr;
-    
-    /*for (size_t i = 0; i < this->GetMeshComponent()->GetVertices().size();)
+bool GameObject::HitByRayCast(LineSegment ray)
+{
+    // checking against aabb
+    if ( ray.Intersects(globalBoundingBox) )
     {
-        tr.a = GetMeshComponent()->GetVertices()[GetMeshComponent()->GetIndices()[i++] * 3];
-        tr.b = GetMeshComponent()->GetVertices()[GetMeshComponent()->GetIndices()[i++] * 3];
-        tr.c = GetMeshComponent()->GetVertices()[GetMeshComponent()->GetIndices()[i++] * 3];
-    }*/
-    //ray.Intersects(this->GetMeshComponent());
-    //std::vector<Component*> componentMesh = this->GetMeshComponent();
-    return true;
+        // check agains mesh
+        return CheckMeshRayCast(ray);
+    }
+    return false;
+}
+
+bool GameObject::CheckMeshRayCast(LineSegment ray)
+{
+
+    if (componentMesh == nullptr){
+        return false;
+    }
+    // test all triangles
+    LineSegment localLineSegment(ray);
+    localLineSegment.Transform(GetModelMatrix().Inverted());
+
+    
+    Triangle meshTriangle;
+    std::vector<Vertex> vertices =  componentMesh->GetVertices();
+    std::vector<unsigned int> indices =  componentMesh->GetIndices();
+
+    // TODO::Not enough time
+    // for (unsigned int i = 0; i < indices.size();)
+    // {
+    //     meshTriangle.a = vertices[indices[i++]].GetPosition();
+    //     meshTriangle.b = vertices[indices[i++]].GetPosition();
+    //     meshTriangle.c = vertices[indices[i++]].GetPosition();
+
+    //     float distance;
+    //     float3 hitPoint;
+    //     if (localLineSegment.Intersects(meshTriangle, &distance, &hitPoint))
+    //     {
+    //         return true;
+    //     }
+    // }
+    return false;
 }
 void GameObject::Save()
 {
@@ -267,7 +302,7 @@ void GameObject::Export(Json::Value &parent)
     }
 
     // Saving to file
-    SceneFileManager::ExportFile( std::to_string(GetId()).c_str(), currentJson);
+    SceneFileManager::ExportFile(std::to_string(GetId()).c_str(), currentJson);
 
     // Addint to parent the id for the generated file
     Json::Value currentJsonGame;

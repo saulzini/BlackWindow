@@ -69,7 +69,7 @@ public:
     AABB GlobalBoundingBox() const {
         return globalBoundingBox;
     }
-    bool CheckRayCast(LineSegment ray);
+    bool HitByRayCast(LineSegment ray);
     bool CheckMeshRayCast(LineSegment ray);
 
     Component *AddComponent(ComponentTypes type);
@@ -79,6 +79,8 @@ public:
     void SetProjectionMatrix(const float4x4 &projection);
     void SetViewMatrix(const float4x4 &projection);
     void CalculateMeshBoundingBox();
+    void InitializeCheckForRayCast(LineSegment ray);
+
     unsigned int  GetProgram() {
         return program;
     }
@@ -161,4 +163,6 @@ public:
     ComponentMeshRenderer *GetMeshRendererComponent() const{
         return meshRendererComponent;
     }
+
+
 };
