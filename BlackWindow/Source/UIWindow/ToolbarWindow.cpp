@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleCamera.h"
 #include "Core/Time/DeltaTime.h"
+#include "Core/SceneFileManager/SceneFileManager.h"
 void ToolbarWindow::Update()
 {
     if (show)
@@ -18,6 +19,8 @@ void ToolbarWindow::Update()
         if (ImGui::SmallButton("Play"))
         {
             App->deltaTime.SetTimeScale(1.0f);
+            SceneFileManager::SaveForPlayThread();
+            timer = TIMERSTATE::RUNNING;
         }
         ImGui::SameLine();
 
@@ -25,13 +28,28 @@ void ToolbarWindow::Update()
         if (ImGui::SmallButton("Pause"))
         {
             App->deltaTime.SetTimeScale(0.0f);
+            timer = TIMERSTATE::PAUSE;
         }
         ImGui::SameLine();
 
         if (ImGui::SmallButton("Stop"))
         {
             App->deltaTime.SetTimeScale(0.0f);
-            App->camera->ResetCamera();
+            SceneFileManager::LoadForPlay();
+            timer = TIMERSTATE::STOP;
+        }
+
+        switch (timer)
+        {
+        case TIMERSTATE::STOP:
+            ImGui::Text("Timer stop");
+            break;
+        case TIMERSTATE::PAUSE:
+            ImGui::Text("Timer pause");
+            break;
+        default:
+            ImGui::Text("Timer running");
+            break;
         }
 
         end();
