@@ -16,13 +16,13 @@ public:
 
     static void SaveScene() {
         App->editor->consoleWindow->AddLog("Saving scene ....");
-        App->scene->SaveScene("scene.blackwindow");
+        App->scene->SaveScene("saves/scene.blackwindow");
         App->editor->consoleWindow->AddLog("Scene saved");
     }
 
     static void SaveForPlay() {
         App->editor->consoleWindow->AddLog("Saving scene for play ....");
-        App->scene->SaveScene("scene-play.blackwindow");
+        App->scene->SaveScene("saves/scene-play.blackwindow");
         App->editor->consoleWindow->AddLog("Scene saved for play");
     }
 
@@ -41,11 +41,11 @@ public:
     }
 
     static void LoadScene() {
-        LoadFromFile("scene.blackwindow");
+        LoadFromFile("saves/scene.blackwindow");
     }
 
     static void LoadForPlay() {
-        LoadFromFile("scene-play.blackwindow");
+        LoadFromFile("saves/scene-play.blackwindow");
     }
 
 

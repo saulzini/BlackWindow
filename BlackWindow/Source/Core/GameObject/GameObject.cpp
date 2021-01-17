@@ -302,7 +302,10 @@ void GameObject::Export(Json::Value &parent)
     }
 
     // Saving to file
-    SceneFileManager::ExportFile(std::to_string(GetId()).c_str(), currentJson);
+    std::string buf = "saves/";
+	buf.append(std::to_string(GetId()).c_str()).c_str();
+
+    SceneFileManager::ExportFile(buf.c_str(), currentJson);
 
     // Addint to parent the id for the generated file
     Json::Value currentJsonGame;

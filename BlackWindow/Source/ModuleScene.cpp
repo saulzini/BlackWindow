@@ -68,7 +68,7 @@ bool ModuleScene::Init()
 	//Light->GetTransformComponent()->SetPosition(float3(0.0f, 5.0f, 3.0f));
 
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
-	SceneFileManager::LoadFromFile("scene.blackwindow");
+	SceneFileManager::LoadScene();
 
 	//Light->Update();
 	
@@ -101,13 +101,14 @@ update_status ModuleScene::Update(float deltaTime)
 	GLint kd = glGetUniformLocation(program, "kd");
 	GLint N = glGetUniformLocation(program, "material.shininess");
 
-	GLint light_pos = glGetUniformLocation(program, "light_pos");
+	//GLint light_pos = glGetUniformLocation(program, "light_pos");
 	GLint light_ambient = glGetUniformLocation(program, "light.ambient");
 	GLint light_diffuse = glGetUniformLocation(program, "light.diffuse");
 	GLint light_specular = glGetUniformLocation(program, "light.specular");
 	GLint viewPos = glGetUniformLocation(program, "viewPos");
 	GLint colorAmbient = glGetUniformLocation(program, "colorAmbient");
-	
+
+
 
 	//glUniform1f(N, 32);
 
@@ -124,7 +125,7 @@ update_status ModuleScene::Update(float deltaTime)
 	/*glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
 	glUniform1i(glGetUniformLocation(program, "material.specular"), 1);*/
 
-	glUniform3f(light_pos,			 lightpos[0],			 lightpos[1],				lightpos[2]);
+	//glUniform3f(light_pos,			 lightpos[0],			 lightpos[1],				lightpos[2]);
 	glUniform3f(light_ambient,   lightambient[0],		 lightambient[1],			lightambient[2]);
 	glUniform3f(light_diffuse,	 lightdiffuse[0],		 lightdiffuse[1],			lightdiffuse[2]);
 	glUniform3f(light_specular, lightspecular[0],		lightspecular[1],		   lightspecular[2]);

@@ -42,7 +42,9 @@ namespace GameObjectFactory
     {
 
         Json::Value nodeRoot;
-        std::ifstream file( jRoot["id"].asCString() ) ;
+        std::string buf = "saves/";
+        buf.append((jRoot["id"].asCString()));
+        std::ifstream file(buf) ;
         if(file.fail()){
             App->editor->consoleWindow->AddLog( "%s not exits" , jRoot["id"].asCString());
             return nullptr;
