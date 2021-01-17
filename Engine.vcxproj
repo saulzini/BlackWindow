@@ -463,6 +463,7 @@
     <ClInclude Include="BlackWindow\Source\ModuleEditor.h" />
     <ClInclude Include="BlackWindow\Source\ModuleInput.h" />
     <ClInclude Include="BlackWindow\Source\ModuleRender.h" />
+    <ClInclude Include="BlackWindow\Source\ModuleRenderScene.h" />
     <ClInclude Include="BlackWindow\Source\ModuleScene.h" />
     <ClInclude Include="BlackWindow\Source\ModuleWindow.h" />
     <ClInclude Include="BlackWindow\Source\stb_image.h" />
@@ -553,6 +554,7 @@
     <ClCompile Include="BlackWindow\Source\ModuleEditor.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleInput.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleRender.cpp" />
+    <ClCompile Include="BlackWindow\Source\ModuleRenderScene.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleScene.cpp" />
     <ClCompile Include="BlackWindow\Source\ModuleWindow.cpp" />
     <ClCompile Include="BlackWindow\Source\UIWindow\AboutWindow.cpp" />

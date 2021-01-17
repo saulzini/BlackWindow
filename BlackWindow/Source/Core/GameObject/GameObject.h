@@ -59,6 +59,19 @@ public:
         return children;
     }
 
+
+    AABB GetSelfBoundingBox() const{
+        return selfBoundingBox;
+    }
+    OBB GetSelfObb() const {
+        return selfObb;
+    }
+    AABB GlobalBoundingBox() const {
+        return globalBoundingBox;
+    }
+    bool CheckRayCast(LineSegment ray);
+    bool CheckMeshRayCast(LineSegment ray);
+
     Component *AddComponent(ComponentTypes type);
     void AddComponent(Component *component);
     void CalculateBox( );
@@ -69,6 +82,7 @@ public:
     unsigned int  GetProgram() {
         return program;
     }
+    void CheckForRayCast(LineSegment ray);
     std::vector<Component *> GetComponents()
     {
         return components;

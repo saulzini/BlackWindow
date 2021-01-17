@@ -344,6 +344,9 @@ float ModuleCamera::GetZoomSpeedFactor() const
 	return zoomSpeed;
 }
 
+Frustum ModuleCamera::GetFrustum()const {
+	return frustum;
+}
 float ModuleCamera::GetTurnSpeedFactor() const
 {
 	if (App->input->GetKey(SDL_SCANCODE_LSHIFT) || App->input->GetKey(SDL_SCANCODE_RSHIFT))

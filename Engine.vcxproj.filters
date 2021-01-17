@@ -237,6 +237,7 @@
     <ClCompile Include="BlackWindow\Source\Core\Components\ComponentCamera.cpp">
       <Filter>Core\Components</Filter>
     </ClCompile>
+    <ClCompile Include="BlackWindow\Source\ModuleRenderScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlackWindow\Source\Application.h" />
@@ -1142,6 +1143,7 @@
     <ClInclude Include="BlackWindow\Source\Core\Components\ComponentMeshRenderer.h">
       <Filter>Core\Components</Filter>
     </ClInclude>
+    <ClInclude Include="BlackWindow\Source\ModuleRenderScene.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shaders">

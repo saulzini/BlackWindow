@@ -42,7 +42,7 @@ protected:
 	float GetTurnSpeedFactor() const;
 	float GetRadiansAngleSpeedFactor() const;
 	float GetRadiansOrbit() const;
-
+	
 
 public:
 	ModuleCamera();
@@ -100,7 +100,7 @@ public:
 		}
 		speedFactor = factor;
 	}
-
+	Frustum GetFrustum() const;
 	void ResetCameraPosition();
 	void ResetCamera();
 	void ResetToDefaultSpeeds();
