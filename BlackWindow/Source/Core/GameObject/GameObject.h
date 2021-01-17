@@ -134,7 +134,7 @@ public:
 
     bool isChild(GameObject *lookingChild);
 
-    void Save();
+    void Save(const char * name);
     void Export(Json::Value &parent);
 
     float4x4 GetModelMatrix() const

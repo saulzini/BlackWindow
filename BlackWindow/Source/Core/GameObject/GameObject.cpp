@@ -262,7 +262,7 @@ bool GameObject::CheckMeshRayCast(LineSegment ray)
     // }
     return false;
 }
-void GameObject::Save()
+void GameObject::Save(const char *name)
 {
     Json::Value jsonRoot;
     jsonRoot["name"] = this->GetName();
@@ -274,7 +274,7 @@ void GameObject::Save()
         (*it)->Export(jsonRoot);
     }
 
-    SceneFileManager::ExportFile("scene.blackwindow", jsonRoot);
+    SceneFileManager::ExportFile(name, jsonRoot);
 }
 
 void GameObject::Export(Json::Value &parent)
