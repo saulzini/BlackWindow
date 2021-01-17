@@ -174,13 +174,30 @@ void GameObject::CalculateBox()
         globalBoundingBox.Enclose(selfObb);
         dd::aabb(globalBoundingBox.minPoint, globalBoundingBox.maxPoint, dd::colors::Red);
     }
-    else {
-
-    }
 }
 
 
 void GameObject::CheckForRayCast(LineSegment ray) {
+
+
+    std::queue<GameObject *> searchQueue;
+    searchQueue.push(this);
+    GameObject *current = nullptr;
+    while (!searchQueue.empty())
+    {
+        current = searchQueue.front();
+        searchQueue.pop();
+       
+        std::vector<GameObject *> currentChildren = current->GetChildren();
+
+        if (currentChildren.size() > 0)
+        {
+            for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
+            {
+                searchQueue.push((GameObject *)*it);
+            }
+        }
+    }
 
   std::vector<GameObject*> currentChildren = this->GetChildren();
    
@@ -209,15 +226,15 @@ bool GameObject::CheckRayCast( LineSegment ray) {
 bool GameObject::CheckMeshRayCast(LineSegment ray) {
     Triangle tr;
     
-    for (size_t i = 0; i < this->GetMeshComponent()->GetVertices().size();)
+    /*for (size_t i = 0; i < this->GetMeshComponent()->GetVertices().size();)
     {
         tr.a = GetMeshComponent()->GetVertices()[GetMeshComponent()->GetIndices()[i++] * 3];
         tr.b = GetMeshComponent()->GetVertices()[GetMeshComponent()->GetIndices()[i++] * 3];
         tr.c = GetMeshComponent()->GetVertices()[GetMeshComponent()->GetIndices()[i++] * 3];
-    }
-    ray.Intersects(this->GetMeshComponent());
+    }*/
+    //ray.Intersects(this->GetMeshComponent());
     //std::vector<Component*> componentMesh = this->GetMeshComponent();
-
+    return true;
 }
 void GameObject::Save()
 {
