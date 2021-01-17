@@ -20,7 +20,7 @@ void ComponentCamera::Update()
 
     float4x4 view = frustum.ViewMatrix();
     float4x4 proj = frustum.ProjectionMatrix();
-    view = float4x4::identity;
+    // view = float4x4::identity;
     float4x4 cameraMatrix = float4x4::FromTRS(
             -transformComponent->GetPosition(),
             transformComponent->GetRotationQuat(),
