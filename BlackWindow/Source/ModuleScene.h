@@ -45,6 +45,9 @@ public:
 		return selected;
 	}
 
+	GameObject* GetLight() {
+		return Light;
+	}
 	void SetSelected(GameObject *gameObject)
 	{
 		if (selected != gameObject)
