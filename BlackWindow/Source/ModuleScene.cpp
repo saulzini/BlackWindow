@@ -56,7 +56,7 @@ bool ModuleScene::Init()
 	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\Hearse\\Hearse.FBX",program); 
 	house = model->LoadModel();
 	delete model;
-	root->AddChildren(house);
+	//root->AddChildren(house);
 
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
 	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program);
@@ -74,6 +74,7 @@ bool ModuleScene::Init()
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
 
 	//Light->Update();
+	
 	return true;
 }
 
@@ -84,8 +85,8 @@ update_status ModuleScene::PreUpdate(float deltaTime)
 
 update_status ModuleScene::Update(float deltaTime)
 {
-	ImVec2 pos = ImGui::GetWindowPos();
-	ImGuizmo::SetRect((float)pos.x, (float)pos.y, (float)App->window->GetWidth(), (float)App->window->GetHeight());
+
+	DrawGuizmo();
 	App->scene->sky->Draw();
 
 	worldTimer->Update();
@@ -155,6 +156,36 @@ bool ModuleScene::CleanUp()
 	worldTimer = nullptr;
 	
 	return true;
+}
+
+void ModuleScene::DrawGuizmo() {
+	//TODO :: NOT ENOUGHT TIME 
+	/* ImGuizmo::BeginFrame();
+	ImGuizmo::Enable(true);
+	ImVec2 pos = ImGui::GetWindowPos();
+	ImGuizmo::SetRect(App->camera->cameraPosition.x, App->camera->cameraPosition.y, App->window->GetWidth(), App->window->GetHeight());
+	float cameraView[16] =
+	{ 1.f, 0.f, 0.f, 0.f,
+	  0.f, 1.f, 0.f, 0.f,
+	  0.f, 0.f, 1.f, 0.f,
+	  0.f, 0.f, 0.f, 1.f };
+	float cameraProjection[16];
+	static const float identityMatrix[16] =
+	{ 1.f, 0.f, 0.f, 0.f,
+		0.f, 1.f, 0.f, 0.f,
+		0.f, 0.f, 1.f, 0.f,
+		0.f, 0.f, 0.f, 1.f };
+	if (GetSelected() == nullptr) {
+		return;
+	}
+	float4x4 model = GetSelected()->GetModelMatrix();
+	
+	float4x4 delta;
+	float4x4 view = App->camera->GetView();
+	view.Transpose();
+	ImGuizmo::DrawGrid(cameraView, cameraProjection, identityMatrix, 100.f);
+	ImGuizmo::SetDrawlist();
+	ImGuizmo::Manipulate((const float*)&view, (const float*)&App->camera->GetProjection() , ImGuizmo::TRANSLATE , ImGuizmo::WORLD, (float*)&model, (float*)&delta, NULL);*/ 
 }
 
 void ModuleScene::AddTexture(const char *texturePath) 
