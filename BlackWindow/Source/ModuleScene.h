@@ -52,7 +52,7 @@ public:
 	 void PickObject();
 	void Load(const Json::Value& parent);
 	void DeleteGameObjects();
-
+	void DrawGuizmo();
 	// For testing
 	Skybox* sky;
 	void AddTexture(const char *texturePath);

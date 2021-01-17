@@ -56,7 +56,7 @@ bool ModuleScene::Init()
 	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\Hearse\\Hearse.FBX",program); 
 	house = model->LoadModel();
 	delete model;
-	root->AddChildren(house);
+	//root->AddChildren(house);
 
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
 	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program);
@@ -84,8 +84,7 @@ update_status ModuleScene::PreUpdate(float deltaTime)
 
 update_status ModuleScene::Update(float deltaTime)
 {
-	ImVec2 pos = ImGui::GetWindowPos();
-	ImGuizmo::SetRect((float)pos.x, (float)pos.y, (float)App->window->GetWidth(), (float)App->window->GetHeight());
+	DrawGuizmo();
 	App->scene->sky->Draw();
 
 	worldTimer->Update();
@@ -155,6 +154,10 @@ bool ModuleScene::CleanUp()
 	worldTimer = nullptr;
 	
 	return true;
+}
+
+void ModuleScene::DrawGuizmo() {
+	
 }
 
 void ModuleScene::AddTexture(const char *texturePath) 
