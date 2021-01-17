@@ -21,8 +21,12 @@ void ComponentCamera::Update()
     float4x4 view = frustum.ViewMatrix();
     float4x4 proj = frustum.ProjectionMatrix();
     view = float4x4::identity;
+    float4x4 cameraMatrix = float4x4::FromTRS(
+            -transformComponent->GetPosition(),
+            transformComponent->GetRotationQuat(),
+            transformComponent->GetScale());
     // view.Transpose();
-    float4x4 clipMatrix = proj * -view * owner->GetModelMatrix();
+    float4x4 clipMatrix = proj * view * cameraMatrix;
     dd::frustum(clipMatrix.Inverted(), float3(1.0f, 1.0f, 1.0f), 1.0f);
 }
 
