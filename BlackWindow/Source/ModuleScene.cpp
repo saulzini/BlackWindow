@@ -24,6 +24,8 @@
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
 #include "Core/SceneFileManager/SceneFileManager.h"
+#include "ImGuizmo.h"
+
 ModuleScene::ModuleScene()
 {
 	program = 0;
@@ -82,6 +84,8 @@ update_status ModuleScene::PreUpdate(float deltaTime)
 
 update_status ModuleScene::Update(float deltaTime)
 {
+	ImVec2 pos = ImGui::GetWindowPos();
+	ImGuizmo::SetRect((float)pos.x, (float)pos.y, (float)App->window->GetWidth(), (float)App->window->GetHeight());
 	App->scene->sky->Draw();
 
 	worldTimer->Update();

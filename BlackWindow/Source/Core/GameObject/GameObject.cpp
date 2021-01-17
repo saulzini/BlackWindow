@@ -196,21 +196,12 @@ void GameObject::CheckForRayCast(LineSegment ray) {
             {
                 searchQueue.push((GameObject *)*it);
             }
-        }
-    }
 
-  std::vector<GameObject*> currentChildren = this->GetChildren();
-   
-    for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
-    {
-        GameObject* aux = ((GameObject*)*it);
-        ((GameObject*)*it)->CheckForRayCast(ray);
-    }
-       if ( (this)->CheckRayCast(ray)) {
-            int i = 0;
+            if ( (this)->CheckRayCast(ray)) {
+                int i = 0;
+            }
         }
-            
-    
+    }
 }
 
 
