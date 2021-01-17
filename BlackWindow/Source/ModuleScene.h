@@ -11,12 +11,11 @@ class ModuleScene : public Module
 
 private:
 	unsigned int program;
-	WorldTimer* worldTimer;
-	GameObject* root;
-	GameObject* selected;
-	GameObject* Light;
-	GameObject* Camera;
-	GameObject* house; // we must deleted!!!!!!!!
+	WorldTimer *worldTimer;
+	GameObject *root;
+	GameObject *selected;
+	GameObject *Light;
+	GameObject *Camera;
 public:
 	ModuleScene();
 	~ModuleScene();
@@ -27,45 +26,49 @@ public:
 	update_status PostUpdate(float deltaTime) override;
 	bool CleanUp() override;
 
-	Skybox* GetSkyBox() const {
+	Skybox *GetSkyBox() const
+	{
 		return sky;
 	}
 
-	GameObject* GetLight() const {
-		return Light;
-	}
-	GameObject* GetRoot() const {
+	GameObject *GetRoot() const
+	{
 		return root;
 	}
 
-	GameObject* GetSelected() const {
-		if (selected == root){
+	GameObject *GetSelected() const
+	{
+		if (selected == root)
+		{
 			return nullptr;
 		}
 		return selected;
 	}
 
-	void SetSelected(GameObject *gameObject){
-		if (selected != gameObject) {
+	void SetSelected(GameObject *gameObject)
+	{
+		if (selected != gameObject)
+		{
 			selected = gameObject;
 		}
 	}
 
-	 void SaveScene();
-	 void PickObject();
-	void Load(const Json::Value& parent);
+	void SaveScene(const char *name);
+	void PickObject();
+	void Load(const Json::Value &parent);
 	void DeleteGameObjects();
 	void DrawGuizmo();
 	// For testing
-	Skybox* sky;
+	Skybox *sky;
 	void AddTexture(const char *texturePath);
 	void AddModel(const char *modelPath);
 
-	WorldTimer* GetWorldTimer() const{
+	WorldTimer *GetWorldTimer() const
+	{
 		return worldTimer;
 	}
 
-	GameObject* CreateGameObject(GameObjectTypes type);
+	GameObject *CreateGameObject(GameObjectTypes type);
 
-	void LoadFromJson(const Json::Value& jRoot);
+	void LoadFromJson(const Json::Value &jRoot);
 };

@@ -201,7 +201,7 @@ void ModuleEditor::DrawMenu()
         if (ImGui::BeginMenu("View"))
         {
              if (ImGui::MenuItem("Load"))
-                SceneFileManager::LoadFromFile("scene.blackwindow");
+                SceneFileManager::LoadScene();
             if (ImGui::MenuItem("Save"))
                 SceneFileManager::Save();
             if (ImGui::MenuItem("Console window"))

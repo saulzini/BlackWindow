@@ -16,12 +16,22 @@ public:
 
     static void SaveScene() {
         App->editor->consoleWindow->AddLog("Saving scene ....");
-        App->scene->SaveScene();
+        App->scene->SaveScene("scene.blackwindow");
         App->editor->consoleWindow->AddLog("Scene saved");
+    }
+
+    static void SaveForPlay() {
+        App->editor->consoleWindow->AddLog("Saving scene for play ....");
+        App->scene->SaveScene("scene-play.blackwindow");
+        App->editor->consoleWindow->AddLog("Scene saved for play");
     }
 
     static void Save(){
         std::thread(SaveScene).detach();
+    }
+
+    static void SaveForPlayThread(){
+        std::thread(SaveForPlay).detach();
     }
 
     static void ExportFile(const char *name, const Json::Value &jsonNode){
@@ -29,6 +39,15 @@ public:
         std::ofstream outputFile(name);
         writer.write(outputFile, jsonNode);
     }
+
+    static void LoadScene() {
+        LoadFromFile("scene.blackwindow");
+    }
+
+    static void LoadForPlay() {
+        LoadFromFile("scene-play.blackwindow");
+    }
+
 
 	static void LoadFromFile(const char *name){
         

@@ -41,10 +41,10 @@ update_status ModuleRenderScene::Update(float deltaTime)
 		iPoint newMousePosition = App->input->GetMousePosition();
 		float width = (float) App->window->GetWidth();
 		float height = (float) App->window->GetHeight();
-		float normalized_x = -(1.0f - (float(newMousePosition.x) * 2.0f) / width);
-		float normalized_y = 1.0f - (float(newMousePosition.y) * 2.0f) / height;
-		LineSegment picking = App->camera->GetFrustum().UnProjectLineSegment(normalized_x, normalized_y);
-		root->CheckForRayCast(picking);
+		float normalizedX = -(1.0f - (float(newMousePosition.x) * 2.0f) / width);
+		float normalizedY = 1.0f - (float(newMousePosition.y) * 2.0f) / height;
+		LineSegment picking = App->camera->GetFrustum().UnProjectLineSegment(normalizedX, normalizedY);
+		root->InitializeCheckForRayCast(picking);
 
 	}
 	return UPDATE_CONTINUE;

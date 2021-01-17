@@ -53,18 +53,12 @@ bool ModuleScene::Init()
 	root = new GameObject(nullptr,"Scene",program);
 	sky = new Skybox();
 	// Setting gameobject
-	ModelImporter::Model *model =new ModelImporter::Model(".\\Assets\\Hearse\\Hearse.FBX",program); 
-	house = model->LoadModel();
-	delete model;
-	//root->AddChildren(house);
-
-	// SceneFileManager::LoadFromFile("scene.blackwindow");
 	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program);
 	root->AddChildren(Light);
 	Light->GetTransformComponent()->SetPosition(float3 (0.0f, 1.0f,0.0f));
 
-	Camera = GameObjectFactory::CreateGameObject(GameObjectTypes::CAMERA, root, "Camera", program);
-	root->AddChildren(Camera);
+	// Camera = GameObjectFactory::CreateGameObject(GameObjectTypes::CAMERA, root, "Camera", program);
+	// root->AddChildren(Camera);
 	//Camera->GetTransformComponent()->SetPosition(float3(0.0f, 1.0f, 0.0f));
 
 	//house->GetTransformComponent()->SetScale(float3(0.01f, 0.01f, 0.01f));
@@ -72,6 +66,7 @@ bool ModuleScene::Init()
 	//Light->GetTransformComponent()->SetPosition(float3(0.0f, 5.0f, 3.0f));
 
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
+	SceneFileManager::LoadFromFile("scene.blackwindow");
 
 	//Light->Update();
 	
@@ -115,7 +110,10 @@ update_status ModuleScene::Update(float deltaTime)
 
 	//glUniform1f(N, 32);
 
-	//float3 lightpos = Light->GetTransformComponent()->GetPosition();
+	float3 lightpos(0.0f,0.0f,0.0f);  
+	if (Light){
+		lightpos = Light->GetTransformComponent()->GetPosition();
+	}
 	float3 lightambient = { 0.2f, 0.2f, 0.2f };
 	float3 lightdiffuse = { 0.5f, 0.5f, 0.5f };
 	float3 lightspecular = { 1.0f, 1.0f, 1.0f };
@@ -223,8 +221,8 @@ GameObject* ModuleScene::CreateGameObject(GameObjectTypes type)
 }
 
 
- void ModuleScene::SaveScene(){
-	root->Save();
+ void ModuleScene::SaveScene(const char *name){
+	root->Save(name);
 }
 
 void ModuleScene::Load(const Json::Value& jRoot)
