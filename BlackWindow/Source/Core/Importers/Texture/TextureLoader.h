@@ -23,6 +23,9 @@ namespace TextureImporter
 	public:
 		TextureLoader(){};
 
+
+
+
 		/// <summary>
 		/// Method that returns 0 if an error has ocurred if not it returns the opengl id
 		/// </summary>
