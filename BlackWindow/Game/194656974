@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "1591374284"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 194656974,
+	"name" : "pCylinder2_$AssimpFbx$_ScalingPivot"
+}

@@ -192,7 +192,7 @@ ProcessedMesh ModelImporter::Model::ProcessMesh(aiMesh *mesh, const aiScene *sce
 	for (GLuint i = 0; i < mesh->mNumFaces; i++)
 	{
 		aiFace face = mesh->mFaces[i];
-		assert(face.mNumIndices == 3);
+		//assert(face.mNumIndices == 3);
 		
 		for (GLuint j = 0; j < face.mNumIndices; j++)
 		{

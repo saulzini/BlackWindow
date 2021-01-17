@@ -11,6 +11,7 @@ class ModuleScene : public Module
 
 private:
 	unsigned int program;
+	unsigned int program2;
 	WorldTimer *worldTimer;
 	GameObject *root;
 	GameObject *selected;
@@ -45,6 +46,9 @@ public:
 		return selected;
 	}
 
+	GameObject* GetLight() {
+		return Light;
+	}
 	void SetSelected(GameObject *gameObject)
 	{
 		if (selected != gameObject)

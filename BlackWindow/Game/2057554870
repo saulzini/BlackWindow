@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "1130931135"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 2057554870,
+	"name" : "Sides_$AssimpFbx$_RotationPivot"
+}

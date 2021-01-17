@@ -1,6 +1,8 @@
 #include "Core/Components/ComponentMeshRenderer.h"
 #include "Core/GameObject/GameObject.h"
-
+#include "ModuleCamera.h"
+#include "Application.h"
+#include "ModuleScene.h"
 void ComponentMeshRenderer::Setup()
 {
     if (owner == nullptr)
@@ -67,8 +69,36 @@ void ComponentMeshRenderer::Update()
     glDrawElements(GL_TRIANGLES, indicesSize, GL_UNSIGNED_INT, 0);
     glBindVertexArray(1);
 
-    glUniform1i(glGetUniformLocation(owner->GetProgram(), "material.diffuse"), 0);
-    glUniform1i(glGetUniformLocation(owner->GetProgram(), "material.specular"), 1);
+
+
+   //// GLint N = glGetUniformLocation(program, "material.shininess");
+
+    GLint light_pos = glGetUniformLocation(owner->GetProgram(), "light_pos");
+    GLint light_ambient = glGetUniformLocation(owner->GetProgram(), "light.ambient");
+    GLint light_diffuse = glGetUniformLocation(owner->GetProgram(), "light.diffuse");
+    GLint light_specular = glGetUniformLocation(owner->GetProgram(), "light.specular");
+    GLint viewPos = glGetUniformLocation(owner->GetProgram(), "viewPos");
+    GLint colorAmbient = glGetUniformLocation(owner->GetProgram(), "colorAmbient");
+
+   // //glUniform1f(N, 32);
+
+    float3 lightpos = App->scene->GetLight()->GetTransformComponent()->GetPosition();
+    float3 lightambient = { 0.2f, 0.2f, 0.2f };
+    float3 lightdiffuse = { 0.5f, 0.5f, 0.5f };
+    float3 lightspecular = { 1.0f, 1.0f, 1.0f };
+    float3 view_Pos = App->camera->cameraPosition;
+    float3 color_Ambient = { 1.0f, 1.0f, 1.0f };
+
+    /*glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
+    glUniform1i(glGetUniformLocation(program, "material.specular"), 1);*/
+
+    glUniform3f(light_pos, lightpos[0], lightpos[1], lightpos[2]);
+    glUniform3f(light_ambient, lightambient[0], lightambient[1], lightambient[2]);
+    glUniform3f(light_diffuse, lightdiffuse[0], lightdiffuse[1], lightdiffuse[2]);
+    glUniform3f(light_specular, lightspecular[0], lightspecular[1], lightspecular[2]);
+    glUniform3f(viewPos, view_Pos[0], view_Pos[1], view_Pos[2]);
+    glUniform3f(colorAmbient, color_Ambient[0], color_Ambient[1], color_Ambient[2]);
+
 }
 
 void ComponentMeshRenderer::OnSave(Json::Value &owner)
