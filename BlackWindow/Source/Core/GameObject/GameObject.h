@@ -157,9 +157,12 @@ public:
         if(materialComponent){
             materialComponent->SetTexture(textureId);
         }
+        glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
+        glUniform1i(glGetUniformLocation(program, "material.specular"), 1);
     }
 
-    ComponentMeshRenderer *GetMeshRendererComponent() const{
+    ComponentMeshRenderer *GetMeshRendererComponent() const
+    {
         return meshRendererComponent;
     }
 
