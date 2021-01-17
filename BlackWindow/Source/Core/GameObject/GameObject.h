@@ -39,16 +39,15 @@ public:
         this->name = name;
         this->program = program;
 
-        this->id = App->GetLcg()->Int();
+        id = App->GetLcg()->Int();
         projectionMatrix = float4x4::identity;
         viewMatrix = float4x4::identity;
         modelMatrix = float4x4::identity;
 
-        this->transformComponent = nullptr;
-        this->componentMesh = nullptr;
-
-        
-        this->materialComponent = nullptr;
+        transformComponent = nullptr;
+        componentMesh = nullptr;
+        meshRendererComponent = nullptr;
+        materialComponent = nullptr;
     }
     ~GameObject() {}
     virtual void Update();

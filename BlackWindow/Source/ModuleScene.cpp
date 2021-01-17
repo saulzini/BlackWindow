@@ -36,6 +36,8 @@ ModuleScene::ModuleScene()
 
 	root = nullptr;
 	selected = nullptr;
+	Light = nullptr;
+	Camera = nullptr;
 }
 
 ModuleScene::~ModuleScene()
@@ -67,7 +69,7 @@ bool ModuleScene::Init()
 	//Light->GetTransformComponent()->SetPosition(float3(0.0f, 5.0f, 3.0f));
 
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
-	//SceneFileManager::LoadFromFile("scene.blackwindow");
+	SceneFileManager::LoadScene();
 
 	//Light->Update();
 	
@@ -191,6 +193,7 @@ void ModuleScene::AddTexture(const char *texturePath)
 	GameObject *selected = GetSelected();
 
 	if (selected == nullptr){
+		App->editor->consoleWindow->AddLog("Select a gameobject to drag a texture");
 		return;
 	}
 	
@@ -214,7 +217,7 @@ void ModuleScene::AddModel(const char *modelPath)
 	glUseProgram(aux);
 	ModelImporter::Model *model =new ModelImporter::Model(modelPath, aux);
 	GameObject *gameObject = model->LoadModel();
-	App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
+	App->camera->MoveAccordingNewModelInScene(gameObject->GlobalBoundingBox().maxPoint);
 	delete model;
 	root->AddChildren(gameObject);
 }
