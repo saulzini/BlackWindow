@@ -1,5 +1,6 @@
 #include "FileManager.h"
 #include <string>
+#include <Windows.h>
 bool FileManager::ReadFile(const char* path) 
 {
     std::ifstream file (path, std::ios::in|std::ios::binary|std::ios::ate);
@@ -22,13 +23,7 @@ bool FileManager::ReadFile(const char* path)
         std::string result = "Assets/Textures/";
         result.append(fileName) ;
         
-        // std::ofstream dest(result, std::ios::binary);
-        // dest << file.rdbuf();
-        // dest.close();
-        std::ifstream infile(path);
-        std::ofstream outFile(result);
-        outFile<<infile.rdbuf();
-        outFile.close();
+        CopyFile(path,result.c_str(),0);
 
         return 1;
     }
