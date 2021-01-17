@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "1050374361"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 1603571950,
+	"name" : "RightUpperArmIK"
+}

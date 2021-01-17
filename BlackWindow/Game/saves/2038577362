@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "600289572"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 2038577362,
+	"name" : "pCylinder2_$AssimpFbx$_RotationPivotInverse"
+}

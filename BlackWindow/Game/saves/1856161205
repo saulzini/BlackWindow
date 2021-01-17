@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "823311433"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.020220439881086349, 0.63641858100891113, 3.1368918418884277 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 1856161205,
+	"name" : "LeftUpperArmIK_$AssimpFbx$_Rotation"
+}

@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "343941357"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 453616559,
+	"name" : "LeftUpperArmFK"
+}

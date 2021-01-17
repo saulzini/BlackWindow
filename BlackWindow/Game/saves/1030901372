@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "1333453625"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 1030901372,
+	"name" : "RightFoot_$AssimpFbx$_Translation"
+}

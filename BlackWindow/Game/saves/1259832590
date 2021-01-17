@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "1130153969"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 1259832590,
+	"name" : "SpinningTop_$AssimpFbx$_ScalingPivot"
+}
