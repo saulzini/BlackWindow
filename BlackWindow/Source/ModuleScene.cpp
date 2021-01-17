@@ -194,6 +194,7 @@ void ModuleScene::AddTexture(const char *texturePath)
 	GameObject *selected = GetSelected();
 
 	if (selected == nullptr){
+		App->editor->consoleWindow->AddLog("Select a gameobject to drag a texture");
 		return;
 	}
 	
