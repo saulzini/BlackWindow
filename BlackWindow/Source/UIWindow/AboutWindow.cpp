@@ -15,7 +15,7 @@ void AboutWindow::Update()
 
         ImGui::Text("Engine: Black Window");
         ImGui::Text("Description: Engine");
-        ImGui::Text("Authors: Saul Juarez");
+        ImGui::Text("Authors: Saul Juarez, Telm Francesc Serra Malagrava");
         ImGui::Text("Libraries: Assimp, Devil, Glew, Gpu detect, Imgui, SDL,MathGeoLib");
         ImGui::Text("License: MIT");
 
