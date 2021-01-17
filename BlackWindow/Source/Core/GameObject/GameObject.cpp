@@ -15,6 +15,8 @@
 #include "ModuleEditor.h"
 #include "UIWindow/ConsoleWindow.h"
 #include "Core/SceneFileManager/SceneFileManager.h"
+#include <string> 
+
 Component *GameObject::AddComponent(ComponentTypes type)
 {
     Component *component = ComponentFactory::CreateComponent(this, type);
@@ -235,12 +237,12 @@ void GameObject::Save()
 void GameObject::Export(Json::Value &parent)
 {
     Json::Value currentJson;
-    currentJson["name"] = this->GetName();
-    currentJson["id"] = this->GetId();
+    currentJson["name"] = GetName();
+    currentJson["id"] = GetId();
 
     // components
     currentJson["components"] = Json::arrayValue;
-    std::vector<Component *> currentComponents = this->GetComponents();
+    std::vector<Component *> currentComponents = GetComponents();
 
     for (std::vector<Component *>::iterator it = currentComponents.begin(); it != currentComponents.end(); ++it)
     {
@@ -249,14 +251,20 @@ void GameObject::Export(Json::Value &parent)
 
     // children
     currentJson["children"] = Json::arrayValue;
-    std::vector<GameObject *> currentChildren = this->GetChildren();
+    std::vector<GameObject *> currentChildren = GetChildren();
 
     for (std::vector<GameObject *>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
     {
         (*it)->Export(currentJson);
     }
 
-    parent["children"].append(currentJson);
+    // Saving to file
+    SceneFileManager::ExportFile( std::to_string(GetId()).c_str(), currentJson);
+
+    // Addint to parent the id for the generated file
+    Json::Value currentJsonGame;
+    currentJsonGame["id"] = std::to_string(GetId());
+    parent["children"].append(currentJsonGame);
 }
 
 void GameObject::RemoveParent()

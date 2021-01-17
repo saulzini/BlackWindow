@@ -40,19 +40,29 @@ namespace GameObjectFactory
 
     static GameObject *CreateGameObjectFromJson(const Json::Value &jRoot, GameObject *parent, unsigned int program)
     {
-		App->editor->consoleWindow->AddLog("Loading %s",jRoot["name"].asCString() );
-        GameObject *root = new GameObject(parent, jRoot["name"].asCString(), program);
+
+        Json::Value nodeRoot;
+        std::ifstream file( jRoot["id"].asCString() ) ;
+        if(file.fail()){
+            App->editor->consoleWindow->AddLog( "%s not exits" , jRoot["id"].asCString());
+            return nullptr;
+        }
+        file >> nodeRoot;
+
+
+		App->editor->consoleWindow->AddLog("Loading %s",nodeRoot["name"].asCString() );
+        GameObject *root = new GameObject(parent, nodeRoot["name"].asCString(), program);
         // load components
-        for (unsigned int index = 0; index < jRoot["components"].size(); index++)
+        for (unsigned int index = 0; index < nodeRoot["components"].size(); index++)
         {
-            Component *component = ComponentFactory::CreateComponentFromJson(jRoot["components"][index],root);
+            Component *component = ComponentFactory::CreateComponentFromJson(nodeRoot["components"][index],root);
             root->AddComponent(component);
 
         }
         //Load children
-        for (unsigned int index = 0; index < jRoot["children"].size(); index++)
+        for (unsigned int index = 0; index < nodeRoot["children"].size(); index++)
         {
-            root->AddChildren( CreateGameObjectFromJson(jRoot["children"][index],root,program) );
+            root->AddChildren( CreateGameObjectFromJson(nodeRoot["children"][index],root,program) );
         }
         root->CalculateMeshBoundingBox();
 
