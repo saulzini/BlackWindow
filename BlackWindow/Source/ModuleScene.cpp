@@ -48,25 +48,26 @@ bool ModuleScene::Init()
 	Program programClass;
 	
 	program = programClass.CreateProgramFromSource("Default.vert", "Default.frag");
+	program2 = programClass.CreateProgramFromSource("Default.vert", "Default.frag");
 	programSky = programClass.CreateProgramFromSource("DefaultBox.vert", "DefaultBox.frag");
 	
 	root = new GameObject(nullptr,"Scene",program);
 	sky = new Skybox();
 	// Setting gameobject
-	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program);
+	Light = GameObjectFactory::CreateGameObject(GameObjectTypes::LIGHT, root, "Light", program2);
 	root->AddChildren(Light);
 	Light->GetTransformComponent()->SetPosition(float3 (0.0f, 1.0f,0.0f));
 
 	// Camera = GameObjectFactory::CreateGameObject(GameObjectTypes::CAMERA, root, "Camera", program);
 	// root->AddChildren(Camera);
 	//Camera->GetTransformComponent()->SetPosition(float3(0.0f, 1.0f, 0.0f));
-
+	
 	//house->GetTransformComponent()->SetScale(float3(0.01f, 0.01f, 0.01f));
 
 	//Light->GetTransformComponent()->SetPosition(float3(0.0f, 5.0f, 3.0f));
 
 	// SceneFileManager::LoadFromFile("scene.blackwindow");
-	SceneFileManager::LoadFromFile("scene.blackwindow");
+	//SceneFileManager::LoadFromFile("scene.blackwindow");
 
 	//Light->Update();
 	
@@ -86,7 +87,6 @@ update_status ModuleScene::Update(float deltaTime)
 
 	worldTimer->Update();
 
-	glUseProgram(program);
 	float4x4 proj = App->camera->GetProjection();
 	float4x4 view = App->camera->GetView();
 
@@ -95,40 +95,39 @@ update_status ModuleScene::Update(float deltaTime)
 	root->CalculateBox();
 	root->Update();
 
-	GLint ks = glGetUniformLocation(program, "ks");
-	GLint kd = glGetUniformLocation(program, "kd");
-	GLint N = glGetUniformLocation(program, "material.shininess");
 
-	//GLint light_pos = glGetUniformLocation(program, "light_pos");
-	GLint light_ambient = glGetUniformLocation(program, "light.ambient");
-	GLint light_diffuse = glGetUniformLocation(program, "light.diffuse");
-	GLint light_specular = glGetUniformLocation(program, "light.specular");
-	GLint viewPos = glGetUniformLocation(program, "viewPos");
-	GLint colorAmbient = glGetUniformLocation(program, "colorAmbient");
+	//GLint N = glGetUniformLocation(program, "material.shininess");
 
+	////GLint light_pos = glGetUniformLocation(program, "light_pos");
+	//GLint light_ambient = glGetUniformLocation(program, "light.ambient");
+	//GLint light_diffuse = glGetUniformLocation(program, "light.diffuse");
+	//GLint light_specular = glGetUniformLocation(program, "light.specular");
+	//GLint viewPos = glGetUniformLocation(program, "viewPos");
+	//GLint colorAmbient = glGetUniformLocation(program, "colorAmbient");
 
 
-	//glUniform1f(N, 32);
 
-	float3 lightpos(0.0f,0.0f,0.0f);  
-	if (Light){
-		lightpos = Light->GetTransformComponent()->GetPosition();
-	}
-	float3 lightambient = { 0.2f, 0.2f, 0.2f };
-	float3 lightdiffuse = { 0.5f, 0.5f, 0.5f };
-	float3 lightspecular = { 1.0f, 1.0f, 1.0f };
-	float3 view_Pos = App->camera->cameraPosition;
-	float3 color_Ambient = { 1.0f, 1.0f, 1.0f };
+	////glUniform1f(N, 32);
 
-	/*glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
-	glUniform1i(glGetUniformLocation(program, "material.specular"), 1);*/
+	//float3 lightpos(0.0f,0.0f,0.0f);  
+	//if (Light){
+	//	lightpos = Light->GetTransformComponent()->GetPosition();
+	//}
+	//float3 lightambient = { 0.2f, 0.2f, 0.2f };
+	//float3 lightdiffuse = { 0.5f, 0.5f, 0.5f };
+	//float3 lightspecular = { 1.0f, 1.0f, 1.0f };
+	//float3 view_Pos = App->camera->cameraPosition;
+	//float3 color_Ambient = { 1.0f, 1.0f, 1.0f };
 
-	//glUniform3f(light_pos,			 lightpos[0],			 lightpos[1],				lightpos[2]);
-	glUniform3f(light_ambient,   lightambient[0],		 lightambient[1],			lightambient[2]);
-	glUniform3f(light_diffuse,	 lightdiffuse[0],		 lightdiffuse[1],			lightdiffuse[2]);
-	glUniform3f(light_specular, lightspecular[0],		lightspecular[1],		   lightspecular[2]);
-	glUniform3f(viewPos,			 view_Pos[0],			 view_Pos[1],				view_Pos[2]);
-	glUniform3f(colorAmbient,	color_Ambient[0],		color_Ambient[1],		   color_Ambient[2]);
+	///*glUniform1i(glGetUniformLocation(program, "material.diffuse"), 0);
+	//glUniform1i(glGetUniformLocation(program, "material.specular"), 1);*/
+
+	////glUniform3f(light_pos,			 lightpos[0],			 lightpos[1],				lightpos[2]);
+	//glUniform3f(light_ambient,   lightambient[0],		 lightambient[1],			lightambient[2]);
+	//glUniform3f(light_diffuse,	 lightdiffuse[0],		 lightdiffuse[1],			lightdiffuse[2]);
+	//glUniform3f(light_specular, lightspecular[0],		lightspecular[1],		   lightspecular[2]);
+	//glUniform3f(viewPos,			 view_Pos[0],			 view_Pos[1],				view_Pos[2]);
+	//glUniform3f(colorAmbient,	color_Ambient[0],		color_Ambient[1],		   color_Ambient[2]);
 
 	std::cout << glGetError() << std::endl; // returns 0 (no error)
 	
@@ -208,7 +207,12 @@ void ModuleScene::AddTexture(const char *texturePath)
 
 void ModuleScene::AddModel(const char *modelPath)
 {
-	ModelImporter::Model *model =new ModelImporter::Model(modelPath,program); 
+	//Creating program for the new GameObject
+	unsigned int aux;
+	Program programClass;
+	aux = programClass.CreateProgramFromSource("Default.vert", "Default.frag");
+	glUseProgram(aux);
+	ModelImporter::Model *model =new ModelImporter::Model(modelPath, aux);
 	GameObject *gameObject = model->LoadModel();
 	App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
 	delete model;
@@ -238,7 +242,7 @@ void ModuleScene::LoadFromJson(const Json::Value& jRoot)
 {
 	// ignoring the first level because it is the scene
 	for (Json::Value::ArrayIndex i = 0; i != jRoot["children"].size(); i++){
-		GameObject *child = GameObjectFactory::CreateGameObjectFromJson(jRoot["children"][i],root,program);
+		GameObject *child = GameObjectFactory::CreateGameObjectFromJson(jRoot["children"][i],root);
 		root->AddChildren(child);
 	}
 }

@@ -11,6 +11,7 @@ class ModuleScene : public Module
 
 private:
 	unsigned int program;
+	unsigned int program2;
 	WorldTimer *worldTimer;
 	GameObject *root;
 	GameObject *selected;

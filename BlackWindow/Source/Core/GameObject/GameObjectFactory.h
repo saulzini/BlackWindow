@@ -38,7 +38,7 @@ namespace GameObjectFactory
         return gameObject;
     }
 
-    static GameObject *CreateGameObjectFromJson(const Json::Value &jRoot, GameObject *parent, unsigned int program)
+    static GameObject *CreateGameObjectFromJson(const Json::Value &jRoot, GameObject *parent)
     {
 
         Json::Value nodeRoot;
@@ -48,10 +48,13 @@ namespace GameObjectFactory
             return nullptr;
         }
         file >> nodeRoot;
-
+        unsigned int aux;
+        Program programClass;
+        aux = programClass.CreateProgramFromSource("Default.vert", "Default.frag");
+        glUseProgram(aux);
 
 		App->editor->consoleWindow->AddLog("Loading %s",nodeRoot["name"].asCString() );
-        GameObject *root = new GameObject(parent, nodeRoot["name"].asCString(), program);
+        GameObject *root = new GameObject(parent, nodeRoot["name"].asCString(), aux);
         // load components
         for (unsigned int index = 0; index < nodeRoot["components"].size(); index++)
         {
@@ -62,7 +65,7 @@ namespace GameObjectFactory
         //Load children
         for (unsigned int index = 0; index < nodeRoot["children"].size(); index++)
         {
-            root->AddChildren( CreateGameObjectFromJson(nodeRoot["children"][index],root,program) );
+            root->AddChildren( CreateGameObjectFromJson(nodeRoot["children"][index],root) );
         }
         root->CalculateMeshBoundingBox();
 

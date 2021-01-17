@@ -19,7 +19,7 @@ public:
         textureId = 0;
         specularId = 0;
         diffuseTurn = true;
-        shininess = 0.0f;
+        shininess = 50.0f;
     };
 
     void OnEditor() override;

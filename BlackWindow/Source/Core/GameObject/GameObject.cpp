@@ -385,7 +385,7 @@ void GameObject::Draw()
     {
         modelMatrix = parent->GetModelMatrix() * modelMatrix;
     }
-
+    glUseProgram(program);
     glUniformMatrix4fv(glGetUniformLocation(program, "model"), 1, GL_TRUE, &modelMatrix[0][0]); //GL_TRUE transpose the matrix
     glUniformMatrix4fv(glGetUniformLocation(program, "view"), 1, GL_TRUE, &viewMatrix[0][0]);
     glUniformMatrix4fv(glGetUniformLocation(program, "proj"), 1, GL_TRUE, &projectionMatrix[0][0]);
