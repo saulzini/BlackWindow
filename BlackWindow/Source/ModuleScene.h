@@ -31,6 +31,9 @@ public:
 		return sky;
 	}
 
+	GameObject* GetLight() const {
+		return Light;
+	}
 	GameObject* GetRoot() const {
 		return root;
 	}

@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "1704213493"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 1.0670045614242554, 0.01979939267039299, -0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 1059531176,
+	"name" : "RightFoot_$AssimpFbx$_PreRotation"
+}

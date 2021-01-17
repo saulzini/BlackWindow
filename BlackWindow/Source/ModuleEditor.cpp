@@ -117,7 +117,7 @@ void ModuleEditor::AddWindow(DefaultImGuiWindow *window)
 void ModuleEditor::SetStyle(const ImGuiIO& io)
 {
     // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
+    ImGui::StyleColorsLight();
     ImGui::StyleColorsClassic();
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
@@ -145,7 +145,7 @@ void ModuleEditor::ShowDockSpace(bool *pOpen)
 
     // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
     // because it would be confusing to have two docking targets within each others.
-    ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
+    ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking | ImGuiWindowFlags_NoBackground;
     if (optFullscreen)
     {
         ImGuiViewport *viewport = ImGui::GetMainViewport();

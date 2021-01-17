@@ -1,0 +1,23 @@
+{
+	"children" : [],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		},
+		{
+			"farPlaneDistance" : 10.0,
+			"front" : [ -0.0, -0.0, -1.0 ],
+			"horizontalFov" : 50.0,
+			"nearPlaneDistance" : 0.10000000149011612,
+			"type" : 4,
+			"up" : [ 0.0, 1.0, 0.0 ],
+			"verticalFov" : -0.20470736920833588
+		}
+	],
+	"id" : 1813828501,
+	"name" : "Camera"
+}

@@ -42,7 +42,7 @@ void main(){
 	vec3 diff = nDtoL  * light.diffuse * vec3(texture(material.diffuse, uv));
 	//------------------------------------
 
-	vec3 reflectDir = reflect( lightDir, normal);
+	vec3 reflectDir = reflect( -lightDir, normal);
 	vec3 V = normalize(viewPos - FragPos);
 	float spec = pow(max(dot(V ,  reflectDir), 0.0),material.shininess);
 	vec3 specular =  spec * light.specular *   vec3(texture(material.specular,  uv));
