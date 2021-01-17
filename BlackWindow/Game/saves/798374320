@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "299297419"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 798374320,
+	"name" : "Hips_$AssimpFbx$_Translation"
+}

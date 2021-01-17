@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "78222688"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 1893442523,
+	"name" : "LeftUpperArmFK_$AssimpFbx$_Translation"
+}

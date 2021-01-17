@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "1917425610"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 2021106971,
+	"name" : "LeftFoot_$AssimpFbx$_Rotation"
+}

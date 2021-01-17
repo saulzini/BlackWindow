@@ -1,0 +1,19 @@
+{
+	"children" : 
+	[
+		{
+			"id" : "729056727"
+		}
+	],
+	"components" : 
+	[
+		{
+			"position" : [ 0.0, 0.0, 0.0 ],
+			"rotation" : [ 0.0, 0.0, 0.0 ],
+			"scale" : [ 1.0, 1.0, 1.0 ],
+			"type" : 1
+		}
+	],
+	"id" : 680427900,
+	"name" : "Firetruck_$AssimpFbx$_ScalingPivotInverse"
+}
