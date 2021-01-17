@@ -23,6 +23,9 @@ namespace TextureImporter
 	public:
 		TextureLoader(){};
 
+
+
+
 		/// <summary>
 		/// Method that returns 0 if an error has ocurred if not it returns the opengl id
 		/// </summary>
@@ -176,9 +179,16 @@ namespace TextureImporter
 			if (found == ResourcesManager::texturesLoaded.end()){
 				Texture texture;
 				texture.id = LoadTexture2D(path,directory);
-				texture.path = path;
 
-				ResourcesManager::texturesLoaded.insert( std::make_pair(path, texture ) ); 
+				
+				std::string fileName = path;
+				if (fileName.find_last_of('\\') != std::string::npos) {
+					fileName = fileName.substr(fileName.find_last_of('\\'), fileName.size());
+
+				}
+				texture.path = fileName;
+
+				ResourcesManager::texturesLoaded.insert( std::make_pair(fileName.c_str(),texture ) );
 				ResourcesManager::texturesLoadedInt.insert( std::make_pair( texture.id, texture ) ); 
 				textureId = texture.id;
 			}
