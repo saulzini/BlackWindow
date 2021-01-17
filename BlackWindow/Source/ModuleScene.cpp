@@ -36,6 +36,8 @@ ModuleScene::ModuleScene()
 
 	root = nullptr;
 	selected = nullptr;
+	Light = nullptr;
+	Camera = nullptr;
 }
 
 ModuleScene::~ModuleScene()
@@ -209,7 +211,7 @@ void ModuleScene::AddModel(const char *modelPath)
 {
 	ModelImporter::Model *model =new ModelImporter::Model(modelPath,program); 
 	GameObject *gameObject = model->LoadModel();
-	App->camera->MoveAccordingNewModelInScene(model->GetDimensions());
+	App->camera->MoveAccordingNewModelInScene(gameObject->GlobalBoundingBox().maxPoint);
 	delete model;
 	root->AddChildren(gameObject);
 }

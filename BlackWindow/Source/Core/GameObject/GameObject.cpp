@@ -116,7 +116,7 @@ void GameObject::CalculateModelMatrix()
 
 bool GameObject::isChild(GameObject *lookingChild)
 {
-    if (children.size() <= 0)
+    if (children.size() == 0)
     {
         return false;
     }
@@ -237,14 +237,14 @@ bool GameObject::CheckMeshRayCast(LineSegment ray)
     if (componentMesh == nullptr){
         return false;
     }
-    // test all triangles
-    LineSegment localLineSegment(ray);
-    localLineSegment.Transform(GetModelMatrix().Inverted());
+    // // test all triangles
+    // LineSegment localLineSegment(ray);
+    // localLineSegment.Transform(GetModelMatrix().Inverted());
 
     
-    Triangle meshTriangle;
-    std::vector<Vertex> vertices =  componentMesh->GetVertices();
-    std::vector<unsigned int> indices =  componentMesh->GetIndices();
+    // Triangle meshTriangle;
+    // std::vector<Vertex> vertices =  componentMesh->GetVertices();
+    // std::vector<unsigned int> indices =  componentMesh->GetIndices();
 
     // TODO::Not enough time
     // for (unsigned int i = 0; i < indices.size();)
