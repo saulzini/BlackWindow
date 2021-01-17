@@ -39,7 +39,6 @@ update_status ModuleRenderScene::Update(float deltaTime)
 		}
 
 		iPoint newMousePosition = App->input->GetMousePosition();
-		Triangle* my_ray;
 		float width = (float) App->window->GetWidth();
 		float height = (float) App->window->GetHeight();
 		float normalized_x = -(1.0f - (float(newMousePosition.x) * 2.0f) / width);

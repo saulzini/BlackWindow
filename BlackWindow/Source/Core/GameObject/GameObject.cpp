@@ -180,8 +180,7 @@ void GameObject::CalculateBox()
 
 void GameObject::CheckForRayCast(LineSegment ray) {
 
-    std::vector<GameObject*> currentChildren = this->GetChildren();
-
+  std::vector<GameObject*> currentChildren = this->GetChildren();
    
     for (std::vector<GameObject*>::iterator it = currentChildren.begin(); it != currentChildren.end(); ++it)
     {
@@ -197,11 +196,25 @@ void GameObject::CheckForRayCast(LineSegment ray) {
 
 
 bool GameObject::CheckRayCast( LineSegment ray) {
-    Triangle tri;
+
 
     if (ray.Intersects(this->GlobalBoundingBox())) {
-        return true;
+       return( this->CheckMeshRayCast(ray));
     }
+
+}
+
+bool GameObject::CheckMeshRayCast(LineSegment ray) {
+    Triangle tr;
+    
+    for (size_t i = 0; i < this->GetMeshComponent()->GetVertices().size();)
+    {
+        tr.a = GetMeshComponent()->GetVertices()[GetMeshComponent()->GetIndices()[i++] * 3];
+        tr.b = GetMeshComponent()->GetVertices()[GetMeshComponent()->GetIndices()[i++] * 3];
+        tr.c = GetMeshComponent()->GetVertices()[GetMeshComponent()->GetIndices()[i++] * 3];
+    }
+    ray.Intersects(this->GetMeshComponent());
+    //std::vector<Component*> componentMesh = this->GetMeshComponent();
 
 }
 void GameObject::Save()

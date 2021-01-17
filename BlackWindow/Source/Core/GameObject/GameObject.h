@@ -70,6 +70,8 @@ public:
         return globalBoundingBox;
     }
     bool CheckRayCast(LineSegment ray);
+    bool CheckMeshRayCast(LineSegment ray);
+
     Component *AddComponent(ComponentTypes type);
     void AddComponent(Component *component);
     void CalculateBox( );
